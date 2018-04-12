@@ -1,0 +1,62 @@
+body {
+    background-color: white;
+}
+
+h1, h2, h3, h4, h5, h6, p, label, body {
+    color: #041E42;
+}
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #041E42;
+}
+
+li {
+    float: left;
+    border-right: 1px solid #D0B888;
+}
+
+table {
+    border-collapse: collapse;
+    border: 1px solid #041E42;
+}
+
+td {
+    padding: 10px;
+}
+
+th {
+    background-color: #041E42;
+    color: #D0B888;
+    padding: 10px;
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+.fsSubmitButton {
+    font-size: 15px !important;
+    background-color: #041E42;
+    border-style: none;
+    color: #D0B888;
+}
+
+.fsSubmitButton:hover {
+    background-color: #A9A9A9;
+}
+
+.fsSubmitButton:active {
+    background-color: #A9A9A9;
+    box-shadow: 0 5px #666;
+    transform: translateY(4px);
+}
+
+img {
+    display: block;
+    width: 15%;
+    padding: 5px;
+}
