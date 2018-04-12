@@ -12,4 +12,4 @@
 
 
 ## Notes:
-* CRN will be separated ex: CS6211 to department (CS) and course number 
+* CRN will be separated ex: CS6211 to department (CS) and course number (6221)
