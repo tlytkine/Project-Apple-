@@ -1,0 +1,11 @@
+body {
+  font-family: verdana;
+}
+th, td {
+	padding: 5px;
+}
+th {
+  background-color: black;
+  color: white;
+}
+tr:nth-child(even) {background-color: #f2f2f2;}
