@@ -1,4 +1,7 @@
-<?php
+<?php 
+include 'header.php';
+include 'db-connect.php';
+$id = $_SESSON["id"];
 	//Student home page
 	//Can see information about the user as well as 
 	//submit the graduation form

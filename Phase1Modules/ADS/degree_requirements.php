@@ -1,28 +1,13 @@
-<?php
-	// Displays degree requirements
-
-	// Login script
-	session_start();
-	$conn = mysqli_connect("localhost", "team5", "9GcBpHaf", "team5");
-
-	$user_check=$_SESSION['login_user'];
-	$ses_sql=mysqli_query($conn, "select username from login where username='$user_check' AND role = 'STUDENT'");
-	$row = mysqli_fetch_assoc($ses_sql);
-	$login_session = $row['username'];
-	if (!isset($login_session)) {
-		mysqli_close($conn);
-		header("Location: wrong_permissions.php");
-		exit;
-	} 
+<?php 
+include 'header.php';
+include 'db-connect.php';
+$id = $_SESSON["id"];
 ?>
-<!DOCTYPE html>
+
 <html>
-<head>
-	<title>View Degree Requirements</title>
-<link rel ="stylesheet" type="text/css" href="style1.css"/>
-</head>
-<body>
-	<h2>View Degree Requirements</h2>
+<head><title>View Degree Requirements</title></head>
+<body><h2>View Degree Requirements</h2><br>
+<?php 
 	<!-- Queries for all degrees in the system and allows
 		the user to select one of them-->
 	<form method="post" action="degree_requirements.php">
