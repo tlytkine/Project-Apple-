@@ -1,4 +1,16 @@
+<?php 
+include 'header.php';
+include 'db-connect.php';
+$id = $_SESSON["id"];
+?>
+
+<html>
+<head><title>Alumni</title></head>
+<body>
+<h1>Alumni</h1><br> 
 <?php
+
+
 	// Alumni home page
 	// Can view and update personal information
 

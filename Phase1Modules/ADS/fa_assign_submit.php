@@ -1,31 +1,14 @@
-<?php
-	// Handles assigning a student a faculty advisor
-
-	// Login script
-	session_start();
-	$conn = mysqli_connect("localhost", "team5", "9GcBpHaf", "team5");
-
-	$user_check=$_SESSION['login_user'];
-	$ses_sql=mysqli_query($conn, "select username from login where username='$user_check' AND role = 'GRAD_SECRETARY'");
-	$row = mysqli_fetch_assoc($ses_sql);
-	$login_session = $row['username'];
-	if (!isset($login_session)) {
-		mysqli_close($conn);
-		header("Location: wrong_permissions.php");
-		exit;
-	}
-
-
-
+<?php 
+include 'header.php';
+include 'db-connect.php';
 
 
 ?>
+
 <html>
 <head><title>Faculty Advisor Update</title></head>
-<link rel ="stylesheet" type="text/css" href="style1.css"/>
 <body>
 <?php
-
 // Faculty advisor query 
 // Faculty advisor result 
 // Put Faculty advisors into drop down menu with fid as hidden value 

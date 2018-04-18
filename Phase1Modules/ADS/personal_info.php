@@ -1,4 +1,7 @@
-<?php
+<?php 
+include 'header.php';
+include 'db-connect.php';
+$id = $_SESSON["id"];
 	//Displays personal information AND allows user to update
 
 	// Login script

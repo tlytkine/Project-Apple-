@@ -1,25 +1,7 @@
-<?php
-	// Grad secretary home page
-	//Can assign students faculty advisors and accept/deny applications
-	
-	//login script
-	session_start();
-	$conn = mysqli_connect("localhost", "team5", "9GcBpHaf", "team5");
-
-	$user_check=$_SESSION['login_user'];
-	$ses_sql=mysqli_query($conn, "select username from login where username='$user_check' AND role = 'GRAD_SECRETARY'");
-	$row = mysqli_fetch_assoc($ses_sql);
-	$login_session = $row['username'];
-	if (!isset($login_session)) {
-		mysqli_close($conn);
-		header("Location: wrong_permissions.php");
-		exit;
-	}
-
-
-
-
-
+<?php 
+include 'header.php'
+include 'db-connect.php';
+$id = $_SESSON["id"];
 ?>
 <html>
 <head><title>Grad Secretary</title></head>

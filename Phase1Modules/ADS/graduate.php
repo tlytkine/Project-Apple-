@@ -1,4 +1,7 @@
-<?php
+<?php 
+include 'header.php';
+include 'db-connect.php'
+$id = $_SESSON["id"];
 	// Removes all information about a student and inserts it into corresponding alumni tables
 
 	// login script

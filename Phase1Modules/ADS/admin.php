@@ -1,36 +1,22 @@
-<?php
-	//File displays all actions the system admin can perform
+<?php 
+include 'header.php';
+include 'db-connect.php';
+$id = $_SESSON["id"];
 
-	// login script
-	// connect to database
-	session_start();
-	$conn = mysqli_connect("localhost", "team5", "9GcBpHaf", "team5");
-
-	// get user from database
-	$user_check=$_SESSION['login_user'];
-	$ses_sql=mysqli_query($conn, "select username from login where username='$user_check' AND role = 'SYSTEM_ADMIN'");
-	$row = mysqli_fetch_assoc($ses_sql);
-	$login_session = $row['username'];
-	// check the result of the query to determine if the user is logged
-	// in and has the appropirate permissions
-	if (!isset($login_session)) {
-		mysqli_close($conn);
-		header("Location: wrong_permissions.php");
-		exit;
-	}
 ?>
+
 <html>
 <head><title>System Admin</title></head>
-<link rel ="stylesheet" type="text/css" href="style1.css"/>
 <body>
-<b>Welcome to System Admin</b>
-<br>
-<b><a href="logout.php">Log Out</a></b>
-<br>
-
+<b>Welcome to System Admin</b><br>
 <?php 
+
+
+
 //Get list of students
-$advisee_query = "SELECT firstname, lastname, gwid, SSN, cleared FROM students";
+// $advisee_query = "SELECT firstname, lastname, gwid, SSN, cleared FROM students";
+// Figure out cleared field 
+$advisee_query = "SELECT firstname, lastname, id, ssn FROM personalinfo WHERE id = $id";
 /*$advisee_query = "SELECT students.firstname, students.lastname, students.gwid, students.cleared, advises.fid, advises.hold
 FROM students, advises
 WHERE advises.gwid = students.gwid;";*/
@@ -147,7 +133,7 @@ while($row = mysqli_fetch_assoc($applications_result)){
 	<input type='submit' value='View Transcript'>
 	</form></td>";
 
-	$query = "SELECT hold FROM advises WHERE gwid = '$gwid';";
+	$query = "SELECT hold FROM advises WHERE studentid = '$gwid';";
 	$result = mysqli_query($conn, $query);
 	$row = mysqli_fetch_assoc($result);
 
@@ -186,8 +172,9 @@ else {
 // Displays current faculty
 echo "<br><h2>Faculty</h2>";
 
-$faculty_query = "SELECT firstname, lastname, fid, address, username
-				 FROM faculty;";
+$faculty_query = "SELECT id,firstname,lastname,dob,address,ssn
+				 FROM personalinfo WHERE personalinfo.id = roles.id
+				 AND roles.role = 'PROFESSOR' OR 'ADVISOR';";
 
 $faculty_result =  mysqli_query($conn, $faculty_query);
 
@@ -263,7 +250,7 @@ echo "<td><form method='post' action='user.php'>
 // Display all alumni
 echo "<h2>Alumni</h2>";
 
-$alumni_query = "SELECT firstname, lastname, gwid, degree_name, year,
+$alumni_query = "SELECT firstname, lastname, studentid, advises.degree_name, year,
 				address, email, username
 				FROM alumni;";
 $alumni_result = mysqli_query($conn, $alumni_query);

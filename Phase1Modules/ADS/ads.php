@@ -1,31 +1,18 @@
-<?php
-	// Performs an audit on a submitted application
-	// login script
-	session_start();
-	$conn = mysqli_connect("localhost", "team5", "9GcBpHaf", "team5");
+<?php 
+include 'header.php';
+include 'db-connect.php';
+$id = $_SESSON["id"];
 
-	$user_check=$_SESSION['login_user'];
-	$ses_sql=mysqli_query($conn, "select username from login where username='$user_check' AND role = 'STUDENT'");
-	$row = mysqli_fetch_assoc($ses_sql);
-	$login_session = $row['username'];
-	if (!isset($login_session)) {
-		mysqli_close($conn);
-		header("Location: wrong_permissions.php");
-		exit;
-	}
 ?>
 
 <html>
-<head>
-<title>
-ADS
-</title>
-</head>
-<link rel ="stylesheet" type="text/css" href="style1.css"/>
+<head><title>ADS</title></head>
 <body>
-<h1>ADS</h1>
-
+<h1>ADS</h1><br> 
 <?php
+
+
+
 // Set variables
 $first_name = $_POST['first_name'];
 $last_name = $_POST['last_name'];
@@ -49,7 +36,7 @@ if (!$conn)	{
 }		
 
 // check if user already has applied
-$duplicate_query = "SELECT * FROM applications WHERE gwid='$gwid';";
+$duplicate_query = "SELECT * FROM graduation_application WHERE studentid='$studentid';";
 $result_from_query=mysqli_query($conn, $duplicate_query);
 if (mysqli_num_rows($result_from_query) > 0) {
 	echo "Already applied<br>";
@@ -167,7 +154,7 @@ if (strlen($error) != 0) {
 // actually insert the application into the database
 for ($i = 1; $i <= 12; $i++) {
 	if ($courses[$i] > 0) {
-		$form_insert = "INSERT INTO applications(firstname,lastname,GWID,crn)
+		$form_insert = "INSERT INTO graduation_application(firstname,lastname,studentid,courseid,year)
 		VALUES ('$first_name','$last_name','$gwid','$courses[$i]');";
 
 		$result_form_insert = mysqli_query($conn, $form_insert);
