@@ -65,10 +65,10 @@
 	$remove_class_crn = $_POST["remove_class_crn"];
 
 	/* login credentials */
-	$servername = "localhost";
-	$username = "team3";
-	$password = "e9Yez5FL";
-	$dbname = "team3";
+	$servername = "127.0.0.1";
+	$username = "teamA2";
+	$password = "Ar9x5Y";
+	$dbname = "teamA2";
 
 	/*connect to database */
 	$conn = mysqli_connect($servername, $username, $password, $dbname);
@@ -106,6 +106,7 @@
 		}
 		$query = "INSERT INTO users
 			VALUES('".$username."', '".$password."', '".$type."');";
+
 		$result = mysqli_query($conn, $query);
 
 		if (!$result) {
@@ -240,9 +241,9 @@
 	/* display student's transcript using the name as the input*/
 	if($transcriptName_search){
 		/* get and display student name*/
-		$query = "SELECT s.fname, s.lname
-			FROM students s
-			WHERE s.fname = '$fname' and s.lname = '$lname';";
+		$query = "SELECT p.firstname, p.lastname
+			FROM personalinfo p
+			WHERE p.firstname = '$fname' AND p.lastname = '$lname';";
 
 		$result = mysqli_query($conn, $query);
 
@@ -250,15 +251,15 @@
 
 		$user_exists = 0;
 		if (mysqli_num_rows($result) > 0){
-			echo "<h2>".$row["fname"]." ".$row["lname"]."</h2>";
+			echo "<h2>".$row["firstname"]." ".$row["lastname"]."</h2>";
 			$user_exists = 1;
 		}
 
 		/* get transcript information */
-		$query = "SELECT t.dept, t.cid, c.cHours, t.grade, t.year, t.semester
-			FROM transcripts t, courses c, students s
-			WHERE t.cid = c.cid AND t.dept = c.dept AND
-			s.fname = '$fname' AND s.lname = '$lname' AND t.SID = s.ID
+		$query = "SELECT t.dept, t.coursenum, c.credithours, t.grade, t.year, t.semester
+			FROM transcripts t, courses c, personalinfo p
+			WHERE t.coursenum = c.coursenum AND t.dept = c.dept AND
+			p.firstname = '$fname' AND p.lastname = '$lname' AND t.studentid = p.id
 			ORDER BY t.year, t.semester DESC;";
 
 		$result = mysqli_query($conn, $query);
@@ -282,8 +283,8 @@
 				echo "<tr>";
 
 				echo "<td>".$row["dept"]."</td>";
-				echo "<td>".$row["cid"]."</td>";
-				echo "<td>".$row["cHours"]."</td>";
+				echo "<td>".$row["coursenum"]."</td>";
+				echo "<td>".$row["credithours"]."</td>";
 				echo "<td>".$row["grade"]."</td>";
 				echo "<td>".$row["semester"]."</td>";
 				echo "<td>".$row["year"]."</td>";
@@ -291,7 +292,7 @@
 				echo "</tr>";
 
 				/* gpa calculation */
-				$weight = $row["cHours"];
+				$weight = $row["credithours"];
 				if (strcmp($row["grade"], "IP") != 0) {
 					$total_credits = $total_credits + $weight;
 				}
@@ -337,9 +338,9 @@
 		$student_id = $_POST["student_id"];
 
 		/* get and display student name*/
-		$query = "SELECT s.fname, s.lname
-			FROM students s
-			WHERE s.id = '$student_id';";
+		$query = "SELECT p.firstname, p.lastname
+			FROM personalinfo p
+			WHERE p.id = '$student_id';";
 
 		$result = mysqli_query($conn, $query);
 
@@ -347,15 +348,15 @@
 
 		$user_exists = 0;
 		if (mysqli_num_rows($result) > 0){
-			echo "<h2>".$row["fname"]." ".$row["lname"]."</h2>";
+			echo "<h2>".$row["firstname"]." ".$row["lastname"]."</h2>";
 			$user_exists = 1;
 		}
 
 		/* get transcript information */
-		$query = "SELECT t.dept, t.cid, c.cHours, t.grade, t.year, t.semester
+		$query = "SELECT t.dept, t.coursenum, c.credithours, t.grade, t.year, t.semester
 			FROM transcripts t, courses c
-			WHERE t.cid = c.cid AND t.dept = c.dept AND
-			t.sid = '$student_id'
+			WHERE t.coursenum = c.coursenum AND t.dept = c.dept AND
+			t.studentid = '$student_id'
 			ORDER BY t.year, t.semester DESC;";
 
 		$result = mysqli_query($conn, $query);
@@ -379,8 +380,8 @@
 				echo "<tr>";
 
 				echo "<td>".$row["dept"]."</td>";
-				echo "<td>".$row["cid"]."</td>";
-				echo "<td>".$row["cHours"]."</td>";
+				echo "<td>".$row["coursenum"]."</td>";
+				echo "<td>".$row["credithours"]."</td>";
 				echo "<td>".$row["grade"]."</td>";
 				echo "<td>".$row["semester"]."</td>";
 				echo "<td>".$row["year"]."</td>";
@@ -388,7 +389,7 @@
 				echo "</tr>";
 
 				/* gpa calculation */
-				$weight = $row["cHours"];
+				$weight = $row["credithours"];
 				if (strcmp($row["grade"], "IP") != 0) {
 					$total_credits = $total_credits + $weight;
 				}
@@ -442,9 +443,9 @@
 
 	if($grade_Nsearch){
 		/* get and display student name*/
-		$query = "SELECT s.fname, s.lname
-			FROM students s
-			WHERE s.fname = '$fname' AND s.lname = '$lname'";
+		$query = "SELECT p.firstname, p.lastname
+			FROM personalinfo p
+			WHERE p.firstname = '$fname' AND p.lastname = '$lname';";
 
 		$result = mysqli_query($conn, $query);
 
@@ -452,14 +453,14 @@
 
 		$user_exists = 0;
 		if (mysqli_num_rows($result) > 0){
-			echo "<h2>".$row["fname"]." ".$row["lname"]."</h2>";
+			echo "<h2>".$row["firstname"]." ".$row["lastname"]."</h2>";
 			$user_exists = 1;
 		}
 
 		/* get student grade information */
-		$query = "SELECT t.sid, t.dept, t.cid, t.grade, t.semester, t.year, t.sectionNum
-			FROM students s, transcripts t
-			WHERE s.id=t.sid AND s.fname = '$fname'
+		$query = "SELECT t.studentid, t.dept, t.coursenum, t.grade, t.semester, t.year
+			FROM transcripts t, personalinfo p
+			WHERE p.firstname = '$fname'  AND p.lastname = '$lname' AND p.id = t.studentid
 			ORDER BY t.year, t.semester DESC;";
 
 		$result = mysqli_query($conn, $query);
@@ -467,20 +468,20 @@
 		/* display student's current grade information with option to change */
 		if (mysqli_num_rows($result) > 0){
 			echo "<table>";
-			echo "<tr><th colspan=2>Course</th><th>Section</th><th>Semester</th><th>Year</th><th>Grade</th><th></th></tr>";
+			echo "<tr><th colspan=2>Course</th><th>Semester</th><th>Year</th><th>Grade</th><th></th></tr>";
 			while ($row = mysqli_fetch_assoc($result)){
 				echo "<tr>";
 
-				echo "<td>".$row["dept"]."</td><td>".$row["cid"]."</td><td>".$row["sectionNum"]."</td><td>".$row["semester"]."</td><td>".$row["year"]."</td>";
+				echo "<td>".$row["dept"]."</td><td>".$row["coursenum"]."</td><td>".$row["semester"]."</td><td>".$row["year"]."</td>";
 				echo "<td><form method='post' action='admin.php'>";
 				echo "<input type='text' name='new_grade' value=".$row["grade"].">";
 				echo "</td>";
 				echo "<td><input type='submit' name='change_grade' value='Change'></td>";
 
 				/* pass through info needed to change grade */
-				echo "<input type='hidden' name='sid' value=".$row["sid"].">";
+				echo "<input type='hidden' name='sid' value=".$row["studentid"].">";
 				echo "<input type='hidden' name='dept' value=".$row["dept"].">";
-				echo "<input type='hidden' name='cid' value=".$row["cid"].">";
+				echo "<input type='hidden' name='cid' value=".$row["coursenum"].">";
 				echo "<input type='hidden' name='semester' value=".$row["semester"].">";
 				echo "<input type='hidden' name='year' value=".$row["year"]."></form>";
 
@@ -512,8 +513,8 @@
 
 		$query = "UPDATE transcripts
 			SET grade = '$new_grade'
-			WHERE sid = '$sid' AND dept = '$dept' AND cid = '$cid' AND semester = '$semester' AND year = '$year';";
-
+			WHERE studentid = '$sid' AND dept = '$dept' AND coursenum = '$cid' AND
+			semester = '$semester' AND year = '$year';";
 
 		if(strcmp($new_grade, "A") == 0 || strcmp($new_grade, "A-"    ) == 0 || strcmp($new_grade, "B+") == 0 || strcmp($new_grade, "B") == 0 ||     strcmp($new_grade, "B-") == 0 || strcmp($new_grade, "C+") == 0 || strcmp(    $new_grade, "C") == 0 || strcmp($new_grade, "F") == 0) {
 
@@ -535,9 +536,9 @@
 		}
 
 		/* get and display student name*/
-		$query = "SELECT s.fname, s.lname
-			FROM students s
-			WHERE s.id = '$student_id';";
+		$query = "SELECT p.firstname, p.lastname
+			FROM personalinfo p
+			WHERE p.id = '$student_id';";
 
 		$result = mysqli_query($conn, $query);
 
@@ -545,14 +546,14 @@
 
 		$user_exists = 0;
 		if (mysqli_num_rows($result) > 0){
-			echo "<h2>".$row["fname"]." ".$row["lname"]."</h2>";
+			echo "<h2>".$row["firstname"]." ".$row["lastname"]."</h2>";
 			$user_exists = 1;
 		}
 
 		/* get student grade information */
-		$query = "SELECT t.sid, t.dept, t.cid, t.grade, t.semester, t.year, t.sectionNum
-			FROM students s, transcripts t
-			WHERE s.id=t.sid AND t.sid = '$student_id'
+		$query = "SELECT t.studentid, t.dept, t.coursenum, t.grade, t.semester, t.year
+			FROM transcripts t
+			WHERE t.studentid = '$student_id'
 			ORDER BY t.year, t.semester DESC;";
 
 		$result = mysqli_query($conn, $query);
@@ -560,20 +561,20 @@
 		/* display student's current grade information with option to change */
 		if (mysqli_num_rows($result) > 0){
 			echo "<table>";
-			echo "<tr><th colspan=2>Course</th><th>Section</th><th>Semester</th><th>Year</th><th>Grade</th><th></th></tr>";
+			echo "<tr><th colspan=2>Course</th><th>Semester</th><th>Year</th><th>Grade</th><th></th></tr>";
 			while ($row = mysqli_fetch_assoc($result)){
 				echo "<tr>";
 
-				echo "<td>".$row["dept"]."</td><td>".$row["cid"]."</td><td>".$row["sectionNum"]."</td><td>".$row["semester"]."</td><td>".$row["year"]."</td>";
+				echo "<td>".$row["dept"]."</td><td>".$row["coursenum"]."</td><td>".$row["semester"]."</td><td>".$row["year"]."</td>";
 				echo "<td><form method='post' action='admin.php'>";
 				echo "<input type='text' name='new_grade' value=".$row["grade"].">";
 				echo "</td>";
 				echo "<td><input type='submit' name='change_grade' value='Change'></td>";
 
 				/* pass through info needed to change grade */
-				echo "<input type='hidden' name='sid' value=".$row["sid"].">";
+				echo "<input type='hidden' name='sid' value=".$row["studentid"].">";
 				echo "<input type='hidden' name='dept' value=".$row["dept"].">";
-				echo "<input type='hidden' name='cid' value=".$row["cid"].">";
+				echo "<input type='hidden' name='cid' value=".$row["coursenum"].">";
 				echo "<input type='hidden' name='semester' value=".$row["semester"].">";
 				echo "<input type='hidden' name='year' value=".$row["year"]."></form>";
 
@@ -609,8 +610,8 @@
 		$lname = $_POST["lname"];
 
 		$query = "SELECT *
-			FROM students s
-			WHERE s.fname = '$fname' AND s.lname = '$lname';";
+			FROM personalinfo p, users u
+			WHERE p.id = u.id AND p.firstname = '$fname' AND p.lastname = '$lname';";
 
 		$result = mysqli_query($conn, $query);
 
@@ -618,18 +619,16 @@
 		if (mysqli_num_rows($result) > 0){
 			echo "<br><br>";
 			echo "<table>";
-			echo "<tr><th>ID</th><th colspan=2>Name</th><th colspan=2>Address</th><th>Email</th><th>Degree</th><th>Username</th></tr>";
+			echo "<tr><th>ID</th><th colspan=2>Name</th><th>Address</th><th>Email</th></tr>"; /*<th>Degree</th>*/
 			while ($row = mysqli_fetch_assoc($result)){
 				echo "<tr>";
 
-				echo "<td>".$row["ID"]."</td>";
-				echo "<td>".$row["fname"]."</td>";
-				echo "<td>".$row["lname"]."</td>";
-				echo "<td>".$row["street"]."</td>";
-				echo "<td>".$row["city"]."</td>";
+				echo "<td>".$row["id"]."</td>";
+				echo "<td>".$row["firstname"]."</td>";
+				echo "<td>".$row["lastname"]."</td>";
+				echo "<td>".$row["address"]."</td>";
 				echo "<td>".$row["email"]."</td>";
-				echo "<td>".$row["degree"]."</td>";
-				echo "<td>".$row["username"]."</td>";
+				/*echo "<td>".$row["degree"]."</td>";*/
 
 				echo "</tr>";
 			}
@@ -762,44 +761,42 @@
 	}
 	if($change_classes){
 		echo '<form method="post" action="admin.php">';
-		echo '<h4>Enter CRN to add class</h4>';
+		echo '<h4>Enter course id to add class</h4>';
 		echo '<input type="text" name="new_class_crn"><br><br>';
 		echo '<input type="submit" name="add_class_info" value="Add">';
 
-		echo '<h4>Enter CRN to remove class</h4>';
+		echo '<h4>Enter course id to remove class</h4>';
 		echo '<input type="text" name="remove_class_crn"><br><br>';
 		echo '<input type="submit" name="remove_class" value="Remove">';
 		echo '</form>';
 
-		$query = "SELECT c.crn, c.dept, c.cid, c.sectionNum, p.name, c.year, c.semester, c.cHours, c.day, c.classTime
-			FROM courses c, professors p
-			WHERE c.profID = p.id
-			ORDER BY c.crn;";
+		$query = "SELECT c.courseid, c.dept, c.coursenum, c.section, p.firstname, p.lastname, c.year, c.semester, c.credithours, c.day, c.time
+			FROM courses c, personalinfo p
+			WHERE c.professorid = p.id
+			ORDER BY c.courseid;";
 		$result = mysqli_query($conn, $query);
 
 		echo "<h2> Current Classes </h2>";
 
 		if (mysqli_num_rows($result) > 0) {
 			echo "<table>";
-			echo "<tr><th>CRN</th><th colspan=2>Course</th><th>Section</th><th>Professor</th><th>Year</th><th>Semester</th><th>Credits</th><th>Day</th><th>Time</th><th>Prereq1 CRN</th><th>Prereq2 CRN</th>";
+			echo "<tr><th>Course ID</th><th colspan=2>Course</th><th>Section</th><th colspan=2>Professor</th><th>Year</th><th>Semester</th><th>Credits</th><th>Day</th><th>Time</th><th>Prereq1 CRN</th><th>Prereq2 CRN</th>";
 
 			while($row = mysqli_fetch_assoc($result)) {
 
 				echo "<tr>";
-				echo  "<td>".$row["crn"]."</td><td>".$row["dept"]."</td><td>".$row["cid"]."</td><td>".$row["sectionNum"]."</td><td>".$row["name"]."</td><td>".$row["year"]."</td><td>".$row["semester"]."</td><td>".$row["cHours"]."</td><td>".$row["day"]."</td><td>".$row["classTime"]."</td>";
+				echo  "<td>".$row["courseid"]."</td><td>".$row["dept"]."</td><td>".$row["coursenum"]."</td><td>".$row["section"]."</td><td>".$row["firstname"]."</td><td>".$row["lastname"]."</td>
+						<td>".$row["year"]."</td><td>".$row["semester"]."</td><td>".$row["credithours"]."</td><td>".$row["day"]."</td><td>".$row["time"]."</td>";
 
 				/* get any prereqs */
-				$query = "SELECT * FROM prereq1
-					WHERE crn = '".$row["crn"]."';";
+				$query = "SELECT * FROM prereqs
+							WHERE courseid = '".$row["courseid"]."';";
 				$prereq = mysqli_query($conn, $query);
-				$prereqCRN = mysqli_fetch_assoc($prereq);
+				$prereq1CRN = mysqli_fetch_assoc($prereq);
+				$prereq2CRN = mysqli_fetch_assoc($prereq);
 
-				$query = "SELECT * FROM prereq2
-					WHERE crn = '".$row["crn"]."';";
-				$prereq2 = mysqli_query($conn, $query);
-				$prereq2CRN = mysqli_fetch_assoc($prereq2);
 
-				echo "<td>".$prereqCRN["preCRN"]."</td><td>".$prereq2CRN["preCRN"]."</td>";
+				echo "<td>".$prereq1CRN["prereqid"]."</td><td>".$prereq2CRN["prereqid"]."</td>";
 
 				echo "</tr>";
 			}
@@ -809,16 +806,12 @@
 	}
 
 	if($remove_class){
-		$query = "DELETE FROM prereq1
-					WHERE '$remove_class_crn' = crn;";
-		$result = mysqli_query($conn, $query);
-
-		$query = "DELETE FROM prereq2
-					WHERE '$remove_class_crn' = crn;";
+		$query = "DELETE FROM prereqs
+					WHERE '$remove_class_crn' = courseid;";
 		$result = mysqli_query($conn, $query);
 
 		$query = "DELETE FROM courses
-					WHERE '$remove_class_crn' = crn;";
+					WHERE '$remove_class_crn' = courseid;";
 		$result = mysqli_query($conn, $query);
 		if(mysqli_affected_rows($conn) > 0){
 			echo "<h4>Class Removed</h4>";
@@ -829,9 +822,9 @@
 	}
 
 	if($add_class_info){
-		$query = "SELECT crn
+		$query = "SELECT courseid
 					FROM courses
-					WHERE $new_class_crn = crn;";
+					WHERE $new_class_crn = courseid;";
 		$result = mysqli_query($conn, $query);
 
 		if (!is_numeric($new_class_crn)){
@@ -844,14 +837,17 @@
 			echo '<form method="post" action="admin.php">';
 			echo '<h4>Input Class Info</h4>';
 
-			echo '<label for=new_class_crn>CRN: </label>';
+			echo '<label for=new_class_crn>courseid: </label>';
 			echo "<input type=text name=new_class_crn value='$new_class_crn'><br>";
 
 			echo '<label for=new_class_dept>Department: </label>';
 			echo '<input type="text" name="new_class_dept"><br>';
 
-			echo '<label for=new_class_cid>CID: </label>';
+			echo '<label for=new_class_cid>coursenum: </label>';
 			echo '<input type="text" name="new_class_cid"><br>';
+
+			echo '<label for=new_title>Title: </label>';
+			echo '<input type="text" name="new_title"><br>';
 
 			echo '<label for=new_class_pid>Professor ID: </label>';
 			echo '<input type="text" name="new_class_pid"><br>';
@@ -890,6 +886,7 @@
 		$new_time = $_POST["new_class_time"];
 		$new_prereq1 = $_POST["new_class_prereq1"];
 		$new_prereq2 = $_POST["new_class_prereq2"];
+		$new_title = $_POST["new_title"];
 		$new_year = "";
 		$new_semester = "";
 
@@ -901,26 +898,26 @@
 			$valid = 0;
 		}
 
-		/* check cid */
+		/* check coursenum */
 		if($valid == 0){
-			echo "Can't check CID because of invalid department<br />";
+			echo "Can't check coursenum because of invalid department<br />";
 		}
 		else if (!is_numeric($new_cid)){
-			echo "Invalid CID<br />";
+			echo "Invalid coursenum<br />";
 			$valid = 0;
 		}
 
 		/* check section */
 		if($valid == 0){
-			echo "Can't check Section because of invalid department or CID<br />";
+			echo "Can't check Section because of invalid department or coursenum<br />";
 		}
 		else if (!is_numeric($new_section)){
 			echo "Invalid Section<br />";
 		}
 		else{
-			$query = "SELECT c.dept, c.cid, c.sectionNum
+			$query = "SELECT c.dept, c.coursenum, c.section
 						FROM courses c
-						WHERE c.dept = '$new_dept' AND c.cid = '$new_cid' AND c.sectionNum = '$new_section';";
+						WHERE c.dept = '$new_dept' AND c.coursenum = '$new_cid' AND c.section = '$new_section';";
 			$result = mysqli_query($conn, $query);
 
 			if (mysqli_num_rows($result) > 0){
@@ -930,12 +927,12 @@
 		}
 
 		/* check pid */
-		$query = "SELECT id
-					FROM professors
-					WHERE $new_pid = id;";
+		$query = "SELECT p.id
+					FROM personalinfo p, roles r
+					WHERE $new_pid = p.id AND r.id = p.id AND r.role = 'professor';";
 		$result = mysqli_query($conn, $query);
 
-		if (mysqli_num_rows($result) <= 0){
+		if ($result == NULL || mysqli_num_rows($result) <= 0){
 			echo "Invalid Professor ID<br />";
 			$valid = 0;
 		}
@@ -977,6 +974,32 @@
 			$valid = 0;
 		}
 
+		/* check first prereq */
+		if($new_prereq1 != NULL){
+			$query = "SELECT courseid
+						FROM courses
+						WHERE courseid = '$new_prereq1';";
+			$result = mysqli_query($conn, $query);
+
+			if (mysqli_num_rows($result) <= 0){
+				echo "Invalid prereq1 CRN<br />";
+				$valid = 0;
+			}
+		 }
+
+		 /* check second prereq */
+		 if($new_prereq2 != NULL){
+			 $query = "SELECT courseid
+						 FROM courses
+						 WHERE courseid = '$new_prereq2';";
+			 $result = mysqli_query($conn, $query);
+
+			 if (mysqli_num_rows($result) <= 0){
+				 echo "Invalid prereq2 CRN<br />";
+				 $valid = 0;
+			 }
+		 }
+
 		/* if input is valid add to database */
 		if($valid == 1){
 			/* get current semester and year */
@@ -992,9 +1015,9 @@
 
 			/* add class to database */
 			$query = "INSERT INTO courses
-						VALUES ('$new_crn', '$new_cid', '$new_dept', '$new_pid',
-							 	'$new_year', '$new_semester', '$new_section',
-								'$new_credits', '$new_day', '$new_time');";
+						VALUES ('$new_crn', '$new_dept', '$new_cid', '$new_section', '$new_title',
+							 	'$new_credits', '$new_day', '$new_time', '$new_year',
+								'$new_semester', '$new_pid');";
 			$result = mysqli_query($conn, $query);
 			if(mysqli_affected_rows($conn) > 0){
 				echo "<h4>Class Added</h4>";
@@ -1003,43 +1026,26 @@
 				echo "<h4>Query error</h4>";
 			}
 
-			/* check prereq1 */
+			/* add prereq1 */
 			if($new_prereq1 != NULL){
-				$query = "SELECT cid
-							FROM courses
-							WHERE crn = '$new_prereq1';";
+				$query = "INSERT INTO prereqs
+							VALUES ('$new_crn', '$new_prereq1');";
 				$result = mysqli_query($conn, $query);
-
-				if (mysqli_num_rows($result) <= 0){
-					echo "Invalid prereq1 CRN<br />";
-				}
-				else{
-					$query = "INSERT INTO prereq1
-								VALUES ('$new_crn', '$new_prereq1');";
-					$result = mysqli_query($conn, $query);
-				}
 			}
 
-			/* check prereq1 */
+			/* add prereq1 */
 			if($new_prereq2 != NULL){
-				$query = "SELECT cid
-							FROM courses
-							WHERE crn = '$new_prereq2';";
-				$result = mysqli_query($conn, $query);
-
-				$query2 = "SELECT preCRN
-							FROM prereq1
-							WHERE preCRN = '$new_prereq2' AND CRN = '$new_crn';";
+				$query2 = "SELECT prereqid
+							FROM prereqs
+							WHERE prereqid = '$new_prereq2' AND courseid = '$new_crn';";
 				$result2 = mysqli_query($conn, $query2);
 
-				if (mysqli_num_rows($result) <= 0){
-					echo "Invalid prereq2 CRN<br />";
-				}
-				else if(mysqli_num_rows($result) > 0){
-					echo "Duplicate Prereq 2<br />";
-				}
+				if(mysqli_num_rows($result2) > 0){
+   					echo "Duplicate Prereq 2<br />";
+   					echo "Will only use once<br />";
+   			 	}
 				else{
-					$query = "INSERT INTO prereq2
+					$query = "INSERT INTO prereqs
 								VALUES ('$new_crn', '$new_prereq2');";
 					$result = mysqli_query($conn, $query);
 				}

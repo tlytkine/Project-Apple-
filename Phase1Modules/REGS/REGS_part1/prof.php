@@ -45,10 +45,10 @@
 	$year = $_POST["year"];
 
 	/* login credentials */
-	$servername = "localhost";
-	$username = "team3";
-	$password = "e9Yez5FL";
-	$dbname = "team3";
+	$servername = "127.0.0.1";
+	$username = "teamA2";
+	$password = "Ar9x5Y";
+	$dbname = "teamA2";
 
 	/* connect to database */
 	$conn = mysqli_connect($servername, $username, $password, $dbname);
@@ -439,9 +439,9 @@
 	/* show professors class rosters */
 	if($roster || $_SESSION["reload2"] == 1){
 		$query = "SELECT p.id, p.firstname, p.lastname, t.dept, t.coursenum, c.semester, c.year, t.grade
-			FROM personalinfo p, transcripts t, courses c,
-			WHERE p.id = t.studentid AND u.id = t.profID AND u.email = '$_SESSION[email]'
-					AND c.semester = t.semester AND c.year = t.year AND t.coursenum = c.coursenum AND t.dept = c.dept;";
+				FROM personalinfo p, transcripts t, courses c, users u
+				WHERE p.id = t.studentid AND u.id = t.professorid AND u.email = '$_SESSION[email]'
+						AND c.semester = t.semester AND c.year = t.year AND t.coursenum = c.coursenum AND t.dept = c.dept;";
 
 		$result = mysqli_query($conn, $query);
 

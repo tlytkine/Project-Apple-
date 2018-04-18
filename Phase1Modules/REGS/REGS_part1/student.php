@@ -29,10 +29,10 @@
 <!-- Handling button presses -->
 <?php
 	/* login credentials */
-	$servername = "localhost";
-	$username= "team3";
-	$password= "e9Yez5FL";
-	$dbname = "team3";
+	$servername = "127.0.0.1";
+	$username = "teamA2";
+	$password = "Ar9x5Y";
+	$dbname = "teamA2";
 
 	/* variables for managing display */
 	$schedule = $_POST["schedule"];
@@ -42,7 +42,7 @@
 	$schedule_display = $_POST["schedule_display"];
 
 	/* extract username */
-	$user = $_SESSION["username"];
+	$user = $_SESSION["email"];
 
 	/* connect to database */
 	$conn = mysqli_connect($servername, $username, $password, $dbname);
@@ -53,7 +53,7 @@
 	/* handle schedule display */
 	if($schedule) {
 		/* prompt for user entry of current year and semester */
-		echo "<p> Enter current year and semester (spring or fall) </p>";
+		echo "<p> Enter year and semester (spring or fall) </p>";
 		echo "<form method='post' action='student.php'>";
 		echo    "<label for='year'>Year: </label>";
 		echo    "<input type='text' id='year' name='year' /> <br/>";
@@ -70,9 +70,9 @@
 		$semester = $_POST["semester"];
 
 		/* get schedule */
-		$query = "SELECT t.dept, t.cid, t.sectionNum, c.day, c.classTime
-			FROM students s, transcripts t, courses c
-			WHERE s.id=t.sid AND s.username = '".$user."' AND t.cid = c.cid AND t.dept = c.dept AND t.semester = '".$semester."' AND t.year = '".$year."'
+		$query = "SELECT t.dept, t.coursenum, c.section, c.day, c.time
+			FROM users u, transcripts t, courses c
+			WHERE u.id=t.studentid AND u.email = '$user' AND t.coursenum = c.coursenum AND t.dept = c.dept AND t.semester = '$semester' AND t.year = '$year'
 			ORDER BY day;";
 
 		$result = mysqli_query($conn, $query);
@@ -84,7 +84,7 @@
 			echo "<tr><th colspan=2>Course</th><th>Section</th><th>Day</th><th>Time</th></tr>";
 			while($row = mysqli_fetch_assoc($result)) {
 				echo "<tr>";
-				echo "<td>".$row["dept"]."</td><td>".$row["cid"]."</td><td>".$row["sectionNum"]."</td><td>".$row["day"]."</td><td>".$row["classTime"]."</td>";
+				echo "<td>".$row["dept"]."</td><td>".$row["coursenum"]."</td><td>".$row["section"]."</td><td>".$row["day"]."</td><td>".$row["time"]."</td>";
 				echo "</tr>";
 			}
 			echo "</table>";
@@ -96,20 +96,20 @@
 	/* handle transcript display */
 	if($transcript) {
 		/* get and display student name */
-		$query = "SELECT fname, lname FROM students
-			WHERE username = '".$user."';";
+		$query = "SELECT p.firstname, p.lastname
+					FROM personalinfo p, users u
+					WHERE p.id = u.id AND u.email = '".$user."';";
 		$result = mysqli_query($conn, $query);
 		$row = mysqli_fetch_assoc($result);
 
-		echo "<h2>".$row["fname"]." ".$row["lname"],"</h2>";
+		echo "<h2>".$row["firstname"]." ".$row["lastname"],"</h2>";
 
 		/* get transcript */
-
-		$query = "SELECT t.dept, t.cid, c.cHours, t.grade, t.year, t.semester
-			      FROM transcripts t, courses c, students s
-			      WHERE t.cid = c.cid AND t.dept = c.dept AND
-				  		s.id = t.sid AND s.username = '$user'
-			 	  ORDER BY t.year, t.semester DESC;";
+		$query = "SELECT t.dept, t.coursenum, c.credithours, t.grade, t.year, t.semester
+			FROM transcripts t, courses c, users u
+			WHERE t.coursenum = c.coursenum AND t.dept = c.dept AND
+			t.studentid = u.id AND u.email = '$user'
+			ORDER BY t.year, t.semester DESC;";
 
 		$result = mysqli_query($conn, $query);
 
@@ -134,8 +134,8 @@
 				echo "<tr>";
 
 				echo "<td>".$row["dept"]."</td>";
-				echo "<td>".$row["cid"]."</td>";
-				echo "<td>".$row["cHours"]."</td>";
+				echo "<td>".$row["coursenum"]."</td>";
+				echo "<td>".$row["credithours"]."</td>";
 				echo "<td>".$row["grade"]."</td>";
 				echo "<td>".$row["semester"]."</td>";
 				echo "<td>".$row["year"]."</td>";
@@ -143,7 +143,7 @@
 				echo "</tr>";
 
 				/* gpa calculation */
-				$weight = $row["cHours"];
+				$weight = $row["credithours"];
 				if (strcmp($row["grade"], "IP") != 0) {
 					$total_credits = $total_credits + $weight;
 				}
@@ -185,9 +185,9 @@
 	if($update) {
 		echo "<h2 style='text-align:center'> Update Personal Info </h2>";
 		echo "<p> This is the information you have currently entered</p>";
-		$query = "SELECT s.id, s.username, s.fname, s.lname, s.street, s.city, s.email
-			      FROM  students s
-			      WHERE s.username = '$user';";
+		$query = "SELECT p.id, p.firstname, p.lastname, p.address, u.email
+			      FROM  personalinfo p, users u
+			      WHERE p.id = u.id AND u.email = '$user';";
 		$result = mysqli_query($conn, $query);
 		if (mysqli_num_rows($result)>0) {
 			echo '<table style="width:25%"';
@@ -195,17 +195,15 @@
 			echo '<th>Student ID</th>';
 			echo '<th>First Name</th>';
 			echo '<th>Last Name</th>';
-			echo '<th>Street Address</th>';
-			echo '<th>City</th>';
+			echo '<th>Address</th>';
 			echo '<th>Email</th>';
 			echo '</tr>';
 			while($row = mysqli_fetch_assoc($result)) {
 				echo '<tr>';
 				echo'<td>' . $row["id"] . '</td>';
-				echo'<td>' . $row["fname"] . '</td>';
-				echo'<td>' . $row["lname"] . '</td>';
-				echo'<td>' . $row["street"] . '</td>';
-				echo'<td>' . $row["city"] . '</td>';
+				echo'<td>' . $row["firstname"] . '</td>';
+				echo'<td>' . $row["lastname"] . '</td>';
+				echo'<td>' . $row["address"] . '</td>';
 				echo'<td>' . $row["email"] . '</td>';
 				echo '</tr>';
 			}
@@ -221,10 +219,8 @@
 		echo    "<input type='text' id='first' name='first' /> <br/>";
 		echo    "<label for='last'>Last name: </label>";
 		echo    "<input type='text' id='last' name='last' /> <br/>";
-		echo    "<label for='street'>Street Address: </label>";
+		echo    "<label for='street'>Address: </label>";
 		echo    "<input type='text' id='street' name='street' /> <br/>";
-		echo    "<label for='city'>City: </label>";
-		echo    "<input type='text' id='city' name='city' /> <br/>";
 		echo    "<label for='email'>Email: </label>";
 		echo    "<input type='text' id='email' name='email' /> <br/>";
 		echo    "<input type='submit' value='Change' name='change' />";
@@ -238,15 +234,20 @@
 		$first = $_POST["first"];
 		$last = $_POST["last"];
 		$street = $_POST["street"];
-		$city = $_POST["city"];
 		$email = $_POST["email"];
 
 		/* for finding correct row */
-		$user = $_SESSION["username"];
+		$user = $_SESSION["email"];
+		$query = "SELECT id
+					FROM users
+					WHERE email = '$user';";
+		$result = mysqli_query($conn, $query);
+		$row = mysqli_fetch_assoc($result);
+		$id = $row["id"];
 
 		/* queries for changing info */
 		if($pass) {
-			$query = "UPDATE users SET password='".$pass."' WHERE username='".$user."';";
+			$query = "UPDATE users SET password='$pass' WHERE email='$user';";
 
 			$result = mysqli_query($conn, $query);
 
@@ -260,12 +261,14 @@
 			}
 		}
 		if($first) {
-			$query = "UPDATE students SET fname='".$first."' WHERE username='".$user."';";
+			$query = "UPDATE personalinfo
+					SET firstname='".$first."'
+					WHERE id='".$id."';";
 
 			$result = mysqli_query($conn, $query);
 
 			if($result) {
-				echo "Successfully updated fist name";
+				echo "Successfully updated first name";
 				echo "</br>";
 			} else {
 				echo "Failed to update fist name";
@@ -273,7 +276,9 @@
 			}
 		}
 		if($last) {
-			$query = "UPDATE students SET lname='".$last."' WHERE username='".$user."';";
+			$query = "UPDATE personalinfo
+					SET lastname='".$last."'
+					WHERE id='".$id."';";
 
 			$result = mysqli_query($conn, $query);
 
@@ -286,7 +291,7 @@
 			}
 		}
 		if($street) {
-			$query = "UPDATE students SET street='".$street."' WHERE username='".$user."';";
+			$query = "UPDATE personalinfo SET address='".$street."' WHERE id='".$id."';";
 
 			$result = mysqli_query($conn, $query);
 
@@ -298,21 +303,8 @@
 				echo "</br>";
 			}
 		}
-		if($city) {
-			$query = "UPDATE students SET city='".$city."' WHERE username='".$user."';";
-
-			$result = mysqli_query($conn, $query);
-
-			if($result) {
-				echo "Successfully updated city";
-				echo "</br>";
-			} else {
-				echo "Failed to update city";
-				echo "</br>";
-			}
-		}
 		if($email) {
-			$query = "UPDATE students SET email='".$email."' WHERE username='".$user."';";
+			$query = "UPDATE users SET email='".$email."' WHERE id='".$id."';";
 
 			$result = mysqli_query($conn, $query);
 
