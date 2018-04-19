@@ -11,10 +11,10 @@ $id = $_SESSON["id"];
 // display personal information, cannot edit
 echo "First Name: ".$first_name."<br>";
 echo "Last Name: ".$last_name."<br>";
-echo "GWID: ".$gwid."<br>";
-echo "SSN: ".$SSN."<br>";
+echo "ID: ".$id."<br>";
 echo "Email: ".$email."<br>";
 echo "Address: ".$address."<br>";
+echo "DOB: ".$dob."<br>"
 ?>
 
 </form>

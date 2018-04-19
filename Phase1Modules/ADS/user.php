@@ -1,7 +1,7 @@
 <?php 
 include 'header.php';
 include 'db-connect.php';
-$id = $_SESSON["id"];
+$id = $_SESSION["id"];
 ?>
 
 <html>

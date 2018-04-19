@@ -33,7 +33,8 @@ echo "<table>
 <tr>
 <th>First Name</th>
 <th>Last Name</th>
-<th>GWID</th>
+<th>ID</th>
+<th>SSN</th>
 <th>Transcript</th>
 <th>Information</th>
 <th>Application Status</th>
@@ -107,8 +108,8 @@ echo "<form method='post' action='user.php'>
 
 
 // Same but with current pending applications
-$applications_query = "SELECT DISTINCT firstname, lastname, gwid
-	FROM applications;";
+$applications_query = "SELECT firstname, lastname, studentid
+	FROM graduation_application;";
 $applications_result = mysqli_query($conn,$applications_query);
 
 echo "<h2>Applications</h2>";
@@ -117,7 +118,7 @@ echo "<table>
 <tr>
 <th>First Name</th>
 <th>Last Name</th>
-<th>GWID</th>
+<th>Student ID</th>
 <th>Transcript</th>
 <th>Holds</th>
 <th>Clear for graduation</th></tr>";
@@ -133,7 +134,7 @@ while($row = mysqli_fetch_assoc($applications_result)){
 	<input type='submit' value='View Transcript'>
 	</form></td>";
 
-	$query = "SELECT hold FROM advises WHERE studentid = '$gwid';";
+	$query = "SELECT hold FROM advises WHERE studentid = '$id';";
 	$result = mysqli_query($conn, $query);
 	$row = mysqli_fetch_assoc($result);
 
@@ -152,7 +153,7 @@ while($row = mysqli_fetch_assoc($applications_result)){
 
 	if ($display_accept) {
 		echo "<td><form method ='post' action='graduate.php'>
-		<input type='hidden' name='gwid' value ='".$gwid."'>
+		<input type='hidden' name='id' value ='".$id."'>
 		<input type='hidden' name='action' value='accept'>
 		<input type='submit' value='Approve'>
 		</form></td>";
@@ -213,25 +214,21 @@ echo "<form method='post' action='user.php'>
 
 // dispaly all degrees
 echo "<br><h2>Degrees</h2>";
-$degree_query = "SELECT degree_name, core1, core2, core3 
-FROM degrees;";
+$degree_query = "SELECT degree_name, cid
+FROM degreerequirements;";
 
 $degree_result = mysqli_query($conn, $degree_query);
 
 echo "<table>
 <tr>
 <th>Degree Name</th>
-<th>Core Course 1</th>
-<th>Core Course 2</th>
-<th>Core Course 3</th>
+<th>Core Courses 
 </tr>";
 
 while($row = mysqli_fetch_assoc($degree_result)){
 	echo "<tr>
 	<td>".$row['degree_name']."</td>
-	<td>&nbsp;&nbsp;".$row['core1']."</td>
-	<td>&nbsp;&nbsp;".$row['core2']."</td>
-	<td>&nbsp;&nbsp;".$row['core3']."</td>
+	<td>&nbsp;&nbsp;".$row['cid']."</td>
 	</tr>";
 }
 echo "</table>";
@@ -250,9 +247,11 @@ echo "<td><form method='post' action='user.php'>
 // Display all alumni
 echo "<h2>Alumni</h2>";
 
-$alumni_query = "SELECT firstname, lastname, studentid, advises.degree_name, year,
-				address, email, username
-				FROM alumni;";
+$alumni_query = "SELECT personalinfo.firstname, personalinfo.lastname, personalinfo.id, advises.degree_name, transcripts.year, personalinfo.address, users.email
+				FROM personalinfo,advises,users
+				WHERE personalinfo.id = roles.id AND roles.role='ALUMNI'
+				AND transcripts.studentid = personalinfo.id AND 
+				advises.studentid = personalinfo.id;";
 $alumni_result = mysqli_query($conn, $alumni_query);
 
 echo "<table>
@@ -264,7 +263,6 @@ echo "<table>
 <th>Year</th>
 <th>Address</th>
 <th>Email</th>
-<th>Username</th>
 <th>Remove Alumni</th>
 </tr>";
 
@@ -272,12 +270,11 @@ while($row = mysqli_fetch_assoc($alumni_result)){
 	echo "<tr>
 	<td>".$row['firstname']."</td>
 	<td>".$row['lastname']."</td>
-	<td>".$row['gwid']."</td>
+	<td>".$row['id']."</td>
 	<td>".$row['degree_name']."</td>
 	<td>".$row['year']."</td>
 	<td>".$row['address']."</td>
 	<td>".$row['email']."</td>
-	<td>".$row['username']."</td>
 	<td><form method='post' action='user.php'>
 		<input type='hidden' name='action' value='remove_alumni'>
 		<input type='hidden' name='gwid' value = '". $row['gwid'] ."'>

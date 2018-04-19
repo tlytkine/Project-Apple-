@@ -10,31 +10,20 @@ $id = $_SESSON["id"];
 <h1>Alumni</h1><br> 
 <?php
 
-
+		$email = $_SESSON["id"];
 	// Alumni home page
 	// Can view and update personal information
 
-	//login script
-	session_start();
-	$conn = mysqli_connect("localhost", "team5", "9GcBpHaf", "team5");
 
-	$user_check=$_SESSION['login_user'];
-	$ses_sql=mysqli_query($conn, "select username from login where username='$user_check' AND role = 'ALUMNI'");
-	$row = mysqli_fetch_assoc($ses_sql);
-	$login_session = $row['username'];
-	if (!isset($login_session)) {
-		mysqli_close($conn);
-		header("Location: wrong_permissions.php");
-		exit;
-	} else {
-		// If logged in, fetch some information about the user
-		$user_name = $_SESSION['login_user'];
-		$query = "SELECT firstname, lastname, gwid, SSN, degree_name, year 
-			FROM alumni WHERE 
-			username='$user_name';";
+
+	
+	// If logged in, fetch some information about the user
+		$query = "SELECT firstname, lastname, id, ssn, advises.degree_name, transcripts.year 
+			FROM personalinfo, roles, advises, transcripts WHERE 
+			email='$email' AND transcripts.studentid = '$id' AND advises.studentid = '$id'
+			AND roles.role = '$id';";
 		$result = mysqli_query($conn, $query);
 		$row = mysqli_fetch_assoc($result);
-		$gwid = $row['gwid'];
 		$SSN = $row['SSN'];
 		$firstname = $row['firstname'];
 		$lastname = $row['lastname'];
@@ -46,17 +35,17 @@ $id = $_SESSON["id"];
 		// If a previous page submitted an update to the personal information, the update the database
 		// Updates email
 		if (strcmp($_POST['update'], "true") == 0 && !empty($_POST['email'])) {
-			$query = "UPDATE alumni
-				SET alumni.email = '" . $_POST['email'] . "'
-				WHERE alumni.gwid = '$gwid';";
+			$query = "UPDATE users
+				SET users.email = '" . $_POST['email'] . "'
+				WHERE users.id = '$id';";
 			$result_cleared_query = mysqli_query($conn, $query);
 			echo "Updated email <br>";
 		}
 		// Updates address
 		if (strcmp($_POST['update'], "true") == 0 && !empty($_POST['address'])) {
-			$query = "UPDATE alumni
-				SET alumni.address = '" . $_POST['address'] . "'
-				WHERE alumni.gwid = '$gwid';";
+			$query = "UPDATE personalinfo
+				SET personalinfo.address = '" . $_POST['address'] . "'
+				WHERE personalinfo.id = '$id';";
 			$result_cleared_query = mysqli_query($conn, $query);
 			echo "Updated address <br>";
 		}
@@ -69,7 +58,7 @@ $id = $_SESSON["id"];
 		$row = mysqli_fetch_assoc($result);
 		$email = $row['email'];
 		$address = $row['address'];
-	}
+	
 ?><!DOCTYPE html>
 <html>
 <head>

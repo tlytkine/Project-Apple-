@@ -7,9 +7,9 @@ $id = $_SESSON["id"];
 <html>
 <head><title>View Degree Requirements</title></head>
 <body><h2>View Degree Requirements</h2><br>
-<?php 
+
 	<!-- Queries for all degrees in the system and allows
-		the user to select one of them-->
+		the user to select one of them -->
 	<form method="post" action="degree_requirements.php">
 		<select name="degree">
 			<?php 
