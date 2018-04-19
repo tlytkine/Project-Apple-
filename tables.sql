@@ -1,3 +1,5 @@
+DROP TABLE IF EXISTS gradecalc CASCADE;
+
 DROP TABLE IF EXISTS degreerequirements CASCADE; 
 
 DROP TABLE IF EXISTS graduationapplication CASCADE; 
@@ -48,6 +50,7 @@ CREATE TABLE personalinfo (
     ssn               VARCHAR (11),
     FOREIGN KEY (id) REFERENCES users(id) 
 ); 
+
 
 CREATE TABLE admissionsapplication ( 
     id                  INT PRIMARY KEY AUTO_INCREMENT, 
@@ -172,12 +175,19 @@ CREATE TABLE graduationapplication (
     FOREIGN KEY (studentid) REFERENCES users(id) 
 );
 
+
 CREATE TABLE degreerequirements (
     degreename  VARCHAR(30),
     courseid    INT,
     PRIMARY KEY (degreename, courseid),
     FOREIGN KEY (courseid) REFERENCES courses(courseid)
 );
+
+CREATE TABLE gradecalc (
+    grade           VARCHAR(2) PRIMARY KEY,
+    qualitypoints   DECIMAL(4,3)
+);
+
 
 --DELIMITER CHANGE BELOW;
 
@@ -200,3 +210,6 @@ CREATE TRIGGER statuscheck after
 delimiter ;
 
 --STOP
+
+
+

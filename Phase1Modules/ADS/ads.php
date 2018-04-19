@@ -52,8 +52,8 @@ $courses = array_unique($courses);
 $course_count = 0;
 for ($i = 1; $i <= 12; $i++) {
 	// check is course is actually taken
-	$course_query = "SELECT * FROM course_status 
-	WHERE gwid ='$gwid' AND coursenum='$courses[$i]';";
+	$course_query = "SELECT grade FROM transcripts  
+	WHERE studentid ='$studentid' AND coursenum='$courses[$i]';";
 	$result_from_query = mysqli_query($conn, $course_query);
 	$row = mysqli_fetch_assoc($result_from_query);
 
@@ -77,21 +77,19 @@ if ($course_count < 10) {
 }
 
 // check against degree
-$degree_query = "SELECT * FROM degrees WHERE degree_name='$degree';";
+$degree_query = "SELECT * FROM degreerequirements WHERE degree_name='$degree';";
 $result_from_query = mysqli_query($conn, $degree_query);
 $row = mysqli_fetch_assoc($result_from_query);
 
 $coure_courses_count = 0;
 for ($i = 1; $i < 12; $i++) {
-	if (strcmp($courses[$i], $row['core1']) == 0 ||
-		strcmp($courses[$i], $row['core2']) == 0 ||
-		strcmp($courses[$i], $row['core3']) == 0 ) {
-		$coure_courses_count++;
+	if (strcmp($courses[$i], $row['courseid']) == 0) {
+		$core_courses_count++;
 	}
 }
 
 // check core classes are satisfied
-if ($coure_courses_count != 3) {
+if ($core_courses_count != 3) {
 	$error .= "Degree core courses are not satisfied<br><br>";
 }
 
