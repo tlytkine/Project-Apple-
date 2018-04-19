@@ -47,10 +47,10 @@
 	$year = $_POST["year"];
 
 	/* login credentials */
-	$servername = "localhost";
-	$username = "team3";
-	$password = "e9Yez5FL";
-	$dbname = "team3";
+	$servername = "127.0.0.1";
+	$username = "teamA2";
+	$password = "Ar9x5Y";
+	$dbname = "teamA2";
 
     /* connect to database */
 	$conn = mysqli_connect($servername, $username, $password, $dbname);
@@ -286,7 +286,7 @@
 		}
 
 		/* get student grade information */
-		$query = $query = "SELECT t.studentid, t.dept, t.coursenum, t.grade, t.semester, t.year
+		$query = "SELECT t.studentid, t.dept, t.coursenum, t.grade, t.semester, t.year
 			FROM transcripts t, personalinfo p
 			WHERE p.firstname = '$fname'  AND p.lastname = '$lname' AND p.id = t.studentid
 			ORDER BY t.year, t.semester DESC;";
