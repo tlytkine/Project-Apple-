@@ -56,7 +56,7 @@ CREATE TABLE admissionsapplication (
     status              VARCHAR(20) NOT NULL, 
     finaldecision       INT NOT NULL, 
     semester            VARCHAR(10), 
-    year                YEAR 
+    year                YEAR, 
     FOREIGN KEY (id) REFERENCES users(id),
     FOREIGN KEY (email) REFERENCES users(email),
     FOREIGN KEY (reviewerusername) REFERENCES users(email) 
@@ -119,7 +119,7 @@ CREATE TABLE academicinfo (
 ); 
 
 CREATE TABLE courses (
-    courseid       INT PRIMARY KEY;
+    courseid       INT PRIMARY KEY,
     dept           VARCHAR(4),
     coursenum      INT,
     section        INT,
@@ -134,7 +134,7 @@ CREATE TABLE courses (
 );
 
 CREATE TABLE transcripts (
-    studentid      INT
+    studentid      INT,
     dept           VARCHAR(4),
     coursenum      INT CHECK (coursenum >= 0 AND coursenum <= 9999),
     professorid    INT,
@@ -149,7 +149,7 @@ CREATE TABLE transcripts (
 CREATE TABLE prereqs (
     courseid    INT,
     prereqid    INT,
-    PRIMARY KEY (courseid, dept, coursenum),
+    PRIMARY KEY (courseid, prereqid),
     FOREIGN KEY (courseid) REFERENCES courses(courseid),
     FOREIGN KEY (prereqid) REFERENCES courses(courseid)    
 );
@@ -190,11 +190,11 @@ CREATE TRIGGER statuscheck after
   AND    new.letterofrecrecieved = 1 
   AND    new.personalinfosubmitted = 1 
   AND    new.transcriptrecieved = 1) THEN 
-  UPDATE application 
+  UPDATE admissionsapplication 
   SET    status = 'Complete' 
   WHERE  id = new.applicationid; 
   ELSE 
-  UPDATE application 
+  UPDATE admissionsapplication 
   SET    status = 'Incomplete' 
   WHERE  id = new.applicationid;END IF;END$$ 
 delimiter ;
