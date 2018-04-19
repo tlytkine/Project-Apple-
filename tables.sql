@@ -175,7 +175,6 @@ CREATE TABLE graduationapplication (
     FOREIGN KEY (studentid) REFERENCES users(id) 
 );
 
-
 CREATE TABLE degreerequirements (
     degreename  VARCHAR(30),
     courseid    INT,
@@ -188,6 +187,11 @@ CREATE TABLE gradecalc (
     qualitypoints   DECIMAL(4,3)
 );
 
+INSERT INTO users (email, password, id) VALUES ('admin@gwu.edu', '$2y$10$K7xpP4XPPWkgYJ0/I4XOtehbRigHUqpmXer99/Ftx1fERDU.JZObC', 1);
+INSERT INTO roles (id, role) VALUES (1, "ADMIN");
+
+INSERT INTO users (email, password, id) VALUES ('gs@gwu.edu', '$2y$10$Dntyy58tka97rsnu94W0yOk6/hqWFcRJ42fb/nIl2/j5D7oaB0Fvm', 2);
+INSERT INTO roles (id, role) VALUES (2, "GS");
 
 --DELIMITER CHANGE BELOW;
 
