@@ -7,73 +7,62 @@
 <h1>View / Edit Faculty Advisor</h1>
 <?php 
 $id = $_SESSON["id"];
-// Faculty advisor query 
-// Faculty advisor result 
-// Put Faculty advisors into drop down menu with fid as hidden value 
-
-$gwid = $_POST['gwid'];
-
-// Gets information about a student
-$student_query = "SELECT firstname, lastname, gwid 
-				  FROM students 
-				  WHERE gwid = '$gwid';";
-$student_result = mysqli_query($conn, $student_query);
-
-$student = mysqli_fetch_assoc($student_result);
-
-// Gets information about all the faculty advisors
-$faculty_query = "SELECT firstname, lastname, fid
-				  FROM faculty;";
-$fq_result = mysqli_query($conn,$faculty_query);
 
 
-// Gets current faculty advisors
-$current_advisor = "SELECT DISTINCT faculty.firstname, faculty.lastname, faculty.fid
-					FROM faculty, advises 
-					WHERE advises.gwid = '$gwid'
-					AND advises.fid = faculty.fid;";
-					
-$ca_result = mysqli_query($conn,$current_advisor);
-$row1 = mysqli_fetch_assoc($ca_result);
+$advises_query = "SELECT 
+P1.firstname AS studentfirstname, P1.lastname AS studentlastname, advises.studentid, advises.hold, advises.degreename
+P2.firstname AS facultyfirstname, P2.lastname AS facultylastname, advises.facultyid
+				  FROM advises, roles AS R1, roles AS R2, 
+				  personalinfo AS P1, personalinfo AS P2
+				  WHERE R1.id = advises.studentid AND R1.role='STUDENT' AND 
+				  R2.id = advises.facultyid AND R2.role='ADVISOR'
+				  AND P1.id=advises.studentid AND P2.id=advises.facultyid";
+$advises_result = mysqli_query($conn, $student_query);
 
-$fac_num = mysqli_num_rows($f_row);
 
-//Display information
+
+$faculty_query = "SELECT personalinfo.firstname, personalinfo.lastname, roles.id
+				  FROM personalinfo, roles 
+				  WHERE personalinfo.id = roles.id AND roles.role = 'ADVISOR'";
+
+$faculty_result = mysqli_query($conn, $faculty_query);
+
+
 echo "<table>
 <tr>
-<th>First Name</th>
-<th>Last Name</th>
-<th>GWID</th>
+<th>Name</th>
+<th>Student ID</th>
+<th>Hold</th>
+<th>Degree Name</th>
 <th>Faculty Advisor</th>
-<th>&nbsp;&nbsp;&nbsp;Assign</th>
-</tr>
-<tr>
-<td>".$student['firstname']."</td>
-<td>".$student['lastname']."</td>
-<td>".$student['gwid']."</td>
-<td>".$row1['firstname']." ".$row1['lastname']."</td>
-<td><form method='post' action = 'fa_assign_submit.php'>
-<select name ='fid'>";
+<th>Faculty ID</th>
+<th>&nbsp;&nbsp;&nbsp;Assign</th>";
 
-	// Different options to select which faculty advisor should be assigned
-	while($row = mysqli_fetch_assoc($fq_result)){
-		echo "<option value ='".$row['fid']."'>".$row['firstname']." ".$row['lastname']."</option>";
+while($row = mysqli_fetch_assoc($advises_result)){
+	
+	echo "<tr>
+	<td>".$row['studentfirstname']." ".$row['studentlastname']."</td>
+	<td>".$row['studentid']."</td>
+	<td>".$row['hold']."</td>
+	<td>".$row['degreename']."</td>
+	<td>".$row['facultyfirstname']." ".$row['facultylastname']."</td>
+	<td>".$row['facultyid']."</td>
+	<td><form method='post' action='advisor_assign_submit.php'>
+	<select name ='facultyid'>";
+	while($row1 = mysqli_fetch_assoc($faculty_result)){
+		echo "<option value ='".$row1['facultyid']."'>".$row1['firstname']." ".$row1['lastname']."</option>";
 	}
-	// submit gets handled in fa_assign_submit.php
- echo "
-</select>
-<input type='submit' value='Assign'>
-<input type='hidden' name='gwid' value ='".$student['gwid']."'>
-</form></td>
-</tr>
-</table>";
-
+	 echo "</select>
+	<input type='submit' value='Assign'>
+	<input type='hidden' name='gwid' value ='".$row['studentid']."'>
+	</form></td>
+	</tr>
+	</table>";
+ 
+}
 
 ?>
 
-
-
-<b><a href="logout.php">Log Out</a></b>
 
 
 </body>

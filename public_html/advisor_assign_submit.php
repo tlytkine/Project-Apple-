@@ -13,15 +13,15 @@ include 'db-connect.php';
 // Faculty advisor result 
 // Put Faculty advisors into drop down menu with fid as hidden value 
 
-$gwid = $_POST['gwid'];
-$fid = $_POST['fid'];
+$studentid = $_POST['studentid'];
+$facultyid = $_POST['facultyid'];
  
 // Deletes any values and then reserts them
 // Can't use update because their might not always be an
 // entry when first creating a student
-$delete = "DELETE FROM advises WHERE gwid = '$gwid';";
-$insert = "INSERT INTO advises (fid, gwid) 
-	VALUES('$fid', '$gwid');";
+$delete = "DELETE FROM advises WHERE studentid = '$studentid';";
+$insert = "INSERT INTO advises (facultyid, studentid) 
+	VALUES('$facultyid', '$studentid');";
 $result1 = mysqli_query($conn, $delete);
 $result2 = mysqli_query($conn, $insert);
 
@@ -63,8 +63,6 @@ else if($x==-1){
 ?>
 
 
-
-<b><a href="gs.php">Go back</a></b>
 
 
 </body>
