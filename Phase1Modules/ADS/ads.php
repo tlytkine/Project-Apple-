@@ -71,7 +71,7 @@ for ($i = 1; $i <= 12; $i++) {
 	}
 }
 echo "<br>";
-// make sure there are ten coureses
+// make sure there are ten courses
 if ($course_count < 10) {
 	$error .= "Not enough classes to graduate<br>";
 }
@@ -81,7 +81,7 @@ $degree_query = "SELECT * FROM degreerequirements WHERE degree_name='$degree';";
 $result_from_query = mysqli_query($conn, $degree_query);
 $row = mysqli_fetch_assoc($result_from_query);
 
-$coure_courses_count = 0;
+$core_courses_count = 0;
 for ($i = 1; $i < 12; $i++) {
 	if (strcmp($courses[$i], $row['courseid']) == 0) {
 		$core_courses_count++;
@@ -93,28 +93,35 @@ if ($core_courses_count != 3) {
 	$error .= "Degree core courses are not satisfied<br><br>";
 }
 
+
+
 // check gpa
-$gpa_calc = "SELECT (Sum(qualitypoints*credithours)/Sum(credithours)) AS GPA 
-FROM grade_calc, courses, course_status
-WHERE grade_calc.grade = course_status.grade 
-AND course_status.gwid = '$gwid'
-AND course_status.coursenum = courses.coursenum;";
+
+$gpa_calc = "SELECT (Sum(qualitypoints*credithours)/Sum(credithours)) AS GPA, transcripts.year 
+FROM gradecalc, courses, transcripts 
+WHERE gradecalc.grade = transcripts.grade 
+AND transcripts.studentidid = '$studentid'
+AND transcripts.coursenum = courses.coursenum;";
 
 $gpa_calc_result = mysqli_query($conn, $gpa_calc);
 
+$year;
 if(mysqli_num_rows($gpa_calc_result)>0){
 	while($row=mysqli_fetch_assoc($gpa_calc_result)){
+		$year = $row['year'];
 		if ($row['GPA'] < 3.0) {
 			$error .= 'Not a high enough GPA<br>';
+
 		}
 	}
 }
 
+
 //check credit hours
 $credits_calc = "SELECT (Sum(credithours)) AS CREDITS
-FROM courses, course_status
-WHERE course_status.coursenum = courses.coursenum
-AND course_status.gwid = '$gwid';";
+FROM courses, transcripts 
+WHERE transcripts.coursenum = courses.coursenum
+AND transcripts.studentid = '$studentid';";
 
 $credit_calc_result = mysqli_query($conn, $credits_calc);
 
@@ -130,8 +137,8 @@ if (mysqli_num_rows($credit_calc_result)>0){
 $letter_grade_check = 0;
 
 $course_grade_check = "SELECT qualitypoints
-FROM course_status, grade_calc 
-WHERE gwid='$gwid' AND grade_calc.grade = course_status.grade;";
+FROM transcripts, gradecalc
+WHERE student='$studentid' AND gradecalc.grade = transcripts.grade;";
 $course_grade_result = mysqli_query($conn, $course_grade_check);
 
 while ($row = mysqli_fetch_assoc($course_grade_result)) {
@@ -149,11 +156,13 @@ if (strlen($error) != 0) {
 	mysqli_close($conn);
 }
 
+
+
 // actually insert the application into the database
 for ($i = 1; $i <= 12; $i++) {
 	if ($courses[$i] > 0) {
-		$form_insert = "INSERT INTO graduation_application(firstname,lastname,studentid,courseid,year)
-		VALUES ('$first_name','$last_name','$gwid','$courses[$i]');";
+		$form_insert = "INSERT INTO graduationapplication(studentid,courseid,year)
+		VALUES ('$studentid','$courses[$i]');";
 
 		$result_form_insert = mysqli_query($conn, $form_insert);
 

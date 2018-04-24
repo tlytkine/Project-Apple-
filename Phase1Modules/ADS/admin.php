@@ -16,11 +16,11 @@ $id = $_SESSON["id"];
 //Get list of students
 // $advisee_query = "SELECT firstname, lastname, gwid, SSN, cleared FROM students";
 // Figure out cleared field 
-$advisee_query = "SELECT firstname, lastname, id, ssn FROM personalinfo WHERE id = $id";
+$advisee_query = "SELECT firstname, lastname, id FROM personalinfo WHERE id = $id";
 /*$advisee_query = "SELECT students.firstname, students.lastname, students.gwid, students.cleared, advises.fid, advises.hold
 FROM students, advises
 WHERE advises.gwid = students.gwid;";*/
-$hold_query = "SELECT advises.fid, advises.hold FROM students, advises WHERE advises.gwid = students.gwid;";
+$hold_query = "SELECT advises.facultyid, advises.hold, advises.hold FROM personalinfo, advises WHERE advises.studentid = personalinfo.id;";
 $advisee_result = mysqli_query($conn, $advisee_query);
 $hold_result = mysqli_query($conn, $hold_query);
 
@@ -34,7 +34,6 @@ echo "<table>
 <th>First Name</th>
 <th>Last Name</th>
 <th>ID</th>
-<th>SSN</th>
 <th>Transcript</th>
 <th>Information</th>
 <th>Application Status</th>
@@ -48,17 +47,18 @@ while ($row = mysqli_fetch_assoc($advisee_result)){
 	// display identification info
 	echo "<tr><td>".$row['firstname']."</td>
 	<td>".$row['lastname']."</td>
-	<td>".$row['gwid']."</td>";
+	<td>".$row['id']."</td>";
 	// transcript
 	echo "<td><form method ='post' action='transcript.php'>
-	<input type='hidden' name='gwid' value ='".$row['gwid']."'>
+	<input type='hidden' name='studentid' value ='".$row['id']."'>
 	<input type='submit' value='View Transcript'>
 	</form></td>";
 	// personal info
 	echo "<td><form method ='post' action='personal_info_fa.php'>
-	<input type='hidden' name='gwid' value ='".$row['gwid']."'>
+	<input type='hidden' name='studentid' value ='".$row['id']."'>
 	<input type='submit' value='View Personal Information'>
 	</form></td>";
+	/*
 	// if the student is cleared for graduation
 	if($row['cleared']==1){
 		echo "<td>Cleared</td>";
@@ -66,9 +66,10 @@ while ($row = mysqli_fetch_assoc($advisee_result)){
 	else {
 		echo "<td>Not cleared</td>";
 	}
+	*/
 echo"<td>";
 
-$gwid = $row['gwid'];
+$studentid = $row['id'];
 $row = mysqli_fetch_assoc($hold_result);
 if (strcmp($row['hold'], "NULL") != 0) {
 echo $row['hold'];
@@ -76,15 +77,15 @@ echo $row['hold'];
 // any holds that might be on the account
 echo "</td>
 <form method ='post' action='hold.php'>
-<input type='hidden' name='gwid' value ='$gwid'>
-<input type='hidden' name='fid' value='".$row['fid']."'>
+<input type='hidden' name='studentid' value ='$studentid'>
+<input type='hidden' name='facultyid' value='".$row['facultyid']."'>
 <td>
 <input type='submit' name='lift' value='Lift Hold'>
 </form>
 </td>
 <form method='post' action='hold.php'>
-<input type='hidden' name='gwid' value ='$gwid'>
-<input type='hidden' name='fid' value='".$row['fid']."'>
+<input type='hidden' name='studentid' value ='$studentid'>
+<input type='hidden' name='facultyid' value='".$row['facultyid']."'>
 <td>
 <input type='text' name='holdtext'>
 <input type='submit' name='place' value='Place Hold'>
@@ -92,7 +93,7 @@ echo "</td>
 </form>";
 	echo "<td><form method='post' action='user.php'>
 		<input type='hidden' name='action' value='remove_student'>
-		<input type='hidden' name='gwid' value = '$gwid'>
+		<input type='hidden' name='studentid' value = '$studentid'>
 		<input type='submit' value='Remove'>
 		</form></td></tr>";
 }
@@ -108,7 +109,7 @@ echo "<form method='post' action='user.php'>
 
 
 // Same but with current pending applications
-$applications_query = "SELECT firstname, lastname, studentid
+$applications_query = "SELECT firstname, lastname, studentid, year
 	FROM graduation_application;";
 $applications_result = mysqli_query($conn,$applications_query);
 
@@ -119,22 +120,24 @@ echo "<table>
 <th>First Name</th>
 <th>Last Name</th>
 <th>Student ID</th>
+<th>Year</th>
 <th>Transcript</th>
 <th>Holds</th>
 <th>Clear for graduation</th></tr>";
 
 while($row = mysqli_fetch_assoc($applications_result)){
-	$gwid = $row['gwid'];
+	$studentid = $row['studentid'];
 	echo "<tr>
 	<td>".$row['firstname']."</td>"."
 	<td>".$row['lastname']."</td>"."
-	<td>".$gwid."</td>";
+	<td>".$studentid."</td>"."
+	<td>".$year."</td>";
 	echo "<td><form method ='post' action='transcript.php'>
-	<input type='hidden' name='gwid' value ='".$gwid."'>
+	<input type='hidden' name='studentid' value ='".$studentid."'>
 	<input type='submit' value='View Transcript'>
 	</form></td>";
 
-	$query = "SELECT hold FROM advises WHERE studentid = '$id';";
+	$query = "SELECT hold FROM advises WHERE studentid = '$studentid';";
 	$result = mysqli_query($conn, $query);
 	$row = mysqli_fetch_assoc($result);
 
@@ -153,7 +156,7 @@ while($row = mysqli_fetch_assoc($applications_result)){
 
 	if ($display_accept) {
 		echo "<td><form method ='post' action='graduate.php'>
-		<input type='hidden' name='id' value ='".$id."'>
+		<input type='hidden' name='studentid' value ='".$studentid."'>
 		<input type='hidden' name='action' value='accept'>
 		<input type='submit' value='Approve'>
 		</form></td>";
