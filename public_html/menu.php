@@ -28,7 +28,7 @@ include 'header.php';
 
 <a href=''>View Student Transcripts</a> <br />
 <a href=''>Enter Student Grades</a> <br />
-<a href=''>Update Advisor Assignments</a> <br />
+<a href='update_advisor_assignments.php'>Update Advisor Assignments</a> <br />
 <a href=''>Update Student Holds</a> <br />
 <a href=''>Approve/Deny Graduation Applications</a> <br />
 
@@ -46,7 +46,7 @@ include 'header.php';
 
 <a href=''>View Student Transcripts</a> <br />
 <a href=''>Enter Student Grades</a> <br />
-<a href=''>Update Advisor Assignments</a> <br />
+<a href='update_advisor_assignments.php'>Update Advisor Assignments</a> <br />
 <a href=''>View Student Holds</a> <br />
 <a href=''>Approve/Deny Graduation Applications</a> <br />
 <?php endif; ?>
