@@ -9,7 +9,7 @@
 
 <?php
     $allowed_user_types = array(
-        "STUDENT"
+        "ADMIN"
     );
     include 'header.php';
 
