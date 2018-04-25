@@ -28,11 +28,22 @@ include 'header.php';
     		echo "Database connection error: " . mysqli_connect_error();
     	}
 
+        /* determine if grade was changed */
         $change_grade = $_POST["change_grade"];
+
+        /* variables for changing students grades */
+    	$new_grade = $_POST["new_grade"];
+    	$id = $_POST["id"];
+    	$dept = $_POST["dept"];
+    	$coursenum = $_POST["coursenum"];
+    	$semester = $_POST["semester"];
+    	$year = $_POST["year"];
+
+        /* runs if grade was changed */
         if($change_grade){
     		$query = "UPDATE transcripts
     			SET grade = '$new_grade'
-    			WHERE studentid = '$sid' AND dept = '$dept' AND coursenum = '$cid' AND
+    			WHERE studentid = '$id' AND dept = '$dept' AND coursenum = '$coursenum' AND
     			semester = '$semester' AND year = '$year';";
 
     		if(strcmp($new_grade, "A") == 0 || strcmp($new_grade, "A-") == 0 || strcmp($new_grade, "B+") == 0 || strcmp($new_grade, "B") == 0 || strcmp($new_grade, "B-") == 0 || strcmp($new_grade, "C+") == 0 || strcmp($new_grade, "C") == 0 || strcmp($new_grade, "F") == 0) {
@@ -41,7 +52,7 @@ include 'header.php';
     			echo "Invalid grade <br/>";
     		}
 
-    		echo "Sorry this isn't a valid student ID";
+    		//echo "Sorry this isn't a valid student ID";
     	}
 
         $query = "SELECT p.id, p.firstname, p.lastname, t.dept, t.coursenum, c.semester, c.year, t.grade
@@ -53,7 +64,6 @@ include 'header.php';
 
 		/* display class rosters */
 		if (mysqli_num_rows($result) > 0){
-			echo "<h2>Classes</h2>";
 			echo "<table>";
 			$cur_dept = ""; //track current class
 			$cur_id = ""; //track current class
