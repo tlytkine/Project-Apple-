@@ -29,7 +29,7 @@ include 'header.php';
 <a href=''>View Student Transcripts</a> <br />
 <a href=''>Enter Student Grades</a> <br />
 <a href='update_advisor_assignments.php'>Update Advisor Assignments</a> <br />
-<a href=''>Update Student Holds</a> <br />
+<a href='update_student_holds.php'>Update Student Holds</a> <br />
 <a href=''>Approve/Deny Graduation Applications</a> <br />
 
 <a href=''>Update Degrees</a> <br />
