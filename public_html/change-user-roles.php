@@ -44,6 +44,7 @@
             $query = "SELECT role FROM roles WHERE id = '$id';";
 			$result = mysqli_query($connection, $query);
 
+            echo "<h3>".$change_role_user."</h3>";
             if (mysqli_num_rows($result) > 0){
                 echo "<br />";
                 echo "<table>";
