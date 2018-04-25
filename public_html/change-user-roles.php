@@ -39,11 +39,13 @@
         if (mysqli_num_rows($result) > 0) {
             $row = mysqli_fetch_assoc($result);
 			$id= $row["id"];
+            $_SESSION["change_role_id"] = $id;
 
             $query = "SELECT role FROM roles WHERE id = '$id';";
 			$result = mysqli_query($connection, $query);
 
             if (mysqli_num_rows($result) > 0){
+                echo "<br />";
                 echo "<table>";
                 echo "<tr><th>Roles</th>";
                 while ($row = mysqli_fetch_assoc($result)){
@@ -60,46 +62,59 @@
 		}
 
 		echo "<h3> Enter role to be added or removed:</h3>";
-        echo "<p>Possible roles are: ADMIN (System Admin) <br />
-                                     ALUMNI (Alumni) <br />
-                                     STUDENT (Student) <br />
-                                     APPLICANT (Applicant) <br />
-                                     GS (Graduate Secretary) <br />
-                                     INSTRUCTOR (Professors) <br />
-                                     ADVISOR (Faculty Advisor) <br />
-                                     REVIEWER (Reviewer) <br />
-                                     CAC (Chair of Admissions Committee)<br /></p>";
+        echo "<p>Possible roles are: <br />
+                    ADMIN (System Admin) <br />
+                    ALUMNI (Alumni) <br />
+                    STUDENT (Student) <br />
+                    APPLICANT (Applicant) <br />
+                    GS (Graduate Secretary) <br />
+                    INSTRUCTOR (Professors) <br />
+                    ADVISOR (Faculty Advisor) <br />
+                    REVIEWER (Reviewer) <br />
+                    CAC (Chair of Admissions Committee)<br /></p>";
 		echo "<form method='post' action='change-user-roles.php'>";
-		echo    "<label for='new_role'>New Role: </label>";
+		echo    "<label for='new_role'>Role: </label>";
 		echo    "<input type='text' id='new_role' name='new_role'/> <br/>";
 		echo    "<input type='submit' value='Add' name='add_role' />";
         echo    "<input type='submit' value='Remove' name='remove_role' />";
 		echo "</form>";
 	}
-	/*else if($do_change_role) {
-		$change_role_user = $_POST["change_role_user"];
+	else if($add_role) {
 		$new_role = $_POST["new_role"];
+        $new_role = strtoupper($new_role);
+        $id = $_SESSION["change_role_id"];
+        $user_types = array(
+            "ADMIN",
+            "ALUMNI",
+            "STUDENT",
+            "APPLICANT",
+            "GS",
+            "INSTRUCTOR",
+            "ADVISOR",
+            "REVIEWER",
+            "CAC"
+        );
 
-		if (strcmp($new_role, "admin") == 0 || strcmp($new_role, "gs") == 0 || strcmp($new_role, "professor") == 0 || strcmp($new_role, "student") == 0) {
-			$query = "UPDATE users SET role = '".$new_role."' WHERE username = '".$change_role_user."';";
+		if (in_array($new_role, $user_types)) {
+			$query = "INSERT INTO roles VALUES ('$id', '$new_role');";
 			$result = mysqli_query($conn, $query);
 
 			if ($result) {
 				echo "<br/>";
-				echo "Successfully changed user role";
+				echo "Successfully added user role";
 			} else {
 				echo "<br/>";
-				echo "Failed to change user role";
+				echo "User already has that role";
 			}
 		} else {
 			echo "<br/>";
-			echo "Invalid user type";
+			echo "Invalid role";
 		}
-	}*/
+	}
     else{
         echo "<p> Enter username to view their current roles: </p>";
 		echo "<form method='post' action='change-user-roles.php'>";
-		echo    "<label for='change_role_user'>Username: </label>";
+		echo    "<label for='change_role_user'>Email: </label>";
 		echo    "<input type='text' id='change_role_user' name='change_role_user'/> <br/>";
 		echo    "<input type='submit' value='Enter' name='change_role' />";
 		echo "</form>";
