@@ -4,22 +4,22 @@
 	$login = $_POST["login"];
 	$reset = $_POST["reset"];
 
-	$user = $_POST['username'];
+	$user = $_POST['email'];
 	$pass = $_POST['password'];
 
-	$_SESSION['username'] = $user;
+	$_SESSION['email'] = $user;
 
-	$servername = "localhost";
-	$username = "team3";
-	$password = "e9Yez5FL";
-	$dbname = "team3";
+	$servername = "127.0.0.1";
+	$username = "teamA2";
+	$password = "Ar9x5Y";
+	$dbname = "teamA2";
 
 	$conn = mysqli_connect($servername, $username, $password, $dbname);
 
 	if($login){
 		$query = "SELECT *
-            	FROM users
-            	WHERE username = '".$user."';";
+            	FROM users u , roles r
+            	WHERE u.id = r.id AND u.email = '".$user."';";
 
 		$result = mysqli_query($conn, $query);
 		$row = mysqli_fetch_assoc($result);

@@ -1,6 +1,6 @@
 <?php
 	session_start();
-	if (strcmp($_SESSION["role"], "professor") != 0) {
+	if (strcmp($_SESSION["role"], "INSTRUCTOR") != 0) {
 		die("ACCESS DENIED");
 	}
 ?>
