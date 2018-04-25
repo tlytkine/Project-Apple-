@@ -20,7 +20,7 @@ include 'header.php';
 <a href=''>Add Users</a> <br />
 <a href=''>Update User Information</a> <br />
 <a href='deactivate-user.php'>Deactivate Users</a> <br />
-<a href=''>Change User Roles</a> <br />
+<a href='change-user-roles.php'>Change User Roles</a> <br />
 
 <a href=''>Update Admissions Document Status</a> <br />
 <a href=''>View Admissions Applications and Reviews</a> <br />
