@@ -22,7 +22,7 @@ First Name: <input type="text" name="fname"><br>
 Last Name: <input type="text" name="lname"><br>
 <input type="submit" name="grade_name_search" value="Search">
 
-<h4>Enter a Student ID:</h4> <input type="text" name="student_id"><br>
+<h4>Enter a Student ID:</h4> <input type="text" name="id"><br>
 <input type="submit" name="grade_search" value="Search">
 </form>
 

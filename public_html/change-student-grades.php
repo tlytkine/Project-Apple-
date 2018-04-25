@@ -56,7 +56,7 @@ include 'header.php';
         } else {
             echo "Invalid grade <br/>";
         }
-        $_SESSION["reload"] = 1; 
+        $_SESSION["reload"] = 1;
         //echo "Sorry this isn't a valid student ID";
     }
 
@@ -93,7 +93,7 @@ include 'header.php';
 					echo "<tr>";
 
 					echo "<td>".$row["dept"]."</td><td>".$row["coursenum"]."</td><td>".$row["semester"]."</td><td>".$row["year"]."</td>";
-					echo "<td><form method='post' action='prof.php'>";
+					echo "<td><form method='post' action='change-student-grades.php'>";
 					echo "<input type='text' name='new_grade' value=".$row["grade"].">";
 					echo "</td>";
 					echo "<td><input type='submit' name='change_grade' value='Change'></td>";
@@ -148,7 +148,7 @@ include 'header.php';
 				echo "<tr>";
 
 				echo "<td>".$row["dept"]."</td><td>".$row["coursenum"]."</td><td>".$row["semester"]."</td><td>".$row["year"]."</td>";
-				echo "<td><form method='post' action='prof.php'>";
+				echo "<td><form method='post' action='change-student-grades.php'>";
 				echo "<input type='text' name='new_grade' value='".$row["grade"]."'>";
 				echo "</td>";
 				echo "<td><input type='submit' name='change_grade' value='Change'></td>";
