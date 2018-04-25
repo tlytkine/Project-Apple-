@@ -17,7 +17,9 @@ include 'header.php';
 
 ?>
 <h2>Search for a Student</h2>
+
 <?php
+    print_r($_SESSION["roles"]);
     if (inarray("INSTRUCTOR", $_SESSION["roles"])){
         echo '<form method="post" action="view-student-transcript.php">';
 		echo '<h4>Enter a Student Name:</h4>';
