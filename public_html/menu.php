@@ -59,7 +59,7 @@ include 'header.php';
 
 <?php if (in_array("STUDENT", $_SESSION["roles"])) : ?>
 <a href=''>View Class Schedule</a> <br />
-<a href=''>View Transcript</a> <br />
+<a href='view-personal-transcript.php'>View Transcript</a> <br />
 <a href=''>Register for Classes</a> <br />
 <a href='view_degree_requirements.php'>View Degree Requirements</a> <br />
 <a href=''>Apply to Graduate</a> <br />
@@ -67,13 +67,13 @@ include 'header.php';
 
 <?php if (in_array("ALUMNI", $_SESSION["roles"])) : ?>
 <a href=''>Update Personal Information</a> <br />
-<a href=''>View Transcript</a> <br />
+<a href='view-personal-transcript.php'>View Transcript</a> <br />
 <?php endif; ?>
 
 <?php if (in_array("INSTRUCTOR", $_SESSION["roles"])) : ?>
 <a href='view-class-roster.php'>View Class Rosters</a> <br />
-<a href=''>Enter Student Grades</a> <br />
-<a href=''>View Student Transcripts</a> <br />
+<a href='search-student-grades.php'>Enter Student Grades</a> <br />
+<a href='search-student-transcripts.php'>View Student Transcripts</a> <br />
 <?php endif; ?>
 
 <?php if (in_array("ADVISOR", $_SESSION["roles"])) : ?>
