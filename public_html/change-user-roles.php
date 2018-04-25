@@ -47,7 +47,7 @@
             echo "<h3>".$change_role_user."</h3>";
             if (mysqli_num_rows($result) > 0){
                 echo "<br />";
-                echo "<table>";
+                echo "<table style='border-right: solid black'>";
                 echo "<tr><th>Roles</th>";
                 while ($row = mysqli_fetch_assoc($result)){
                     echo "<td>".$row["role"]."</td>";
