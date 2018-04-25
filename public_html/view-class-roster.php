@@ -93,9 +93,9 @@ include 'header.php';
 				echo "</tr>";
 
 				/* pass through info needed to change grade */
-				echo "<input type='hidden' name='sid' value=".$row["id"].">";
+				echo "<input type='hidden' name='id' value=".$row["id"].">";
 				echo "<input type='hidden' name='dept' value=".$row["dept"].">";
-				echo "<input type='hidden' name='cid' value=".$row["coursenum"].">";
+				echo "<input type='hidden' name='coursenum' value=".$row["coursenum"].">";
 				echo "<input type='hidden' name='semester' value=".$row["semester"].">";
 				echo "<input type='hidden' name='year' value=".$row["year"]."></form>";
 			}
