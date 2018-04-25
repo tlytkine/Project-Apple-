@@ -60,7 +60,7 @@ include 'header.php';
 <?php if (in_array("STUDENT", $_SESSION["roles"])) : ?>
 <a href='view-class-schedule.php'>View Class Schedule</a> <br />
 <a href='view-personal-transcript.php'>View Transcript</a> <br />
-<a href=''>Register for Classes</a> <br />
+<a href='register.php'>Register for Classes</a> <br />
 <a href='view_degree_requirements.php'>View Degree Requirements</a> <br />
 <a href=''>Apply to Graduate</a> <br />
 <?php endif; ?>
