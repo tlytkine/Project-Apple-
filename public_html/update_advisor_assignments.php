@@ -8,22 +8,16 @@
 <?php 
 $id = $_SESSON["id"];
 
-
+3
 $advises_query = "SELECT 
-P1.firstname AS studentfirstname, P1.lastname AS studentlastname, advises.studentid, advises.hold, advises.degreename
-P2.firstname AS facultyfirstname, P2.lastname AS facultylastname, advises.facultyid
-				  FROM advises, roles AS R1, roles AS R2, 
-				  personalinfo AS P1, personalinfo AS P2
-				  WHERE R1.id = advises.studentid AND R1.role='STUDENT' AND 
-				  R2.id = advises.facultyid AND R2.role='ADVISOR'
-				  AND P1.id=advises.studentid AND P2.id=advises.facultyid";
+P1.firstname AS studentfirstname, P1.lastname AS studentlastname, advises.studentid, advises.hold, advises.degreename,
+P2.firstname AS facultyfirstname, P2.lastname AS facultylastname, advises.facultyid FROM advises, roles AS R1, roles AS R2, personalinfo AS P1, personalinfo AS P2 WHERE R1.id = advises.studentid AND R1.role='STUDENT' AND R2.id = advises.facultyid AND R2.role='ADVISOR' AND P1.id=advises.studentid AND P2.id=advises.facultyid;";
 $advises_result = mysqli_query($conn, $student_query);
 
 
 
-$faculty_query = "SELECT personalinfo.firstname, personalinfo.lastname, roles.id
-				  FROM personalinfo, roles 
-				  WHERE personalinfo.id = roles.id AND roles.role = 'ADVISOR'";
+$faculty_query = "SELECT firstname, lastname, role FROM personalinfo, roles 
+				  WHERE personalinfo.id = roles.id AND roles.role = 'ADVISOR';";
 
 $faculty_result = mysqli_query($conn, $faculty_query);
 
