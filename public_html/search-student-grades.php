@@ -9,22 +9,39 @@
 
 <?php
 $allowed_user_types = array(
-    "INSTRUCTOR"
+    "INSTRUCTOR",
+    "GS",
+    "ADMIN"
 );
 include 'header.php';
 
 ?>
 <h2>Search for a Student</h2>
 
-<form method="post" action="change-student-grades.php">
-<h4>Enter a Student Name:</h4>
-First Name: <input type="text" name="fname"><br>
-Last Name: <input type="text" name="lname"><br>
-<input type="submit" name="grade_name_search" value="Search">
+<?php
+    if (in_array("INSTRUCTOR", $_SESSION["roles"])){
+        echo '<form method="post" action="change-student-grades.php">';
+		echo '<h4>Enter a Student Name:</h4>';
+		echo 'First Name: <input type="text" name="fname"><br>';
+		echo 'Last Name: <input type="text" name="lname"><br>';
+		echo '<input type="submit" name="grade_name_search" value="Search">';
 
-<h4>Enter a Student ID:</h4> <input type="text" name="id"><br>
-<input type="submit" name="grade_search" value="Search">
-</form>
+        echo '<h4>Enter a Student ID:</h4> <input type="text" name="id"><br>';
+		echo '<input type="submit" name="grade_search" value="Search">';
+		echo '</form>';
+    }
+    else {
+        echo '<form method="post" action="change-any-student-grades.php">';
+		echo '<h4>Enter a Student Name:</h4>';
+		echo 'First Name: <input type="text" name="fname"><br>';
+		echo 'Last Name: <input type="text" name="lname"><br>';
+		echo '<input type="submit" name="grade_name_search" value="Search">';
+
+        echo '<h4>Enter a Student ID:</h4> <input type="text" name="id"><br>';
+		echo '<input type="submit" name="grade_search" value="Search">';
+		echo '</form>';
+    }
+?>
 
 </body>
 </html>
