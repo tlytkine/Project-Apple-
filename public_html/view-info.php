@@ -110,6 +110,9 @@
 
 			$result = mysqli_query($connection, $query);
 
+            $user = $email;
+            $_SESSION["email"] = $email;
+
 			if($result) {
 				echo "Successfully updated email";
 				echo "</br>";
