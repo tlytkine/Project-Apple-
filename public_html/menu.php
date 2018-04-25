@@ -34,7 +34,7 @@ include 'header.php';
 
 <a href=''>Update Degrees</a> <br />
 <a href=''>Update Available Classes</a> <br />
-<a href=''>Update Courses Offered</a><br />
+<a href='add-remove-classes.php'>Update Courses Offered</a><br />
 <?php endif; ?>
 
 <?php if (in_array("GS", $_SESSION["roles"])) : ?>
