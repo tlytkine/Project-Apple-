@@ -28,6 +28,22 @@ include 'header.php';
     		echo "Database connection error: " . mysqli_connect_error();
     	}
 
+        $change_grade = $_POST["change_grade"];
+        if($change_grade){
+    		$query = "UPDATE transcripts
+    			SET grade = '$new_grade'
+    			WHERE studentid = '$sid' AND dept = '$dept' AND coursenum = '$cid' AND
+    			semester = '$semester' AND year = '$year';";
+
+    		if(strcmp($new_grade, "A") == 0 || strcmp($new_grade, "A-") == 0 || strcmp($new_grade, "B+") == 0 || strcmp($new_grade, "B") == 0 || strcmp($new_grade, "B-") == 0 || strcmp($new_grade, "C+") == 0 || strcmp($new_grade, "C") == 0 || strcmp($new_grade, "F") == 0) {
+    			$result = mysqli_query($conn, $query);
+    		} else {
+    			echo "Invalid grade <br/>";
+    		}
+
+    		echo "Sorry this isn't a valid student ID";
+    	}
+
         $query = "SELECT p.id, p.firstname, p.lastname, t.dept, t.coursenum, c.semester, c.year, t.grade
 				FROM personalinfo p, transcripts t, courses c, users u
 				WHERE p.id = t.studentid AND u.id = t.professorid AND u.email = '$_SESSION[email]'
@@ -60,10 +76,10 @@ include 'header.php';
 				echo "<td>".$row["lastname"]."</td>";
 
 				echo "<td>";
-				echo "<form method='post' action='prof.php'>";
+				echo "<form method='post' action='view-class-roster.php'>";
 				echo "<input type='text' name='new_grade' value=".$row["grade"].">";
 				echo "</td>";
-				echo "<td><input type='submit' name='change_grade2' value='Change'></td>";
+				echo "<td><input type='submit' name='change_grade' value='Change'></td>";
 				echo "</tr>";
 
 				/* pass through info needed to change grade */
