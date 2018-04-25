@@ -73,15 +73,15 @@
                     REVIEWER (Reviewer) <br />
                     CAC (Chair of Admissions Committee)<br /></p>";
 		echo "<form method='post' action='change-user-roles.php'>";
-		echo    "<label for='new_role'>Role: </label>";
-		echo    "<input type='text' id='new_role' name='new_role'/> <br/>";
+		echo    "<label for='role'>Role: </label>";
+		echo    "<input type='text' id='role' name='role'/> <br/>";
 		echo    "<input type='submit' value='Add' name='add_role' />";
         echo    "<input type='submit' value='Remove' name='remove_role' />";
 		echo "</form>";
 	}
 	else if($remove_role) {
-		$remove_role = $_POST["remove_role"];
-        $remove_role = strtoupper($remove_role);
+		$role = $_POST["role"];
+        $role = strtoupper($role);
         $id = $_SESSION["change_role_id"];
         $user_types = array(
             "ADMIN",
@@ -95,8 +95,8 @@
             "CAC"
         );
 
-		if (in_array($remove_role, $user_types)) {
-			$query = "DELETE FROM roles WHERE id = '$id' AND role = '$remove_role';";
+		if (in_array($role, $user_types)) {
+			$query = "DELETE FROM roles WHERE id = '$id' AND role = '$role';";
 			$result = mysqli_query($connection, $query);
 
 			if ($result) {
@@ -112,8 +112,8 @@
 		}
 	}
     else if($add_role) {
-		$new_role = $_POST["new_role"];
-        $new_role = strtoupper($new_role);
+		$role = $_POST["role"];
+        $role = strtoupper($role);
         $id = $_SESSION["change_role_id"];
         $user_types = array(
             "ADMIN",
@@ -127,8 +127,8 @@
             "CAC"
         );
 
-		if (in_array($new_role, $user_types)) {
-			$query = "INSERT INTO roles VALUES ('$id', '$new_role');";
+		if (in_array($role, $user_types)) {
+			$query = "INSERT INTO roles VALUES ('$id', '$role');";
 			$result = mysqli_query($connection, $query);
 
 			if ($result) {
