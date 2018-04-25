@@ -42,7 +42,7 @@
 		$semester = $_POST["semester"];
 
 		/* get schedule */
-		$query = "SELECT t.dept, t.coursenum, c.section, c.day, c.time
+		$query = "SELECT t.dept, t.coursenum, c.section, c.day, c.time, c.title
 			FROM users u, transcripts t, courses c
 			WHERE u.id=t.studentid AND u.email = '$user' AND t.coursenum = c.coursenum AND t.dept = c.dept AND t.semester = '$semester' AND t.year = '$year'
 			ORDER BY day;";
@@ -53,10 +53,10 @@
 		if (mysqli_num_rows($result) > 0) {
 			echo "<br/>";
 			echo "<table>";
-			echo "<tr><th colspan=2>Course</th><th>Section</th><th>Day</th><th>Time</th></tr>";
+			echo "<tr><th colspan=2>Course</th><th>Section</th><th>Title</th><th>Day</th><th>Time</th></tr>";
 			while($row = mysqli_fetch_assoc($result)) {
 				echo "<tr>";
-				echo "<td>".$row["dept"]."</td><td>".$row["coursenum"]."</td><td>".$row["section"]."</td><td>".$row["day"]."</td><td>".$row["time"]."</td>";
+				echo "<td>".$row["dept"]."</td><td>".$row["coursenum"]."</td><td>".$row["section"]."</td><td>".$row["title"]."</td><td>".$row["day"]."</td><td>".$row["time"]."</td>";
 				echo "</tr>";
 			}
 			echo "</table>";
