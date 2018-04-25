@@ -157,7 +157,7 @@
 		/* check pid */
 		$query = "SELECT p.id
 					FROM personalinfo p, roles r
-					WHERE $new_pid = p.id AND r.id = p.id AND r.role = 'professor';";
+					WHERE $new_pid = p.id AND r.id = p.id AND r.role = 'INSTRUCTOR';";
 		$result = mysqli_query($connection, $query);
 
 		if ($result == NULL || mysqli_num_rows($result) <= 0){
