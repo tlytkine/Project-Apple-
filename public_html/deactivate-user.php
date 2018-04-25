@@ -42,7 +42,7 @@
             $row = mysqli_fetch_assoc($result);
 			$id= $row["id"];
 
-			$query = "UPDATE users SET role = 'INACTIVE' WHERE id = '$id';";
+			$query = "UPDATE roles SET role = 'INACTIVE' WHERE id = '$id';";
 			$result = mysqli_query($connection, $query);
 
 			if($result) {
