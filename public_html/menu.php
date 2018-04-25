@@ -13,7 +13,7 @@ include 'header.php';
 <h1>Menu</h1>
 
 <?php if (in_array("USER", $_SESSION["roles"])) : ?> <!-- -applicant/-alumni -->
-<a href=''>Update Personal Information</a> <br />
+<a href='view-info.php'>Update Personal Information</a> <br />
 <?php endif; ?>
 
 <?php if (in_array("ADMIN", $_SESSION["roles"])) : ?>

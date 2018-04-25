@@ -202,6 +202,7 @@ INSERT INTO courses VALUES ('2', 'CS','6222', '1', 'class', '3', 'M', '12:00:00'
 
 INSERT INTO users (email, password, id) VALUES ('billy@gwu.edu', '$2y$10$K7xpP4XPPWkgYJ0/I4XOtehbRigHUqpmXer99/Ftx1fERDU.JZObC', 4);
 INSERT INTO roles (id, role) VALUES (4, "STUDENT");
+INSERT INTO roles (id, role) VALUES (4, "USER");
 INSERT INTO personalinfo VALUES('4', 'billy', 'miller', '2000-01-01', '123 address st', '123-45-6789');
 
 INSERT INTO transcripts VALUES('4', 'CS', '6221', '3', '2018', 'spring', 'A');
