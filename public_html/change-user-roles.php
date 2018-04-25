@@ -79,7 +79,39 @@
         echo    "<input type='submit' value='Remove' name='remove_role' />";
 		echo "</form>";
 	}
-	else if($add_role) {
+	else if($remove_role) {
+		$remove_role = $_POST["remove_role"];
+        $remove_role = strtoupper($remove_role);
+        $id = $_SESSION["change_role_id"];
+        $user_types = array(
+            "ADMIN",
+            "ALUMNI",
+            "STUDENT",
+            "APPLICANT",
+            "GS",
+            "INSTRUCTOR",
+            "ADVISOR",
+            "REVIEWER",
+            "CAC"
+        );
+
+		if (in_array($remove_role, $user_types)) {
+			$query = "DELETE FROM roles WHERE id = '$id' AND role = '$remove_role';";
+			$result = mysqli_query($connection, $query);
+
+			if ($result) {
+				echo "<br/>";
+				echo "Successfully removed user role";
+			} else {
+				echo "<br/>";
+				echo "User doesn't have that role";
+			}
+		} else {
+			echo "<br/>";
+			echo "Invalid role";
+		}
+	}
+    else if($add_role) {
 		$new_role = $_POST["new_role"];
         $new_role = strtoupper($new_role);
         $id = $_SESSION["change_role_id"];
