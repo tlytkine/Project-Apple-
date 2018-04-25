@@ -33,7 +33,6 @@
 		/* check if user exists */
 		$query = "SELECT id FROM users WHERE email = '$deac_user';";
 		$result = mysqli_query($connection, $query);
-		$exists = mysqli_num_rows($result);    /* 1 if exists, 0 if otherwise */
         if (mysqli_num_rows($result) > 0) {
             $row = mysqli_fetch_assoc($result);
 			$id= $row["id"];
