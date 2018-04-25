@@ -33,7 +33,7 @@
 
 		/* check if user exists */
 		$query = "SELECT id FROM users WHERE username = '".$deac_user."';";
-		$result = mysqli_query($conn, $query);
+		$result = mysqli_query($connection, $query);
 		$exists = mysqli_num_rows($result);    /* 1 if exists, 0 if otherwise */
         if($exists == 0) {
 			echo "User does not exist";
@@ -43,7 +43,7 @@
 			$id= $row["id"];
 
 			$query = "UPDATE users SET role = 'INACTIVE' WHERE id = '$id';";
-			$result = mysqli_query($conn, $query);
+			$result = mysqli_query($connection, $query);
 
 			if($result) {
 				echo "Successfully deactivated account";
