@@ -1,6 +1,6 @@
 <?php
 	session_start();
-	if (strcmp($_SESSION["role"], "gs") != 0) {
+	if (strcmp($_SESSION["role"], "GS") != 0) {
 		die("ACCESS DENIED");
 	}
 

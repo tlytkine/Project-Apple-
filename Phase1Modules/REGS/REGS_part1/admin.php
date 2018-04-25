@@ -1,6 +1,6 @@
 <?php
 	session_start();
-	if (strcmp($_SESSION["role"], "admin") != 0) {
+	if (strcmp($_SESSION["role"], "ADMIN") != 0) {
 		die("ACCESS DENIED");
 	}
 
@@ -902,7 +902,7 @@
 		if($valid == 0){
 			echo "Can't check coursenum because of invalid department<br />";
 		}
-		else if (!is_numeric($new_cid)){
+		else if (!is_numeric($new_cid) || $new_cid < 0 || $new_cid > 9999){
 			echo "Invalid coursenum<br />";
 			$valid = 0;
 		}
