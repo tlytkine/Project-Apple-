@@ -16,7 +16,7 @@ include 'header.php';
 ?>
 <h2>Search for a Student</h2>
 
-<form method="post" action="change_student_grades.php">
+<form method="post" action="public_html/change_student_grades.php">
 <h4>Enter a Student Name:</h4>
 First Name: <input type="text" name="fname"><br>
 Last Name: <input type="text" name="lname"><br>
