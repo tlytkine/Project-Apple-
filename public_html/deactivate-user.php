@@ -38,14 +38,22 @@
             $row = mysqli_fetch_assoc($result);
 			$id= $row["id"];
 
-			$query = "UPDATE roles SET role = 'INACTIVE' WHERE id = '$id';";
-			$result = mysqli_query($connection, $query);
+            $query = "DELETE FROM roles WHERE id = '$id';";
+			$result1 = mysqli_query($connection, $query);
 
-			if($result) {
-				echo "Successfully deactivated account";
-			} else {
-				echo "Failed to deactivate user";
-			}
+            if($result1){
+                $query = "INSERT INTO roles VALUES('$id', 'INACTIVE');";
+			    $result2 = mysqli_query($connection, $query);
+
+			    if($result2) {
+				    echo "Successfully deactivated account";
+			    } else {
+				    echo "Failed to deactivate user";
+			    }
+            }
+            else{
+                echo "Failed to deactivate user";
+            }
 		}
         else {
 			echo "User does not exist";
