@@ -47,7 +47,7 @@ include 'header.php';
     			semester = '$semester' AND year = '$year';";
 
     		if(strcmp($new_grade, "A") == 0 || strcmp($new_grade, "A-") == 0 || strcmp($new_grade, "B+") == 0 || strcmp($new_grade, "B") == 0 || strcmp($new_grade, "B-") == 0 || strcmp($new_grade, "C+") == 0 || strcmp($new_grade, "C") == 0 || strcmp($new_grade, "F") == 0) {
-    			$result = mysqli_query($conn, $query);
+    			$result = mysqli_query($connection, $query);
     		} else {
     			echo "Invalid grade <br/>";
     		}
