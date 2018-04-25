@@ -25,8 +25,7 @@
     	echo "Database connection error: " . mysqli_connect_error();
     }
 
-    /* extract user */
-	$user = $_SESSION["email"];
+    $deactivate = $_POST["do_deactivate"];
 
 	if($deactivate) {
 		$deac_user = $_POST["deac_user"];
