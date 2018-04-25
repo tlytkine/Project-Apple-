@@ -41,7 +41,7 @@
 		$query = "DELETE FROM courses
 					WHERE '$remove_class_crn' = courseid;";
 		$result = mysqli_query($connection, $query);
-		if(mysqli_affected_rows($conn) > 0){
+		if(mysqli_affected_rows($connection) > 0){
 			echo "<h4>Class Removed</h4>";
 		}
 		else{
@@ -247,7 +247,7 @@
 							 	'$new_credits', '$new_day', '$new_time', '$new_year',
 								'$new_semester', '$new_pid');";
 			$result = mysqli_query($connection, $query);
-			if(mysqli_affected_rows($conn) > 0){
+			if(mysqli_affected_rows($connection) > 0){
 				echo "<h4>Class Added</h4>";
 			}
 			else{
