@@ -97,7 +97,7 @@
 
 		if (in_array($new_role, $user_types)) {
 			$query = "INSERT INTO roles VALUES ('$id', '$new_role');";
-			$result = mysqli_query($conn, $query);
+			$result = mysqli_query($connection, $query);
 
 			if ($result) {
 				echo "<br/>";
