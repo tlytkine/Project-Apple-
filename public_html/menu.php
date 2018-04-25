@@ -73,7 +73,7 @@ include 'header.php';
 <?php if (in_array("INSTRUCTOR", $_SESSION["roles"])) : ?>
 <a href='view-class-roster.php'>View Class Rosters</a> <br />
 <a href='search-student-grades.php'>Enter Student Grades</a> <br />
-<a href=''>View Student Transcripts</a> <br />
+<a href='search-student-transcripts.php'>View Student Transcripts</a> <br />
 <?php endif; ?>
 
 <?php if (in_array("ADVISOR", $_SESSION["roles"])) : ?>
