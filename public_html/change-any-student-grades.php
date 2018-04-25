@@ -92,7 +92,7 @@ include 'header.php';
 					echo "<tr>";
 
 					echo "<td>".$row["dept"]."</td><td>".$row["coursenum"]."</td><td>".$row["semester"]."</td><td>".$row["year"]."</td>";
-					echo "<td><form method='post' action='change-student-grades.php'>";
+					echo "<td><form method='post' action='change-any-student-grades.php'>";
 					echo "<input type='text' name='new_grade' value=".$row["grade"].">";
 					echo "</td>";
 					echo "<td><input type='submit' name='change_grade' value='Change'></td>";
@@ -141,7 +141,7 @@ include 'header.php';
 				echo "<tr>";
 
 				echo "<td>".$row["dept"]."</td><td>".$row["coursenum"]."</td><td>".$row["semester"]."</td><td>".$row["year"]."</td>";
-				echo "<td><form method='post' action='change-student-grades.php'>";
+				echo "<td><form method='post' action='change-any-student-grades.php'>";
 				echo "<input type='text' name='new_grade' value='".$row["grade"]."'>";
 				echo "</td>";
 				echo "<td><input type='submit' name='change_grade' value='Change'></td>";
