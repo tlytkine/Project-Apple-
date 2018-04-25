@@ -29,16 +29,12 @@
 
 	if($deactivate) {
 		$deac_user = $_POST["deac_user"];
-        $id;
 
 		/* check if user exists */
-		$query = "SELECT id FROM users WHERE email = '".$deac_user."';";
+		$query = "SELECT id FROM users WHERE email = '$deac_user';";
 		$result = mysqli_query($connection, $query);
 		$exists = mysqli_num_rows($result);    /* 1 if exists, 0 if otherwise */
-        if($exists == 0) {
-			echo "User does not exist";
-		}
-        else {
+        if (mysqli_num_rows($result) > 0) {
             $row = mysqli_fetch_assoc($result);
 			$id= $row["id"];
 
@@ -50,6 +46,9 @@
 			} else {
 				echo "Failed to deactivate user";
 			}
+		}
+        else {
+			echo "User does not exist";
 		}
 	}
     /* deactivate account */
