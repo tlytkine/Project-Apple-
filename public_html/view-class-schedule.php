@@ -47,7 +47,7 @@
 			WHERE u.id=t.studentid AND u.email = '$user' AND t.coursenum = c.coursenum AND t.dept = c.dept AND t.semester = '$semester' AND t.year = '$year'
 			ORDER BY day;";
 
-		$result = mysqli_query(connection, $query);
+		$result = mysqli_query($connection, $query);
 
 		/* display schedule */
 		if (mysqli_num_rows($result) > 0) {
