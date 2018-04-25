@@ -26,7 +26,7 @@ include 'header.php';
 <a href=''>View Admissions Applications and Reviews</a> <br />
 <a href=''>Update Final Admissions Decisions</a> <br />
 
-<a href=''>View Student Transcripts</a> <br />
+<a href='search-student-transcripts.php'>View Student Transcripts</a> <br />
 <a href=''>Enter Student Grades</a> <br />
 <a href='update_advisor_assignments.php'>Update Advisor Assignments</a> <br />
 <a href='update_student_holds.php'>Update Student Holds</a> <br />
@@ -44,7 +44,7 @@ include 'header.php';
 <a href=''>View Admissions Applications and Reviews</a> <br />
 <a href=''>Update Final Admissions Decisions</a> <br />
 
-<a href=''>View Student Transcripts</a> <br />
+<a href='search-student-transcripts.php'>View Student Transcripts</a> <br />
 <a href=''>Enter Student Grades</a> <br />
 <a href='update_advisor_assignments.php'>Update Advisor Assignments</a> <br />
 <a href=''>View Student Holds</a> <br />
