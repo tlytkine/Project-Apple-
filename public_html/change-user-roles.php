@@ -128,6 +128,9 @@
         );
 
 		if (in_array($role, $user_types)) {
+            $query = "DELETE FROM roles WHERE id = '$id' AND role = 'INACTIVE';";
+			$result = mysqli_query($connection, $query);
+
 			$query = "INSERT INTO roles VALUES ('$id', '$role');";
 			$result = mysqli_query($connection, $query);
 
