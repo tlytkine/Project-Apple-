@@ -33,7 +33,7 @@ include 'header.php';
 <a href=''>Approve/Deny Graduation Applications</a> <br />
 
 <a href=''>Update Degrees</a> <br />
-<a href=''>Update Available Classes</a> <br />
+<a href='update-classes.php'>Update Available Classes</a> <br />
 <a href='add-remove-classes.php'>Update Courses Offered</a><br />
 <?php endif; ?>
 
