@@ -77,7 +77,7 @@ include 'header.php';
 <?php endif; ?>
 
 <?php if (in_array("ADVISOR", $_SESSION["roles"])) : ?>
-<a href=''>View Advisee Information</a> <br /> <!-- includes application status -->
+<a href='view_advisee_information.php'>View Advisee Information</a> <br /> <!-- includes application status -->
 <a href=''>View Advisee Transcripts</a> <br />
 <a href=''>Update Advisee Holds</a> <br />
 <?php endif; ?>
