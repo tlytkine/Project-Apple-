@@ -40,7 +40,7 @@
 <p>Degree: </p>
 <select name="degreename">
 <!-- Inser other degrees -->
-<option value="ms_cs">MS CS</option>
+<option value="MS CS">MS CS</option>
 </select>
 <p>GW ID:</p>
 <input type="text" name="studentid" value=
