@@ -47,8 +47,7 @@ $courses = array_unique($courses);
 $course_count = 0;
 for ($i = 1; $i <= 12; $i++) {
 	// check is course is actually taken
-	$course_query = "SELECT grade FROM transcripts  
-	WHERE studentid ='$studentid' AND coursenum='$courses[$i]';";
+	$course_query = "SELECT grade FROM transcripts, courses WHERE transcripts.studentid ='$studentid' AND transcripts.coursenum=courses.coursenum AND courses.courseid='$courses[$i]' AND courses.dept = transcripts.dept;";
 	$result_from_query = mysqli_query($connection, $course_query);
 	$row = mysqli_fetch_assoc($result_from_query);
 
@@ -179,8 +178,7 @@ $result_cleared_query = mysqli_query($connection, $cleared_query);
 // close the connection
 mysqli_close($connection);
 ?>
-	<br>
-	<b><a href="logout.php">Log Out</a></b>
+
 </body>
 
 </html>
