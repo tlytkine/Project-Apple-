@@ -6,6 +6,7 @@ $id = $_SESSON["id"];
 
 <html>
 <head><title>Update Student Holds</title></head>
+<link rel="stylesheet" href="style.css">
 <body>
 
 <?php

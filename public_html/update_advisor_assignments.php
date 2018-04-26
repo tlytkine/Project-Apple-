@@ -3,10 +3,11 @@
 
 <html>
 <head><title>View / Edit Faculty Advisor</title></head>
+<link rel="stylesheet" href="style.css">
 <body>
 <h1>View / Edit Faculty Advisor</h1>
 <?php 
-$id = $_SESSON["id"];
+$id = $_SESSION["id"];
 
 
 $advises_query = "SELECT P1.firstname AS studentfirstname, P1.lastname AS studentlastname, advises.studentid, advises.hold, advises.degreename,
