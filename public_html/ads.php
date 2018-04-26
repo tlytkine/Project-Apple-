@@ -157,11 +157,11 @@ if (strlen($error) != 0) {
 for ($i = 1; $i <= 12; $i++) {
 	if ($courses[$i] > 0) {
 		$form_insert = "INSERT INTO graduationapplication(studentid,courseid,year)
-		VALUES ($studentid,$courses[$i],'2018');";
+		VALUES ($studentid,$courses[$i],'2018')";
 
 		$result_form_insert = mysqli_query($connection, $form_insert);
 
-		if($result_form_insert){
+		if(mysqli_affected_rows($result_form_insert) > 0){
 			echo "Course $i added successfully!<br>\n";
 		}
 		else {
