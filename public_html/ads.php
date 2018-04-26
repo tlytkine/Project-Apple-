@@ -70,7 +70,6 @@ for ($i = 1; $i <= 12; $i++) {
 		echo "Course has not been taken: $courses[$i]<br>";
 	} 
 }
-echo "$course_count: " . $course_count . "<br>";
 echo "<br>";
 // make sure there are ten courses
 if ($course_count < 10) {
@@ -85,7 +84,6 @@ $core_courses_count = 0;
 	$i=0;
 	while($row =mysqli_fetch_assoc($result_from_query)){
 		for($i = 1; $i<=12; $i++){
-			echo "first value: ".$courses[$i]."second value: ". $row['courseid']."<br>"; 
 			if (strcmp($courses[$i], $row['courseid']) == 0) {
 				$core_courses_count++;
 			}
@@ -96,6 +94,8 @@ $core_courses_count = 0;
 if ($core_courses_count != 3) {
 	$error .= "Degree core courses are not satisfied<br><br>";
 }
+
+echo "Num: " . $core_courses_count . "<br>";
 
 
 
