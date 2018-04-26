@@ -14,7 +14,8 @@ $id = $_SESSION["id"];
 
 	$degreenameresult = mysqli_query($connection, $degreenamequery);
 
-	$degreename = mysqli_fetch_assoc($degreenameresult);
+	$row = mysqli_fetch_assoc($degreenameresult);
+	$degreename = $row['degreename'];
 
 	echo "Degree Requirements: ";
 	echo $degreename;
