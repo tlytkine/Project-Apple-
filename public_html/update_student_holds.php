@@ -6,6 +6,7 @@ $id = $_SESSON["id"];
 
 <html>
 <head><title>Update Student Holds</title></head>
+<link rel="stylesheet" href="style.css">
 <body>
 
 <?php
@@ -14,7 +15,7 @@ $id = $_SESSON["id"];
 // Get all students / faculty advisors 
 $advisee_query = "SELECT P1.firstname AS studentfirstname, P1.lastname AS studentlastname, P2.firstname AS facultyfirstname, P2.lastname AS facultylastname, advises.studentid, advises.facultyid, advises.hold, advises.degreename FROM personalinfo AS P1, personalinfo AS P2, advises 
 WHERE P1.id = advises.studentid AND P2.id = advises.facultyid;"; 
-$advisee_result = mysqli_query($conn, $advisee_query);
+$advisee_result = mysqli_query($connection, $advisee_query);
 
 
 

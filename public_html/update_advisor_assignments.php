@@ -3,21 +3,22 @@
 
 <html>
 <head><title>View / Edit Faculty Advisor</title></head>
+<link rel="stylesheet" href="style.css">
 <body>
 <h1>View / Edit Faculty Advisor</h1>
 <?php 
-$id = $_SESSON["id"];
+$id = $_SESSION["id"];
 
 
 $advises_query = "SELECT P1.firstname AS studentfirstname, P1.lastname AS studentlastname, advises.studentid, advises.hold, advises.degreename,
 P2.firstname AS facultyfirstname, P2.lastname AS facultylastname, advises.facultyid FROM advises, roles AS R1, roles AS R2, personalinfo AS P1, personalinfo AS P2 WHERE R1.id = advises.studentid AND R1.role='STUDENT' AND R2.id = advises.facultyid AND R2.role='ADVISOR' AND P1.id=advises.studentid AND P2.id=advises.facultyid;";
-$advises_result = mysqli_query($conn, $advises_query);
+$advises_result = mysqli_query($connection, $advises_query);
 
 
 
 $faculty_query = "SELECT firstname, lastname, role FROM personalinfo, roles WHERE personalinfo.id = roles.id AND roles.role = 'ADVISOR';";
 
-$faculty_result = mysqli_query($conn, $faculty_query);
+$faculty_result = mysqli_query($connection, $faculty_query);
 
 
 echo "<table>
