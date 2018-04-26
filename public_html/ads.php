@@ -71,10 +71,11 @@ if ($course_count < 10) {
 }
 
 // check against degree
-$degree_query = "SELECT degreename, courseid FROM degreerequirements WHERE degreename='$degree';";
+$degree_query = "SELECT degreename, courseid FROM degreerequirements WHERE degree_name='$degree';";
 $result_from_query = mysqli_query($connection, $degree_query);
 
 $core_courses_count = 0;
+// fix to properly compare 
 	$i=0;
 	while($row =mysqli_fetch_assoc($result_from_query)){
 		if (strcmp($courses[$i], $row['courseid']) == 0) {
