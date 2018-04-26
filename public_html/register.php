@@ -299,7 +299,11 @@
 
 		if(!$result) {
 			echo "<br/> Failed to Drop Class <br/>";
-		} else {
+		}
+        else if (mysqli_affected_rows($connection) == 0){
+            echo "<br/> Weren't registered for class <br/>";
+        }
+        else {
 			echo "<br/> Successfully Dropped Class <br/>";
 		}
 	}
