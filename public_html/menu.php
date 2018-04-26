@@ -22,7 +22,7 @@ include 'header.php';
 <a href='deactivate-user.php'>Deactivate Users</a> <br />
 <a href='change-user-roles.php'>Change User Roles</a> <br />
 
-<a href=''>Update Admissions Document Status</a> <br />
+<a href='document-status.php'>Update Admissions Document Status</a> <br />
 <a href=''>View Admissions Applications and Reviews</a> <br />
 <a href='final-decisions.php'>Update Final Admissions Decisions</a> <br />
 
@@ -40,7 +40,7 @@ include 'header.php';
 <?php if (in_array("GS", $_SESSION["roles"])) : ?>
 <a href=''>View Student Information</a> <br />
 
-<a href=''>Update Admissions Document Status</a> <br />
+<a href='document-status.php'>Update Admissions Document Status</a> <br />
 <a href=''>View Admissions Applications and Reviews</a> <br />
 <a href='final-decisions.php'>Update Final Admissions Decisions</a> <br />
 

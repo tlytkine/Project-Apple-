@@ -20,15 +20,15 @@ include 'db-connect.php';
 // Look for application:
 $application_lookup_query = "SELECT id, status, finaldecision
 	FROM admissionsapplication
-	WHERE email='{$_SESSION["email"]}'";
+	WHERE id={$_SESSION["id"]}";
 $query = $application_lookup_query;
 $result = mysqli_query($connection, $query);
 $rows = mysqli_num_rows($result);
 // Check if application was found:
 if ($rows != 1) {
 	// If not, create new application:
-	$query = "INSERT INTO admissionsapplication (email, status, finaldecision)
-		VALUES ('{$_SESSION["email"]}', 'Incomplete', 0)";
+	$query = "INSERT INTO admissionsapplication (id, status, finaldecision)
+		VALUES ({$_SESSION["id"]}, 'Incomplete', 0)";
 	$result = mysqli_query($connection, $query);
 	if (!$result) {
 		echo "<script type='text/javascript'>alert('Application could not be created');</script>";
@@ -39,7 +39,6 @@ if ($rows != 1) {
 	$result = mysqli_query($connection, $query);
 	$rows = mysqli_num_rows($result);
 	$row = mysqli_fetch_array($result);
-	$_SESSION["id"] = $row["id"];
 
 	// Add documentstatus row:
 	$query = "INSERT INTO documentstatus(applicationid, applicationsubmitted, transcriptrecieved, letterofrecrecieved)
