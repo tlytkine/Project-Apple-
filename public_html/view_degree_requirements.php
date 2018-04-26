@@ -12,10 +12,16 @@ $id = $_SESSION["id"];
 <?php
 	$degreenamequery = "SELECT degreename FROM advises WHERE studentid=$id;";
 
+	echo $degreenamequery;
+	echo "<br>";
+
 	$degreenameresult = mysqli_query($connection, $degreenamequery);
 
 	$row = mysqli_fetch_assoc($degreenameresult);
 	$degreename = $row['degreename'];
+
+	echo $degreename;
+	echo "<br>";
 
 	echo "Degree Requirements: ";
 	echo $degreename;
