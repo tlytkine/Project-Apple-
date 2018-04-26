@@ -32,15 +32,16 @@ echo "Student ID: " . $studentid . "<br>";
 echo "Degree Name: " . $degreename . "<br>";
 
 // check if user already has applied
-$duplicate_query = "SELECT studentid FROM graduation_application WHERE studentid='$studentid';";
+$duplicate_query = "SELECT studentid FROM graduationapplication WHERE studentid=$studentid;";
 $result_from_query=mysqli_query($connection, $duplicate_query);
-if(!$result_from_query){
-	echo "Error: " . $result_from_query . "<br>";
+if($result_from_query){
+	if (mysqli_num_rows($result_from_query) > 0) {
+		echo "Already applied<br>";
+		exit();
+	}
 }
-
-if (mysqli_num_rows($result_from_query) > 0) {
-	echo "Already applied<br>";
-	exit();
+else {
+	echo "Error: " . $duplicate_query . "<br>";
 }
 
 $error = '';
@@ -84,12 +85,12 @@ $core_courses_count = 0;
 	$i=0;
 	while($row =mysqli_fetch_assoc($result_from_query)){
 		for($i = 1; $i<=12; $i++){
+			echo "first value: ".$courses[$i]."second value: ". $row['courseid']."<br>"; 
 			if (strcmp($courses[$i], $row['courseid']) == 0) {
 				$core_courses_count++;
 			}
 		}
 	}
-	echo "$core_courses_count: " . $core_courses_count . "<br>";
 
 // check core classes are satisfied
 if ($core_courses_count != 3) {
