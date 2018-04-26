@@ -5,13 +5,13 @@ $id = $_SESSION["id"];
 ?>
 
 <html>
-<head><title>Update Student Holds</title></head>
+<head><title>View Student Holds</title></head>
 <link rel="stylesheet" href="style.css">
 <body>
 
 <?php
 
-echo "<h1>Update Student Holds</h1>";
+echo "<h1>View Student Holds</h1>";
 
 // Get all students / faculty advisors 
 $advisee_query = "SELECT P1.firstname AS studentfirstname, P1.lastname AS studentlastname, P2.firstname AS facultyfirstname, P2.lastname AS facultylastname, advises.studentid, advises.facultyid, advises.hold, advises.degreename FROM personalinfo AS P1, personalinfo AS P2, advises 
@@ -27,8 +27,6 @@ echo "<table>
 <th>Faculty Advisor</th>
 <th>Faculty ID</th>
 <th>Hold</th>
-<th>Lift Hold</th>
-<th>Place Hold</th>
 </tr>";
 
 // Displays a table of all students along with actions that can be taken
@@ -38,16 +36,6 @@ echo "<tr><td>".$row['studentfirstname']." ".$row['studentlastname']."</td>
 <td>".$row['facultyfirstname']." ".$row['facultylastname']."</td>
 <td>".$row['facultyid']."</td>
 <td>".$row['hold']."</td>
-<form method ='post' action='hold_submit.php'>
-<input type='hidden' name='studentid' value ='".$row['studentid']."'>
-<input type='hidden' name='facultyid' value='".$row['facultyid']."'>
-<td><input type='submit' name='lift' value='Lift Hold'></form></td>
-<form method='post' action='hold_submit.php'>
-<input type='hidden' name='studentid' value ='".$row['studentid']."'>
-<input type='hidden' name='facultyid' value='".$row['facultyid']."'>
-<td><input type='text' name='holdtext'>
-<input type='submit' name='place' value='Place Hold'></td>
-</form>
 </tr>";
 }
 echo "</table>";
