@@ -52,9 +52,8 @@ include 'header.php';
 <?php endif; ?>
 
 <?php if (in_array("APPLICANT", $_SESSION["roles"])) : ?>
-<a href=''>Update Personal Information</a> <br />
-<a href=''>View Admissions Application</a> <br />
-<a href=''>View Application Status</a> <br />
+<a href='admissions-application.php'>Complete Admissions Application</a> <br />
+<a href='applicant-status.php'>View Application Status</a> <br />
 <?php endif; ?>
 
 <?php if (in_array("STUDENT", $_SESSION["roles"])) : ?>
