@@ -82,7 +82,7 @@ include 'header.php';
 <?php endif; ?>
 
 <?php if (in_array("REVIEWER", $_SESSION["roles"])) : ?>
-<a href=''>Review Applications</a> <br />
+<a href='completed-applications.php'>Review Applications</a> <br />
 <?php endif; ?>
 
 <?php if (in_array("CAC", $_SESSION["roles"])) : ?>
