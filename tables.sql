@@ -54,14 +54,12 @@ CREATE TABLE personalinfo (
 
 CREATE TABLE admissionsapplication (
     id                  INT PRIMARY KEY AUTO_INCREMENT,
-    email               VARCHAR(254) NOT NULL,
     reviewerusername    VARCHAR(254),
     status              VARCHAR(20) NOT NULL,
     finaldecision       INT NOT NULL,
     semester            VARCHAR(10),
     year                YEAR,
     FOREIGN KEY (id) REFERENCES users(id),
-    FOREIGN KEY (email) REFERENCES users(email),
     FOREIGN KEY (reviewerusername) REFERENCES users(email)
 );
 

@@ -12,7 +12,7 @@ include 'header.php';
 ?>
 <h1>Menu</h1>
 
-<?php if (in_array("USER", $_SESSION["roles"])) : ?> <!-- -applicant/-alumni -->
+<?php if (in_array("USER", $_SESSION["roles"]) && !in_array("APPLICANT", $_SESSION["roles"]) && !in_array("ALUMNI", $_SESSION["roles"])) : ?>
 <a href='view-info.php'>Update Personal Information</a> <br />
 <?php endif; ?>
 
@@ -22,8 +22,8 @@ include 'header.php';
 <a href='deactivate-user.php'>Deactivate Users</a> <br />
 <a href='change-user-roles.php'>Change User Roles</a> <br />
 
-<a href=''>Update Admissions Document Status</a> <br />
-<a href=''>View Admissions Applications and Reviews</a> <br />
+<a href='document-status.php'>Update Admissions Document Status</a> <br />
+<a href='view-admissions-applications.php'>View Admissions Applications and Reviews</a> <br />
 <a href='final-decisions.php'>Update Final Admissions Decisions</a> <br />
 
 <a href='search-student-transcripts.php'>View Student Transcripts</a> <br />
@@ -40,8 +40,8 @@ include 'header.php';
 <?php if (in_array("GS", $_SESSION["roles"])) : ?>
 <a href=''>View Student Information</a> <br />
 
-<a href=''>Update Admissions Document Status</a> <br />
-<a href=''>View Admissions Applications and Reviews</a> <br />
+<a href='document-status.php'>Update Admissions Document Status</a> <br />
+<a href='view-admissions-applications.php'>View Admissions Applications and Reviews</a> <br />
 <a href='final-decisions.php'>Update Final Admissions Decisions</a> <br />
 
 <a href='search-student-transcripts.php'>View Student Transcripts</a> <br />
@@ -52,9 +52,9 @@ include 'header.php';
 <?php endif; ?>
 
 <?php if (in_array("APPLICANT", $_SESSION["roles"])) : ?>
-<a href=''>Update Personal Information</a> <br />
-<a href=''>View Admissions Application</a> <br />
-<a href=''>View Application Status</a> <br />
+<a href='update-applicant-info.php'>Update Personal Information</a> <br />
+<a href='admissions-application.php'>Complete Admissions Application</a> <br />
+<a href='applicant-status.php'>View Application Status</a> <br />
 <?php endif; ?>
 
 <?php if (in_array("STUDENT", $_SESSION["roles"])) : ?>
@@ -83,11 +83,11 @@ include 'header.php';
 <?php endif; ?>
 
 <?php if (in_array("REVIEWER", $_SESSION["roles"])) : ?>
-<a href=''>Review Applications</a> <br />
+<a href='completed-applications.php'>Review Applications</a> <br />
 <?php endif; ?>
 
 <?php if (in_array("CAC", $_SESSION["roles"])) : ?>
-<a href=''>View Admissions Applications and Reviews</a> <br />
+<a href='view-admissions-applications.php'>View Admissions Applications and Reviews</a> <br />
 <a href='final-decisions.php'>Update Final Admissions Decisions</a> <br />
 <?php endif; ?>
 

@@ -1,61 +1,36 @@
 <html lang="en-US">
 <head>
 	<meta charset="UTF-8">
-	<title>Manage Users </title>
+	<title>Create Account</title>
 	<link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-<?php
-$allowed_user_types = array("System Administrator");
-include 'header.php';
-?>
-<h1>Add Users</h1>
-<br/>
-<form method="POST" id="newuser">
+<h1>Create Account</h1>
+<form method="POST" id="newaccount">
 	<input type="email" name="email" placeholder="Email" maxlength="254" required>
 	<input type="password" name="password" placeholder="Password" maxlength="255" required>
-	<br /><br />
-	<select multiple name="roles[]" required>
-		<option value="" selected disabled>Roles</option>
-		<option value="ADMIN">System Administrator</option>
-		<option value="GS">Grad Secretary</option>
-		<option value="INSTRUCTOR">Instructor</option>
-		<option value="ADVISOR">Advisor</option>
-		<option value="REVIEWER">Faculty Reviewer</option>
-		<option value="CAC">Chair of Admissions Committee</option>
-		<option value="APPLICANT">Applicant</option>
-		<option value="STUDENT">Student</option>
-		<option value="ALUMNI">Alumni</option>
-	</select>
-	<br /><br />
-	<button type="submit">Add User</button>
+	<button type="submit">Create Account</button>
 </form>
 
 <?php
 require 'password.php'; // Allows use of password_hash with PHP 5.4
 
-if (isset($_POST['email']) && isset($_POST['password']) && isset($_POST['roles'])) {
+session_start();
+if (isset($_POST['email']) && isset($_POST['password'])) {
 	include 'db-connect.php';
 
 	// Prepare email and password:
 	$email = mysqli_real_escape_string($connection, trim($_POST['email']));
 	$password = mysqli_real_escape_string($connection, trim($_POST['password']));
 	
-	// Prepare roles:
-	$roles = array();
-	foreach ($_POST['roles'] as $role) {
-		$roles[] = mysqli_real_escape_string($connection, trim($role));
-	}
-	$roles[] = "USER"; // Add USER role by default
-	
 	// Hash password:
 	$hash = password_hash($password, PASSWORD_BCRYPT);
 	
 	// Look up account:
-	$query = "SELECT email FROM users WHERE email='$email'";
+	$query = "SELECT email, password FROM users WHERE email='$email'";
 	$result = mysqli_query($connection, $query);
-	
+
 	// Process result:
 	$rows = mysqli_num_rows($result);
 	if ($rows != 0) {
@@ -77,6 +52,8 @@ if (isset($_POST['email']) && isset($_POST['password']) && isset($_POST['roles']
 			exit();
 		}
 		$id = mysqli_fetch_array($result)["id"];
+		
+		$roles = array("APPLICANT", "USER");
 		
 		// Insert roles:
 		foreach ($roles as $role) {
@@ -100,6 +77,7 @@ if (isset($_POST['email']) && isset($_POST['password']) && isset($_POST['roles']
 		}
 		
 		echo "<script type='text/javascript'>alert('Account created');</script>";
+		header("refresh:0 url=login.php");
 	}
 }
 
