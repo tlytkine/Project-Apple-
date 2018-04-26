@@ -18,7 +18,7 @@ include 'header.php';
 
 <?php if (in_array("ADMIN", $_SESSION["roles"])) : ?>
 <a href='add-users.php'>Add Users</a> <br />
-<a href=''>Update User Information</a> <br />
+<a href='update-user-info.php'>Update User Information</a> <br />
 <a href='deactivate-user.php'>Deactivate Users</a> <br />
 <a href='change-user-roles.php'>Change User Roles</a> <br />
 
