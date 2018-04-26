@@ -64,12 +64,13 @@ echo $advisor_last;
 		// Displays an drop down box with all available classes
 		echo "<select name ='course$i'>";
 		echo "<option value = '0'>-----</option>";
-		$query = "SELECT coursenum, courseid FROM courses;";
+		$query = "SELECT dept,coursenum, courseid FROM courses;";
 		$result = mysqli_query($connection, $query);
 		while ($row = mysqli_fetch_assoc($result)) {
 			$coursenum = $row['coursenum'];
 			$courseid = $row['courseid'];
-			echo "<option value='$courseid'>$courseid</option>";
+			$dept = $row['dept'];
+			echo "<option value='$courseid'>".$dept." ".$coursenum."</option>";
 		}
 		echo "</select>";
 		echo "<br><br>";
