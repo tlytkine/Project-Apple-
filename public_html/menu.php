@@ -23,7 +23,7 @@ include 'header.php';
 <a href='change-user-roles.php'>Change User Roles</a> <br />
 
 <a href='document-status.php'>Update Admissions Document Status</a> <br />
-<a href=''>View Admissions Applications and Reviews</a> <br />
+<a href='view-admissions-applications.php'>View Admissions Applications and Reviews</a> <br />
 <a href='final-decisions.php'>Update Final Admissions Decisions</a> <br />
 
 <a href='search-student-transcripts.php'>View Student Transcripts</a> <br />
@@ -41,7 +41,7 @@ include 'header.php';
 <a href=''>View Student Information</a> <br />
 
 <a href='document-status.php'>Update Admissions Document Status</a> <br />
-<a href=''>View Admissions Applications and Reviews</a> <br />
+<a href='view-admissions-applications.php'>View Admissions Applications and Reviews</a> <br />
 <a href='final-decisions.php'>Update Final Admissions Decisions</a> <br />
 
 <a href='search-student-transcripts.php'>View Student Transcripts</a> <br />
@@ -86,7 +86,7 @@ include 'header.php';
 <?php endif; ?>
 
 <?php if (in_array("CAC", $_SESSION["roles"])) : ?>
-<a href=''>View Admissions Applications and Reviews</a> <br />
+<a href='view-admissions-applications.php'>View Admissions Applications and Reviews</a> <br />
 <a href='final-decisions.php'>Update Final Admissions Decisions</a> <br />
 <?php endif; ?>
 
