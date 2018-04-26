@@ -69,7 +69,7 @@ echo $advisor_last;
 		while ($row = mysqli_fetch_assoc($result)) {
 			$coursenum = $row['coursenum'];
 			$courseid = $row['courseid'];
-			echo "<option value='$coursenum'>$courseid</option>";
+			echo "<option value='$courseid'>$courseid</option>";
 		}
 		echo "</select>";
 		echo "<br><br>";
