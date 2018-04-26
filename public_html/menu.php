@@ -12,7 +12,7 @@ include 'header.php';
 ?>
 <h1>Menu</h1>
 
-<?php if (in_array("USER", $_SESSION["roles"])) : ?> <!-- -applicant/-alumni -->
+<?php if (in_array("USER", $_SESSION["roles"]) && !in_array("APPLICANT", $_SESSION["roles"]) && !in_array("ALUMNI", $_SESSION["roles"])) : ?>
 <a href='view-info.php'>Update Personal Information</a> <br />
 <?php endif; ?>
 
@@ -52,6 +52,7 @@ include 'header.php';
 <?php endif; ?>
 
 <?php if (in_array("APPLICANT", $_SESSION["roles"])) : ?>
+<a href='update-applicant-info.php'>Update Personal Information</a> <br />
 <a href='admissions-application.php'>Complete Admissions Application</a> <br />
 <a href='applicant-status.php'>View Application Status</a> <br />
 <?php endif; ?>
