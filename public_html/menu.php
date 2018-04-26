@@ -47,7 +47,7 @@ include 'header.php';
 <a href='search-student-transcripts.php'>View Student Transcripts</a> <br />
 <a href='search-student-grades.php'>Enter Student Grades</a> <br />
 <a href='update_advisor_assignments.php'>Update Advisor Assignments</a> <br />
-<a href=''>View Student Holds</a> <br />
+<a href='view_student_holds.php'>View Student Holds</a> <br />
 <a href='approve_deny_graduation_applications.php'>Approve/Deny Graduation Applications</a> <br />
 <?php endif; ?>
 
@@ -66,7 +66,7 @@ include 'header.php';
 <?php endif; ?>
 
 <?php if (in_array("ALUMNI", $_SESSION["roles"])) : ?>
-<a href=''>Update Personal Information</a> <br />
+<a href='view-info.php'>Update Personal Information</a> <br />
 <a href='view-personal-transcript.php'>View Transcript</a> <br />
 <?php endif; ?>
 
@@ -78,8 +78,8 @@ include 'header.php';
 
 <?php if (in_array("ADVISOR", $_SESSION["roles"])) : ?>
 <a href='view_advisee_information.php'>View Advisee Information</a> <br /> <!-- includes application status -->
-<a href=''>View Advisee Transcripts</a> <br />
-<a href=''>Update Advisee Holds</a> <br />
+<a href='search-student-transcripts.php'>View Advisee Transcripts</a> <br />
+<a href='update_student_holds.php'>Update Advisee Holds</a> <br />
 <?php endif; ?>
 
 <?php if (in_array("REVIEWER", $_SESSION["roles"])) : ?>
