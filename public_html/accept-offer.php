@@ -44,6 +44,14 @@ if (isset($_POST['accept'])) {
 	}
 	$_SESSION["roles"] = $roles;
 	
+	// Add hold:
+	$query = "INSERT INTO advises (studentid, hold) VALUES ($id, 'New Student')";
+	$result = mysqli_query($connection, $query);	
+	if (!$result) {
+		echo "<script type='text/javascript'>alert('Error adding hold');</script>";
+		exit();
+	}
+	
 	// Welcome message and redirect:
 	echo "<script type='text/javascript'>alert('Congratulations and welcome to the George Washington University! Go Colonials!');</script>";
 	header("refresh:0 url=menu.php");
