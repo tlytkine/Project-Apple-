@@ -72,11 +72,11 @@ if ($course_count < 10) {
 
 // check against degree
 $degree_query = "SELECT degreename, courseid FROM degreerequirements WHERE degree_name='$degree';";
-$result_from_query = mysqli_query($conn, $degree_query);
-$row = mysqli_fetch_assoc($result_from_query);
+$result_from_query = mysqli_query($connection, $degree_query);
 
 $core_courses_count = 0;
 for ($i = 1; $i < 12; $i++) {
+	$row = mysqli_fetch_assoc($result_from_query);
 	if (strcmp($courses[$i], $row['courseid']) == 0) {
 		$core_courses_count++;
 	}
@@ -97,7 +97,7 @@ WHERE gradecalc.grade = transcripts.grade
 AND transcripts.studentidid = '$studentid'
 AND transcripts.coursenum = courses.coursenum;";
 
-$gpa_calc_result = mysqli_query($conn, $gpa_calc);
+$gpa_calc_result = mysqli_query($connection, $gpa_calc);
 
 $year;
 if(mysqli_num_rows($gpa_calc_result)>0){
