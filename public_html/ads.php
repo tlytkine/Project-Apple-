@@ -70,6 +70,7 @@ for ($i = 1; $i <= 12; $i++) {
 		echo "Course has not been taken: $courses[$i]<br>";
 	} 
 }
+
 echo "<br>";
 // make sure there are ten courses
 if ($course_count < 10) {
@@ -95,7 +96,6 @@ if ($core_courses_count != 3) {
 	$error .= "Degree core courses are not satisfied<br><br>";
 }
 
-echo "Num: " . $core_courses_count . "<br>";
 
 
 
@@ -157,7 +157,6 @@ if ($letter_grade_check > 2) {
 
 if (strlen($error) != 0) {
 	echo $error;
-	mysqli_close($connection);
 }
 
 
@@ -170,12 +169,6 @@ for ($i = 1; $i <= 12; $i++) {
 
 		$result_form_insert = mysqli_query($connection, $form_insert);
 
-		if(mysqli_affected_rows($result_form_insert) > 0){
-			echo "Course $i added successfully!<br>\n";
-		}
-		else {
-			echo "Error: " . $form_insert . "<br>" . mysqli_error($connection);
-		}
 	}
 }
 
