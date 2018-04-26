@@ -71,16 +71,17 @@ if ($course_count < 10) {
 }
 
 // check against degree
-$degree_query = "SELECT degreename, courseid FROM degreerequirements WHERE degree_name='$degree';";
+$degree_query = "SELECT degreename, courseid FROM degreerequirements WHERE degreename='$degree';";
 $result_from_query = mysqli_query($connection, $degree_query);
 
 $core_courses_count = 0;
-for ($i = 1; $i < 12; $i++) {
-	$row = mysqli_fetch_assoc($result_from_query);
-	if (strcmp($courses[$i], $row['courseid']) == 0) {
+	$i=0;
+	while($row =mysqli_fetch_assoc($result_from_query)){
+		if (strcmp($courses[$i], $row['courseid']) == 0) {
 		$core_courses_count++;
+		}
+		$i++;
 	}
-}
 
 // check core classes are satisfied
 if ($core_courses_count != 3) {
