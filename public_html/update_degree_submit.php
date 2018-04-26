@@ -6,6 +6,7 @@ $id = $_SESSION["id"];
 
 <html>
 <head><title>Update Degree Submit</title></head>
+<link rel="stylesheet" href="style.css">
 <body>
 	<?php
 

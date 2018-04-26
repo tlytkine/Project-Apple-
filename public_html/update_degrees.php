@@ -1,21 +1,22 @@
 <?php 
 include 'header.php';
 include 'db-connect.php';
-$id = $_SESSON["id"];
+$id = $_SESSION["id"];
 ?>
 
 <html>
 <head><title>Update Degrees</title></head>
+<link rel="stylesheet" href="style.css">
 <body>
 <b>Update Degrees</b><br>
 
 <?php
 
 echo "<br><h2>Degrees</h2>";
-$degree_query = "SELECT degree_name, courseid
+$degree_query = "SELECT degreename, courseid
 FROM degreerequirements;";
 
-$degree_result = mysqli_query($conn, $degree_query);
+$degree_result = mysqli_query($connection, $degree_query);
 
 echo "<table>
 <tr>
@@ -25,7 +26,7 @@ echo "<table>
 
 while($row = mysqli_fetch_assoc($degree_result)){
 	echo "<tr>
-	<td>".$row['degree_name']."</td>
+	<td>".$row['degreename']."</td>
 	<td>&nbsp;&nbsp;".$row['courseid']."</td>
 	</tr>";
 }

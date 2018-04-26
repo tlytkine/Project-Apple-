@@ -6,6 +6,7 @@ $id = $_SESSION["id"];
 
 <html>
 <head><title>Advisee Information</title></head>
+<link rel="stylesheet" href="style.css">
 <body>
 <b>Advisee Information</b><br>
 
@@ -14,9 +15,9 @@ $id = $_SESSION["id"];
 echo "<br><h2>Advisee Information</h2>";
 
 
-$advisee_query = "SELECT firstname,lastname,studentid, hold, degree_name FROM personalinfo,advises WHERE advises.facultyid='$id' AND personalinfo.id=advises.studentid;";
+$advisee_query = "SELECT firstname,lastname,studentid, hold, degreename FROM personalinfo,advises WHERE advises.facultyid='$id' AND personalinfo.id=advises.studentid;";
 
-$advisee_result = mysqli_query($conn, $advisee_query);
+$advisee_result = mysqli_query($connection, $advisee_query);
 
 echo "<table>
 <tr>
@@ -31,7 +32,7 @@ while($row = mysqli_fetch_assoc($advisee_result)){
 	<td>".$row['firstname']." ".$row['lastname']."</td>
 	<td>".$row['studentid']."</td>
 	<td>".$row['hold']."</td>
-	<td>".$row['degree_name']."</td>
+	<td>".$row['degreename']."</td>
 	</tr>";
 }
 echo "</table>";
