@@ -2,7 +2,7 @@
 <body>
 <head>
     <meta charset="UTF-8">
-    <title>Change Grades</title>
+    <title>View Transcript</title>
     <link rel="stylesheet" href="style.css">
 </head>
 
