@@ -10,9 +10,9 @@ $id = $_SESSION["id"];
 
 
 <?php
-	$degreenamequery = "SELECT degreename FROM advises WHERE studentid='$id';";
+	$degreenamequery = "SELECT degreename FROM advises WHERE studentid=$id;";
 
-	$degreenameresult = mysqli_query($conn, $degreenamequery);
+	$degreenameresult = mysqli_query($connection, $degreenamequery);
 
 	$degreename = mysqli_fetch_assoc($degreenameresult);
 
@@ -20,8 +20,8 @@ $id = $_SESSION["id"];
 	echo $degreename;
 	echo "<br>";
 
-	$degreerequirementsquery = "SELECT courseid,dept,coursenum,title FROM degreerequirements, courses WHERE degreerequirements.degreename = '$degreename' AND courses.courseid = degreerequirements.courseid;";
-	$degreerequirementsresult = mysqli_query($conn, $degreerequirementsquery);
+	$degreerequirementsquery = "SELECT degreerequirements.courseid,dept,coursenum,title FROM degreerequirements, courses WHERE degreerequirements.degreename = '$degreename' AND courses.courseid = degreerequirements.courseid;";
+	$degreerequirementsresult = mysqli_query($connection, $degreerequirementsquery);
 
 	echo "<table>
 	<tr>
