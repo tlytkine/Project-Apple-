@@ -62,7 +62,7 @@ include 'header.php';
 <a href='view-personal-transcript.php'>View Transcript</a> <br />
 <a href='register.php'>Register for Classes</a> <br />
 <a href='view_degree_requirements.php'>View Degree Requirements</a> <br />
-<a href=''>Apply to Graduate</a> <br />
+<a href='form1.php'>Apply to Graduate</a> <br />
 <?php endif; ?>
 
 <?php if (in_array("ALUMNI", $_SESSION["roles"])) : ?>
