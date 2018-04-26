@@ -96,7 +96,8 @@ if ($row["finaldecision"] == 0) {
 	if ($row["finaldecision"] == 1) {
 		echo "Your application for admission has been denied.";
 	} else if ($row["finaldecision"] == 3 || $row["finaldecision"] == 4) {
-		echo "Congratulations you have been admitted. The formal letter of acceptance will be mailed.";
+		echo "Congratulations you have been admitted. The formal letter of acceptance will be mailed. <br />";
+		echo "<a href='accept-offer.php'>Accept Offer</a>";
 	} else {
 		echo "An error has occurred. Please contact the admissions office for assistance.";
 	}
