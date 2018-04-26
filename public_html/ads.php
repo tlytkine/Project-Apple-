@@ -28,11 +28,16 @@ for ($i = 1; $i <= 12; $i++) {
 // Display some info
 echo "First Name: " . $first_name . "<br>";
 echo "Last Name: " . $last_name . "<br>";
-
+echo "Student ID: " . $studentid . "<br>";
+echo "Degree Name: " . $degreename . "<br>";
 
 // check if user already has applied
 $duplicate_query = "SELECT studentid FROM graduation_application WHERE studentid='$studentid';";
 $result_from_query=mysqli_query($connection, $duplicate_query);
+if(!$result_from_query){
+	echo "Error: " . $result_from_query . "<br>";
+}
+
 if (mysqli_num_rows($result_from_query) > 0) {
 	echo "Already applied<br>";
 	exit();
@@ -64,6 +69,7 @@ for ($i = 1; $i <= 12; $i++) {
 		echo "Course has not been taken: $courses[$i]<br>";
 	}
 }
+echo "$course_count: " . $course_count . "<br>";
 echo "<br>";
 // make sure there are ten courses
 if ($course_count < 10) {
@@ -75,14 +81,15 @@ $degree_query = "SELECT degreename, courseid FROM degreerequirements WHERE degre
 $result_from_query = mysqli_query($connection, $degree_query);
 
 $core_courses_count = 0;
-// fix to properly compare 
 	$i=0;
 	while($row =mysqli_fetch_assoc($result_from_query)){
-		if (strcmp($courses[$i], $row['courseid']) == 0) {
-		$core_courses_count++;
+		for($i = 1; $i<=12; $i++){
+			if (strcmp($courses[$i], $row['courseid']) == 0) {
+				$core_courses_count++;
+			}
 		}
-		$i++;
 	}
+	echo "$core_courses_count: " . $core_courses_count . "<br>";
 
 // check core classes are satisfied
 if ($core_courses_count != 3) {
