@@ -7,6 +7,7 @@ $id = $_SESSION["id"];
 
 <html>
 <head><title>ADS</title></head>
+<link rel="stylesheet" href="style.css">
 <body>
 <h1>ADS</h1><br> 
 <?php
@@ -16,8 +17,8 @@ $id = $_SESSION["id"];
 // Set variables
 $first_name = $_POST['first_name'];
 $last_name = $_POST['last_name'];
-$gwid = $_POST['gwid'];
-$degree = $_POST['degree'];
+$studentid = $_POST['studentid'];
+$degreename = $_POST['degreename'];
 
 // Load all given courses
 for ($i = 1; $i <= 12; $i++) {
@@ -28,15 +29,9 @@ for ($i = 1; $i <= 12; $i++) {
 echo "First Name: " . $first_name . "<br>";
 echo "Last Name: " . $last_name . "<br>";
 
-// Connect to database
-$conn = mysqli_connect("localhost", "team5", "9GcBpHaf", "team5");
-//Check	connection
-if (!$conn)	{	
-	die("Connection failed: " . mysqli_connect_error());	
-}		
 
 // check if user already has applied
-$duplicate_query = "SELECT * FROM graduation_application WHERE studentid='$studentid';";
+$duplicate_query = "SELECT studentid FROM graduation_application WHERE studentid='$studentid';";
 $result_from_query=mysqli_query($conn, $duplicate_query);
 if (mysqli_num_rows($result_from_query) > 0) {
 	echo "Already applied<br>";
@@ -54,20 +49,20 @@ for ($i = 1; $i <= 12; $i++) {
 	// check is course is actually taken
 	$course_query = "SELECT grade FROM transcripts  
 	WHERE studentid ='$studentid' AND coursenum='$courses[$i]';";
-	$result_from_query = mysqli_query($conn, $course_query);
+	$result_from_query = mysqli_query($connection, $course_query);
 	$row = mysqli_fetch_assoc($result_from_query);
 
 	if (isset($row['grade'])) {
 		if (strcmp($row['grade'], 'IP') == 0) {
 			echo "$course_query <br>";
-			echo "course in progress <br><br>";
+			echo "Course is still in progress.<br><br>";
 		}
 		else {
 			$course_count++;
 		}
 	}
 	else if ($courses[$i] != 0){
-		echo "course not taken: $courses[$i]<br>";
+		echo "Course has not been taken: $courses[$i]<br>";
 	}
 }
 echo "<br>";
@@ -77,7 +72,7 @@ if ($course_count < 10) {
 }
 
 // check against degree
-$degree_query = "SELECT * FROM degreerequirements WHERE degree_name='$degree';";
+$degree_query = "SELECT degreename, courseid FROM degreerequirements WHERE degree_name='$degree';";
 $result_from_query = mysqli_query($conn, $degree_query);
 $row = mysqli_fetch_assoc($result_from_query);
 
@@ -139,7 +134,7 @@ $letter_grade_check = 0;
 $course_grade_check = "SELECT qualitypoints
 FROM transcripts, gradecalc
 WHERE student='$studentid' AND gradecalc.grade = transcripts.grade;";
-$course_grade_result = mysqli_query($conn, $course_grade_check);
+$course_grade_result = mysqli_query($connection, $course_grade_check);
 
 while ($row = mysqli_fetch_assoc($course_grade_result)) {
 	if ($row['qualitypoints'] < 2.70) {
@@ -153,7 +148,7 @@ if ($letter_grade_check > 2) {
 
 if (strlen($error) != 0) {
 	echo $error;
-	mysqli_close($conn);
+	mysqli_close($connection);
 }
 
 
@@ -164,25 +159,25 @@ for ($i = 1; $i <= 12; $i++) {
 		$form_insert = "INSERT INTO graduationapplication(studentid,courseid,year)
 		VALUES ('$studentid','$courses[$i]');";
 
-		$result_form_insert = mysqli_query($conn, $form_insert);
+		$result_form_insert = mysqli_query($connection, $form_insert);
 
 		if($result_form_insert){
 			echo "Course $i added successfully!<br>\n";
 		}
 		else {
-			echo "Error: " . $form_insert . "<br>" . mysqli_error($conn);
+			echo "Error: " . $form_insert . "<br>" . mysqli_error($connection);
 		}
 	}
 }
 
 // Query to update students cleared field to 1 if all conditions met 
-$cleared_query = "UPDATE students
-				SET students.cleared = 1 
-				WHERE students.gwid = '$gwid';";
-$result_cleared_query = mysqli_query($conn, $cleared_query);
+$cleared_query = "UPDATE graduationapplication
+				SET cleared = 1 
+				WHERE studentid = '$studentid';";
+$result_cleared_query = mysqli_query($connection, $cleared_query);
 
 // close the connection
-mysqli_close($conn);
+mysqli_close($connection);
 ?>
 	<br>
 	<b><a href="logout.php">Log Out</a></b>

@@ -14,7 +14,7 @@ $id = $_SESSION["id"];
 		$degree_html = "<select name ='major'>";
 		$degree_html .= "<option value = '0'>-----</option>";
 		$query = "SELECT DISTINCT degreename FROM degreerequirements;";
-		$result = mysqli_query($conn, $query);
+		$result = mysqli_query($connection, $query);
 		while ($row = mysqli_fetch_assoc($result)) {
 			$degree = $row['degree_name'];
 			$degree_html .= "<option value='$degree'>
@@ -45,7 +45,7 @@ $id = $_SESSION["id"];
 		(degree_name, courseid)
 		VALUES ('$degree_name', '$core1'),('$degree_name', '$core2'),('$degree_name','$core3');";
 
-		$degree_result = mysqli_query($conn, $degree_query);
+		$degree_result = mysqli_query($connection, $degree_query);
 		if (!$degree_result) {
 			echo "<h2>Problem adding degree.</h2><br>";
 			echo $degree_query . "<br>";
@@ -60,7 +60,7 @@ $id = $_SESSION["id"];
 		$degree_html = "<select name ='major'>";
 		$degree_html .= "<option value = '0'>-----</option>";
 		$query = "SELECT degree_name FROM degreerequirements;";
-		$result = mysqli_query($conn, $query);
+		$result = mysqli_query($connection, $query);
 		while ($row = mysqli_fetch_assoc($result)) {
 			$degree = $row['degree_name'];
 			$degree_html .= "<option value='$degree'>
@@ -89,7 +89,7 @@ $id = $_SESSION["id"];
 		$degree_query .= "UPDATE degreerequirements (degree_name, courseid)
 		VALUES ('$degree_name', '$courseid');";
 
-		$degree_result = mysqli_query($conn, $degree_query);
+		$degree_result = mysqli_query($connection, $degree_query);
 		if (!$degree_result) {
 			echo "<h2>Problem editing requirement.</h2><br>";
 			echo $degree_query . "<br>";

@@ -168,6 +168,7 @@ CREATE TABLE graduationapplication (
     studentid   INT,
     courseid    INT,
     year        YEAR,
+    cleared INT,
     PRIMARY KEY (studentid, courseid),
     FOREIGN KEY (courseid) REFERENCES courses(courseid),
     FOREIGN KEY (studentid) REFERENCES users(id)
@@ -204,6 +205,22 @@ INSERT INTO roles (id, role) VALUES (4, "USER");
 INSERT INTO personalinfo VALUES('4', 'billy', 'miller', '2000-01-01', '123 address st', '123-45-6789');
 
 INSERT INTO transcripts VALUES('4', 'CS', '6221', '3', '2018', 'spring', 'A');
+
+INSERT INTO gradecalc(grade,qualitypoints) 
+VALUES
+('A',4.00),
+('A-',3.70),
+('B+',3.30),
+('B',3.00),
+('B-',2.70),
+('C+',2.30),
+('C',2.00),
+('F',0.00)
+('IP',0.00);
+
+
+
+
 
 --DELIMITER CHANGE BELOW;
 

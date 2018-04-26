@@ -4,19 +4,19 @@
 	$id = $_SESSION["id"];
 	$query = "SELECT firstname, lastname
 	FROM personalinfo WHERE id='$id';";
-	$result = mysqli_query($conn, $query);
+	$result = mysqli_query($connection, $query);
 	$row = mysqli_fetch_assoc($result);
 	$firstname = $row['firstname'];
 	$lastname = $row['lastname'];
 
 
 	$fid_query = "SELECT facultyid FROM advises WHERE studentid = '$id';";
-	$fid_result = mysqli_query($conn, $fid_query);
+	$fid_result = mysqli_query($connection, $fid_query);
 	$row = mysqli_fetch_assoc($fid_result);
 	$fid = $row['facultyid'];
 	$fa_query = "SELECT firstname, lastname FROM personalinfo 
-	WHERE id = '$facultyid';";
-	$fa = mysqli_query($conn, $fa_query);
+	WHERE id = '$fid';";
+	$fa = mysqli_query($connection, $fa_query);
 	$row = mysqli_fetch_assoc($fa);
 	$advisor_first = $row['firstname'];
 	$advisor_last = $row['lastname'];
@@ -25,7 +25,7 @@
 
 <html>
 <head><title>Form 1</title></head>
-<link rel ="stylesheet" type="text/css" href="style1.css"/>
+<link rel="stylesheet" href="style.css">
 <body>
 
 <!-- Display some information that will get passed with the submitted form-->
@@ -38,12 +38,13 @@
 <input type="text" name="last_name" value=
 <?php echo '"' . $lastname . '"'; ?> readonly>
 <p>Degree: </p>
-<select name="degree">
+<select name="degreename">
+<!-- Inser other degrees -->
 <option value="ms_cs">MS CS</option>
 </select>
 <p>GW ID:</p>
-<input type="text" name="gwid" value=
-<?php echo '"' . $gwid . '"';	?> readonly>
+<input type="text" name="studentid" value=
+<?php echo '"' . $id . '"';	?> readonly>
 
 
 <p>Faculty Advisor:</p>
@@ -64,11 +65,11 @@ echo $advisor_last;
 		echo "<select name ='course$i'>";
 		echo "<option value = '0'>-----</option>";
 		$query = "SELECT coursenum, courseid FROM courses;";
-		$result = mysqli_query($conn, $query);
+		$result = mysqli_query($connection, $query);
 		while ($row = mysqli_fetch_assoc($result)) {
 			$coursenum = $row['coursenum'];
-			$crn = $row['crn'];
-			echo "<option value='$coursenum'>$crn</option>";
+			$courseid = $row['courseid'];
+			echo "<option value='$coursenum'>$courseid</option>";
 		}
 		echo "</select>";
 		echo "<br><br>";
