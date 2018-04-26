@@ -178,6 +178,13 @@ $cleared_query = "UPDATE graduationapplication
 				WHERE studentid = '$studentid';";
 $result_cleared_query = mysqli_query($connection, $cleared_query);
 
+if ($result_cleared_query) {
+	echo "<br> Application cleared successfully!";
+}
+else {
+	echo "<br>Application failed to be cleared for graduation.";
+}
+
 // close the connection
 mysqli_close($connection);
 ?>
