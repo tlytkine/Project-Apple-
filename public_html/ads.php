@@ -68,7 +68,7 @@ for ($i = 1; $i <= 12; $i++) {
 	}
 	else if ($courses[$i] != 0){
 		echo "Course has not been taken: $courses[$i]<br>";
-	}
+	} 
 }
 echo "$course_count: " . $course_count . "<br>";
 echo "<br>";
@@ -78,7 +78,7 @@ if ($course_count < 10) {
 }
 
 // check against degree
-$degree_query = "SELECT degreename, courseid FROM degreerequirements WHERE degreename='$degree';";
+$degree_query = "SELECT degreename, courseid FROM degreerequirements WHERE degreename='$degreename';";
 $result_from_query = mysqli_query($connection, $degree_query);
 
 $core_courses_count = 0;
