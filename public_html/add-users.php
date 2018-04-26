@@ -86,6 +86,9 @@ if (isset($_POST['email']) && isset($_POST['password']) && isset($_POST['roles']
 				echo "<script type='text/javascript'>alert('Account could not be created');</script>";
 				exit();
 			}
+			if ($role == "APPLICANT") {
+				include 'initialize-applicant.php';
+			}
 		}
 		
 		// Insert blank personalinfo row:
