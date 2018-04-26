@@ -32,7 +32,7 @@ echo "Last Name: " . $last_name . "<br>";
 
 // check if user already has applied
 $duplicate_query = "SELECT studentid FROM graduation_application WHERE studentid='$studentid';";
-$result_from_query=mysqli_query($conn, $duplicate_query);
+$result_from_query=mysqli_query($connection, $duplicate_query);
 if (mysqli_num_rows($result_from_query) > 0) {
 	echo "Already applied<br>";
 	exit();
@@ -117,7 +117,7 @@ FROM courses, transcripts
 WHERE transcripts.coursenum = courses.coursenum
 AND transcripts.studentid = '$studentid';";
 
-$credit_calc_result = mysqli_query($conn, $credits_calc);
+$credit_calc_result = mysqli_query($connection, $credits_calc);
 
 if (mysqli_num_rows($credit_calc_result)>0){
 	while($row=mysqli_fetch_assoc($credit_calc_result)){
