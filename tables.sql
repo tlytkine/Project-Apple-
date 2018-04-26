@@ -196,8 +196,28 @@ INSERT INTO users (email, password, id) VALUES ('instructor@gwu.edu', '$2y$10$Dn
 INSERT INTO roles (id, role) VALUES (3, "INSTRUCTOR");
 INSERT INTO personalinfo VALUES('3', 'b', 'narahari', '2000-01-01', '123 address st', '123-45-6789');
 
-INSERT INTO courses VALUES ('1', 'CS','6221', '1', 'class', '3', 'M', '15:00:00', '2018','spring', '3');
-INSERT INTO courses VALUES ('2', 'CS','6222', '1', 'class', '3', 'M', '12:00:00', '2018','spring', '3');
+insert into courses (courseid, coursenum, dept, professorid, year, semester, section, credits, day, time, title) values ('1','6221', 'CS', '3', '2018','spring', '10', '3','M', '15:00:00', 'Class');
+insert into courses (courseid, coursenum, dept, professorid, year, semester, section, credits, day, time, title) values ('2','6461', 'CS', '3', '2018','spring', '10','3', 'T', '15:00:00', 'Class');
+insert into courses (courseid, coursenum, dept, professorid, year, semester, section, credits, day, time, title) values ('3','6212', 'CS', '3', '2018','spring', '10','3', 'W', '15:00:00', 'Class');
+insert into courses (courseid, coursenum, dept, professorid, year, semester, section, credits, day, time, title) values ('4','6220', 'CS', '3', '2018','spring', '10','3', 'R', '15:00:00', 'Class');
+insert into courses (courseid, coursenum, dept, professorid, year, semester, section, credits, day, time, title) values ('5','6232', 'CS', '3', '2018','spring', '10', '3','M','18:00:00', 'Class');
+insert into courses (courseid, coursenum, dept, professorid, year, semester, section, credits, day, time, title) values ('6','6233', 'CS', '3', '2018','spring', '10', '3','T', '18:00:00', 'Class');
+insert into courses (courseid, coursenum, dept, professorid, year, semester, section, credits, day, time, title) values ('7','6241', 'CS', '3', '2018','spring', '10','3', 'W', '18:00:00', 'Class');
+insert into courses (courseid, coursenum, dept, professorid, year, semester, section, credits, day, time, title) values ('8','6242', 'CS', '3', '2018','spring', '10','3', 'R', '18:00:00', 'Class');
+insert into courses (courseid, coursenum, dept, professorid, year, semester, section, credits, day, time, title) values ('9','6246', 'CS', '3', '2018','spring', '10', '3','T', '15:00:00', 'Class');
+insert into courses (courseid, coursenum, dept, professorid, year, semester, section, credits, day, time, title) values ('10','6251', 'CS', '3', '2018','spring', '10', '3','M', '18:00:00', 'Class');
+insert into courses (courseid, coursenum, dept, professorid, year, semester, section, credits, day, time, title) values ('11','6254', 'CS', '3', '2018','spring', '10','3', 'M', '15:00:00', 'Class');
+insert into courses (courseid, coursenum, dept, professorid, year, semester, section, credits, day, time, title) values ('12','6260', 'CS', '3', '2018','spring', '10', '3','R', '18:00:00', 'Class');
+insert into courses (courseid, coursenum, dept, professorid, year, semester, section, credits, day, time, title) values ('13','6262', 'CS', '3', '2018','spring', '10','3', 'W', '18:00:00', 'Class');
+insert into courses (courseid, coursenum, dept, professorid, year, semester, section, credits, day, time, title) values ('14','6283', 'CS', '3', '2018','spring', '10', '3','T', '18:00:00', 'Class');
+insert into courses (courseid, coursenum, dept, professorid, year, semester, section, credits, day, time, title) values ('15','6284', 'CS', '3', '2018','spring', '10', '3','M', '18:00:00', 'Class');
+insert into courses (courseid, coursenum, dept, professorid, year, semester, section, credits, day, time, title) values ('16','6286', 'CS', '3', '2018','spring', '10', '3','W', '18:00:00', 'Class');
+insert into courses (courseid, coursenum, dept, professorid, year, semester, section, credits, day, time, title) values ('17','6325', 'CS', '3', '2018','spring', '10','2', 'R', '16:00:00', 'Class');
+insert into courses (courseid, coursenum, dept, professorid, year, semester, section, credits, day, time, title) values ('18','6339', 'CS', '3', '2018','spring', '10', '2','T', '15:00:00', 'Class');
+insert into courses (courseid, coursenum, dept, professorid, year, semester, section, credits, day, time, title) values ('19','6384', 'CS', '3', '2018','spring', '10', '3','W', '16:00:00', 'Class');
+insert into courses (courseid, coursenum, dept, professorid, year, semester, section, credits, day, time, title) values ('20','6243', 'EE', '3', '2018','spring', '10', '3','M', '18:00:00', 'Class');
+insert into courses (courseid, coursenum, dept, professorid, year, semester, section, credits, day, time, title) values ('21','6244', 'EE', '3', '2018','spring', '10', '2','T', '18:00:00', 'Class');
+insert into courses (courseid, coursenum, dept, professorid, year, semester, section, credits, day, time, title) values ('22','6210', 'Math', '3', '2018','spring', '10', '2','W', '18:00:00', 'Class');
 
 INSERT INTO users (email, password, id) VALUES ('billy@gwu.edu', '$2y$10$K7xpP4XPPWkgYJ0/I4XOtehbRigHUqpmXer99/Ftx1fERDU.JZObC', 4);
 INSERT INTO roles (id, role) VALUES (4, "STUDENT");
@@ -206,7 +226,7 @@ INSERT INTO personalinfo VALUES('4', 'billy', 'miller', '2000-01-01', '123 addre
 
 INSERT INTO transcripts VALUES('4', 'CS', '6221', '3', '2018', 'spring', 'A');
 
-INSERT INTO gradecalc(grade,qualitypoints) 
+INSERT INTO gradecalc(grade,qualitypoints)
 VALUES
 ('A',4.00),
 ('A-',3.70),
