@@ -142,6 +142,7 @@ CREATE TABLE transcripts (
     year           YEAR,
     semester       VARCHAR(30),
     grade          VARCHAR(2),
+    title          VARCHAR(60),
     PRIMARY KEY (studentid, dept, coursenum, year, semester),
     FOREIGN KEY (studentid) REFERENCES users(id),
     FOREIGN KEY (professorid) REFERENCES users(id)
@@ -243,7 +244,7 @@ INSERT INTO roles (id, role) VALUES (4, "STUDENT");
 INSERT INTO roles (id, role) VALUES (4, "USER");
 INSERT INTO personalinfo VALUES('4', 'billy', 'miller', '2000-01-01', '123 address st', '123-45-6789');
 
-INSERT INTO transcripts VALUES('4', 'CS', '6221', '3', '2018', 'spring', 'A');
+INSERT INTO transcripts VALUES('4', 'CS', '6221', '3', '2018', 'spring', 'A', 'Software Paradigms');
 
 INSERT INTO gradecalc(grade,qualitypoints)
 VALUES
