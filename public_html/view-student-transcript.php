@@ -14,7 +14,7 @@ $allowed_user_types = array(
 include 'header.php';
 
 ?>
-<h2>Change Gades</h2>
+<h2>View Transcript</h2>
 
 <?php
     //include 'db-connect.php';

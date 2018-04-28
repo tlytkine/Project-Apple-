@@ -69,7 +69,7 @@
 
 		if (mysqli_num_rows($result) > 0) {
 			echo "<table>";
-			echo "<tr><th>course id</th><th colspan=2>Course</th><th>Section</th><th colspan=2>Professor</th><th>Year</th><th>Semester</th><th>Credits</th><th>Day</th><th>Time</th><th>Prereq1 CRN</th><th>Prereq2 CRN</th>";
+			echo "<tr><th>course id</th><th colspan=2>Course</th><th>Section</th><th colspan=2>Professor</th><th>Year</th><th>Semester</th><th>Credits</th><th>Day</th><th>Time</th><th>Prereq1 Course ID</th><th>Prereq2 Course ID</th>";
 
 			while($row = mysqli_fetch_assoc($result)) {
 
@@ -108,7 +108,7 @@
 
 		if (mysqli_num_rows($result) > 0) {
 			echo "<table>";
-			echo "<tr><th>course id</th><th colspan=2>Course</th><th>Section</th><th colspan=2>Professor</th><th>Year</th><th>Semester</th><th>Credits</th><th>Day</th><th>Time</th><th>Prereq1 CRN</th><th>Prereq2 CRN</th>";
+			echo "<tr><th>course id</th><th colspan=2>Course</th><th>Section</th><th colspan=2>Professor</th><th>Year</th><th>Semester</th><th>Credits</th><th>Day</th><th>Time</th><th>Prereq1 Course ID</th><th>Prereq2 Course ID</th>";
 
 			while($row = mysqli_fetch_assoc($result)) {
 
@@ -150,7 +150,7 @@
 
 		if (mysqli_num_rows($result) > 0) {
 			echo "<table>";
-			echo "<tr><th>course id</th><th colspan=2>Course</th><th>Section</th><th colspan=2>Professor</th><th>Year</th><th>Semester</th><th>Credits</th><th>Day</th><th>Time</th><th>Prereq1 CRN</th><th>Prereq2 CRN</th>";
+			echo "<tr><th>course id</th><th colspan=2>Course</th><th>Section</th><th colspan=2>Professor</th><th>Year</th><th>Semester</th><th>Credits</th><th>Day</th><th>Time</th><th>Prereq1 Course ID</th><th>Prereq2 Course ID</th>";
 
 			while($row = mysqli_fetch_assoc($result)) {
 

@@ -2,7 +2,7 @@
 <body>
 <head>
     <meta charset="UTF-8">
-    <title>Change Grades</title>
+    <title>View Transcript</title>
     <link rel="stylesheet" href="style.css">
 </head>
 
@@ -15,7 +15,7 @@ $allowed_user_types = array(
 include 'header.php';
 
 ?>
-<h2>Change Gades</h2>
+<h2>View Transcript</h2>
 
 <?php
     //include 'db-connect.php';

@@ -2,7 +2,7 @@
 <body>
 <head>
     <meta charset="UTF-8">
-    <title>View Schedule</title>
+    <title>Change Roles</title>
     <link rel="stylesheet" href="style.css">
 </head>
 

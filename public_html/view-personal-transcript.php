@@ -2,7 +2,7 @@
 <body>
 <head>
     <meta charset="UTF-8">
-    <title>View TRanscript</title>
+    <title>View Transcript</title>
     <link rel="stylesheet" href="style.css">
 </head>
 
