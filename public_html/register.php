@@ -197,13 +197,24 @@
 		$row = mysqli_fetch_assoc($result);
 		$sid = $row["id"];
 
+        /* check holds */
+        $has_hold = 1;
+        $query = "SELECT hold
+					FROM advises a
+					WHERE a.studentid = '$sid';";
+		$result = mysqli_query($connection, $query);
+
+		$row = mysqli_fetch_assoc($result);
+		$hold = $row["hold"];
+        if($hold != NULL){
+            $has_hold = 0;
+            echo "You have a hold on your account<br />";
+            echo $hold;
+            echo "<br />";
+        }
+
 		/* check for prereqs */
 		$passPrereqs = 1;
-		/* search for class in prereq1
-		 * if has one, check if is in transcript
-		 * then check for class in prereq2
-		 * if is, check if is in transcript for student
-		 * if either of those checks fail, change passPrereqs to 0 */
 		$query = "SELECT * FROM prereqs WHERE courseid = '".$classInfo["courseid"]."';";
 		$prereqs = mysqli_query($connection, $query);
 		if(mysqli_num_rows($prereqs) > 0) {
@@ -256,7 +267,7 @@
 		}
 		echo $classInfo["professorid "];
 		/* insert into transcript if allowed*/
-		if($passSched == 1 && $passPrereqs == 1 && $class != NULL) {
+		if($has_hold == 1 && $passSched == 1 && $passPrereqs == 1 && $class != NULL) {
 			$query = "INSERT INTO transcripts VALUES
 				('$sid', '".$classInfo["dept"]."', '".$classInfo["coursenum"]."', '".$classInfo["professorid"]."', '".$classInfo["year"]."', '".$classInfo["semester"]."', 'IP', '".$classInfo["title"]."');";
 
