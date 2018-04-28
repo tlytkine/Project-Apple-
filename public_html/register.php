@@ -258,7 +258,7 @@
 		/* insert into transcript if allowed*/
 		if($passSched == 1 && $passPrereqs == 1 && $class != NULL) {
 			$query = "INSERT INTO transcripts VALUES
-				('$sid', '".$classInfo["dept"]."', '".$classInfo["coursenum"]."', '".$classInfo["professorid"]."', '".$classInfo["year"]."', '".$classInfo["semester"]."', 'IP');";
+				('$sid', '".$classInfo["dept"]."', '".$classInfo["coursenum"]."', '".$classInfo["professorid"]."', '".$classInfo["year"]."', '".$classInfo["semester"]."', 'IP', '".$classInfo["title"]."');";
 
 			$result = mysqli_query($connection, $query);
 
