@@ -42,7 +42,7 @@ include 'header.php';
     echo "<h2>".$row["firstname"]." ".$row["lastname"],"</h2>";
 
     /* get transcript */
-    $query = "SELECT t.dept, t.coursenum, c.credithours, t.grade, t.year, t.semester
+    $query = "SELECT t.dept, t.coursenum, c.credithours, t.grade, t.year, t.semester, t.title
         FROM transcripts t, courses c, users u
         WHERE t.coursenum = c.coursenum AND t.dept = c.dept AND
         t.studentid = u.id AND u.email = '$user'
@@ -63,7 +63,7 @@ include 'header.php';
         while ($row = mysqli_fetch_assoc($result)){
             if($cur_year != $row["year"] || $cur_sem != $row["semester"]){
                 echo "</table><br><table>";
-                echo "<tr><th colspan=2>Course</th><th>Credits</th><th>Grade</th><th>Semester</th><th>Year</th></tr>";
+                echo "<tr><th colspan=2>Course</th><th>Title</th><th>Credits</th><th>Grade</th><th>Semester</th><th>Year</th></tr>";
                 $cur_year = $row["year"];
                 $cur_sem = $row["semester"];
             }
@@ -72,6 +72,7 @@ include 'header.php';
 
             echo "<td>".$row["dept"]."</td>";
             echo "<td>".$row["coursenum"]."</td>";
+            echo "<td>".$row["title"]."</td>";
             echo "<td>".$row["credithours"]."</td>";
             echo "<td>".$row["grade"]."</td>";
             echo "<td>".$row["semester"]."</td>";

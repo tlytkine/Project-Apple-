@@ -65,7 +65,7 @@ include 'header.php';
 		}
 
 		/* get transcript information */
-		$query = "SELECT t.dept, t.coursenum, c.credithours, t.grade, t.year, t.semester
+		$query = "SELECT t.dept, t.coursenum, c.credithours, t.grade, t.year, t.semester, t.title
 			FROM transcripts t, courses c, personalinfo p
 			WHERE t.coursenum = c.coursenum AND t.dept = c.dept AND
 			p.firstname = '$fname' AND p.lastname = '$lname' AND t.studentid = p.id
@@ -85,7 +85,7 @@ include 'header.php';
 			while ($row = mysqli_fetch_assoc($result)){
 				if($cur_year != $row["year"] || $cur_sem != $row["semester"]){
 					echo "</table><br><table>";
-					echo "<tr><th colspan=2>Course</th><th>Credits</th><th>Grade</th><th>Semester</th><th>Year</th></tr>";
+					echo "<tr><th colspan=2>Course</th><th>Title</th><th>Credits</th><th>Grade</th><th>Semester</th><th>Year</th></tr>";
 					$cur_year = $row["year"];
 					$cur_sem = $row["semester"];
 				}
@@ -93,6 +93,7 @@ include 'header.php';
 
 				echo "<td>".$row["dept"]."</td>";
 				echo "<td>".$row["coursenum"]."</td>";
+                echo "<td>".$row["title"]."</td>";
 				echo "<td>".$row["credithours"]."</td>";
 				echo "<td>".$row["grade"]."</td>";
 				echo "<td>".$row["semester"]."</td>";
@@ -170,7 +171,7 @@ include 'header.php';
 		}
 
 		/* get transcript information */
-		$query = "SELECT t.dept, t.coursenum, c.credithours, t.grade, t.year, t.semester
+		$query = "SELECT t.dept, t.coursenum, c.credithours, t.grade, t.year, t.semester, t.title
 			FROM transcripts t, courses c
 			WHERE t.coursenum = c.coursenum AND t.dept = c.dept AND
 			t.studentid = '$student_id'
@@ -190,7 +191,7 @@ include 'header.php';
 			while ($row = mysqli_fetch_assoc($result)){
 				if($cur_year != $row["year"] || $cur_sem != $row["semester"]){
 					echo "</table><br><table>";
-					echo "<tr><th colspan=2>Course</th><th>Credits</th><th>Grade</th><th>Semester</th><th>Year</th></tr>";
+					echo "<tr><th colspan=2>Course</th><th>Title</th><th>Credits</th><th>Grade</th><th>Semester</th><th>Year</th></tr>";
 					$cur_year = $row["year"];
 					$cur_sem = $row["semester"];
 				}
@@ -198,6 +199,7 @@ include 'header.php';
 
 				echo "<td>".$row["dept"]."</td>";
 				echo "<td>".$row["coursenum"]."</td>";
+                echo "<td>".$row["title"]."</td>";
 				echo "<td>".$row["credithours"]."</td>";
 				echo "<td>".$row["grade"]."</td>";
 				echo "<td>".$row["semester"]."</td>";
