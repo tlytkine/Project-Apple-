@@ -12,7 +12,6 @@
         "STUDENT"
     );
     include 'header.php';
-
     include 'db-connect.php';
     /*$servername = "127.0.0.1";
     $serverusername = "teamA2";

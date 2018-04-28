@@ -17,16 +17,7 @@ include 'header.php';
 <h2>View Transcript</h2>
 
 <?php
-    //include 'db-connect.php';
-    $servername = "127.0.0.1";
-    $serverusername = "teamA2";
-    $serverpassword = "Ar9x5Y";
-    $dbname = "teamA2";
-    //$script = "../../mysql/bin/tables.sql";
-    $connection = mysqli_connect($servername, $serverusername, $serverpassword, $dbname);
-    if (mysqli_connect_errno()) {
-    	echo "Database connection error: " . mysqli_connect_error();
-    }
+    include 'db-connect.php';
 
     $transcript_search = $_POST["transcript_search"];
 	$transcript_name_search = $_POST["transcript_name_search"];

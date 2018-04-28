@@ -12,18 +12,8 @@
         "USER"
     );
     include 'header.php';
+    include 'db-connect.php';
 
-
-    //include 'db-connect.php';
-    $servername = "127.0.0.1";
-    $serverusername = "teamA2";
-    $serverpassword = "Ar9x5Y";
-    $dbname = "teamA2";
-    //$script = "../../mysql/bin/tables.sql";
-    $connection = mysqli_connect($servername, $serverusername, $serverpassword, $dbname);
-    if (mysqli_connect_errno()) {
-    	echo "Database connection error: " . mysqli_connect_error();
-    }
 
     /* extract user */
 	$user = $_SESSION["email"];
