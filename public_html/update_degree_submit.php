@@ -16,7 +16,7 @@ $id = $_SESSION["id"];
 		$query = "SELECT DISTINCT degreename FROM degreerequirements;";
 		$result = mysqli_query($connection, $query);
 		while ($row = mysqli_fetch_assoc($result)) {
-			$degree = $row['degree_name'];
+			$degree = $row['degreename'];
 			$degree_html .= "<option value='$degree'>
 			$degree</option>";
 		}
@@ -24,7 +24,7 @@ $id = $_SESSION["id"];
 
 		echo "<h2>Enter Degree Information.</h2><br>";
 		echo "<form method='post' action='user.php'>
-		<p>Degree Name<p><input type='text' name='degree_name'>
+		<p>Degree Name<p><input type='text' name='degreename'>
 		<p>Core Course 1<p><input type='text' name='core1'>
 		<p>Core Course 2<p><input type='text' name='core2'>
 		<p>Core Course 3<p><input type='text' name='core3'>
@@ -35,15 +35,15 @@ $id = $_SESSION["id"];
 	}
 	//add degree
 	if (strcmp($_POST['action'], 'add_degree') == 0) {
-		$degree_name = $_POST['degree_name'];
+		$degreename = $_POST['degreename'];
 		$core1 = $_POST['core1'];
 		$core2 = $_POST['core2'];
 		$core3 = $_POST['core3'];
 
 
 		$degree_query .= "INSERT INTO degreerequirements 
-		(degree_name, courseid)
-		VALUES ('$degree_name', '$core1'),('$degree_name', '$core2'),('$degree_name','$core3');";
+		(degreename, courseid)
+		VALUES ('$degreename', '$core1'),('$degreename', '$core2'),('$degreename','$core3');";
 
 		$degree_result = mysqli_query($connection, $degree_query);
 		if (!$degree_result) {
@@ -59,10 +59,10 @@ $id = $_SESSION["id"];
 	if (strcmp($_POST['action'], 'edit_degree_requirements') == 0) {
 		$degree_html = "<select name ='major'>";
 		$degree_html .= "<option value = '0'>-----</option>";
-		$query = "SELECT degree_name FROM degreerequirements;";
+		$query = "SELECT degreename FROM degreerequirements;";
 		$result = mysqli_query($connection, $query);
 		while ($row = mysqli_fetch_assoc($result)) {
-			$degree = $row['degree_name'];
+			$degree = $row['degreename'];
 			$degree_html .= "<option value='$degree'>
 			$degree</option>";
 		}
@@ -70,7 +70,7 @@ $id = $_SESSION["id"];
 
 		echo "<h2>Edit Degree Requirements.</h2><br>";
 		echo "<form method='post' action='user.php'>
-		<p>Degree Name<p><input type='text' name='degree_name'>
+		<p>Degree Name<p><input type='text' name='degreename'>
 		<p>Core Course 1<p><input type='text' name='core1'>
 		<p>Core Course 2<p><input type='text' name='core2'>
 		<p>Core Course 3<p><input type='text' name='core3'>
@@ -81,13 +81,13 @@ $id = $_SESSION["id"];
 	}
 	// edit degree
 	if (strcmp($_POST['action'], 'edit_degree') == 0) {
-		$degree_name = $_POST['degree_name'];
+		$degreename = $_POST['degreename'];
 		$courseid = $_POST['courseid'];
 
 
 
-		$degree_query .= "UPDATE degreerequirements (degree_name, courseid)
-		VALUES ('$degree_name', '$courseid');";
+		$degree_query .= "UPDATE degreerequirements (degreename, courseid)
+		VALUES ('$degreename', '$courseid');";
 
 		$degree_result = mysqli_query($connection, $degree_query);
 		if (!$degree_result) {
