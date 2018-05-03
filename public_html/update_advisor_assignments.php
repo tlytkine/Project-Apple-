@@ -30,25 +30,24 @@ $faculty_result = mysqli_query($connection,$faculty_query);
 
 
 // Gets current faculty advisors
-$current_advisor = "SELECT DISTINCT personalinfo.firstname, personalinfo.lastname, personalinfo.id
+$current_advisor = "SELECT DISTINCT personalinfo.firstname, personalinfo.lastname, personalinfo.id, advises.hold, advises.degreename 
 					FROM personalinfo, roles, advises
 					WHERE advises.studentid = '$studentid'
 					AND advises.facultyid = personalinfo.id
-					AND roles.role='ADVISOR
+					AND roles.role='ADVISOR'
 					AND roles.id = personalinfo.id';";
 					
 $ca_result = mysqli_query($connection,$current_advisor);
 
+
 $students = mysqli_fetch_assoc($student_result);
 $alladvisors = mysqli_fetch_assoc($faculty_result);
-$currentadvisors = mysqli_fetch_assoc($ca_result);
+$currentadvisor = mysqli_fetch_assoc($ca_result);
 
 
-$faculty_query = "SELECT firstname, lastname, role FROM personalinfo, roles WHERE personalinfo.id = roles.id AND roles.role = 'ADVISOR';";
 
-$faculty_result = mysqli_query($connection, $faculty_query);
 
-echo $faculty_query . "<br>";
+
 
 
 echo "<table>
@@ -64,16 +63,16 @@ echo "<table>
 while($row = mysqli_fetch_assoc($advises_result)){
 	
 	echo "<tr>
-	<td>".$row['studentfirstname']." ".$row['studentlastname']."</td>
-	<td>".$row['studentid']."</td>
-	<td>".$row['hold']."</td>
-	<td>".$row['degreename']."</td>
-	<td>".$row['facultyfirstname']." ".$row['facultylastname']."</td>
-	<td>".$row['facultyid']."</td>
+	<td>".$students['firstname']." ".$students['lastname']."</td>
+	<td>".$students['id']."</td>
+	<td>".$currentadvisor['hold']."</td>
+	<td>".$currentadvisor['degreename']."</td>
+	<td>".$currentadvisor['firstname']." ".$currentadvisor['lastname']."</td>
+	<td>".$currentadvisor['id']."</td>
 	<td><form method='post' action='advisor_assign_submit.php'>
 	<select name ='facultyid'>";
 	while($row1 = mysqli_fetch_assoc($faculty_result)){
-		echo "<option value ='".$row1['facultyid']."'>".$row1['firstname']." ".$row1['lastname']."</option>";
+		echo "<option value ='".$alladvisors['id']."'>".$row1['firstname']." ".$row1['lastname']."</option>";
 	}
 	 echo "</select>
 	<input type='submit' value='Assign'>
