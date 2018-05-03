@@ -19,6 +19,7 @@ $student_query = "SELECT personalinfo.id,firstname,lastname
 				  WHERE roles.role = 'STUDENT';";
 $student_result = mysqli_query($connection, $student_query);
 
+echo $student_query . "<br>";
 
 
 // Gets information about all the faculty advisors
@@ -27,6 +28,7 @@ $faculty_query = "SELECT firstname, lastname, personalinfo.id
 				  WHERE roles.role='ADVISOR';";
 $faculty_result = mysqli_query($connection,$faculty_query);
 
+echo $faculty_query . "<br>";
 
 
 // Gets current faculty advisors
@@ -38,6 +40,8 @@ $current_advisor = "SELECT DISTINCT personalinfo.firstname, personalinfo.lastnam
 					AND roles.id = personalinfo.id';";
 					
 $ca_result = mysqli_query($connection,$current_advisor);
+
+echo $current_advisor . "<br>";
 
 
 $students = mysqli_fetch_assoc($student_result);
