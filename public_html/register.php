@@ -13,15 +13,6 @@
     );
     include 'header.php';
     include 'db-connect.php';
-    /*$servername = "127.0.0.1";
-    $serverusername = "teamA2";
-    $serverpassword = "Ar9x5Y";
-    $dbname = "teamA2";
-    //$script = "../../mysql/bin/tables.sql";
-    $connection = mysqli_connect($servername, $serverusername, $serverpassword, $dbname);
-    if (mysqli_connect_errno()) {
-    	echo "Database connection error: " . mysqli_connect_error();
-    }*/
 ?>
 
 <h2 style="text-align:center"> Search For Classes </h2>
@@ -57,7 +48,7 @@
 
 	/* show all classes */
 	if($all) {
-		$query = "SELECT c.courseid, c.dept, c.coursenum, c.section, p.firstname, p.lastname, c.year, c.semester, c.credithours, c.day, c.time
+		$query = "SELECT c.courseid, c.dept, c.coursenum, c.section, p.firstname, p.lastname, c.year, c.semester, c.credithours, c.day, c.time, c.title
 			FROM courses c, personalinfo p
 			WHERE c.professorid = p.id
 			ORDER BY c.courseid;";
@@ -67,12 +58,12 @@
 
 		if (mysqli_num_rows($result) > 0) {
 			echo "<table>";
-			echo "<tr><th>course id</th><th colspan=2>Course</th><th>Section</th><th colspan=2>Professor</th><th>Year</th><th>Semester</th><th>Credits</th><th>Day</th><th>Time</th><th>Prereq1 Course ID</th><th>Prereq2 Course ID</th>";
+			echo "<tr><th>course id</th><th colspan=2>Course</th><th>Title</th><th>Section</th><th colspan=2>Professor</th><th>Year</th><th>Semester</th><th>Credits</th><th>Day</th><th>Time</th><th>Prereq1 Course ID</th><th>Prereq2 Course ID</th>";
 
 			while($row = mysqli_fetch_assoc($result)) {
 
 				echo "<tr>";
-				echo  "<td>".$row["courseid"]."</td><td>".$row["dept"]."</td><td>".$row["coursenum"]."</td><td>".$row["section"]."</td><td>".$row["firstname"]."</td><td>".$row["lastname"]."</td><td>".$row["year"]."</td><td>".$row["semester"]."</td><td>".$row["credithours"]."</td><td>".$row["day"]."</td><td>".$row["time"]."</td>";
+				echo  "<td>".$row["courseid"]."</td><td>".$row["dept"]."</td><td>".$row["coursenum"]."</td><td>".$row["title"]."</td><td>".$row["section"]."</td><td>".$row["firstname"]."</td><td>".$row["lastname"]."</td><td>".$row["year"]."</td><td>".$row["semester"]."</td><td>".$row["credithours"]."</td><td>".$row["day"]."</td><td>".$row["time"]."</td>";
 
 				/* get any prereqs */
 				$query = "SELECT * FROM prereqs
@@ -96,7 +87,7 @@
 	if($idSearch) {
 		$id = $_POST["search"];
 
-		$query = "SELECT c.courseid, c.dept, c.coursenum, c.section, p.firstname, p.lastname, c.year, c.semester, c.credithours, c.day, c.time
+		$query = "SELECT c.courseid, c.dept, c.coursenum, c.section, p.firstname, p.lastname, c.year, c.semester, c.credithours, c.day, c.time, c.title
 			FROM courses c, personalinfo p
 			WHERE c.professorid = p.id AND c.coursenum = '$id'
 			ORDER BY c.courseid;";
@@ -106,12 +97,12 @@
 
 		if (mysqli_num_rows($result) > 0) {
 			echo "<table>";
-			echo "<tr><th>course id</th><th colspan=2>Course</th><th>Section</th><th colspan=2>Professor</th><th>Year</th><th>Semester</th><th>Credits</th><th>Day</th><th>Time</th><th>Prereq1 Course ID</th><th>Prereq2 Course ID</th>";
+			echo "<tr><th>course id</th><th colspan=2>Course</th><th>Title</th><th>Section</th><th colspan=2>Professor</th><th>Year</th><th>Semester</th><th>Credits</th><th>Day</th><th>Time</th><th>Prereq1 Course ID</th><th>Prereq2 Course ID</th>";
 
 			while($row = mysqli_fetch_assoc($result)) {
 
 				echo "<tr>";
-				echo  "<td>".$row["courseid"]."</td><td>".$row["dept"]."</td><td>".$row["coursenum"]."</td><td>".$row["section"]."</td><td>".$row["firstname"]."</td><td>".$row["lastname"]."</td><td>".$row["year"]."</td><td>".$row["semester"]."</td><td>".$row["credithours"]."</td><td>".$row["day"]."</td><td>".$row["time"]."</td>";
+				echo  "<td>".$row["courseid"]."</td><td>".$row["dept"]."</td><td>".$row["coursenum"]."</td><td>".$row["title"]."</td><td>".$row["section"]."</td><td>".$row["firstname"]."</td><td>".$row["lastname"]."</td><td>".$row["year"]."</td><td>".$row["semester"]."</td><td>".$row["credithours"]."</td><td>".$row["day"]."</td><td>".$row["time"]."</td>";
 
 				/* get any prereqs */
 				$query = "SELECT * FROM prereqs
@@ -138,7 +129,7 @@
 	if($deptSearch) {
 		$dept = $_POST["search"];
 
-		$query = "SELECT c.courseid, c.dept, c.coursenum, c.section, p.firstname, p.lastname, c.year, c.semester, c.credithours, c.day, c.time
+		$query = "SELECT c.courseid, c.dept, c.coursenum, c.section, p.firstname, p.lastname, c.year, c.semester, c.credithours, c.day, c.time, c.title
 			FROM courses c, personalinfo p
 			WHERE c.professorid = p.id AND c.dept = '$dept'
 			ORDER BY c.courseid;";
@@ -148,12 +139,12 @@
 
 		if (mysqli_num_rows($result) > 0) {
 			echo "<table>";
-			echo "<tr><th>course id</th><th colspan=2>Course</th><th>Section</th><th colspan=2>Professor</th><th>Year</th><th>Semester</th><th>Credits</th><th>Day</th><th>Time</th><th>Prereq1 Course ID</th><th>Prereq2 Course ID</th>";
+			echo "<tr><th>course id</th><th colspan=2>Course</th><th>Title</th><th>Section</th><th colspan=2>Professor</th><th>Year</th><th>Semester</th><th>Credits</th><th>Day</th><th>Time</th><th>Prereq1 Course ID</th><th>Prereq2 Course ID</th>";
 
 			while($row = mysqli_fetch_assoc($result)) {
 
 				echo "<tr>";
-				echo  "<td>".$row["courseid"]."</td><td>".$row["dept"]."</td><td>".$row["coursenum"]."</td><td>".$row["section"]."</td><td>".$row["firstname"]."</td><td>".$row["lastname"]."</td><td>".$row["year"]."</td><td>".$row["semester"]."</td><td>".$row["credithours"]."</td><td>".$row["day"]."</td><td>".$row["time"]."</td>";
+				echo  "<td>".$row["courseid"]."</td><td>".$row["dept"]."</td><td>".$row["coursenum"]."</td><td>".$row["title"]."</td><td>".$row["section"]."</td><td>".$row["firstname"]."</td><td>".$row["lastname"]."</td><td>".$row["year"]."</td><td>".$row["semester"]."</td><td>".$row["credithours"]."</td><td>".$row["day"]."</td><td>".$row["time"]."</td>";
 
 				/* get any prereqs */
 				$query = "SELECT * FROM prereqs
