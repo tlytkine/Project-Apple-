@@ -68,7 +68,7 @@ include 'header.php';
 			echo "<h2>".$row["firstname"]." ".$row["lastname"]."</h2>";
 
 			/* get student grade information */
-			$query = "SELECT t.studentid, t.dept, t.coursenum, t.grade, t.semester, t.year
+			$query = "SELECT t.studentid, t.dept, t.coursenum, t.grade, t.semester, t.year, t.title
 				FROM transcripts t, personalinfo p, users u
 				WHERE p.firstname = '$fname'  AND p.lastname = '$lname' AND p.id = t.studentid
                         	AND u.email = '$_SESSION[email]' AND u.id = t.professorid
@@ -79,11 +79,11 @@ include 'header.php';
 			/* display student's current grade information with option to change */
 			if (mysqli_num_rows($result) > 0){
 				echo "<table>";
-				echo "<tr><th colspan=2>Course</th><th>Semester</th><th>Year</th><th>Grade</th><th></th></tr>";
+				echo "<tr><th colspan=2>Course</th><th>Title</th><th>Semester</th><th>Year</th><th>Grade</th><th></th></tr>";
 				while ($row = mysqli_fetch_assoc($result)){
 					echo "<tr>";
 
-					echo "<td>".$row["dept"]."</td><td>".$row["coursenum"]."</td><td>".$row["semester"]."</td><td>".$row["year"]."</td>";
+					echo "<td>".$row["dept"]."</td><td>".$row["coursenum"]."</td><td>".$row["title"]."</td><td>".$row["semester"]."</td><td>".$row["year"]."</td>";
 					echo "<td><form method='post' action='change-student-grades.php'>";
 					echo "<input type='text' name='new_grade' value=".$row["grade"].">";
 					echo "</td>";
@@ -124,7 +124,7 @@ include 'header.php';
 		}
 
 		/* get student grade information */
-		$query = "SELECT t.studentid, t.dept, t.coursenum, t.grade, t.semester, t.year
+		$query = "SELECT t.studentid, t.dept, t.coursenum, t.grade, t.semester, t.year, t.title
 			FROM transcripts t, users u
 			WHERE t.studentid = '$id' AND u.email = '$_SESSION[email]' AND u.id = t.professorid
 			ORDER BY t.year, t.semester DESC;";
@@ -134,11 +134,11 @@ include 'header.php';
 		/* display student's current grade information with option to change */
 		if (mysqli_num_rows($result) > 0){
 			echo "<table>";
-			echo "<tr><th colspan=2>Course</th><th>Semester</th><th>Year</th><th>Grade</th><th></th></tr>";
+			echo "<tr><th colspan=2>Course</th><th>Title</th><th>Semester</th><th>Year</th><th>Grade</th><th></th></tr>";
 			while ($row = mysqli_fetch_assoc($result)){
 				echo "<tr>";
 
-				echo "<td>".$row["dept"]."</td><td>".$row["coursenum"]."</td><td>".$row["semester"]."</td><td>".$row["year"]."</td>";
+				echo "<td>".$row["dept"]."</td><td>".$row["coursenum"]."</td><td>".$row["title"]."</td><td>".$row["semester"]."</td><td>".$row["year"]."</td>";
 				echo "<td><form method='post' action='change-student-grades.php'>";
 				echo "<input type='text' name='new_grade' value='".$row["grade"]."'>";
 				echo "</td>";
