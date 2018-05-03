@@ -24,6 +24,10 @@ DROP TABLE IF EXISTS admissionsapplication CASCADE;
 
 DROP TABLE IF EXISTS personalinfo CASCADE;
 
+DROP TABLE IF EXISTS alumnipersonalinfo CASCADE;
+
+DROP TABLE IF EXISTS applicantpersonalinfo CASCADE;
+
 DROP TABLE IF EXISTS roles CASCADE;
 
 DROP TABLE IF EXISTS users CASCADE;
@@ -51,6 +55,27 @@ CREATE TABLE personalinfo (
     FOREIGN KEY (id) REFERENCES users(id)
 );
 
+CREATE TABLE alumnipersonalinfo (
+    id                INT PRIMARY KEY,
+    firstname         VARCHAR(30),
+    lastname          VARCHAR(30),
+    dob               DATE,
+    address           VARCHAR (100),
+    graduationyear    INT  
+    ssn               VARCHAR (11),
+    FOREIGN KEY (id) REFERENCES users(id)
+);
+
+CREATE TABLE applicantpersonalinfo (
+    id                INT PRIMARY KEY,
+    firstname         VARCHAR(30),
+    lastname          VARCHAR(30),
+    dob               DATE,
+    address           VARCHAR (100),
+    applicantyear     INT 
+    ssn               VARCHAR (11),
+    FOREIGN KEY (id) REFERENCES users(id)
+);
 
 CREATE TABLE admissionsapplication (
     id                  INT PRIMARY KEY AUTO_INCREMENT,
@@ -186,6 +211,11 @@ CREATE TABLE gradecalc (
     grade           VARCHAR(2) PRIMARY KEY,
     qualitypoints   DECIMAL(4,3)
 );
+
+
+
+
+
 
 INSERT INTO users (email, password, id) VALUES ('admin@gwu.edu', '$2y$10$K7xpP4XPPWkgYJ0/I4XOtehbRigHUqpmXer99/Ftx1fERDU.JZObC', 1);
 INSERT INTO roles (id, role) VALUES (1, "ADMIN");

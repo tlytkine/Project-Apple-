@@ -68,7 +68,7 @@ include 'header.php';
 <?php endif; ?>
 
 <?php if (in_array("ALUMNI", $_SESSION["roles"])) : ?>
-<a href='view-info.php'>Update Personal Information</a> <br />
+<a href='view-alumni-info.php'>Update Personal Information</a> <br />
 <a href='view-personal-transcript.php'>View Transcript</a> <br />
 <?php endif; ?>
 
