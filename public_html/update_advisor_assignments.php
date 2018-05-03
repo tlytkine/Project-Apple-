@@ -37,7 +37,7 @@ $current_advisor = "SELECT DISTINCT personalinfo.firstname, personalinfo.lastnam
 					WHERE advises.studentid = '$studentid'
 					AND advises.facultyid = personalinfo.id
 					AND roles.role='ADVISOR'
-					AND roles.id = personalinfo.id';";
+					AND roles.id = personalinfo.id;";
 					
 $ca_result = mysqli_query($connection,$current_advisor);
 
