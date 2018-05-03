@@ -127,7 +127,7 @@ include 'header.php';
 		/* display student's current grade information with option to change */
 		if (mysqli_num_rows($result) > 0){
 			echo "<table>";
-			echo "<tr><th colspan=2>Course</th><th>Title</th>th>Semester</th><th>Year</th><th>Grade</th><th></th></tr>";
+			echo "<tr><th colspan=2>Course</th><th>Title</th><th>Semester</th><th>Year</th><th>Grade</th><th></th></tr>";
 			while ($row = mysqli_fetch_assoc($result)){
 				echo "<tr>";
 
