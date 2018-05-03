@@ -8,19 +8,40 @@
 <h1>View / Edit Faculty Advisor</h1>
 <?php 
 $id = $_SESSION["id"];
-
-
-$advises_query = "SELECT P1.firstname AS studentfirstname, P1.lastname AS studentlastname, advises.studentid, advises.hold, advises.degreename,
-P2.firstname AS facultyfirstname, P2.lastname AS facultylastname, advises.facultyid FROM advises, roles AS R1, roles AS R2, personalinfo AS P1, personalinfo AS P2 WHERE R1.id = advises.studentid AND R1.role='STUDENT' AND R2.id = advises.facultyid AND R2.role='ADVISOR' AND P1.id=advises.studentid AND P2.id=advises.facultyid;";
+$studentid = $_POST["studentid"];
 
 
 
-$advises_result = mysqli_query($connection, $advises_query);
 
-echo $advises_query . "<br>";
+// Gets information about a student
+$student_query = "SELECT personalinfo.id,firstname,lastname
+				  FROM personalinfo, roles 
+				  WHERE roles.role = 'STUDENT';";
+$student_result = mysqli_query($connection, $student_query);
 
 
 
+// Gets information about all the faculty advisors
+$faculty_query = "SELECT firstname, lastname, personalinfo.id
+				  FROM personalinfo, roles
+				  WHERE roles.role='ADVISOR';";
+$faculty_result = mysqli_query($connection,$faculty_query);
+
+
+
+// Gets current faculty advisors
+$current_advisor = "SELECT DISTINCT personalinfo.firstname, personalinfo.lastname, personalinfo.id
+					FROM personalinfo, roles, advises
+					WHERE advises.studentid = '$studentid'
+					AND advises.facultyid = personalinfo.id
+					AND roles.role='ADVISOR
+					AND roles.id = personalinfo.id';";
+					
+$ca_result = mysqli_query($connection,$current_advisor);
+
+$students = mysqli_fetch_assoc($student_result);
+$alladvisors = mysqli_fetch_assoc($faculty_result);
+$currentadvisors = mysqli_fetch_assoc($ca_result);
 
 
 $faculty_query = "SELECT firstname, lastname, role FROM personalinfo, roles WHERE personalinfo.id = roles.id AND roles.role = 'ADVISOR';";
@@ -56,7 +77,7 @@ while($row = mysqli_fetch_assoc($advises_result)){
 	}
 	 echo "</select>
 	<input type='submit' value='Assign'>
-	<input type='hidden' name='gwid' value ='".$row['studentid']."'>
+	<input type='hidden' name='studentid' value ='".$row['studentid']."'>
 	</form></td>
 	</tr>
 	</table>";
