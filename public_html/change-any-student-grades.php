@@ -101,7 +101,7 @@ include 'header.php';
 
 		    	}
 			else {
-				echo "You do not have this student";
+				echo "This student has not taken any classes";
 			}
 		}
 	}
