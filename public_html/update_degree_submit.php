@@ -23,7 +23,7 @@ $id = $_SESSION["id"];
 		$degree_html .= "</select><br><br>";
 
 		echo "<h2>Enter Degree Information.</h2><br>";
-		echo "<form method='post' action='user.php'>
+		echo "<form method='post'>
 		<p>Degree Name<p><input type='text' name='degreename'>
 		<p>Core Course 1<p><input type='text' name='core1'>
 		<p>Core Course 2<p><input type='text' name='core2'>
