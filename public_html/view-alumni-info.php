@@ -137,7 +137,7 @@
 				echo'<td>' . $row["lastname"] . '</td>';
 				echo'<td>' . $row["address"] . '</td>';
 				echo'<td>' . $row["email"] . '</td>';
-				echo'<td>' . $row["graduationyear"] . '</td>;
+				echo'<td>' . $row["graduationyear"] . '</td>';
 				echo '</tr>';
 			}
 			echo '</table><br />';
