@@ -117,7 +117,7 @@ include 'header.php';
 		$row = mysqli_fetch_assoc($result);
 
 		/* get student grade information */
-		$query = "SELECT t.studentid, t.dept, t.coursenum, t.grade, t.semester, t.year
+		$query = "SELECT t.studentid, t.dept, t.coursenum, t.grade, t.semester, t.year, t.title
 			FROM transcripts t
 			WHERE t.studentid = '$id'
 			ORDER BY t.year, t.semester DESC;";
@@ -127,11 +127,11 @@ include 'header.php';
 		/* display student's current grade information with option to change */
 		if (mysqli_num_rows($result) > 0){
 			echo "<table>";
-			echo "<tr><th colspan=2>Course</th><th>Semester</th><th>Year</th><th>Grade</th><th></th></tr>";
+			echo "<tr><th colspan=2>Course</th><th>Title</th>th>Semester</th><th>Year</th><th>Grade</th><th></th></tr>";
 			while ($row = mysqli_fetch_assoc($result)){
 				echo "<tr>";
 
-				echo "<td>".$row["dept"]."</td><td>".$row["coursenum"]."</td><td>".$row["semester"]."</td><td>".$row["year"]."</td>";
+				echo "<td>".$row["dept"]."</td><td>".$row["coursenum"]."</td><td>".$row["title"]."</td><td>".$row["semester"]."</td><td>".$row["year"]."</td>";
 				echo "<td><form method='post' action='change-any-student-grades.php'>";
 				echo "<input type='text' name='new_grade' value='".$row["grade"]."'>";
 				echo "</td>";
