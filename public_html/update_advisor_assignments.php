@@ -19,7 +19,6 @@ if($assign1){
 		$advisor_update = "UPDATE advises SET facultyid = $facultyidother WHERE 
 		studentid = $studentidother;";
 		$advisor_result = mysqli_query($connection, $advisor_update);
-		echo $advisor_update; 
 
 		$current_students_result = mysqli_query($connection, $current_students);
 		$facultyresult = mysqli_query($connection,$facultyquery);
@@ -37,7 +36,6 @@ if($assign2){
 		$advisor_update = "UPDATE advises SET facultyid = $facultyidnew WHERE 
 		studentid = $studentidnew;";
 		$advisor_result = mysqli_query($connection, $advisor_update);
-		echo $advisor_update; 
 
 		$current_students_result = mysqli_query($connection, $current_students);
 		$facultyresult = mysqli_query($connection,$facultyquery);
