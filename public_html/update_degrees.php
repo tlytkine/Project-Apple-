@@ -291,17 +291,18 @@ echo "
 
 	//Update Degree Requirements Code
 	if (strcmp($_POST['action'], 'update_degree_requirements') == 0) {
-		$degree_query = "SELECT degreerequirements.degreename, degreerequirements.courseid, courses.dept, courses.coursenum, courses.title FROM degreerequirements, courses WHERE degreerequirements.courseid = courses.courseid;";
-		$degree_result = mysqli_query($connection, $degree_query);
+		$degree_name_query = "SELECT DISTINCT degreerequirements.degreename FROM degreerequirements, courses WHERE degreerequirements.courseid = courses.courseid;";
+		$degree_name_result = mysqli_query($connection, $degree_name_query);
 		echo "<h2>Update Core Course</h2>";
 		echo "<form method='post'>
 		<p>Degree Name<p><select name='degreename'>";
-		while($row=mysqli_fetch_assoc($degree_result)){
+		while($row=mysqli_fetch_assoc($degree_name_result)){
 			echo "<option value='".$row['degreename']."'>";
 			echo $row['degreename'];
 			echo "</option>";
 		}
 		echo "</select>";
+		$degree_query = "SELECT degreerequirements.degreename, degreerequirements.courseid, courses.dept, courses.coursenum, courses.title FROM degreerequirements, courses WHERE degreerequirements.courseid = courses.courseid;";
 		$degree_result = mysqli_query($connection, $degree_query);
 		echo "<p>Current Course<p><select name='currentcourseid'>";
 		while($row=mysqli_fetch_assoc($degree_result)){
