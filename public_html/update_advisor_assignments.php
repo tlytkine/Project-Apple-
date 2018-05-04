@@ -32,6 +32,8 @@ if($assign){
 	$facultyresult = mysqli_query($connection,$facultyquery);
 	$result = mysqli_query($connection, $query);
 
+	echo $advisor_update; 
+
 	if($advisor_result){
 		echo "Advisor sucessfully assigned!";
 	}
