@@ -62,30 +62,6 @@ if((isset($_POST['degreename']))&&(isset($_POST['currentcourseid']))&&(isset($_P
 		}
 	}
 
-
-	// Add new course 
-	if (strcmp($_POST['action'], 'add_new_course') == 0) {
-		$degreenamecheck = isset($_POST['degreenameadd']) ? $_POST['degreenameadd'] : false;
-		$courseidcheck = isset($_POST['courseidadd']) ? $_POST['courseidadd'] : false;
-
-		if($degreenamecheck && $courseidcheck){
-			$degreename = $_POST['degreenameadd'];
-			$courseid = $_POST['courseidadd'];
-
-			$add_new_course_query = "INSERT INTO degreerequirements(degreename,courseid)
-			VALUES('$degreename',$courseid);";
-			$add_new_course_result = mysqli_query($connection, $add_new_course_query);
-			if($add_new_course_result){
-				$add_new_course_success = "Course added successfully!";
-			}
-			else {
-				$add_new_course_error = "Error adding course.";
-			}
-		}
-		else {
-			$add_new_course_invalid_input = "Make sure you are entering a valid degree name and courseid.";
-		}
-	}
 	// delete course
 	if (strcmp($_POST['action'], 'delete') == 0) {
 		
@@ -184,13 +160,6 @@ echo "
 &nbsp;&nbsp;
 <td>
 <form method='post'>
-<input type='hidden' name='action' value='add_course'>
-<input type='submit' value='Add Course'>
-</form>
-</td>
-&nbsp;&nbsp;
-<td>
-<form method='post'>
 <input type='hidden' name='action' value='edit_degree_name'>
 <input type='submit' value='Update Degree Name'>
 </form>
@@ -262,32 +231,6 @@ echo "
 		</form>";
 
 	}
-	if(strcmp($_POST['action'], 'add_course')== 0){
-		$degree_name_query = "SELECT degreename FROM degreerequirements;";
-		$degree_name_result = mysqli_query($connection,$degree_name_query);
-		echo "<h2>Add Course</h2>";
-		echo "<form method='post'>
-		<p>Degree Name</p>
-		<select name='degreenameadd'>";
-		while($row=mysqli_fetch_assoc($degree_name_result)){
-			echo "<option value='".$row['degreename']."'>";
-			echo $row['degreename']." ";
-			echo "</option>";
-		}
-		echo "</select>";
-		$courses_query = "SELECT courseid, dept, coursenum, title FROM courses;";
-		$courses_result = mysqli_query($connection,$courses_query);
-		echo "<p>Course</p><select name='courseidadd>";
-		while($row=mysqli_fetch_assoc($courses_result)){
-			echo "<option value='".$row['courseid']."'>";
-			echo $row['dept']." ".$row['coursenum']."-".$row['title'];
-			echo "</option>";
-		}
-		echo "</select>";
-		echo "<input type='hidden' name='action' value='add_new_course'><br><br>
-		<input type='submit' name='submit' value='Add Course'>
-		</form>";
-	}
 
 	//Update Degree Requirements Code
 	if (strcmp($_POST['action'], 'update_degree_requirements') == 0) {
@@ -334,16 +277,6 @@ echo "
 	}
 	else if($update_degree_invalid_input){
 		echo "<br>" . $update_degree_invalid_input . "<br>";
-	}
-	// Add new course notifications 
-	else if($add_new_course_success){
-		echo "<br>" . $add_new_course_success . "<br>";
-	}
-	else if($add_new_course_error){
-		echo "<br>" . $add_new_course_degree_error . "<br>";
-	}
-	else if($add_new_course_invalid_input){
-		echo "<br>" . $add_new_course_invalid_input . "<br>";
 	}
 	// Update degree name notifications 
 	else if($update_degree_name_success){
