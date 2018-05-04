@@ -336,7 +336,7 @@ INSERT INTO transcripts VALUES('9', 'CS', '6221', '3', '2017', 'fall', 'B', 'Sof
 INSERT INTO transcripts VALUES('9', 'CS', '6461', '4', '2017', 'fall', 'B', 'Computer Architecture');
 INSERT INTO transcripts VALUES('9', 'CS', '6212', '5', '2017', 'fall', 'B', 'Algorithims');
 INSERT INTO transcripts VALUES('9', 'CS', '6232', '7', '2017', 'fall', 'B', 'Networks 1');
-INSERT INTO transcripts VALUES('9', 'CS', '6241', '4', '2018', 'fall', 'B', 'Databases 1');
+INSERT INTO transcripts VALUES('9', 'CS', '6241', '4', '2017', 'fall', 'B', 'Databases 1');
 INSERT INTO transcripts VALUES('9', 'CS', '6233', '3', '2018', 'spring', 'B', 'Networks 2');
 INSERT INTO transcripts VALUES('9', 'CS', '6242', '5', '2018', 'spring', 'B', 'Databases 2');
 INSERT INTO transcripts VALUES('9', 'EE', '6244', '4', '2018', 'spring', 'C', 'Information Theory');
