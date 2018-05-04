@@ -19,9 +19,7 @@ $id = $_SESSION["id"];
 	// edit degree
 	if (strcmp($_POST['action'], 'update_degree') == 0) {
 
-		if(isset($_POST['degreename'])&&
-			(isset($_POST['currentcourseid'])&&$_POST['newcourseid'])){
-
+if((isset($_POST['degreename']))&&(isset($_POST['currentcourseid']))&&(isset($_POST['newcourseid']))){
 			$degreename = $_POST['degreename'];
 			$currentcourseid = $_POST['currentcourseid'];
 			$newcourseid = $_POST['newcourseid'];
@@ -213,7 +211,7 @@ echo "
 		echo "<h2>Update Degree Name</h2>";
 		echo "<form method='post'>
 		<p>Select Degree</p><select name='currentdegreename'>";
-		while($row=mysqli_fetch_assoc($degreeresult)){
+		while($row=mysqli_fetch_assoc($degree_result)){
 			echo "option value='".$row['degreename']."'>";
 			echo $row['degreename'];
 			echo "</option>";
@@ -265,7 +263,7 @@ echo "
 
 	}
 	if(strcmp($_POST['action'], 'add_course')== 0){
-		$degree_name_query = "SELECT DISTINCT degreename FROM degreerequirements;";
+		$degree_name_query = "SELECT degreename FROM degreerequirements;";
 		$degree_name_result = mysqli_query($connection,$degree_name_query);
 		echo "<h2>Add Course</h2>";
 		echo "<form method='post'>
@@ -293,11 +291,12 @@ echo "
 
 	//Update Degree Requirements Code
 	if (strcmp($_POST['action'], 'update_degree_requirements') == 0) {
+		$degree_query = "SELECT degreerequirements.degreename, degreerequirements.courseid, courses.dept, courses.coursenum, courses.title FROM degreerequirements, courses WHERE degreerequirements.courseid = courses.courseid;";
 		$degree_result = mysqli_query($connection, $degree_query);
 		echo "<h2>Update Core Course</h2>";
 		echo "<form method='post'>
 		<p>Degree Name<p><select name='degreename'>";
-		while($row=mysqli_fetch_assoc($degreeresult)){
+		while($row=mysqli_fetch_assoc($degree_result)){
 			echo "option value='".$row['degreename']."'>";
 			echo $row['degreename'];
 			echo "</option>";
@@ -305,7 +304,7 @@ echo "
 		echo "</select>";
 		$degree_result = mysqli_query($connection, $degree_query);
 		echo "<p>Current Course<p><select name='currentcourseid'>";
-		while($row=mysqli_fetch_assoc($degreeresult)){
+		while($row=mysqli_fetch_assoc($degree_result)){
 			echo "option value='".$row['courseid']."'>";
 			echo $row['dept']." ".$row['coursenum']."-".$row['title'];
 			echo "</option>";
