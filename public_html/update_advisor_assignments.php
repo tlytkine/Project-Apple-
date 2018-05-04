@@ -39,13 +39,19 @@ while($row = mysqli_fetch_assoc($result)){
 	<td><form method='post' action='advisor_assign_submit.php'>
 	<select name ='facultyid'>";
 
-	echo "<option value ='".$row['facultyid']."'>".$row['facultyfirstname']." ".$row['facultylastname']."</option>
-	</select>
-	<input type='submit' value='Assign'>
-	<input type='hidden' name='studentid' value ='".$row['studentid']."'>
-	</form></td>
-	</tr>
-	</table>";
+	$facultyquery = "SELECT firstname AS facultyfirstname,lastname AS facultylastname,personalinfo.id AS facultyid FROM personalinfo,roles WHERE personalinfo.id = roles.id AND roles.role='ADVISOR';";
+	$facultyresult = mysqli_query($connection,$facultyquery);
+
+	while($row1 = mysqli_fetch_assoc($facultyresult)){
+
+		echo "<option value ='".$row1['facultyid']."' name='facultyid'>".$row1['facultyfirstname']." ".$row1['facultylastname']."</option>
+		</select>
+		<input type='submit' value='Assign'>
+		<input type='hidden' name='studentid' value ='".$row['studentid']."'>
+		</form></td>";
+	}
+		echo "</tr>
+		</table>";
 }
 
 ?>
