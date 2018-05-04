@@ -125,7 +125,7 @@ $id = $_SESSION["id"];
 
 			} 
 			else {
-				$add_degree_failure = "This degree and its core courses already exist in the system. To edit a degree or to add a new course, use the edit degree requirements button and add course buttons respectively.";
+				$add_degree_failure = "This degree and its core courses already exist in the system. <br> To add or delete new courses for an existing degree, use the add degree and add course buttons respectively.";
 			}
 		}
 		else {
