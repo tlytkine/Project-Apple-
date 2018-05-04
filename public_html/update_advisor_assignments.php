@@ -25,8 +25,8 @@ if($assign){
 		}
 	}
 
-	$advisor_update = "UPDATE advises SET facultyid = '$facultyid' WHERE 
-	studentid = '$studentid';";
+	$advisor_update = "UPDATE advises SET facultyid =$facultyid WHERE 
+	studentid = $studentid;";
 	$advisor_result = mysqli_query($connection, $advisor_update);
 	$current_students_result = mysqli_query($connection, $current_students);
 	$facultyresult = mysqli_query($connection,$facultyquery);
