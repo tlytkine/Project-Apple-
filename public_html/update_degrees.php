@@ -67,9 +67,9 @@ $id = $_SESSION["id"];
 
 	// Add new course 
 	if (strcmp($_POST['action'], 'add_new_course') == 0) {
-		if(isset($_POST['degreename']) && isset($_POST['courseid'])){
-			$degreename = $_POST['degreename'];
-			$courseid = $_POST['courseid'];
+		if(isset($_POST['degreenameadd']) && isset($_POST['courseidadd'])){
+			$degreename = $_POST['degreenameadd'];
+			$courseid = $_POST['courseidadd'];
 
 			$add_new_course_query = "INSERT INTO degreerequirements(degreename,courseid)
 			VALUES('$degreename',$courseid);";
@@ -269,7 +269,7 @@ echo "
 		echo "<h2>Add Course</h2>";
 		echo "<form method='post'>
 		<p>Degree Name</p>
-		<select name='degreename'>";
+		<select name='degreenameadd'>";
 		while($row=mysqli_fetch_assoc($degree_name_result)){
 			echo "<option value='".$row['degreename']."'>";
 			echo $row['degreename']." ";
@@ -278,14 +278,14 @@ echo "
 		echo "</select>";
 		$courses_query = "SELECT courseid, dept, coursenum, title FROM courses;";
 		$courses_result = mysqli_query($connection,$courses_query);
-		echo "<p>Course</p><select name='courseid>";
+		echo "<p>Course</p><select name='courseidadd>";
 		while($row=mysqli_fetch_assoc($courses_result)){
 			echo "<option value='".$row['courseid']."'>";
 			echo $row['dept']." ".$row['coursenum']."-".$row['title'];
 			echo "</option>";
 		}
 		echo "</select>
-		<input type='hidden' name='action' value='add_new_course'><br>
+		<input type='hidden' name='action' value='add_new_course'><br><br>
 		<input type='submit' name='submit' value='Add Course'>
 		</form>";
 	}
