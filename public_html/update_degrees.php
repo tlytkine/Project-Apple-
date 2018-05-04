@@ -133,32 +133,40 @@ $id = $_SESSION["id"];
 		}
 	}
 
-echo "<br><h2>Degrees</h2>";
-$degree_query = "SELECT degreename, courseid
-FROM degreerequirements;";
+	echo "<br><h2>Degrees</h2>";
+	$degree_query = "SELECT degreename, courseid
+	FROM degreerequirements;";
 
-$degree_result = mysqli_query($connection, $degree_query);
+	$degree_result = mysqli_query($connection, $degree_query);
 
-echo "<table>
-<tr>
-<th>Degree Name</th>
-<th>Core Courses</th>
-<th>Remove Course</th>
-</tr>";
+	if($degree_result){
 
-while($row = mysqli_fetch_assoc($degree_result)){
-	echo "<tr>
-	<td>".$row['degreename']."</td>
-	<td>&nbsp;&nbsp;".$row['courseid']."</td>
-	<td><form method='post'>
-	<input type='hidden' name='action' value='delete'>
-	<input type='hidden' name='degreename' value='".$row['degreename']."'>
-	<input type='hidden' name='courseid' value='".$row['courseid']."'>
-	<input type='submit' value='Remove'>
-	</form></td> 
-	</tr>";
-}
-echo "</table>";
+		echo "<table>
+		<tr>
+		<th>Degree Name</th>
+		<th>Core Courses</th>
+		<th>Remove Course</th>
+		</tr>";
+
+		while($row = mysqli_fetch_assoc($degree_result)){
+			echo "<tr>
+			<td>".$row['degreename']."</td>
+			<td>&nbsp;&nbsp;".$row['courseid']."</td>
+			<td><form method='post'>
+			<input type='hidden' name='action' value='delete'>
+			<input type='hidden' name='degreename' value='".$row['degreename']."'>
+			<input type='hidden' name='courseid' value='".$row['courseid']."'>
+			<input type='submit' value='Remove'>
+			</form></td> 
+			</tr>";
+		}
+		echo "</table>";
+	}
+	else {
+		echo "There are currently no degrees in the system.";
+	}
+
+
 
 echo "
 <br>
@@ -177,14 +185,8 @@ echo "
 <input type='hidden' name='action' value='add_course'>
 <input type='submit' value='Add Course'>
 </td>
-&nbsp;&nbsp;&nbsp;
-<td>
-<form method='post'>
-<input type='hidden' name='action' value='update_degree_requirements'>
-<input type='submit' value='Edit Core Course'>
-</form>
-</td>
-&nbsp;&nbsp;&nbsp;
+</tr>
+<tr>
 <td>
 <form method='post'>
 <input type='hidden' name='action' value='edit_degree_name'>
@@ -192,6 +194,12 @@ echo "
 </form>
 </td>
 &nbsp;&nbsp;&nbsp;
+<td>
+<form method='post'>
+<input type='hidden' name='action' value='update_degree_requirements'>
+<input type='submit' value='Update Core Course'>
+</form>
+</td>
 </tr>
 </table>";
 
