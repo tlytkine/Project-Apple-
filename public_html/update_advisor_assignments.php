@@ -126,12 +126,12 @@ while($row = mysqli_fetch_assoc($current_students_result)){
 	$facultyquery = "SELECT firstname AS facultyfirstname,lastname AS facultylastname,personalinfo.id AS facultyid FROM personalinfo,roles WHERE personalinfo.id = roles.id AND roles.role='ADVISOR';";
 	$facultyresult = mysqli_query($connection,$facultyquery);
 
-	$studentidnew = $row['studentid'];
+	$studentidnew = $row['id'];
 
 	while($row1 = mysqli_fetch_assoc($facultyresult)){
 
 		echo "<option value ='".$row1['facultyid']."' name='facultyidnew'>".$row1['facultyfirstname']." ".$row1['facultylastname']."</option>
-		<input type='hidden' name='studentidnew' value ='".$studentidnew."'>
+		<input type='hidden' name='studentidnew' value ='$studentidnew'>
 		<input type='hidden' name='facultyidnew' value ='".$row1['facultyid']."'>
 		</select>
 		<input type='submit' value='Assign' name='assign2'>
