@@ -40,15 +40,15 @@ while($row = mysqli_fetch_assoc($degree_result)){
 echo "</table>";
 
 echo "<table>
-	<tr><th>";
+	<tr><td>";
 echo "<form method='post'>
 	<input type='hidden' name='action' value='input_degree'>
 	<input type='submit' value='Add Degree'>
-	</form></th>";
-echo "<th><form method='post'>
+	</form></td>";
+echo "<td><form method='post'>
 	<input type='hidden' name='action' value='edit_degree_requirements'>
 	<input type='submit' value='Edit Degree Requirements'>
-	</form></th></tr></table>";
+	</form></td></tr></table>";
 
 
 	if (strcmp($_POST['action'], 'input_degree') == 0) {
