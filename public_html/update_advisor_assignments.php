@@ -84,7 +84,7 @@ while($row = mysqli_fetch_assoc($result)){
 
 		echo "<option value ='".$row1['facultyid']."' name='facultyidother'>".$row1['facultyfirstname']." ".$row1['facultylastname']."</option>
 		<input type='hidden' name='studentidother' value ='".$row['studentid']."'>
-		<input type='hidden' name='facultyidother' value ='".$row1['facultyidother']."'>
+		<input type='hidden' name='facultyidother' value ='".$row1['facultyid']."'>
 		</select>
 
 		<input type='submit' value='assign' name='assign1'>
