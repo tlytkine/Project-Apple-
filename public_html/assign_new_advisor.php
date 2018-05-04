@@ -40,7 +40,8 @@ echo "<table>
 <th>Student ID</th>
 <th>Hold</th>
 <th>Degree Name</th>
-<th>&nbsp;&nbsp;&nbsp;Assign</th>";
+<th>&nbsp;&nbsp;&nbsp;Assign</th>
+</tr>";
 
 while($row = mysqli_fetch_assoc($current_students_result)){
 	
