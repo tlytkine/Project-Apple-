@@ -8,40 +8,44 @@
 <h1>View / Edit Faculty Advisor</h1>
 <?php 
 $id = $_SESSION["id"];
-$assign = $_POST['assign'];
+$assign1 = $_POST['assign1'];
+$assign2 = $_POST['assign2'];
 
-if($assign){
+if($assign1){
 
-	if($_POST['facultyidnew']){
-		$facultyidnew = $_POST['facultyidnew'];
-		if($_POST['studentidnew']){
-			$studentidnew = $_POST['studentidnew'];
-		}
-			$advisor_update = "UPDATE advises SET facultyid = $facultyidnew WHERE 
-			studentid = $studentidnew;";
-			$advisor_result = mysqli_query($connection, $advisor_update);
-			echo $advisor_update; 
-	}
-	else if($_POST['facultyidother']){
+
 		$facultyidother = $_POST['facultyidother'];
-		if($_POST['studentidother']){
-			$studentidother = $_POST['studentidother'];
-		}
+		$studentidother = $_POST['studentidother'];
 		$advisor_update = "UPDATE advises SET facultyid = $facultyidother WHERE 
 		studentid = $studentidother;";
 		$advisor_result = mysqli_query($connection, $advisor_update);
 		echo $advisor_update; 
-	}
 
-	$current_students_result = mysqli_query($connection, $current_students);
-	$facultyresult = mysqli_query($connection,$facultyquery);
-	$result = mysqli_query($connection, $query);
+		$current_students_result = mysqli_query($connection, $current_students);
+		$facultyresult = mysqli_query($connection,$facultyquery);
+		$result = mysqli_query($connection, $query);
 
-	
+		if($advisor_result){
+			echo "Advisor sucessfully assigned!";
+		}
+}
 
-	if($advisor_result){
-		echo "Advisor sucessfully assigned!";
-	}
+if($assign2){
+
+		$facultyidnew = $_POST['facultyidnew'];
+		$studentidnew = $_POST['studentidnew'];
+		$advisor_update = "UPDATE advises SET facultyid = $facultyidnew WHERE 
+		studentid = $studentidnew;";
+		$advisor_result = mysqli_query($connection, $advisor_update);
+		echo $advisor_update; 
+
+		$current_students_result = mysqli_query($connection, $current_students);
+		$facultyresult = mysqli_query($connection,$facultyquery);
+		$result = mysqli_query($connection, $query);
+
+		if($advisor_result){
+			echo "Advisor sucessfully assigned!";
+		}
 }
 
 
@@ -80,7 +84,7 @@ while($row = mysqli_fetch_assoc($result)){
 
 		echo "<option value ='".$row1['facultyid']."' name='facultyidother'>".$row1['facultyfirstname']." ".$row1['facultylastname']."</option>
 		</select>
-		<input type='submit' value='Assign'>
+		<input type='submit' value='assign' name='assign1'>
 		<input type='hidden' name='studentidother' value ='".$row['studentid']."'>
 		</form></td>";
 	}
@@ -124,7 +128,7 @@ while($row = mysqli_fetch_assoc($current_students_result)){
 
 		echo "<option value ='".$row1['facultyid']."' name='facultyidnew'>".$row1['facultyfirstname']." ".$row1['facultylastname']."</option>
 		</select>
-		<input type='submit' value='Assign' name='assign'>
+		<input type='submit' value='Assign' name='assign2'>
 		<input type='hidden' name='studentidnew' value ='".$row['studentid']."'>
 		</form></td>";
 	}
