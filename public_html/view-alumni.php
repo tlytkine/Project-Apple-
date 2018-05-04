@@ -59,7 +59,7 @@
         }
 	}
     else if($degree_search){
-        $degree = $_POST["degree_name"];
+        $degree = $_POST["degreename"];
 
         $query = "SELECT a.firstname, a.lastname, u.email
                   FROM alumnipersonalinfo a, users u
