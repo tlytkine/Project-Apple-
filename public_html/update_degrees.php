@@ -45,7 +45,7 @@ echo "<form method='post'>
 	<input type='hidden' name='action' value='input_degree'>
 	<input type='submit' value='Add Degree'>
 	</form></td>";
-echo "<td><br><form method='post'>
+echo "<td><form method='post'>
 	<input type='hidden' name='action' value='edit_degree_requirements'>
 	<input type='submit' value='Edit Degree Requirements'>
 	</form></td></tr></table>";
