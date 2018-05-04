@@ -176,7 +176,7 @@ echo "<table>
 <td>
 <form method='post'>
 <input type='hidden' name='action' value='update_degree_requirements'>
-<input type='submit' value='Edit Degree Requirements'>
+<input type='submit' value='Edit Core Course'>
 </form>
 </td>
 <td>
@@ -198,7 +198,7 @@ echo "<table>
 		<input type='submit' name='submit' value='Add Course'>
 		</form>";
 	}
-	if(strcmp($_POST['action'], 'edit_degree_name')== 0){
+	else if(strcmp($_POST['action'], 'edit_degree_name')== 0){
 		echo "<h2>Update Degree Name</h2>";
 		echo "<form method'post'>
 		<p>Current Degree Name</p><input type='text' name='currentdegreename'>
@@ -208,7 +208,7 @@ echo "<table>
 		<input type='submit' name='submit' value='Update'>
 		</form";
 	}
-	if (strcmp($_POST['action'], 'input_degree') == 0) {
+	else if (strcmp($_POST['action'], 'input_degree') == 0) {
 
 		echo "<h2>Enter Degree Information.</h2><br>";
 		echo "<form method='post'>
@@ -225,15 +225,15 @@ echo "<table>
 	}
 
 	//Update Degree Requirements Code
-	if (strcmp($_POST['action'], 'update_degree_requirements') == 0) {
+	else if (strcmp($_POST['action'], 'update_degree_requirements') == 0) {
 
-		echo "<h2>Update Degree Requirements.</h2><br>";
-		echo "<p>Please enter the degree name , current courseid that you wish to have updated and the courseid of the course you wish to have the requirement updated to.</p>";
+		echo "<h2>Update Core Course</h2>";
 		echo "<form method='post'>
 		<p>Degree Name<p><input type='text' name='degreename'>
 		<p>Current Course ID<p><input type='text' name='currentcourseid'>
 		<p>New Course ID<p><input type='text' name='newcourseid'>
 		<input type='hidden' name='action' value='update_degree'>
+		<br>
 		<input type='submit' name='submit' value='Update'>
 		</form>";
 
@@ -242,50 +242,50 @@ echo "<table>
 	if($update_degree_success){
 		echo "<br>" . $update_degree_success . "<br>";
 	}
-	if($update_degree_error){
+	else if($update_degree_error){
 		echo "<br>" . $update_degree_error . "<br>";
 	}
-	if($update_degree_invalid_input){
+	else if($update_degree_invalid_input){
 		echo "<br>" . $update_degree_invalid_input . "<br>";
 	}
 	// Add new course notifications 
-	if($add_new_course_success){
+	else if($add_new_course_success){
 		echo "<br>" . $add_new_course_success . "<br>";
 	}
-	if($add_new_course_error){
+	else if($add_new_course_error){
 		echo "<br>" . $add_new_course_degree_error . "<br>";
 	}
-	if($add_new_course_invalid_input){
+	else if($add_new_course_invalid_input){
 		echo "<br>" . $add_new_course_invalid_input . "<br>";
 	}
 	// Update degree name notifications 
-	if($update_degree_name_success){
+	else if($update_degree_name_success){
 		echo "<br>" . $update_degree_name_success . "<br>";
 	}
-	if($update_degree_name_error){
+	else if($update_degree_name_error){
 		echo "<br>" . $update_degree_name_error . "<br>";
 	}
-	if($update_degree_name_invalid_input){
+	else if($update_degree_name_invalid_input){
 		echo "<br>" . $update_degree_name_invalid_input . "<br>";
 	}
 	// Delete course notifications 
-	if($course_delete_success){
+	else if($course_delete_success){
 		echo "<br>" . $course_delete_success . "<br>";
 	}
-	if($course_delete_failure){
+	else if($course_delete_failure){
 		echo "<br>" . $course_delete_failure . "<br>";
 	}
-	if($course_delete_error){
+	else if($course_delete_error){
 		echo "<br>" . $course_delete_error . "<br>";
 	}
 	// Add degree notifications 
-	if($add_degree_success){
+	else if($add_degree_success){
 		echo "<br>" . $add_degree_success . "<br>";
 	}
-	if($add_degree_failure){
+	else if($add_degree_failure){
 		echo "<br>" . $add_degree_failure . "<br>";
 	}
-	if($add_degree_error){
+	else if($add_degree_error){
 		echo "<br>" . $add_degree_error . "<br>";
 	}
 
