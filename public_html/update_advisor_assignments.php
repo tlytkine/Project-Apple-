@@ -8,7 +8,6 @@
 <h1>View / Edit Faculty Advisor</h1>
 <?php 
 $id = $_SESSION["id"];
-
 $assign = $_POST['assign'];
 
 if($assign){
@@ -18,7 +17,7 @@ if($assign){
 
 	$advisor_update = "UPDATE advises SET facultyid = '$facultyid' WHERE 
 	studentid = '$studentid';";
-	$advisor_result = mysqli_query($connection, $advisor_result);
+	$advisor_result = mysqli_query($connection, $advisor_update);
 
 	if($advisor_result){
 		echo "Advisor sucessfully assigned!";
