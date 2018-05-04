@@ -134,8 +134,9 @@ $id = $_SESSION["id"];
 	}
 
 	echo "<br><h2>Degrees</h2>";
-	$degree_query = "SELECT degreename, courseid
-	FROM degreerequirements;";
+	$degree_query = "SELECT degreerequirements.degreename, degreerequirements.courseid, courses.dept, courses.coursenum, courses.title 
+	FROM degreerequirements, courses
+	WHERE degreerequirements.courseid = courses.courseid;";
 
 	$degree_result = mysqli_query($connection, $degree_query);
 
@@ -144,7 +145,10 @@ $id = $_SESSION["id"];
 		echo "<table>
 		<tr>
 		<th>Degree Name</th>
-		<th>Core Courses</th>
+		<th>Core Course ID</th>
+		<th>Department</th>
+		<th>Course Number</th>
+		<th>Title</th>
 		<th>Remove Course</th>
 		</tr>";
 
@@ -152,6 +156,9 @@ $id = $_SESSION["id"];
 			echo "<tr>
 			<td>".$row['degreename']."</td>
 			<td>&nbsp;&nbsp;".$row['courseid']."</td>
+			<td>&nbsp;$nbsp;".$row['dept']."</td>
+			<td>&nbsp;&nbsp;".$row['coursenum']."</td>
+			<td>&nbsp;&nbsp;".$row['title']."</td>
 			<td><form method='post'>
 			<input type='hidden' name='action' value='delete'>
 			<input type='hidden' name='degreename' value='".$row['degreename']."'>
