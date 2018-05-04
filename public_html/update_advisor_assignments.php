@@ -86,6 +86,7 @@ while($row = mysqli_fetch_assoc($result)){
 		</select>
 		<input type='submit' value='assign' name='assign1'>
 		<input type='hidden' name='studentidother' value ='".$row['studentid']."'>
+		<input type='hidden' name='facultyidother' value ='".$row1['facultyidother']."'>
 		</form></td>";
 	}
 		echo "</tr>
@@ -130,6 +131,7 @@ while($row = mysqli_fetch_assoc($current_students_result)){
 		</select>
 		<input type='submit' value='Assign' name='assign2'>
 		<input type='hidden' name='studentidnew' value ='".$row['studentid']."'>
+		<input type='hidden' name='facultyidnew' value ='".$row1['facultyid']."'>
 		</form></td>";
 	}
 		echo "</tr>
