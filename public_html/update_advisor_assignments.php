@@ -12,8 +12,18 @@ $assign = $_POST['assign'];
 
 if($assign){
 
-	$facultyid = $_POST['facultyid'];
-	$studentid = $_POST['studentid'];
+	if($_POST['facultyidnew']){
+		$facultyid = $_POST['facultyidnew'];
+		if($_POST['studentidnew']){
+			$studentid = $_POST['studentidnew'];
+		}
+	}
+	else if($_POST['facultyidother']){
+		$facultyid = $_POST['facultyidother'];
+		if($_POST['studentidother']){
+			$studentid = $_POST['studentidother'];
+		}
+	}
 
 	$advisor_update = "UPDATE advises SET facultyid = '$facultyid' WHERE 
 	studentid = '$studentid';";
@@ -61,10 +71,10 @@ while($row = mysqli_fetch_assoc($result)){
 
 	while($row1 = mysqli_fetch_assoc($facultyresult)){
 
-		echo "<option value ='".$row1['facultyid']."' name='facultyid'>".$row1['facultyfirstname']." ".$row1['facultylastname']."</option>
+		echo "<option value ='".$row1['facultyid']."' name='facultyidother'>".$row1['facultyfirstname']." ".$row1['facultylastname']."</option>
 		</select>
 		<input type='submit' value='Assign'>
-		<input type='hidden' name='studentid' value ='".$row['studentid']."'>
+		<input type='hidden' name='studentidother' value ='".$row['studentid']."'>
 		</form></td>";
 	}
 		echo "</tr>
@@ -105,10 +115,10 @@ while($row = mysqli_fetch_assoc($current_students_result)){
 
 	while($row1 = mysqli_fetch_assoc($facultyresult)){
 
-		echo "<option value ='".$row1['facultyid']."' name='facultyid'>".$row1['facultyfirstname']." ".$row1['facultylastname']."</option>
+		echo "<option value ='".$row1['facultyid']."' name='facultyidnew'>".$row1['facultyfirstname']." ".$row1['facultylastname']."</option>
 		</select>
 		<input type='submit' value='Assign' name='assign'>
-		<input type='hidden' name='studentid' value ='".$row['studentid']."'>
+		<input type='hidden' name='studentidnew' value ='".$row['studentid']."'>
 		</form></td>";
 	}
 		echo "</tr>
