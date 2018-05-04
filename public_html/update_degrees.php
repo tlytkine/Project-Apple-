@@ -77,7 +77,7 @@ echo "<td><form method='post'>
 
 		$degree_query .= "INSERT INTO degreerequirements 
 		(degreename, courseid)
-		VALUES ('$degreename', '$core1'),('$degreename', '$core2'),('$degreename','$core3');";
+		VALUES ('$degreename', $core1),('$degreename', $core2),('$degreename',$core3);";
 
 		$degree_result = mysqli_query($connection, $degree_query);
 		if (!$degree_result) {
