@@ -63,9 +63,9 @@ while($row = mysqli_fetch_assoc($current_students_result)){
 		<input type='hidden' name='studentid' value ='".$row['studentid']."'>
 		</form></td>";
 	}
-		echo "</tr>
-		</table>";
+	echo "</tr>";
 }
+echo "</table>";
 
 
 
