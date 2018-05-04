@@ -8,49 +8,12 @@
 <h1>View / Edit Faculty Advisor</h1>
 <?php 
 $id = $_SESSION["id"];
-$studentid = $_POST["studentid"];
 
 
 
+$query = "SELECT P1.firstname AS studentfirstname, P1.lastname AS studentlastname, P1.id AS studentid, hold, degreename, P2.firstname AS advisorfirstname, P2.firstname AS advisorlastname, P2.id AS advisorid FROM personalinfo AS P1, personalinfo AS P2, roles AS R1, roles AS R2,  advises WHERE R1.role='STUDENT' AND R1.id = P1.id AND advises.studentid = P1.id AND P2.id = advises.facultyid AND R2.role = 'ADVISOR' AND R2.id = advises.facultyid;";
 
-// Gets information about a student
-$student_query = "SELECT personalinfo.id,firstname,lastname
-				  FROM personalinfo, roles 
-				  WHERE roles.role = 'STUDENT';";
-$student_result = mysqli_query($connection, $student_query);
-
-echo $student_query . "<br>";
-
-
-// Gets information about all the faculty advisors
-$faculty_query = "SELECT firstname, lastname, personalinfo.id
-				  FROM personalinfo, roles
-				  WHERE roles.role='ADVISOR';";
-$faculty_result = mysqli_query($connection,$faculty_query);
-
-echo $faculty_query . "<br>";
-
-
-// Gets current faculty advisors
-$current_advisor = "SELECT DISTINCT personalinfo.firstname, personalinfo.lastname, personalinfo.id, advises.hold, advises.degreename 
-					FROM personalinfo, roles, advises
-					WHERE advises.studentid = '$studentid'
-					AND advises.facultyid = personalinfo.id
-					AND roles.role='ADVISOR'
-					AND roles.id = personalinfo.id;";
-					
-$ca_result = mysqli_query($connection,$current_advisor);
-
-echo $current_advisor . "<br>";
-
-
-$students = mysqli_fetch_assoc($student_result);
-$alladvisors = mysqli_fetch_assoc($faculty_result);
-$currentadvisor = mysqli_fetch_assoc($ca_result);
-
-
-
-
+$result = mysqli_query($connection, $query);
 
 
 
@@ -64,27 +27,25 @@ echo "<table>
 <th>Faculty ID</th>
 <th>&nbsp;&nbsp;&nbsp;Assign</th>";
 
-while($row = mysqli_fetch_assoc($advises_result)){
+while($row = mysqli_fetch_assoc($result)){
 	
 	echo "<tr>
-	<td>".$students['firstname']." ".$students['lastname']."</td>
-	<td>".$students['id']."</td>
-	<td>".$currentadvisor['hold']."</td>
-	<td>".$currentadvisor['degreename']."</td>
-	<td>".$currentadvisor['firstname']." ".$currentadvisor['lastname']."</td>
-	<td>".$currentadvisor['id']."</td>
+	<td>".$row['studentfirstname']." ".$row['studentlastname']."</td>
+	<td>".$row['studentid']."</td>
+	<td>".$row['hold']."</td>
+	<td>".$row['degreename']."</td>
+	<td>".$row['advisorfirstname']." ".$row['advisorlastname']."</td>
+	<td>".$row['advisorid']."</td>
 	<td><form method='post' action='advisor_assign_submit.php'>
 	<select name ='facultyid'>";
-	while($row1 = mysqli_fetch_assoc($faculty_result)){
-		echo "<option value ='".$alladvisors['id']."'>".$row1['firstname']." ".$row1['lastname']."</option>";
-	}
-	 echo "</select>
+
+	echo "<option value ='".$row['facultyid']."'>".$row['facultyfirstname']." ".$row['facultylastname']."</option>
+	</select>
 	<input type='submit' value='Assign'>
 	<input type='hidden' name='studentid' value ='".$row['studentid']."'>
 	</form></td>
 	</tr>
 	</table>";
- 
 }
 
 ?>
