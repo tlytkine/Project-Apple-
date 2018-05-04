@@ -61,7 +61,7 @@ CREATE TABLE alumnipersonalinfo (
     lastname          VARCHAR(30),
     dob               DATE,
     address           VARCHAR (100),
-    graduationyear    INT,  
+    graduationyear    INT,
     degreename        VARCHAR(30),
     ssn               VARCHAR (11),
     FOREIGN KEY (id) REFERENCES users(id)
@@ -187,6 +187,7 @@ CREATE TABLE advises (
     facultyid   INT,
     hold        VARCHAR(30),
     degreename  VARCHAR(30),
+    admityear   YEAR,
     FOREIGN KEY (studentid) REFERENCES users(id),
     FOREIGN KEY (facultyid) REFERENCES users(id)
 );
@@ -214,43 +215,80 @@ CREATE TABLE gradecalc (
 );
 
 
-
-
-
-
+/* admin */
 INSERT INTO users (email, password, id) VALUES ('admin@gwu.edu', '$2y$10$K7xpP4XPPWkgYJ0/I4XOtehbRigHUqpmXer99/Ftx1fERDU.JZObC', 1);
 INSERT INTO roles (id, role) VALUES (1, "ADMIN");
 
+/* gs */
 INSERT INTO users (email, password, id) VALUES ('gs@gwu.edu', '$2y$10$Dntyy58tka97rsnu94W0yOk6/hqWFcRJ42fb/nIl2/j5D7oaB0Fvm', 2);
 INSERT INTO roles (id, role) VALUES (2, "GS");
 
-INSERT INTO users (email, password, id) VALUES ('instructor@gwu.edu', '$2y$10$Dntyy58tka97rsnu94W0yOk6/hqWFcRJ42fb/nIl2/j5D7oaB0Fvm', 3);
+/* instructor 1 */
+INSERT INTO users (email, password, id) VALUES ('simha@gwu.edu', '$2y$10$K7xpP4XPPWkgYJ0/I4XOtehbRigHUqpmXer99/Ftx1fERDU.JZObC', 3);
 INSERT INTO roles (id, role) VALUES (3, "INSTRUCTOR");
-INSERT INTO personalinfo VALUES('3', 'b', 'narahari', '2000-01-01', '123 address st', '123-45-6789');
+INSERT INTO roles (id, role) VALUES (3, "CAC");
+INSERT INTO roles (id, role) VALUES (3, "USER");
+INSERT INTO personalinfo VALUES('3', 'r', 'simha', '2000-01-01', '123 address st', '123-45-6789');
 
+/* instructor 2 */
+/* advisor 1 */
+INSERT INTO users (email, password, id) VALUES ('heller@gwu.edu', '$2y$10$K7xpP4XPPWkgYJ0/I4XOtehbRigHUqpmXer99/Ftx1fERDU.JZObC', 4);
+INSERT INTO roles (id, role) VALUES (4, "INSTRUCTOR");
+INSERT INTO roles (id, role) VALUES (4, "ADVISOR");
+INSERT INTO roles (id, role) VALUES (4, "USER");
+INSERT INTO personalinfo VALUES('4', 'r', 'heller', '2000-01-01', '123 address st', '023-45-6789');
+
+/* instructor 3 */
+/* advisor 2 */
+INSERT INTO users (email, password, id) VALUES ('parmer@gwu.edu', '$2y$10$K7xpP4XPPWkgYJ0/I4XOtehbRigHUqpmXer99/Ftx1fERDU.JZObC', 5);
+INSERT INTO roles (id, role) VALUES (5, "INSTRUCTOR");
+INSERT INTO roles (id, role) VALUES (5, "ADVISOR");
+INSERT INTO roles (id, role) VALUES (5, "USER");
+INSERT INTO personalinfo VALUES('5', 'g', 'parmer', '2000-01-01', '123 address st', '013-45-6789');
+
+/* instructor 4 */
+/* reviewer 1 */
+INSERT INTO users (email, password, id) VALUES ('pless@gwu.edu', '$2y$10$K7xpP4XPPWkgYJ0/I4XOtehbRigHUqpmXer99/Ftx1fERDU.JZObC', 6);
+INSERT INTO roles (id, role) VALUES (6, "INSTRUCTOR");
+INSERT INTO roles (id, role) VALUES (6, "REVIEWER");
+INSERT INTO roles (id, role) VALUES (6, "USER");
+INSERT INTO personalinfo VALUES('6', 'r', 'pless', '2000-01-01', '123 address st', '012-45-6789');
+
+/* instructor 5 */
+/* reviewer 2 */
+/* advisor 3 */
+INSERT INTO users (email, password, id) VALUES ('narahari@gwu.edu', '$2y$10$K7xpP4XPPWkgYJ0/I4XOtehbRigHUqpmXer99/Ftx1fERDU.JZObC', 7);
+INSERT INTO roles (id, role) VALUES (7, "INSTRUCTOR");
+INSERT INTO roles (id, role) VALUES (7, "ADVISOR");
+INSERT INTO roles (id, role) VALUES (7, "REVIEWER");
+INSERT INTO roles (id, role) VALUES (7, "USER");
+INSERT INTO personalinfo VALUES('7', 'b', 'narahari', '2000-01-01', '123 address st', '012-35-6789');
+
+/* add courses */
 INSERT INTO courses (courseid, coursenum, dept, professorid, year, semester, section, credithours, day, time, title) VALUES ('1','6221', 'CS', '3', '2018','spring', '10', '3','M', '15:00:00', 'Software Paradigms');
-INSERT INTO courses (courseid, coursenum, dept, professorid, year, semester, section, credithours, day, time, title) VALUES ('2','6461', 'CS', '3', '2018','spring', '10','3', 'T', '15:00:00', 'Computer Architecture');
-INSERT INTO courses (courseid, coursenum, dept, professorid, year, semester, section, credithours, day, time, title) VALUES ('3','6212', 'CS', '3', '2018','spring', '10','3', 'W', '15:00:00', 'Algorithms');
-INSERT INTO courses (courseid, coursenum, dept, professorid, year, semester, section, credithours, day, time, title) VALUES ('4','6225', 'CS', '3', '2018','spring', '10','3', 'R', '15:00:00', 'Data Compression');
-INSERT INTO courses (courseid, coursenum, dept, professorid, year, semester, section, credithours, day, time, title) VALUES ('5','6232', 'CS', '3', '2018','spring', '10', '3','M','18:00:00', 'Networks 1');
+INSERT INTO courses (courseid, coursenum, dept, professorid, year, semester, section, credithours, day, time, title) VALUES ('2','6461', 'CS', '4', '2018','spring', '10','3', 'T', '15:00:00', 'Computer Architecture');
+INSERT INTO courses (courseid, coursenum, dept, professorid, year, semester, section, credithours, day, time, title) VALUES ('3','6212', 'CS', '5', '2018','spring', '10','3', 'W', '15:00:00', 'Algorithms');
+INSERT INTO courses (courseid, coursenum, dept, professorid, year, semester, section, credithours, day, time, title) VALUES ('4','6225', 'CS', '6', '2018','spring', '10','3', 'R', '15:00:00', 'Data Compression');
+INSERT INTO courses (courseid, coursenum, dept, professorid, year, semester, section, credithours, day, time, title) VALUES ('5','6232', 'CS', '7', '2018','spring', '10', '3','M','18:00:00', 'Networks 1');
 INSERT INTO courses (courseid, coursenum, dept, professorid, year, semester, section, credithours, day, time, title) VALUES ('6','6233', 'CS', '3', '2018','spring', '10', '3','T', '18:00:00', 'Networks 2');
-INSERT INTO courses (courseid, coursenum, dept, professorid, year, semester, section, credithours, day, time, title) VALUES ('7','6241', 'CS', '3', '2018','spring', '10','3', 'W', '18:00:00', 'Database 1');
-INSERT INTO courses (courseid, coursenum, dept, professorid, year, semester, section, credithours, day, time, title) VALUES ('8','6242', 'CS', '3', '2018','spring', '10','3', 'R', '18:00:00', 'Database 2');
-INSERT INTO courses (courseid, coursenum, dept, professorid, year, semester, section, credithours, day, time, title) VALUES ('9','6246', 'CS', '3', '2018','spring', '10', '3','T', '15:00:00', 'Compilers');
+INSERT INTO courses (courseid, coursenum, dept, professorid, year, semester, section, credithours, day, time, title) VALUES ('7','6241', 'CS', '4', '2018','spring', '10','3', 'W', '18:00:00', 'Database 1');
+INSERT INTO courses (courseid, coursenum, dept, professorid, year, semester, section, credithours, day, time, title) VALUES ('8','6242', 'CS', '5', '2018','spring', '10','3', 'R', '18:00:00', 'Database 2');
+INSERT INTO courses (courseid, coursenum, dept, professorid, year, semester, section, credithours, day, time, title) VALUES ('9','6246', 'CS', '6', '2018','spring', '10', '3','T', '15:00:00', 'Compilers');
 INSERT INTO courses (courseid, coursenum, dept, professorid, year, semester, section, credithours, day, time, title) VALUES ('10','6251', 'CS', '3', '2018','spring', '10', '3','M', '18:00:00', 'Distributed Systems');
-INSERT INTO courses (courseid, coursenum, dept, professorid, year, semester, section, credithours, day, time, title) VALUES ('11','6254', 'CS', '3', '2018','spring', '10','3', 'M', '15:00:00', 'Software Engineering');
-INSERT INTO courses (courseid, coursenum, dept, professorid, year, semester, section, credithours, day, time, title) VALUES ('12','6260', 'CS', '3', '2018','spring', '10', '3','R', '18:00:00', 'Multimedia');
-INSERT INTO courses (courseid, coursenum, dept, professorid, year, semester, section, credithours, day, time, title) VALUES ('13','6262', 'CS', '3', '2018','spring', '10','3', 'W', '18:00:00', 'Graphics 1');
-INSERT INTO courses (courseid, coursenum, dept, professorid, year, semester, section, credithours, day, time, title) VALUES ('14','6283', 'CS', '3', '2018','spring', '10', '3','T', '18:00:00', 'Security 1');
-INSERT INTO courses (courseid, coursenum, dept, professorid, year, semester, section, credithours, day, time, title) VALUES ('15','6284', 'CS', '3', '2018','spring', '10', '3','M', '18:00:00', 'Cryptography');
-INSERT INTO courses (courseid, coursenum, dept, professorid, year, semester, section, credithours, day, time, title) VALUES ('16','6286', 'CS', '3', '2018','spring', '10', '3','W', '18:00:00', 'Network Security');
+INSERT INTO courses (courseid, coursenum, dept, professorid, year, semester, section, credithours, day, time, title) VALUES ('11','6254', 'CS', '7', '2018','spring', '10','3', 'M', '15:00:00', 'Software Engineering');
+INSERT INTO courses (courseid, coursenum, dept, professorid, year, semester, section, credithours, day, time, title) VALUES ('12','6260', 'CS', '4', '2018','spring', '10', '3','R', '18:00:00', 'Multimedia');
+INSERT INTO courses (courseid, coursenum, dept, professorid, year, semester, section, credithours, day, time, title) VALUES ('13','6262', 'CS', '5', '2018','spring', '10','3', 'W', '18:00:00', 'Graphics 1');
+INSERT INTO courses (courseid, coursenum, dept, professorid, year, semester, section, credithours, day, time, title) VALUES ('14','6283', 'CS', '6', '2018','spring', '10', '3','T', '18:00:00', 'Security 1');
+INSERT INTO courses (courseid, coursenum, dept, professorid, year, semester, section, credithours, day, time, title) VALUES ('15','6284', 'CS', '4', '2018','spring', '10', '3','M', '18:00:00', 'Cryptography');
+INSERT INTO courses (courseid, coursenum, dept, professorid, year, semester, section, credithours, day, time, title) VALUES ('16','6286', 'CS', '7', '2018','spring', '10', '3','W', '18:00:00', 'Network Security');
 INSERT INTO courses (courseid, coursenum, dept, professorid, year, semester, section, credithours, day, time, title) VALUES ('17','6325', 'CS', '3', '2018','spring', '10','2', 'R', '16:00:00', 'Advanced Algorithms');
-INSERT INTO courses (courseid, coursenum, dept, professorid, year, semester, section, credithours, day, time, title) VALUES ('18','6339', 'CS', '3', '2018','spring', '10', '2','T', '15:00:00', 'Embedded Systems');
-INSERT INTO courses (courseid, coursenum, dept, professorid, year, semester, section, credithours, day, time, title) VALUES ('19','6384', 'CS', '3', '2018','spring', '10', '3','W', '16:00:00', 'Advanced Crypto');
-INSERT INTO courses (courseid, coursenum, dept, professorid, year, semester, section, credithours, day, time, title) VALUES ('20','6243', 'EE', '3', '2018','spring', '10', '3','M', '18:00:00', 'Communication Systems');
-INSERT INTO courses (courseid, coursenum, dept, professorid, year, semester, section, credithours, day, time, title) VALUES ('21','6244', 'EE', '3', '2018','spring', '10', '2','T', '18:00:00', 'Information Theory');
+INSERT INTO courses (courseid, coursenum, dept, professorid, year, semester, section, credithours, day, time, title) VALUES ('18','6339', 'CS', '5', '2018','spring', '10', '2','T', '15:00:00', 'Embedded Systems');
+INSERT INTO courses (courseid, coursenum, dept, professorid, year, semester, section, credithours, day, time, title) VALUES ('19','6384', 'CS', '6', '2018','spring', '10', '3','W', '16:00:00', 'Advanced Crypto');
+INSERT INTO courses (courseid, coursenum, dept, professorid, year, semester, section, credithours, day, time, title) VALUES ('20','6243', 'EE', '5', '2018','spring', '10', '3','M', '18:00:00', 'Communication Systems');
+INSERT INTO courses (courseid, coursenum, dept, professorid, year, semester, section, credithours, day, time, title) VALUES ('21','6244', 'EE', '4', '2018','spring', '10', '2','T', '18:00:00', 'Information Theory');
 INSERT INTO courses (courseid, coursenum, dept, professorid, year, semester, section, credithours, day, time, title) VALUES ('22','6210', 'Math', '3', '2018','spring', '10', '2','W', '18:00:00', 'Logic');
 
+/* add prereqs */
 INSERT INTO prereqs VALUES (6, 5);
 INSERT INTO prereqs VALUES (8, 7);
 INSERT INTO prereqs VALUES (9, 2);
@@ -269,14 +307,76 @@ INSERT INTO prereqs VALUES (19, 14);
 INSERT INTO prereqs VALUES (19, 15);
 
 
+/* student 1 */
+INSERT INTO users (email, password, id) VALUES ('mccartney@gwu.edu', '$2y$10$K7xpP4XPPWkgYJ0/I4XOtehbRigHUqpmXer99/Ftx1fERDU.JZObC', 8);
+INSERT INTO roles (id, role) VALUES (8, "STUDENT");
+INSERT INTO roles (id, role) VALUES (8, "USER");
+INSERT INTO personalinfo VALUES('8', 'paul', 'mccartney', '2000-01-01', '123 address st', '333-11-1111');
 
-INSERT INTO users (email, password, id) VALUES ('billy@gwu.edu', '$2y$10$K7xpP4XPPWkgYJ0/I4XOtehbRigHUqpmXer99/Ftx1fERDU.JZObC', 4);
-INSERT INTO roles (id, role) VALUES (4, "STUDENT");
-INSERT INTO roles (id, role) VALUES (4, "USER");
-INSERT INTO personalinfo VALUES('4', 'billy', 'miller', '2000-01-01', '123 address st', '123-45-6789');
+INSERT INTO transcripts VALUES('8', 'CS', '6221', '3', '2017', 'fall', 'A', 'Software Paradigms');
+INSERT INTO transcripts VALUES('8', 'CS', '6461', '4', '2017', 'fall', 'A', 'Computer Architecture');
+INSERT INTO transcripts VALUES('8', 'CS', '6212', '5', '2017', 'fall', 'B', 'Algorithims');
+INSERT INTO transcripts VALUES('8', 'CS', '6225', '6', '2017', 'fall', 'B', 'Data Compression');
+INSERT INTO transcripts VALUES('8', 'CS', '6232', '7', '2017', 'fall', 'B', 'Networks 1');
+INSERT INTO transcripts VALUES('8', 'CS', '6233', '3', '2018', 'spring', 'A', 'Networks 2');
+INSERT INTO transcripts VALUES('8', 'CS', '6241', '4', '2018', 'spring', 'A', 'Databases 1');
+INSERT INTO transcripts VALUES('8', 'CS', '6246', '6', '2018', 'spring', 'A', 'Compilers');
+INSERT INTO transcripts VALUES('8', 'CS', '6262', '5', '2018', 'spring', 'B', 'Graphics 1');
+INSERT INTO transcripts VALUES('8', 'CS', '6283', '6', '2018', 'spring', 'B', 'Security 1');
 
-INSERT INTO transcripts VALUES('4', 'CS', '6221', '3', '2018', 'spring', 'A', 'Software Paradigms');
+INSERT INTO advises VALUES('8', '7', NULL, 'MS_CS', 2017);
 
+/* student 2 */
+INSERT INTO users (email, password, id) VALUES ('harrison@gwu.edu', '$2y$10$K7xpP4XPPWkgYJ0/I4XOtehbRigHUqpmXer99/Ftx1fERDU.JZObC', 9);
+INSERT INTO roles (id, role) VALUES (9, "STUDENT");
+INSERT INTO roles (id, role) VALUES (9, "USER");
+INSERT INTO personalinfo VALUES('9', 'george', 'harrison', '2000-01-01', '123 address st', '444-11-1111');
+
+INSERT INTO transcripts VALUES('9', 'CS', '6221', '3', '2017', 'fall', 'B', 'Software Paradigms');
+INSERT INTO transcripts VALUES('9', 'CS', '6461', '4', '2017', 'fall', 'B', 'Computer Architecture');
+INSERT INTO transcripts VALUES('9', 'CS', '6212', '5', '2017', 'fall', 'B', 'Algorithims');
+INSERT INTO transcripts VALUES('9', 'CS', '6232', '7', '2017', 'fall', 'B', 'Networks 1');
+INSERT INTO transcripts VALUES('9', 'CS', '6241', '4', '2017', 'fall', 'B', 'Databases 1');
+INSERT INTO transcripts VALUES('9', 'CS', '6233', '3', '2018', 'spring', 'B', 'Networks 2');
+INSERT INTO transcripts VALUES('9', 'CS', '6242', '5', '2018', 'spring', 'B', 'Databases 2');
+INSERT INTO transcripts VALUES('9', 'EE', '6244', '4', '2018', 'spring', 'C', 'Information Theory');
+INSERT INTO transcripts VALUES('9', 'CS', '6283', '6', '2018', 'spring', 'B', 'Security 1');
+
+INSERT INTO advises VALUES('9', '5', NULL, 'MS_CS', 2017);
+
+/* alumni 1 */
+INSERT INTO users (email, password, id) VALUES ('clapton@gwu.edu', '$2y$10$K7xpP4XPPWkgYJ0/I4XOtehbRigHUqpmXer99/Ftx1fERDU.JZObC', 10);
+INSERT INTO roles (id, role) VALUES (10, "ALUMNI");
+INSERT INTO roles (id, role) VALUES (10, "USER");
+INSERT INTO alumnipersonalinfo VALUES('10', 'eric', 'clapton', '2000-01-01', '123 address st', 2006, 'MS_CS', '555-11-1111');
+
+INSERT INTO transcripts VALUES('10', 'CS', '6221', '3', '2005', 'fall', 'B', 'Software Paradigms');
+INSERT INTO transcripts VALUES('10', 'CS', '6461', '4', '2005', 'fall', 'B', 'Computer Architecture');
+INSERT INTO transcripts VALUES('10', 'CS', '6212', '5', '2005', 'fall', 'B', 'Algorithims');
+INSERT INTO transcripts VALUES('10', 'CS', '6232', '7', '2005', 'fall', 'B', 'Networks 1');
+INSERT INTO transcripts VALUES('10', 'CS', '6241', '4', '2005', 'fall', 'B', 'Databases 1');
+INSERT INTO transcripts VALUES('10', 'CS', '6233', '3', '2006', 'spring', 'B', 'Networks 2');
+INSERT INTO transcripts VALUES('10', 'CS', '6242', '5', '2006', 'spring', 'B', 'Databases 2');
+INSERT INTO transcripts VALUES('10', 'CS', '6283', '6', '2006', 'spring', 'A', 'Security 1');
+INSERT INTO transcripts VALUES('10', 'CS', '6286', '7', '2006', 'spring', 'A', 'Network Security');
+INSERT INTO transcripts VALUES('10', 'CS', '6254', '7', '2006', 'spring', 'A', 'Software Engineering');
+
+/* aplicant 1 */
+INSERT INTO users (email, password, id) VALUES ('lennon@gwu.edu', '$2y$10$K7xpP4XPPWkgYJ0/I4XOtehbRigHUqpmXer99/Ftx1fERDU.JZObC', 11);
+INSERT INTO roles (id, role) VALUES (11, "APPLICANT");
+INSERT INTO roles (id, role) VALUES (11, "USER");
+INSERT INTO applicantpersonalinfo VALUES('11', 'john', 'lennon', '2000-01-01', '123 address st', 2018, '111-11-1111');
+/* application Complete with no reviews (info needs to be added)*/
+
+
+/* applicant 2 */
+INSERT INTO users (email, password, id) VALUES ('starr@gwu.edu', '$2y$10$K7xpP4XPPWkgYJ0/I4XOtehbRigHUqpmXer99/Ftx1fERDU.JZObC', 12);
+INSERT INTO roles (id, role) VALUES (12, "APPLICANT");
+INSERT INTO roles (id, role) VALUES (12, "USER");
+INSERT INTO applicantpersonalinfo VALUES('12', 'ringo', 'starr', '2000-01-01', '123 address st', 2018, '222-11-1111');
+/* application incomplete, missing transcripts (info needs to be added) */
+
+/* fill grade calc table */
 INSERT INTO gradecalc(grade,qualitypoints)
 VALUES
 ('A',4.00),
@@ -288,10 +388,6 @@ VALUES
 ('C',2.00),
 ('F',0.00),
 ('IP',0.00);
-
-
-
-
 
 --DELIMITER CHANGE BELOW;
 

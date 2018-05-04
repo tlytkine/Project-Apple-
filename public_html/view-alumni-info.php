@@ -116,7 +116,7 @@
 	else {
 		echo "<h2 style='text-align:center'> Update Personal Info </h2>";
 		echo "<p> This is the information you have currently entered</p>";
-		$query = "SELECT p.id, p.firstname, p.lastname, p.address, u.email, p.year
+		$query = "SELECT p.id, p.firstname, p.lastname, p.address, u.email, p.graduationyear
 			      FROM  alumnipersonalinfo p, users u
 			      WHERE p.id = u.id AND u.email = '$user';";
 		$result = mysqli_query($connection, $query);
