@@ -63,7 +63,8 @@ echo "<table>
 <th>Degree Name</th>
 <th>Faculty Advisor</th>
 <th>Faculty ID</th>
-<th>&nbsp;&nbsp;&nbsp;Assign</th>";
+<th>&nbsp;&nbsp;&nbsp;Assign</th>
+</tr>";
 
 while($row = mysqli_fetch_assoc($result)){
 	
@@ -90,9 +91,10 @@ while($row = mysqli_fetch_assoc($result)){
 		<input type='submit' value='assign' name='assign1'>
 		</form></td>";
 	}
-		echo "</tr>
-		</table>";
+		echo "</tr>";
+
 }
+echo "</table>";
 
 echo "<h1>Assign New Faculty Advisor</h1>";
 
