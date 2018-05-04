@@ -264,11 +264,12 @@ echo "
 
 	}
 	if(strcmp($_POST['action'], 'add_course')== 0){
+		$degree_query = "SELECT degreerequirements.degreename,degreerequirements.courseid,courses.dept,courses.coursenum,courses.title FROM degreerequirements,courses WHERE degreerequirements.courseid = courses.courseid;";
 		$degree_result = mysqli_query($connection, $degree_query);
 		echo "<h2>Add Course</h2>";
 		echo "<form method='post'>
 		<p>Degree Name</p><select name='degreename'>";
-		while($row=mysqli_fetch_assoc($degreeresult)){
+		while($row=mysqli_fetch_assoc($degree_result)){
 			echo "option value='".$row['degreename']."'>";
 			echo $row['degreename'];
 			echo "</option>";
@@ -277,9 +278,9 @@ echo "
 		$courses_query = "SELECT courseid, dept, coursenum, title FROM courses;";
 		$courses_result = mysqli_query($connection,$courses_query);
 		echo "<p>Course</p><select name='courseid>";
-		while($row1=mysqli_fetch_assoc($courses_result1)){
-			echo "<option value='".$row1['courseid']."'>";
-			echo $row1['dept']." ".$row1['coursenum']."-".$row1['title'];
+		while($row=mysqli_fetch_assoc($courses_result)){
+			echo "<option value='".$row['courseid']."'>";
+			echo $row['dept']." ".$row['coursenum']."-".$row['title'];
 			echo "</option>";
 		}
 		echo "</select>
