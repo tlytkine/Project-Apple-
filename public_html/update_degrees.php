@@ -67,7 +67,7 @@ $id = $_SESSION["id"];
 
 	// Add new course 
 	if (strcmp($_POST['action'], 'add_new_course') == 0) {
-		$degreenamecheck = isset($_POST['degreenameadd']) ? $_POST['degreename'] : false;
+		$degreenamecheck = isset($_POST['degreenameadd']) ? $_POST['degreenameadd'] : false;
 		$courseidcheck = isset($_POST['courseidadd']) ? $_POST['courseidadd'] : false;
 
 		if($degreenamecheck && $courseidcheck){
