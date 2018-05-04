@@ -210,9 +210,10 @@ echo "
 		$degree_result = mysqli_query($connection, $degree_query);
 		echo "<h2>Update Degree Name</h2>";
 		echo "<form method='post'>
-		<p>Select Degree</p><select name='currentdegreename'>";
+		<p>Select Degree</p>
+		<select name='currentdegreename'>";
 		while($row=mysqli_fetch_assoc($degree_result)){
-			echo "option value='".$row['degreename']."'>";
+			echo "<option value='".$row['degreename']."'>";
 			echo $row['degreename'];
 			echo "</option>";
 		}
@@ -297,7 +298,7 @@ echo "
 		echo "<form method='post'>
 		<p>Degree Name<p><select name='degreename'>";
 		while($row=mysqli_fetch_assoc($degree_result)){
-			echo "option value='".$row['degreename']."'>";
+			echo "<option value='".$row['degreename']."'>";
 			echo $row['degreename'];
 			echo "</option>";
 		}
@@ -305,7 +306,7 @@ echo "
 		$degree_result = mysqli_query($connection, $degree_query);
 		echo "<p>Current Course<p><select name='currentcourseid'>";
 		while($row=mysqli_fetch_assoc($degree_result)){
-			echo "option value='".$row['courseid']."'>";
+			echo "<option value='".$row['courseid']."'>";
 			echo $row['dept']." ".$row['coursenum']."-".$row['title'];
 			echo "</option>";
 		}
