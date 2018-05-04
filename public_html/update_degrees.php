@@ -160,7 +160,10 @@ while($row = mysqli_fetch_assoc($degree_result)){
 }
 echo "</table>";
 
-echo "<table>
+echo "
+<br>
+<br>
+<table>
 <tr>
 <td>
 <form method='post'>
@@ -168,37 +171,31 @@ echo "<table>
 <input type='submit' value='Add Degree'>
 </form>
 </td>
+&nbsp;&nbsp;&nbsp;
 <td>
 <form method='post'>
 <input type='hidden' name='action' value='add_course'>
 <input type='submit' value='Add Course'>
 </td>
+&nbsp;&nbsp;&nbsp;
 <td>
 <form method='post'>
 <input type='hidden' name='action' value='update_degree_requirements'>
 <input type='submit' value='Edit Core Course'>
 </form>
 </td>
+&nbsp;&nbsp;&nbsp;
 <td>
 <form method='post'>
 <input type='hidden' name='action' value='edit_degree_name'>
 <input type='submit' value='Update Degree Name'>
 </form>
 </td>
+&nbsp;&nbsp;&nbsp;
 </tr>
 </table>";
 
-	if (strcmp($_POST['action'], 'add_course') == 0) {
-		echo "<h2>Add Course</h2>";
-		echo "<form method='post'>
-		<p>Degree Name</p><input type='text' name='degreename'>
-		<p>Course ID</p><input type='text' name='courseid'>
-		<input type='hidden' name='action' value='add_new_course'>
-		<br>
-		<input type='submit' name='submit' value='Add Course'>
-		</form>";
-	}
-	else if(strcmp($_POST['action'], 'edit_degree_name')== 0){
+	if(strcmp($_POST['action'], 'edit_degree_name')== 0){
 		echo "<h2>Update Degree Name</h2>";
 		echo "<form method'post'>
 		<p>Current Degree Name</p><input type='text' name='currentdegreename'>
@@ -208,7 +205,7 @@ echo "<table>
 		<input type='submit' name='submit' value='Update'>
 		</form";
 	}
-	else if (strcmp($_POST['action'], 'input_degree') == 0) {
+	if (strcmp($_POST['action'], 'input_degree') == 0) {
 
 		echo "<h2>Enter Degree Information.</h2><br>";
 		echo "<form method='post'>
@@ -223,9 +220,19 @@ echo "<table>
 		</form>";
 
 	}
+	if(strcmp($_POST['action'], 'add_course')== 0){
+		echo "<h2>Add Course</h2>";
+		echo "<form method='post'>
+		<p>Degree Name</p><input type='text' name='degreename'>
+		<p>Course ID</p><input type='text' name='courseid'>
+		<input type='hidden' name='action' value='add_new_course'>
+		<br>
+		<input type='submit' name='submit' value='Add Course'>
+		</form>";
+	}
 
 	//Update Degree Requirements Code
-	else if (strcmp($_POST['action'], 'update_degree_requirements') == 0) {
+	if (strcmp($_POST['action'], 'update_degree_requirements') == 0) {
 
 		echo "<h2>Update Core Course</h2>";
 		echo "<form method='post'>
