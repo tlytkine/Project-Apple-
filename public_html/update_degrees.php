@@ -12,6 +12,10 @@ $id = $_SESSION["id"];
 
 <?php
 
+	$degree_query = "SELECT degreerequirements.degreename, degreerequirements.courseid, courses.dept, courses.coursenum, courses.title FROM degreerequirements, courses WHERE degreerequirements.courseid = courses.courseid;";
+
+	$courses_query = "SELECT courseid, dept, coursenum, title FROM courses;";
+
 	// edit degree
 	if (strcmp($_POST['action'], 'update_degree') == 0) {
 
@@ -134,9 +138,7 @@ $id = $_SESSION["id"];
 	}
 
 	echo "<br><h2>Update Degrees Menu</h2>";
-	$degree_query = "SELECT degreerequirements.degreename, degreerequirements.courseid, courses.dept, courses.coursenum, courses.title 
-	FROM degreerequirements, courses
-	WHERE degreerequirements.courseid = courses.courseid;";
+
 
 	$degree_result = mysqli_query($connection, $degree_query);
 
@@ -210,10 +212,17 @@ echo "
 </table>";
 
 	if(strcmp($_POST['action'], 'edit_degree_name')== 0){
+		$degree_result = mysqli_query($connection, $degree_query);
 		echo "<h2>Update Degree Name</h2>";
 		echo "<form method='post'>
-		<p>Current Degree Name</p><input type='text' name='currentdegreename'>
-		<p>New Degree Name</p><input type='text' name='newdegreename'>
+		<p>Select Degree</p><select name='currentdegreename'>";
+		while($row=mysqli_fetch_assoc($degreeresult)){
+			echo "option value='".$row['degreename']."'>";
+			echo $row['degreename'];
+			echo "</option>";
+		}
+		echo "</select>";
+		echo "<p>Enter New Name</p><input type='text' name='newdegreename'>
 		<input type='hidden' name='action' value='update_degree_name'>
 		<br>
 		<input type='submit' name='submit' value='Update'>
@@ -225,26 +234,27 @@ echo "
 		echo "<form method='post'>
 		<p>A degree must have three core courses.</p> <br>
 		<p>Degree Name<p><input type='text' name='degreename'>";
-		$courses_query = "SELECT courseid, dept, coursenum, title FROM courses;";
-		$courses_result = mysqli_query($connection,$courses_query);
+		$courses_result1 = mysqli_query($connection,$courses_query);
 		echo "<p>Core Course 1</p><select name='core1'>";
-		while($row=mysqli_fetch_assoc($courses_result)){
-			echo "<option value='".$row['courseid']."'>";
-			echo $row['dept']." ".$row['coursenum']."-".$row['title'];
+		while($row1=mysqli_fetch_assoc($courses_result1)){
+			echo "<option value='".$row1['courseid']."'>";
+			echo $row1['dept']." ".$row1['coursenum']."-".$row1['title'];
 			echo "</option>";
 		}
 		echo "</select>";
-				echo "<p>Core Course 2</p><select name='core2'>";
-		while($row=mysqli_fetch_assoc($courses_result)){
-			echo "<option value='".$row['courseid']."'>";
-			echo $row['dept']." ".$row['coursenum']. "-".$row['title'];
+		$courses_result2 = mysqli_query($connection,$courses_query);
+		echo "<p>Core Course 2</p><select name='core2'>";
+		while($row2=mysqli_fetch_assoc($courses_result2)){
+			echo "<option value='".$row2['courseid']."'>";
+			echo $row2['dept']." ".$row2['coursenum']. "-".$row2['title'];
 			echo "</option>";
 		}
 		echo "</select>";
+		$courses_result3 = mysqli_query($connection,$courses_query);
 		echo "<p>Core Course 3</p><select name='core3'>";
-		while($row=mysqli_fetch_assoc($courses_result)){
-			echo "<option value='".$row['courseid']."'>";
-			echo $row['dept']." ".$row['coursenum']. "-".$row['title'];
+		while($row3=mysqli_fetch_assoc($courses_result3)){
+			echo "<option value='".$row3['courseid']."'>";
+			echo $row3['dept']." ".$row3['coursenum']. "-".$row3['title'];
 			echo "</option>";
 		}
 		echo "</select>
@@ -255,26 +265,58 @@ echo "
 
 	}
 	if(strcmp($_POST['action'], 'add_course')== 0){
+		$degree_result = mysqli_query($connection, $degree_query);
 		echo "<h2>Add Course</h2>";
 		echo "<form method='post'>
-		<p>Degree Name</p><input type='text' name='degreename'>
-		<p>Course ID</p><input type='text' name='courseid'>
-		<input type='hidden' name='action' value='add_new_course'>
-		<br>
+		<p>Degree Name</p><select name='degreename'>";
+		while($row=mysqli_fetch_assoc($degreeresult)){
+			echo "option value='".$row['degreename']."'>";
+			echo $row['degreename'];
+			echo "</option>";
+		}
+		echo "</select>";
+		$courses_result = mysqli_query($connection,$courses_query);
+		echo "<p>Course</p><select name='courseid>";
+		while($row1=mysqli_fetch_assoc($courses_result1)){
+			echo "<option value='".$row1['courseid']."'>";
+			echo $row1['dept']." ".$row1['coursenum']."-".$row1['title'];
+			echo "</option>";
+		}
+		echo "</select>
+		<input type='hidden' name='action' value='add_new_course'><br>
 		<input type='submit' name='submit' value='Add Course'>
 		</form>";
 	}
 
 	//Update Degree Requirements Code
 	if (strcmp($_POST['action'], 'update_degree_requirements') == 0) {
-
+		$degree_result = mysqli_query($connection, $degree_query);
 		echo "<h2>Update Core Course</h2>";
 		echo "<form method='post'>
-		<p>Degree Name<p><input type='text' name='degreename'>
-		<p>Current Course ID<p><input type='text' name='currentcourseid'>
-		<p>New Course ID<p><input type='text' name='newcourseid'>
-		<input type='hidden' name='action' value='update_degree'>
-		<br>
+		<p>Degree Name<p><select name='degreename'>";
+		while($row=mysqli_fetch_assoc($degreeresult)){
+			echo "option value='".$row['degreename']."'>";
+			echo $row['degreename'];
+			echo "</option>";
+		}
+		echo "</select>";
+		$degree_result = mysqli_query($connection, $degree_query);
+		echo "<p>Current Course<p><select name='currentcourseid'>";
+		while($row=mysqli_fetch_assoc($degreeresult)){
+			echo "option value='".$row['courseid']."'>";
+			echo $row['dept']." ".$row['coursenum']."-".$row['title'];
+			echo "</option>";
+		}
+		echo "</select>";
+		$courses_result = mysqli_query($connection,$courses_query);
+		echo "<p>New Course</p><select name='newcourseid>";
+		while($row=mysqli_fetch_assoc($courses_result)){
+			echo "<option value='".$row['courseid']."'>";
+			echo $row['dept']." ".$row['coursenum']."-".$row['title'];
+			echo "</option>";
+		}
+		echo "</select>";
+		echo "<input type='hidden' name='action' value='update_degree'><br>
 		<input type='submit' name='submit' value='Update'>
 		</form>";
 
