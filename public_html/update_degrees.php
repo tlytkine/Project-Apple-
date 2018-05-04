@@ -22,12 +22,19 @@ echo "<table>
 <tr>
 <th>Degree Name</th>
 <th>Core Courses</th>
+<th>Remove Course</th>
 </tr>";
 
 while($row = mysqli_fetch_assoc($degree_result)){
 	echo "<tr>
 	<td>".$row['degreename']."</td>
 	<td>&nbsp;&nbsp;".$row['courseid']."</td>
+	<td><form method='post'>
+	<input type='hidden' name='action' value='delete'>
+	<input type='hidden' name='degreename' value='".$row['degreename']."'>
+	<input type='hidden' name='courseid' value='".$row['courseid']."'>
+	<input type='submit' value='Remove'
+	</form></td> 
 	</tr>";
 }
 echo "</table>";
@@ -65,6 +72,22 @@ echo "<td><form method='post'>
 		<input type='hidden' name='action' value='add_degree'>
 		<input type='submit' name='submit' value='Add Degree'>
 		</form>";
+
+	}
+	// delete course
+	if (strcmp($_POST['action'], 'delete') == 0) {
+		$degreename = $_POST['degreename'];
+		$courseid = $_POST['courseid'];
+
+		$delete_query = "DELETE FROM degreerequirements WHERE degreename='$degreename' AND courseid = '$courseid';";
+		$delete_result = mysqli_query($connection, $delete_query);
+
+		if($delete_query){
+			echo "Course deleted successfully!";
+		}
+		else {
+			echo "Course was not able to be deleted.";
+		}
 
 	}
 	//add degree
