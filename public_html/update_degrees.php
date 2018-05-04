@@ -264,14 +264,14 @@ echo "
 
 	}
 	if(strcmp($_POST['action'], 'add_course')== 0){
-		$degree_query = "SELECT degreerequirements.degreename,degreerequirements.courseid,courses.dept,courses.coursenum,courses.title FROM degreerequirements,courses WHERE degreerequirements.courseid = courses.courseid;";
-		$degree_result = mysqli_query($connection,$degree_query);
+		$degree_name_query = "SELECT DISTINCT degreename FROM degreerequirements;";
+		$degree_name_result = mysqli_query($connection,$degree_name_query);
 		echo "<h2>Add Course</h2>";
 		echo "<form method='post'>
 		<p>Degree Name</p>
 		<select name='degreename'>";
-		while($row=mysqli_fetch_assoc($degree_result)){
-			echo "option value='".$row['degreename']."'>";
+		while($row=mysqli_fetch_assoc($degree_name_result)){
+			echo "<option value='".$row['degreename']."'>";
 			echo $row['degreename']." ";
 			echo "</option>";
 		}
