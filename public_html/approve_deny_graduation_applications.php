@@ -37,8 +37,18 @@ if($approve){
 
 	$year = $currentyear['year'];
 
-	$insertalumniquery = "INSERT INTO alumnipersonalinfo(id,firstname,lastname,dob,address,graduationyear,ssn) VALUES($sid,'$firstname','$lastname','$dob','$address','$year','$ssn');";
+
+	$degreenamequery = "SELECT degreename FROM advises WHERE studentid=$sid;";
+	$degreenameresult = mysqli_query($connection, $degreenamequery);
+	$degreenamefetch = mysqli_fetch_assoc($degreenameresult);
+
+	$degreename = $degreenamefetch['degreename'];
+
+	$insertalumniquery = "INSERT INTO alumnipersonalinfo(id,firstname,lastname,dob,address,graduationyear,degreename,ssn) VALUES($sid,'$firstname','$lastname','$dob','$address',$year,'$degreename','$ssn');";
 	$insertalumniresult = mysqli_query($connection, $insertalumniquery);
+
+
+
 
 	$deletestudentquery = "DELETE FROM personalinfo WHERE id = '$sid';";
 	$deletestudentresult = mysqli_query($connection, $deletestudentquery);

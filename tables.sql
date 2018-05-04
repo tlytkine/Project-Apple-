@@ -61,7 +61,8 @@ CREATE TABLE alumnipersonalinfo (
     lastname          VARCHAR(30),
     dob               DATE,
     address           VARCHAR (100),
-    graduationyear    INT  
+    graduationyear    INT,  
+    degreename        VARCHAR(30),
     ssn               VARCHAR (11),
     FOREIGN KEY (id) REFERENCES users(id)
 );
@@ -72,7 +73,7 @@ CREATE TABLE applicantpersonalinfo (
     lastname          VARCHAR(30),
     dob               DATE,
     address           VARCHAR (100),
-    applicantyear     INT 
+    applicantyear     INT,
     ssn               VARCHAR (11),
     FOREIGN KEY (id) REFERENCES users(id)
 );

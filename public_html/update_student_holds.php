@@ -11,6 +11,53 @@ $id = $_SESSION["id"];
 
 <?php
 
+$studentid = $_POST['studentid'];
+$facultyid = $_POST['facultyid'];
+
+
+
+# Lift Hold Button 
+if (isset($_POST['lift'])) {
+	$lift_query = "UPDATE advises
+	SET hold='NULL'
+	WHERE studentid = '$studentid' AND 
+	facultyid = '$facultyid'";
+	$lift_result = mysqli_query($connection, $lift_query);
+	if(mysqli_affected_rows($connection)>0){
+		echo "Hold was successfully lifted!";
+	}
+	else {
+		echo "There was not a hold in place to be lifted.";
+	}
+}
+
+
+
+# Place Hold Button 
+if (isset($_POST['place'])) {
+	echo "<h1>Place Hold</h1><br>";
+	if(isset($_POST['holdtext'])){
+		$holdtext = $_POST['holdtext'];
+		if(strlen($holdtext)>0){
+			$place_query = "UPDATE advises
+			SET hold='$holdtext'
+			WHERE studentid = '$studentid' AND 
+			facultyid = '$facultyid'";
+
+			$place_result = mysqli_query($connection, $place_query);
+			if(mysqli_affected_rows($connection)>0){
+				echo "Hold was successfully placed!<br>";
+			}
+			else {
+				echo "Please try a different hold.<br>";
+			}
+		}
+		else {
+			echo "Hold was not placed. Please enter a hold in the text field.<br>";
+		}
+	}
+}
+
 echo "<h1>Update Student Holds</h1>";
 
 // Get all students / faculty advisors 
@@ -38,7 +85,7 @@ echo "<tr><td>".$row['studentfirstname']." ".$row['studentlastname']."</td>
 <td>".$row['facultyfirstname']." ".$row['facultylastname']."</td>
 <td>".$row['facultyid']."</td>
 <td>".$row['hold']."</td>
-<form method ='post' action='hold_submit.php'>
+<form method ='post'>
 <input type='hidden' name='studentid' value ='".$row['studentid']."'>
 <input type='hidden' name='facultyid' value='".$row['facultyid']."'>
 <td><input type='submit' name='lift' value='Lift Hold'></form></td>
