@@ -34,7 +34,7 @@ echo "</table>";
 
 echo "<table>
 	<tr><td>";
-echo "<form method='post' action='update_degree_submit.php'>
+echo "<form method='post'>
 	<input type='hidden' name='action' value='input_degree'>
 	<input type='submit' value='Add Degree'>
 	</form>";
