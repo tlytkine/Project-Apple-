@@ -83,6 +83,8 @@ echo "<td><form method='post'>
 			$degree_result = mysqli_query($connection, $degree_query);
 			if ($degree_result) {
 				echo "Degree added successfully!";
+				mysqli_refresh($connection,MYSQLI_REFRESH_GRANT);
+
 			} 
 			else {
 				echo "This degree and its core courses already exist in the system. To edit a degree or to add a new course, use the edit degree requirements button and add course buttons respectively.";
@@ -104,6 +106,7 @@ echo "<td><form method='post'>
 			$delete_result = mysqli_query($connection, $delete_query);
 
 			if($delete_result){
+				mysqli_refresh($connection,MYSQLI_REFRESH_GRANT);
 				echo "Course deleted successfully!";
 			}
 			else {
