@@ -170,7 +170,6 @@ $id = $_SESSION["id"];
 
 echo "
 <br>
-<br>
 <table>
 <tr>
 <td>
@@ -179,21 +178,21 @@ echo "
 <input type='submit' value='Add Degree'>
 </form>
 </td>
-&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;
 <td>
 <form method='post'>
 <input type='hidden' name='action' value='add_course'>
 <input type='submit' value='Add Course'>
+</form>
 </td>
-</tr>
-<tr>
+&nbsp;&nbsp;
 <td>
 <form method='post'>
 <input type='hidden' name='action' value='edit_degree_name'>
 <input type='submit' value='Update Degree Name'>
 </form>
 </td>
-&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;
 <td>
 <form method='post'>
 <input type='hidden' name='action' value='update_degree_requirements'>
