@@ -118,26 +118,23 @@ echo "<table>
 </tr>";
 
 while($row = mysqli_fetch_assoc($current_students_result)){
-	
+	$studentidnew = $row['id'];
 	echo "<tr>
 	<td>".$row['firstname']." ".$row['lastname']."</td>
 	<td>".$row['id']."</td>
 	<td>".$row['hold']."</td>
 	<td>".$row['degreename']."</td>
-	<td><form method='post'>
-	<select name ='facultyid'>";
-	$studentidnew = $row['id'];
-
+	<td><form method='post'><select name ='facultyid'>";
 	while($row1 = mysqli_fetch_assoc($facultyresult)){
-
-		echo "<option value ='".$row1['facultyid']."' name='facultyidnew'>".$row1['facultyfirstname']." ".$row1['facultylastname']."</option>
+	echo "<option value ='".$row1['facultyid']."' name='facultyidnew'>".$row1['facultyfirstname']." ".$row1['facultylastname']."</option>
 		<input type='hidden' name='studentidnew' value ='$studentidnew'>
 		<input type='hidden' name='facultyidnew' value ='".$row1['facultyid']."'>
 		</select>
 		<input type='submit' value='Assign' name='assign2'>
 		</form></td>";
 	}
-		echo "</tr>";
+	echo "</tr>";
+	
 }
 echo "</table>";
 
