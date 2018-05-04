@@ -13,32 +13,34 @@ $assign = $_POST['assign'];
 if($assign){
 
 	if($_POST['facultyidnew']){
-		$facultyid = $_POST['facultyidnew'];
+		$facultyidnew = $_POST['facultyidnew'];
 		if($_POST['studentidnew']){
-			$studentid = $_POST['studentidnew'];
+			$studentidnew = $_POST['studentidnew'];
 		}
+			$advisor_update = "UPDATE advises SET facultyid = $facultyidnew WHERE 
+			studentid = $studentidnew;";
+			$advisor_result = mysqli_query($connection, $advisor_update);
+			echo $advisor_update; 
 	}
 	else if($_POST['facultyidother']){
-		$facultyid = $_POST['facultyidother'];
+		$facultyidother = $_POST['facultyidother'];
 		if($_POST['studentidother']){
-			$studentid = $_POST['studentidother'];
+			$studentidother = $_POST['studentidother'];
 		}
+		$advisor_update = "UPDATE advises SET facultyid = $facultyidother WHERE 
+		studentid = $studentidother;";
+		$advisor_result = mysqli_query($connection, $advisor_update);
+		echo $advisor_update; 
 	}
 
-	$advisor_update = "UPDATE advises SET facultyid =$facultyid WHERE 
-	studentid = $studentid;";
-	$advisor_result = mysqli_query($connection, $advisor_update);
 	$current_students_result = mysqli_query($connection, $current_students);
 	$facultyresult = mysqli_query($connection,$facultyquery);
 	$result = mysqli_query($connection, $query);
 
-	echo $advisor_update; 
+	
 
 	if($advisor_result){
 		echo "Advisor sucessfully assigned!";
-	}
-	else {
-		echo "Advisor was not able to be assigned.";
 	}
 }
 
