@@ -89,7 +89,7 @@ echo "<tr><td>".$row['studentfirstname']." ".$row['studentlastname']."</td>
 <input type='hidden' name='studentid' value ='".$row['studentid']."'>
 <input type='hidden' name='facultyid' value='".$row['facultyid']."'>
 <td><input type='submit' name='lift' value='Lift Hold'></form></td>
-<form method='post' action='hold_submit.php'>
+<form method='post'>
 <input type='hidden' name='studentid' value ='".$row['studentid']."'>
 <input type='hidden' name='facultyid' value='".$row['facultyid']."'>
 <td><input type='text' name='holdtext'>
