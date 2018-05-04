@@ -8,7 +8,7 @@ $id = $_SESSION["id"];
 <head><title>Update Degrees</title></head>
 <link rel="stylesheet" href="style.css">
 <body>
-<b>Update Degrees</b><br>
+
 
 <?php
 
@@ -98,8 +98,7 @@ echo "<td><form method='post'>
 		$core3 = $_POST['core3'];
 
 
-		$degree_query .= "INSERT INTO degreerequirements 
-		(degreename, courseid)
+		$degree_query .= "INSERT INTO degreerequirements(degreename, courseid)
 		VALUES ('$degreename', $core1),('$degreename', $core2),('$degreename',$core3);";
 
 		$degree_result = mysqli_query($connection, $degree_query);
