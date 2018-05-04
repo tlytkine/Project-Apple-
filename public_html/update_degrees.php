@@ -142,8 +142,6 @@ $id = $_SESSION["id"];
 
 	$degree_result = mysqli_query($connection, $degree_query);
 
-	if($degree_result){
-
 		echo "<table>
 		<tr>
 		<th>Degree Name</th>
@@ -170,10 +168,7 @@ $id = $_SESSION["id"];
 			</tr>";
 		}
 		echo "</table>";
-	}
-	else {
-		echo "There are currently no degrees in the system.";
-	}
+	
 
 
 
