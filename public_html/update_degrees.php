@@ -67,7 +67,10 @@ $id = $_SESSION["id"];
 
 	// Add new course 
 	if (strcmp($_POST['action'], 'add_new_course') == 0) {
-		if(isset($_POST['degreenameadd']) && isset($_POST['courseidadd'])){
+		$degreenamecheck = isset($_POST['degreenameadd']) ? $_POST['degreename'] : false;
+		$courseidcheck = isset($_POST['courseidadd']) ? $_POST['courseidadd'] : false;
+
+		if($degreenamecheck && $courseidcheck){
 			$degreename = $_POST['degreenameadd'];
 			$courseid = $_POST['courseidadd'];
 
@@ -84,8 +87,6 @@ $id = $_SESSION["id"];
 		else {
 			$add_new_course_invalid_input = "Make sure you are entering a valid degree name and courseid.";
 		}
-
-
 	}
 	// delete course
 	if (strcmp($_POST['action'], 'delete') == 0) {
@@ -284,8 +285,8 @@ echo "
 			echo $row['dept']." ".$row['coursenum']."-".$row['title'];
 			echo "</option>";
 		}
-		echo "</select>
-		<input type='hidden' name='action' value='add_new_course'><br><br>
+		echo "</select>";
+		echo "<input type='hidden' name='action' value='add_new_course'><br><br>
 		<input type='submit' name='submit' value='Add Course'>
 		</form>";
 	}
