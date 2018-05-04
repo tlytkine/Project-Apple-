@@ -47,7 +47,6 @@ $id = $_SESSION["id"];
 			$newdegreename = $_POST['newdegreename'];
 
 			$update_degree_name_query = "UPDATE degreerequirements SET degreename = '$newdegreename' WHERE degreename = '$currentdegreename';";
-			echo $update_degree_name_query;
 			$update_degree_name_result = mysqli_query($connection, $update_degree_name_query);
 			if($update_degree_name_result){
 				$update_degree_name_success = "Degree name updated successfully!";
@@ -205,7 +204,7 @@ echo "
 
 	if(strcmp($_POST['action'], 'edit_degree_name')== 0){
 		echo "<h2>Update Degree Name</h2>";
-		echo "<form method'post'>
+		echo "<form method='post'>
 		<p>Current Degree Name</p><input type='text' name='currentdegreename'>
 		<p>New Degree Name</p><input type='text' name='newdegreename'>
 		<input type='hidden' name='action' value='update_degree_name'>
