@@ -104,6 +104,9 @@ echo "<h1>Assign New Faculty Advisor</h1>";
 $current_students = "SELECT firstname,lastname,personalinfo.id,degreename,hold FROM personalinfo, advises, roles WHERE personalinfo.id = roles.id AND roles.role = 'STUDENT' AND advises.studentid = roles.id AND advises.facultyid IS NULL;";
 $current_students_result = mysqli_query($connection, $current_students);
 
+$facultyquery = "SELECT firstname AS facultyfirstname,lastname AS facultylastname,personalinfo.id AS facultyid FROM personalinfo,roles WHERE personalinfo.id = roles.id AND roles.role='ADVISOR';";
+$facultyresult = mysqli_query($connection,$facultyquery);
+
 
 echo "<table>
 <tr>
@@ -111,7 +114,8 @@ echo "<table>
 <th>Student ID</th>
 <th>Hold</th>
 <th>Degree Name</th>
-<th>&nbsp;&nbsp;&nbsp;Assign</th>";
+<th>&nbsp;&nbsp;&nbsp;Assign</th>
+</tr>";
 
 while($row = mysqli_fetch_assoc($current_students_result)){
 	
@@ -122,10 +126,6 @@ while($row = mysqli_fetch_assoc($current_students_result)){
 	<td>".$row['degreename']."</td>
 	<td><form method='post'>
 	<select name ='facultyid'>";
-
-	$facultyquery = "SELECT firstname AS facultyfirstname,lastname AS facultylastname,personalinfo.id AS facultyid FROM personalinfo,roles WHERE personalinfo.id = roles.id AND roles.role='ADVISOR';";
-	$facultyresult = mysqli_query($connection,$facultyquery);
-
 	$studentidnew = $row['id'];
 
 	while($row1 = mysqli_fetch_assoc($facultyresult)){
@@ -137,9 +137,9 @@ while($row = mysqli_fetch_assoc($current_students_result)){
 		<input type='submit' value='Assign' name='assign2'>
 		</form></td>";
 	}
-		echo "</tr>
-		</table>";
+		echo "</tr>";
 }
+echo "</table>";
 
 ?>
 
