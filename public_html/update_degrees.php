@@ -82,7 +82,7 @@ echo "<td><form method='post'>
 		$delete_query = "DELETE FROM degreerequirements WHERE degreename='$degreename' AND courseid = '$courseid';";
 		$delete_result = mysqli_query($connection, $delete_query);
 
-		if($delete_query){
+		if($delete_result){
 			echo "Course deleted successfully!";
 		}
 		else {
