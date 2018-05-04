@@ -220,15 +220,14 @@ echo "
 		echo "</select>";
 		echo "<p>Enter New Name</p><input type='text' name='newdegreename'>
 		<input type='hidden' name='action' value='update_degree_name'>
-		<br>
+		<br><br>
 		<input type='submit' name='submit' value='Update'>
 		</form";
 	}
 	if (strcmp($_POST['action'], 'input_degree') == 0) {
 
-		echo "<h2>Enter Degree Information.</h2><br>";
+		echo "<h2>Enter Degree Information: </h2>";
 		echo "<form method='post'>
-		<p>A degree must have three core courses.</p> <br>
 		<p>Degree Name<p><input type='text' name='degreename'>";
 		$courses_query = "SELECT courseid, dept, coursenum, title FROM courses;";
 		$courses_result1 = mysqli_query($connection,$courses_query);
@@ -258,7 +257,7 @@ echo "
 		}
 		echo "</select>
 		<input type='hidden' name='action' value='add_degree'>
-		<br>
+		<br><br>
 		<input type='submit' name='submit' value='Add Degree'>
 		</form>";
 
@@ -320,7 +319,7 @@ echo "
 			echo "</option>";
 		}
 		echo "</select>";
-		echo "<input type='hidden' name='action' value='update_degree'><br>
+		echo "<input type='hidden' name='action' value='update_degree'><br><br>
 		<input type='submit' name='submit' value='Update'>
 		</form>";
 
