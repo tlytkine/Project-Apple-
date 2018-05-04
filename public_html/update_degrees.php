@@ -33,7 +33,7 @@ while($row = mysqli_fetch_assoc($degree_result)){
 	<input type='hidden' name='action' value='delete'>
 	<input type='hidden' name='degreename' value='".$row['degreename']."'>
 	<input type='hidden' name='courseid' value='".$row['courseid']."'>
-	<input type='submit' value='Remove'
+	<input type='submit' value='Remove'>
 	</form></td> 
 	</tr>";
 }
@@ -45,7 +45,7 @@ echo "<form method='post'>
 	<input type='hidden' name='action' value='input_degree'>
 	<input type='submit' value='Add Degree'>
 	</form></td>";
-echo "<td><form method='post'>
+echo "<td><br><form method='post'>
 	<input type='hidden' name='action' value='edit_degree_requirements'>
 	<input type='submit' value='Edit Degree Requirements'>
 	</form></td></tr></table>";
