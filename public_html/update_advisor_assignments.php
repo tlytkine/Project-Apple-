@@ -83,10 +83,11 @@ while($row = mysqli_fetch_assoc($result)){
 	while($row1 = mysqli_fetch_assoc($facultyresult)){
 
 		echo "<option value ='".$row1['facultyid']."' name='facultyidother'>".$row1['facultyfirstname']." ".$row1['facultylastname']."</option>
-		</select>
-		<input type='submit' value='assign' name='assign1'>
 		<input type='hidden' name='studentidother' value ='".$row['studentid']."'>
 		<input type='hidden' name='facultyidother' value ='".$row1['facultyidother']."'>
+		</select>
+
+		<input type='submit' value='assign' name='assign1'>
 		</form></td>";
 	}
 		echo "</tr>
@@ -128,10 +129,10 @@ while($row = mysqli_fetch_assoc($current_students_result)){
 	while($row1 = mysqli_fetch_assoc($facultyresult)){
 
 		echo "<option value ='".$row1['facultyid']."' name='facultyidnew'>".$row1['facultyfirstname']." ".$row1['facultylastname']."</option>
-		</select>
-		<input type='submit' value='Assign' name='assign2'>
 		<input type='hidden' name='studentidnew' value ='".$row['studentid']."'>
 		<input type='hidden' name='facultyidnew' value ='".$row1['facultyid']."'>
+		</select>
+		<input type='submit' value='Assign' name='assign2'>
 		</form></td>";
 	}
 		echo "</tr>
