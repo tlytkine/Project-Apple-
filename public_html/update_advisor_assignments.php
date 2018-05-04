@@ -9,6 +9,24 @@
 <?php 
 $id = $_SESSION["id"];
 
+$assign = $_POST['assign'];
+
+if($assign){
+
+	$facultyid = $_POST['facultyid'];
+	$studentid = $_POST['studentid'];
+
+	$advisor_update = "UPDATE advises SET facultyid = '$facultyid' WHERE 
+	studentid = '$studentid';";
+	$advisor_result = mysqli_query($connection, $advisor_result);
+
+	if($advisor_result){
+		echo "Advisor sucessfully assigned!";
+	}
+	else {
+		echo "Advisor was not able to be assigned.";
+	}
+}
 
 
 $query = "SELECT P1.firstname AS studentfirstname, P1.lastname AS studentlastname, P1.id AS studentid, hold, degreename, P2.firstname AS advisorfirstname, P2.lastname AS advisorlastname, P2.id AS advisorid FROM personalinfo AS P1, personalinfo AS P2, roles AS R1, roles AS R2,  advises WHERE R1.role='STUDENT' AND R1.id = P1.id AND advises.studentid = P1.id AND P2.id = advises.facultyid AND R2.role = 'ADVISOR' AND R2.id = advises.facultyid;";
@@ -59,24 +77,7 @@ echo "<h1>Assign New Faculty Advisor</h1>";
 
 
 
-$assign = $_POST['assign'];
 
-if($assign){
-
-	$facultyid = $_POST['facultyid'];
-	$studentid = $_POST['studentid'];
-
-	$advisor_update = "UPDATE advises SET facultyid = '$facultyid' WHERE 
-	studentid = '$studentid';";
-	$advisor_result = mysqli_query($connection, $advisor_result);
-
-	if($advisor_result){
-		echo "Advisor sucessfully assigned!";
-	}
-	else {
-		echo "Advisor was not able to be assigned.";
-	}
-}
 
 $current_students = "SELECT firstname,lastname,personalinfo.id,degreename,hold FROM personalinfo, advises, roles WHERE personalinfo.id = roles.id AND roles.role = 'STUDENT' AND advises.studentid = roles.id AND advises.facultyid IS NULL;";
 $current_students_result = mysqli_query($connection, $current_students);
