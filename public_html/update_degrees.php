@@ -156,7 +156,7 @@ $id = $_SESSION["id"];
 			echo "<tr>
 			<td>".$row['degreename']."</td>
 			<td>&nbsp;&nbsp;".$row['courseid']."</td>
-			<td>&nbsp;$nbsp;".$row['dept']."</td>
+			<td>&nbsp;&nbsp;".$row['dept']."</td>
 			<td>&nbsp;&nbsp;".$row['coursenum']."</td>
 			<td>&nbsp;&nbsp;".$row['title']."</td>
 			<td><form method='post'>
