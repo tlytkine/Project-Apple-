@@ -7,6 +7,9 @@
 	<link rel='stylesheet' href='style.css'>
 	<body>
 <?php
+
+
+	echo "<h1>New Student Advising Form</h1>";
 	$student_query = "SELECT firstname, lastname FROM personalinfo WHERE id=$studentid;";
 	$student_result = mysqli_query($connection, $student_query);
 	$row = mysqli_fetch_assoc($student_result);
@@ -30,8 +33,10 @@
 	$row = mysqli_fetch_assoc($degree_name_result);
 	$degreename = $row['degreename'];
 
+	$complete = $_POST['complete'];
 
 	// Puts courses entered into an array 
+	if($complete){
 		for($i = 1; $i <= 12; $i++) {
 			$courses[$i] = $_POST["course$i"];
 		}
@@ -67,9 +72,9 @@
 		
 		}
 		//Inserts courses into new studentadvisingform table and counts number of successful inserts
-		if($total_course_count >= 10){
-			$successful_insert_count = 0;
-			for($i=1; $i<=12; $i++){
+		else{
+				$successful_insert_count = 0;
+				for($i=1; $i<=12; $i++){
 					if($courses[$i]>0){
 						$advising_form_insert_query = "INSERT INTO newstudentadvisingform(studentid,courseid,facultyid) VALUES($studentid,$courses[$i],$faculty_id);";
 						$advising_form_insert_result = mysqli_query($connection,$advising_form_insert_query);
@@ -82,7 +87,12 @@
 					$advising_form_submitted = "Advising form successfully submitted! Once your faculty advisor signs off on this form, your registration hold will be lifted off of your acccount.";
 				}
 		}
+	}
 
+	// Check to see if student has an advisor yet 
+	$advisor_check_query = "SELECT facultyid FROM advises WHERE studentid=$studentid;";
+	$advisor_check_result = mysqli_query($connection,$advisor_check_query);
+	$row2 = mysqli_fetch_assoc($advisor_check_result);
 
 
 
@@ -96,8 +106,6 @@
 	$check_hold_result = mysqli_query($connection,$check_hold_query);
 	$row = mysqli_fetch_assoc($check_hold_result);
 
-	echo "<h1>New Student Advising Form</h1>";
-
 	if(ISSET($row1['studentid'])){
 		echo "You have already submitted an advising form. Please wait for your advisor to sign off on your form 
 		to lift your registration hold.";
@@ -107,6 +115,9 @@
 	}
 	else if($advising_form_submitted){
 		echo $advising_form_submitted;
+	}
+	else if(!(ISSET($row2['facultyid'])) ){
+		echo "You do not have access to this form because a faculty advisor has not been assigned to you yet.";
 	}
 	else {
 		echo "<p>This form must be filled out to lift the initial registration hold off of your account.</p>
@@ -134,20 +145,16 @@
 			echo "</select>
 			<br><br>";
 		}
-			if($core_course_error){
-				echo $core_course_error;
-				echo "<br>";
-			}
-			else if($total_course_error){
-				echo $total_course_error;
-				echo "<br>";
-			}
-			echo "<input type='submit' value='Submit Form'>";
+			echo "<input type='hidden' name='complete' value='complete'>
+			<input type='submit' value='Submit Form'>";
 	}
 
-
-
-
+	if($core_course_error){
+		echo $core_course_error;
+	}
+	else if($total_course_error){
+		echo $total_course_error;
+	}
 
 	echo "</body>";
 	echo "</html>";
