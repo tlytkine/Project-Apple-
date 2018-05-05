@@ -14,57 +14,10 @@ $id = $_SESSION["id"];
 <?php
 
 
-$approve = $_POST["approve"];
+$approve = $_POST['approve'];
+$deny = $_POST['deny'];
 $sid = $_POST["studentid"];
 
-if($approve){
-	$studentinfoquery = "SELECT * FROM personalinfo WHERE id = $sid;";
-	$studentinforesult = mysqli_query($connection, $studentinfoquery);
-
-	$studentinfo = mysqli_fetch_assoc($studentinforesult);
-
-	$firstname = $studentinfo['firstname'];
-	$lastname = $studentinfo['lastname'];
-	$dob = $studentinfo['dob'];
-	$address = $studentinfo['address'];
-	$ssn = $studentinfo['ssn'];
-
-
-	$currentyearquery = "SELECT year FROM courses LIMIT 1;";
-	$currentyearresult = mysqli_query($connection, $currentyearquery);
-
-	$currentyear = mysqli_fetch_assoc($currentyearresult);
-
-	$year = $currentyear['year'];
-
-
-	$degreenamequery = "SELECT degreename FROM advises WHERE studentid=$sid;";
-	$degreenameresult = mysqli_query($connection, $degreenamequery);
-	$degreenamefetch = mysqli_fetch_assoc($degreenameresult);
-
-	$degreename = $degreenamefetch['degreename'];
-
-	$insertalumniquery = "INSERT INTO alumnipersonalinfo(id,firstname,lastname,dob,address,graduationyear,degreename,ssn) VALUES($sid,'$firstname','$lastname','$dob','$address',$year,'$degreename','$ssn');";
-	$insertalumniresult = mysqli_query($connection, $insertalumniquery);
-
-
-
-
-	$deletestudentquery = "DELETE FROM personalinfo WHERE id = '$sid';";
-	$deletestudentresult = mysqli_query($connection, $deletestudentquery);
-
-	$updaterolequery = "UPDATE roles SET role='ALUMNI' WHERE id='$sid' AND ROLE='STUDENT';";
-	$updateroleresult = mysqli_query($connection, $updaterolequery);
-
-	echo "Student is now an alumni!";
-
-}
-
-if($deny){
-	$denyquery = "DELETE FROM graduationapplication WHERE studentid='$sid';";
-	$denyresult = mysqli_query($connection, $denyquery);
-	echo "Students graduation application deleted from system!";
-}
 
 
 
@@ -113,27 +66,60 @@ while($row=mysqli_fetch_assoc($applications_result)){
 }
 echo "</table>";
 
-
-$deny = $_POST["deny"];
-$approve = $_POST["approve"];
-
 if($approve){
-	$studentid = $_POST["studentid"];
-	$approve_query = "DELETE FROM graduationapplication WHERE studentid='$studentid';";
-	$approve_result = mysqli_query($connection,$approve_query);
+	$studentinfoquery = "SELECT * FROM personalinfo WHERE id = $sid;";
+	$studentinforesult = mysqli_query($connection, $studentinfoquery);
 
-	$change_to_alumni_query = "UPDATE roles SET role ='ALUMNI' WHERE id='$studentid';";
-	$change_to_alumni_result = mysqli_query($connection,$change_to_alumni_query);
-	if($approve_result && $change_to_alumni_result){
-		echo "Application cleared! Student can now login as an alumni";
+	$studentinfo = mysqli_fetch_assoc($studentinforesult);
+
+	$firstname = $studentinfo['firstname'];
+	$lastname = $studentinfo['lastname'];
+	$dob = $studentinfo['dob'];
+	$address = $studentinfo['address'];
+	$ssn = $studentinfo['ssn'];
+
+
+	$currentyearquery = "SELECT year,semester FROM courses LIMIT 1;";
+	$currentyearresult = mysqli_query($connection, $currentyearquery);
+
+	$currentyear = mysqli_fetch_assoc($currentyearresult);
+
+	$year = $currentyear['year'];
+	$semester = $currentyear['semester'];
+
+
+	$degreenamequery = "SELECT degreename FROM advises WHERE studentid=$sid;";
+	$degreenameresult = mysqli_query($connection, $degreenamequery);
+	$degreenamefetch = mysqli_fetch_assoc($degreenameresult);
+
+	$degreename = $degreenamefetch['degreename'];
+
+	$insertalumniquery = "INSERT INTO alumnipersonalinfo(id,firstname,lastname,dob,address,graduationyear,graduationsemester,degreename,ssn) VALUES($sid,'$firstname','$lastname','$dob','$address','$year','$semester','$degreename','$ssn');";
+	$insertalumniresult = mysqli_query($connection, $insertalumniquery);
+
+	$deletestudentquery = "DELETE FROM personalinfo WHERE id = $sid;";
+	$deletestudentresult = mysqli_query($connection, $deletestudentquery);
+
+	$updaterolequery = "UPDATE roles SET role='ALUMNI' WHERE id=$sid;";
+	$updateroleresult = mysqli_query($connection, $updaterolequery);
+
+	echo "Student is now an alumni!";
+
+}
+
+if($deny){
+	$denyquery = "DELETE FROM graduationapplication WHERE studentid=sid;";
+	$denyresult = mysqli_query($connection, $denyquery);
+	if($denyresult){
+		echo "Students graduation application deleted from system!";
+	}
+	else{
+		echo "Error deleting student from system.";
 	}
 }
-else if($deny){
-	$studentid = $_POST["studentid"];
-	$approve_query = "DELETE FROM graduationapplication WHERE studentid='$studentid';";
-	$approve_result = mysqli_query($connection,$approve_query);
 
-}
+
+
 
 
 
