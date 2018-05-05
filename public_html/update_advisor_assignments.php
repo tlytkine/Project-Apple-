@@ -115,54 +115,60 @@
 	}
 
 	echo "<br>";
-	$current_students = "SELECT firstname,lastname,personalinfo.id,degreename,hold FROM personalinfo, advises, roles WHERE personalinfo.id = roles.id AND roles.role = 'STUDENT' AND advises.studentid = roles.id AND advises.facultyid IS NULL;";
-	$current_students_result = mysqli_query($connection, $current_students);
-
-	if($current_students_result){
-
-		echo "<h1>Assign New Faculty Advisor</h1>";
-
-		$facultyquery = "SELECT firstname AS facultyfirstname,lastname AS facultylastname,personalinfo.id AS facultyid FROM personalinfo,roles WHERE personalinfo.id = roles.id AND roles.role='ADVISOR';";
-		$facultyresult = mysqli_query($connection,$facultyquery);
 
 
-		echo "<table>
-		<tr>
-		<th>Name</th>
-		<th>Student ID</th>
-		<th>Hold</th>
-		<th>Degree Name</th>
-		<th>&nbsp;&nbsp;&nbsp;Assign</th>
-		</tr>";
+	$new_student_check_query = "SELECT * FROM advises WHERE facultyid IS NULL;";
+	$new_student_check_result = mysqli_query($connection,$new_student_check_query);
+
+	$new_students = mysqli_fetch_assoc($new_student_check_result);
+	if(ISSET($new_students['studentid'])){
+
+		$current_students = "SELECT firstname,lastname,personalinfo.id,degreename,hold FROM personalinfo, advises, roles WHERE personalinfo.id = roles.id AND roles.role = 'STUDENT' AND advises.studentid = roles.id AND advises.facultyid IS NULL;";
+		$current_students_result = mysqli_query($connection, $current_students);
+
+			echo "<h1>Assign New Faculty Advisor</h1>";
+
+			$facultyquery = "SELECT firstname AS facultyfirstname,lastname AS facultylastname,personalinfo.id AS facultyid FROM personalinfo,roles WHERE personalinfo.id = roles.id AND roles.role='ADVISOR';";
+			$facultyresult = mysqli_query($connection,$facultyquery);
+
+
+			echo "<table>
+			<tr>
+			<th>Name</th>
+			<th>Student ID</th>
+			<th>Hold</th>
+			<th>Degree Name</th>
+			<th>&nbsp;&nbsp;&nbsp;Assign</th>
+			</tr>";
 
 
 
-		while($row = mysqli_fetch_assoc($current_students_result)){
-			$studentidnew = $row['id'];
-			echo "<tr>
-			<td>".$row['firstname']." ".$row['lastname']."</td>
-			<td>".$row['id']."</td>
-			<td>".$row['hold']."</td>
-			<td>".$row['degreename']."</td>
-			<td><form method='post'><select name ='facultyidnew'>";
-			while($row1 = mysqli_fetch_assoc($facultyresult)){
-				echo "<option value ='".$row1['facultyid']."' name='facultyidnew'>".$row1['facultyfirstname']." ".$row1['facultylastname']."</option>";
+			while($row = mysqli_fetch_assoc($current_students_result)){
+				$studentidnew = $row['id'];
+				echo "<tr>
+				<td>".$row['firstname']." ".$row['lastname']."</td>
+				<td>".$row['id']."</td>
+				<td>".$row['hold']."</td>
+				<td>".$row['degreename']."</td>
+				<td><form method='post'><select name ='facultyidnew'>";
+				while($row1 = mysqli_fetch_assoc($facultyresult)){
+					echo "<option value ='".$row1['facultyid']."' name='facultyidnew'>".$row1['facultyfirstname']." ".$row1['facultylastname']."</option>";
+				}
+				echo "</select><input type='hidden' name='studentidnew' value ='".$row['id']."'>
+				<input type='submit' value='Assign' name='assign2'>";
+				echo "</form></td>";
+				echo "</tr>";
 			}
-			echo "</select><input type='hidden' name='studentidnew' value ='".$row['id']."'>
-			<input type='submit' value='Assign' name='assign2'>";
-			echo "</form></td>";
-			echo "</tr>";
-		}
-		echo "</table>";
-		echo "<br>";
-		if($assignsuccess2){
-			echo $assignsuccess2;
+			echo "</table>";
 			echo "<br>";
-		}
-		else if($alreadyassigned2){
-			echo $alreadyassigned2;
-			echo "<br>";
-		}
+			if($assignsuccess2){
+				echo $assignsuccess2;
+				echo "<br>";
+			}
+			else if($alreadyassigned2){
+				echo $alreadyassigned2;
+				echo "<br>";
+			}
 	}
 	else {
 		echo "There are currently no students in the system that do not have faculty advisors assigned to them.";
