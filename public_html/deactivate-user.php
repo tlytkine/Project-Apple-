@@ -2,7 +2,7 @@
 <body>
 <head>
     <meta charset="UTF-8">
-    <title>View Schedule</title>
+    <title>Deactivate Users</title>
     <link rel="stylesheet" href="style.css">
 </head>
 
