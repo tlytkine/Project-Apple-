@@ -25,6 +25,7 @@ include 'header.php';
 <a href='document-status.php'>Update Admissions Document Status</a> <br />
 <a href='view-admissions-applications.php'>View Admissions Applications and Reviews</a> <br />
 <a href='final-decisions.php'>Update Final Admissions Decisions</a> <br />
+<a href='admissions-statistics.php'>View Admissions Statistics</a> <br />
 
 <a href='search-student-transcripts.php'>View Student Transcripts</a> <br />
 <a href='search-student-grades.php'>Enter Student Grades</a> <br />
@@ -46,6 +47,7 @@ include 'header.php';
 <a href='document-status.php'>Update Admissions Document Status</a> <br />
 <a href='view-admissions-applications.php'>View Admissions Applications and Reviews</a> <br />
 <a href='final-decisions.php'>Update Final Admissions Decisions</a> <br />
+<a href='admissions-statistics.php'>View Admissions Statistics</a> <br />
 
 <a href='search-student-transcripts.php'>View Student Transcripts</a> <br />
 <a href='search-student-grades.php'>Enter Student Grades</a> <br />
