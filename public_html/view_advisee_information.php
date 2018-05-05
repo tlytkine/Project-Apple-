@@ -12,31 +12,37 @@ $id = $_SESSION["id"];
 
 <?php
 
-echo "<br><h2>Advisee Information</h2>";
+	echo "<br><h2>Advisee Information</h2>";
 
 
-$advisee_query = "SELECT firstname,lastname,studentid, hold, degreename FROM personalinfo,advises WHERE advises.facultyid='$id' AND personalinfo.id=advises.studentid;";
+	$advisee_query = "SELECT firstname,lastname,studentid, hold, degreename FROM personalinfo,advises WHERE advises.facultyid='$id' AND personalinfo.id=advises.studentid;";
 
-$advisee_result = mysqli_query($connection, $advisee_query);
+	$advisee_result = mysqli_query($connection, $advisee_query);
 
-echo "<table>
-<tr>
-<th>Name</th>
-<th>Student ID</th>
-<th>Hold</th>
-<th>Degree Name</th>
-</tr>";
+	$row = mysqli_fetch_assoc($advisee_result);
+	if(ISSET($row['studentid'])){
 
-while($row = mysqli_fetch_assoc($advisee_result)){
-	echo "<tr>
-	<td>".$row['firstname']." ".$row['lastname']."</td>
-	<td>".$row['studentid']."</td>
-	<td>".$row['hold']."</td>
-	<td>".$row['degreename']."</td>
-	</tr>";
-}
-echo "</table>";
+		echo "<table>
+		<tr>
+		<th>Name</th>
+		<th>Student ID</th>
+		<th>Hold</th>
+		<th>Degree Name</th>
+		</tr>";
 
+		while($row = mysqli_fetch_assoc($advisee_result)){
+			echo "<tr>
+			<td>".$row['firstname']." ".$row['lastname']."</td>
+			<td>".$row['studentid']."</td>
+			<td>".$row['hold']."</td>
+			<td>".$row['degreename']."</td>
+			</tr>";
+		}
+		echo "</table>";
+	}
+	else {
+		echo "You are not currently assigned as an advisor to any student.";
+	}
 
 ?>
 

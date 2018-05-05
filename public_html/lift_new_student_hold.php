@@ -89,8 +89,7 @@
 
 
 
-	echo "<h1>Lift New Student Holds</h1>
-	Welcome ".$advisorfirstname." ".$advisorlastname."<br>";
+	echo "<h1>Lift New Student Holds</h1>";
 
 	$advisee_info_query = "SELECT firstname, lastname, studentid, degreename, admityear, hold FROM advises, personalinfo WHERE advises.facultyid=$facultyid AND advises.hold='New Student' AND advises.studentid = personalinfo.id;";
 	$advisee_info_result = mysqli_query($connection,$advisee_info_query);
