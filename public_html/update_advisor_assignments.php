@@ -49,6 +49,9 @@
 		else if($advisor_result) {
 			$alreadyassigned2 = "Advisor is already assigned to student.";
 		}
+		else {
+
+		}
 
 		$current_students_result = mysqli_query($connection, $current_students);
 		$facultyresult = mysqli_query($connection,$facultyquery);
@@ -141,10 +144,9 @@
 			<td>".$row['id']."</td>
 			<td>".$row['hold']."</td>
 			<td>".$row['degreename']."</td>
-			<td><form method='post'><select name ='facultyid'>";
+			<td><form method='post'><select name ='facultyidnew'>";
 			while($row1 = mysqli_fetch_assoc($facultyresult)){
 				echo "<option value ='".$row1['facultyid']."' name='facultyidnew'>".$row1['facultyfirstname']." ".$row1['facultylastname']."</option>";
-
 			}
 			echo "</select><input type='hidden' name='studentidnew' value ='".$row['id']."'>
 			<input type='submit' value='Assign' name='assign2'>";
