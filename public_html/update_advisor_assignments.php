@@ -20,13 +20,18 @@ if($assign1){
 		studentid = $studentidother;";
 		$advisor_result = mysqli_query($connection, $advisor_update);
 
+		if(mysqli_affected_rows($connection)>0){
+			$assignsuccess1 = "Advisor successfully assigned!";
+		}
+		else {
+			$alreadyassigned = "Advisor is already assigned to student.";
+		}
+
 		$current_students_result = mysqli_query($connection, $current_students);
 		$facultyresult = mysqli_query($connection,$facultyquery);
 		$result = mysqli_query($connection, $query);
 
-		if($advisor_result){
-			$assignsuccess1 = "Advisor successfully assigned!";
-		}
+
 }
 
 if($assign2){
@@ -142,6 +147,11 @@ echo "<br>";
 if($assignsuccess1){
 	echo $assignsuccess1;
 	echo "<br>";
+}
+else if($alreadyassigned){
+	echo $alreadyassigned;
+	echo "<br>";
+
 }
 
 }
