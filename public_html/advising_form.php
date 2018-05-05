@@ -7,6 +7,9 @@
 	<link rel='stylesheet' href='style.css'>
 	<body>
 <?php
+
+
+	echo "<h1>New Student Advising Form</h1>";
 	$student_query = "SELECT firstname, lastname FROM personalinfo WHERE id=$studentid;";
 	$student_result = mysqli_query($connection, $student_query);
 	$row = mysqli_fetch_assoc($student_result);
@@ -86,9 +89,13 @@
 		}
 	}
 
+	// Check to see if student has an advisor yet 
+	$advisor_check_query = "SELECT facultyid FROM advises WHERE studentid=$studentid;";
+	$advisor_check_result = mysqli_query($connection,$advisor_check_query);
+	$row2 = mysqli_fetch_assoc($advisor_check_result);
 
 
-	echo "<h1>New Student Advising Form</h1>";
+
 	// Checks if student has already submitted form 
 	$advising_form_query = "SELECT hold FROM newstudentadvisingform WHERE studentid=$studentid;";
 	$advising_form_result = mysql_query($connection,$adivising_form_query);
@@ -108,6 +115,9 @@
 	}
 	else if($advising_form_submitted){
 		echo $advising_form_submitted;
+	}
+	else if(!(ISSET($row2['facultyid'])) ){
+		echo "You do not have access to this form because a faculty advisor has not been assigned to you yet.";
 	}
 	else {
 		echo "<p>This form must be filled out to lift the initial registration hold off of your account.</p>
