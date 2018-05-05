@@ -7,7 +7,12 @@
 	<link rel='stylesheet' href='style.css'>
 	<body>
 <?php
-	if(ISSET($_POST['lift_hold'])){
+
+
+
+	$lifthold = $_POST['lift_hold'];
+
+	if($lifthold){
 
 		$studentid = $_POST['studentid'];
 
@@ -25,19 +30,20 @@
 		}
 	}
 
+	$viewform = $_POST['view_form'];
 
-	if(ISSET($_POST['view_form'])){
+
+	if($viewform){
 		$studentid = $_POST['studentid'];
 		$studentfirstname = $_POST['studentfirstname'];
 		$studentlastname = $_POST['studentlastname'];
 		$submit_check_query = "SELECT courseid FROM newstudentadvisingform WHERE studentid=$studentid AND facultyid=$facultyid;";
 		$submit_check_result = mysqli_query($connection,$submit_check_query);
-		$row = mysqli_fetch_assoc($submit_check_result);
-		if(ISSET($row['courseid'])){
+		if($submit_check_result){
 			echo "<h2>New Student Advising Form</h2>
 			Student Name: ".$studentfirstname." ".$studentlastname."<br>
 			Student ID: ".$studentid;
-			$coures_entered_query = "SELECT newstudentadvisingform.courseid, courses.dept, courses.coursenum, courses.title, courses.credithours FROM newstudentadvisingform, courses WHERE newstudentadvisingform.studentid=$studentid AND newstudentadvisingform.facultyid=$facultyid;";
+			$coures_entered_query = "SELECT newstudentadvisingform.courseid,courses.dept,courses.coursenum,courses.title,courses.credithours FROM newstudentadvisingform, courses WHERE newstudentadvisingform.studentid=$studentid AND newstudentadvisingform.facultyid=$facultyid AND courses.courseid = newstudentadvisingform.courseid;";
 			$courses_entered_result = mysqli_query($connection,$courses_entered_query);
 			echo "Courses Entered: <br>";
 			echo "<table>
@@ -93,9 +99,8 @@
 
 	$advisee_info_query = "SELECT firstname, lastname, studentid, degreename, admityear, hold FROM advises, personalinfo WHERE advises.facultyid=$facultyid AND advises.hold='New Student' AND advises.studentid = personalinfo.id;";
 	$advisee_info_result = mysqli_query($connection,$advisee_info_query);
-	$row = mysqli_fetch_assoc($advisee_info_result);
 
-	if(ISSET($row['studentid'])){
+	if($advisee_info_result){
 		echo"<table>
 		<tr>
 		<th>Advisee</th>
@@ -104,7 +109,7 @@
 		<th>Admit Year</th> 
 		<th>View New Student Advising Form / Lift Hold</th>
 		</tr>";
-		while($row=mysqli_fetch_assoc($advisee_info)){
+		while($row=mysqli_fetch_assoc($advisee_info_result)){
 			echo "<tr>
 			<td>".$row['firstname']." ".$row['lastname']."</td>
 			<td>".$row['studentid']."</td>
