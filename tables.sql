@@ -238,6 +238,7 @@ INSERT INTO roles (id, role) VALUES (2, "GS");
 INSERT INTO users (email, password, id) VALUES ('simha@gwu.edu', '$2y$10$K7xpP4XPPWkgYJ0/I4XOtehbRigHUqpmXer99/Ftx1fERDU.JZObC', 3);
 INSERT INTO roles (id, role) VALUES (3, "INSTRUCTOR");
 INSERT INTO roles (id, role) VALUES (3, "CAC");
+INSERT INTO roles (id, role) VALUES (3, "REVIEWER");
 INSERT INTO roles (id, role) VALUES (3, "USER");
 INSERT INTO personalinfo VALUES('3', 'r', 'simha', '2000-01-01', '123 address st', '123-45-6789');
 
