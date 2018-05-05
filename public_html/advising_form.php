@@ -30,10 +30,8 @@
 	$row = mysqli_fetch_assoc($degree_name_result);
 	$degreename = $row['degreename'];
 
-	$complete = $_POST['complete'];
 
 	// Puts courses entered into an array 
-	if($complete){
 		for($i = 1; $i <= 12; $i++) {
 			$courses[$i] = $_POST["course$i"];
 		}
@@ -69,9 +67,9 @@
 		
 		}
 		//Inserts courses into new studentadvisingform table and counts number of successful inserts
-		else{
-				$successful_insert_count = 0;
-				for($i=1; $i<=12; $i++){
+		if($total_course_count >= 10){
+			$successful_insert_count = 0;
+			for($i=1; $i<=12; $i++){
 					if($courses[$i]>0){
 						$advising_form_insert_query = "INSERT INTO newstudentadvisingform(studentid,courseid,facultyid) VALUES($studentid,$courses[$i],$faculty_id);";
 						$advising_form_insert_result = mysqli_query($connection,$advising_form_insert_query);
@@ -84,7 +82,6 @@
 					$advising_form_submitted = "Advising form successfully submitted! Once your faculty advisor signs off on this form, your registration hold will be lifted off of your acccount.";
 				}
 		}
-	}
 
 
 
@@ -99,6 +96,8 @@
 	$check_hold_result = mysqli_query($connection,$check_hold_query);
 	$row = mysqli_fetch_assoc($check_hold_result);
 
+	echo "<h1>New Student Advising Form</h1>";
+
 	if(ISSET($row1['studentid'])){
 		echo "You have already submitted an advising form. Please wait for your advisor to sign off on your form 
 		to lift your registration hold.";
@@ -110,7 +109,6 @@
 		echo $advising_form_submitted;
 	}
 	else {
-		echo "<h1>New Student Advising Form</h1>";
 		echo "<p>This form must be filled out to lift the initial registration hold off of your account.</p>
 		<form method='post'>
 		<p><b>First Name:</b> ".$studentfirstname."</p>
@@ -136,16 +134,20 @@
 			echo "</select>
 			<br><br>";
 		}
-			echo "<input type='hidden' name='complete' value='complete'>
-			<input type='submit' value='Submit Form'>";
+			if($core_course_error){
+				echo $core_course_error;
+				echo "<br>";
+			}
+			else if($total_course_error){
+				echo $total_course_error;
+				echo "<br>";
+			}
+			echo "<input type='submit' value='Submit Form'>";
 	}
 
-	if($core_course_error){
-		echo $core_course_error;
-	}
-	else if($total_course_error){
-		echo $total_course_error;
-	}
+
+
+
 
 	echo "</body>";
 	echo "</html>";
