@@ -2,7 +2,7 @@
 <body>
 <head>
     <meta charset="UTF-8">
-    <title>Update Classes</title>
+    <title>View Students</title>
     <link rel="stylesheet" href="style.css">
 </head>
 
