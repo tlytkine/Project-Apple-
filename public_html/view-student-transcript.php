@@ -83,7 +83,7 @@ include 'header.php';
 		$sum = 0;
 
         /* display transcript information */
-		if (mysqli_num_rows($result) > 0 && $has_student == 1) && $is_student != 0){
+		if (mysqli_num_rows($result) > 0 && $has_student == 1 && $is_student != 0){
 			echo "<table>";
 			$cur_year = ""; //track current year
 			$cur_sem = ""; //track current semester
