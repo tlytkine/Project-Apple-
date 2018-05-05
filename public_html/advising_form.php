@@ -30,10 +30,8 @@
 	$row = mysqli_fetch_assoc($degree_name_result);
 	$degreename = $row['degreename'];
 
-	$complete = $_POST['complete'];
 
 	// Puts courses entered into an array 
-	if($complete){
 		for($i = 1; $i <= 12; $i++) {
 			$courses[$i] = $_POST["course$i"];
 		}
@@ -84,7 +82,7 @@
 					$advising_form_submitted = "Advising form successfully submitted! Once your faculty advisor signs off on this form, your registration hold will be lifted off of your acccount.";
 				}
 		}
-	}
+	
 
 
 
@@ -145,8 +143,7 @@
 				echo $total_course_error;
 				echo "<br>";
 			}
-			echo "<input type='hidden' name='complete' value='complete'>
-			<input type='submit' value='Submit Form'>";
+			echo "<input type='submit' value='Submit Form'>";
 	}
 
 
