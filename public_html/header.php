@@ -7,7 +7,7 @@ session_start();
 
 // Redirect to home page if accessing restricted page:
 /*
-if (!in_array($_SESSION["roles"], $allowed_user_types)) {
+if (empty(array_intersect($_SESSION["roles"], $allowed_user_types))) {
 	if (isset($_SESSION["roles"])) {
 		header("location: menu.php");
 	} else {
