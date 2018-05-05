@@ -2,7 +2,7 @@
 <body>
 <head>
     <meta charset="UTF-8">
-    <title>Update Classes</title>
+    <title>View Alumni</title>
     <link rel="stylesheet" href="style.css">
 </head>
 
@@ -30,10 +30,11 @@
         $current_year = $row["year"];
 
 		$year = $_POST["year"];
+        $semester = $_POST["semester"];
 
         $query = "SELECT a.firstname, a.lastname, u.email
                   FROM alumnipersonalinfo a, users u
-                  WHERE a.id = u.id AND a.graduationyear = '$year';";
+                  WHERE a.id = u.id AND a.graduationyear = '$year' AND a.graduationsemester = '$semester';";
 
         $result = mysqli_query($connection, $query);
 
@@ -88,9 +89,9 @@
     else{
 		echo '<form method="post" action="view-alumni.php">';
 
-        echo '<h4>Search by Graduation Year (and semester?)</h4>';
-		//echo "<input type='radio' name='semester' value='fall'>Fall";
-		//echo "<input type='radio' name='semester' value='spring'>Spring <br/>";
+        echo '<h4>Search by Graduation Year and semester</h4>';
+		echo "<input type='radio' name='semester' value='fall'>Fall";
+		echo "<input type='radio' name='semester' value='spring'>Spring <br/>";
         echo '<input type="text" name="year"><br>';
         echo '<input type="submit" name="year_search" value="Search">';
 
