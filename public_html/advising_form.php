@@ -88,21 +88,22 @@
 
 
 
-	// Checks if student has new student hold on account 
-	$check_hold_query = "SELECT hold FROM advises WHERE hold='New Student' AND studentid=$studentid;";
-	$check_hold_result = mysqli_query($connection,$check_hold_query);
-	$row = mysqli_fetch_assoc($check_hold_result);
 
 	// Checks if student has already submitted form 
 	$advising_form_query = "SELECT hold FROM newstudentadvisingform WHERE studentid=$studentid;";
 	$advising_form_result = mysql_query($connection,$adivising_form_query);
 	$row1 = mysqli_fetch_assoc($advising_form_result);
 
-	if(ISSET($row['studentid'])){
+	// Checks if student has new student hold on account 
+	$check_hold_query = "SELECT hold FROM advises WHERE hold='New Student' AND studentid=$studentid;";
+	$check_hold_result = mysqli_query($connection,$check_hold_query);
+	$row = mysqli_fetch_assoc($check_hold_result);
+
+	if(ISSET($row1['studentid'])){
 		echo "You have already submitted an advising form. Please wait for your advisor to sign off on your form 
 		to lift your registration hold.";
 	}
-	else if(ISSET($row1['hold'])){
+	else if($row['hold']!='New Student'){
 		echo "There is not a new student registration hold on your account. You do not have access to this form because your advisor has already lifted the hold on your account.";
 	}
 	else if($advising_form_submitted){
@@ -135,9 +136,10 @@
 			echo "</select>
 			<br><br>";
 		}
+			echo "<input type='hidden' name='complete' value='complete'>
+			<input type='submit' value='Submit Form'>";
 	}
-	echo "<input type='hidden' name='complete' value='complete'>
-	<input type='submit' value='Submit Form'>";
+
 	if($core_course_error){
 		echo $core_course_error;
 	}
