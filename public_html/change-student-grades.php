@@ -53,13 +53,27 @@ include 'header.php';
 
 	/* display page change a students grades */
 	if($grade_name_search){
+        /* make sure name entered is a student */
+		$query = "SELECT p.firstname, p.lastname
+			FROM personalinfo p, roles r
+			WHERE p.id = r.id AND r.role = 'STUDENT' AND p.firstname = '$fname' AND p.lastname = '$lname';";
+
+		$result = mysqli_query($connection, $query);
+
+		$row = mysqli_fetch_assoc($result);
+
+		$is_student = 0;
+		if (mysqli_num_rows($result) > 0){
+			$is_student = 1;
+		}
+
 	   	/* get and display student name*/
 		$query = "SELECT p.firstname, p.lastname
 			FROM personalinfo p
 			WHERE p.firstname = '$fname' AND p.lastname = '$lname';";
 
 		$result = mysqli_query($connection, $query);
-		if (mysqli_num_rows($result) == 0){
+        if (mysqli_num_rows($result) == 0 || $is_student == 0){
 			echo "This student doesn't exist";
 		}
 		else{
@@ -109,6 +123,21 @@ include 'header.php';
 
 	/* display page change a students grades */
 	if($grade_search || $_SESSION["reload"] == 1){
+        /* make sure name entered is a student */
+		$query = "SELECT r.id
+			FROM roles r
+			WHERE r.id = '$id' AND r.role = 'STUDENT';";
+
+		$result = mysqli_query($connection, $query);
+
+		$row = mysqli_fetch_assoc($result);
+
+		$is_student = 0;
+		if (mysqli_num_rows($result) > 0){
+			$is_student = 1;
+		}
+
+        /* fetch student's name */
 		$query = "SELECT p.firstname, p.lastname
 			FROM personalinfo p
 			WHERE p.id = '$id';";
@@ -118,7 +147,7 @@ include 'header.php';
 		$row = mysqli_fetch_assoc($result);
 
 		$notinclass = 0;
-		if (mysqli_num_rows($result) > 0){
+		if (mysqli_num_rows($result) > 0 && $is_student != 0){
 			echo "<h2>".$row["firstname"]." ".$row["lastname"]."</h2>";
 			$notinclass = 1;
 		}
@@ -157,7 +186,7 @@ include 'header.php';
 
 			$_SESSION["reload"] = 0;
 		}
-		else if ($notinclass == 1){
+		else if ($notinclass == 1 && $is_student != 0){
 			echo "You do not have this student";
 		}
 		else {

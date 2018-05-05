@@ -30,6 +30,20 @@ include 'header.php';
 
     /* display student's transcript using the name as the input*/
 	if($transcript_name_search){
+        /* make sure name entered is a student */
+		$query = "SELECT p.firstname, p.lastname
+			FROM personalinfo p, roles r
+			WHERE p.id = r.id AND r.role = 'STUDENT' AND p.firstname = '$fname' AND p.lastname = '$lname';";
+
+		$result = mysqli_query($connection, $query);
+
+		$row = mysqli_fetch_assoc($result);
+
+		$is_student = 0;
+		if (mysqli_num_rows($result) > 0){
+			$is_student = 1;
+		}
+
 		/* get and display student name*/
 		$query = "SELECT p.firstname, p.lastname
 			FROM personalinfo p
@@ -58,8 +72,8 @@ include 'header.php';
 		$weight = 0;
 		$sum = 0;
 
-		/* display transcript information */
-		if (mysqli_num_rows($result) > 0){
+        /* display transcript information */
+		if (mysqli_num_rows($result) > 0 && $is_student != 0 && $is_student != 0){
 			echo "<table>";
 			$cur_year = ""; //track current year
 			$cur_sem = ""; //track current semester
@@ -115,7 +129,7 @@ include 'header.php';
 			echo "<br/>";
 			echo "<h4> GPA: " . $gpa;
 		}
-		else if ($user_exists == 1){
+		else if ($user_exists == 1 && $is_student != 0){
 			echo "This student has not taken any of your classes yet";
 		}
 		else {
@@ -125,6 +139,20 @@ include 'header.php';
 
 	/* display transcript data */
 	if($transcript_search){
+        /* make sure name entered is a student */
+		$query = "SELECT r.id
+			FROM roles r
+			WHERE r.id = '$student_id' AND r.role = 'STUDENT';";
+
+		$result = mysqli_query($connection, $query);
+
+		$row = mysqli_fetch_assoc($result);
+
+		$is_student = 0;
+		if (mysqli_num_rows($result) > 0){
+			$is_student = 1;
+		}
+
 		/* get and display student name*/
 		$query = "SELECT p.firstname, p.lastname
 			FROM personalinfo p
@@ -154,7 +182,7 @@ include 'header.php';
 		$sum = 0;
 
 		/* display transcript information */
-		if (mysqli_num_rows($result) > 0){
+		if (mysqli_num_rows($result) > 0 && $is_student != 0){
 			echo "<table>";
 			$cur_year = ""; //track current year
 			$cur_sem = ""; //track current semester
@@ -210,7 +238,7 @@ include 'header.php';
 			echo "<br/>";
 			echo "<h4> GPA: " . $gpa;
 		}
-		else if ($user_exists == 1){
+		else if ($user_exists == 1 && $is_student != 0){
 			echo "This student has not taken any of your classes yet";
 		}
 		else {
