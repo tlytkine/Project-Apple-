@@ -146,7 +146,7 @@
 		<p><b>Student ID:</b> ".$studentid." </p>
 		<p><b>Enter Degree:</b> </p>
 		<select name='degreename'>";
-		$degree_query = "SELECT degreerequirements.degreename, degreerequirements.courseid, courses.dept, courses.coursenum, courses.title FROM degreerequirements, courses WHERE degreerequirements.courseid = courses.courseid;";
+		$degree_query = "SELECT DISTINCT degreename FROM degreerequirements, courses WHERE degreerequirements.courseid = courses.courseid;";
 		$degree_result = mysqli_query($connection, $degree_query);
 		while($row=mysqli_fetch_assoc($degree_result)){
 			echo "<option value='".$row['degreename']."'>";
