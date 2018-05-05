@@ -56,7 +56,7 @@ include 'header.php';
         /* make sure name entered is a student */
 		$query = "SELECT p.firstname, p.lastname
 			FROM personalinfo p, roles r
-			WHERE p.id = r.id AND r.role = 'STUDENT' AND p.firstname = '$fname' AND p.lastname = '$lname';";
+			WHERE p.id = r.id AND r.role = 'STUDENT' AND p.firstname LIKE '%$fname%' AND p.lastname LIKE '%$lname%';";
 
 		$result = mysqli_query($connection, $query);
 
@@ -70,7 +70,7 @@ include 'header.php';
 	   	/* get and display student name*/
 		$query = "SELECT p.firstname, p.lastname
 			FROM personalinfo p
-			WHERE p.firstname = '$fname' AND p.lastname = '$lname';";
+			WHERE p.firstname LIKE '%$fname%' AND p.lastname LIKE '%$lname%';";
 
 		$result = mysqli_query($connection, $query);
         if (mysqli_num_rows($result) == 0 || $is_student == 0){
@@ -84,7 +84,7 @@ include 'header.php';
 			/* get student grade information */
 			$query = "SELECT t.studentid, t.dept, t.coursenum, t.grade, t.semester, t.year, t.title
 				FROM transcripts t, personalinfo p
-				WHERE p.firstname = '$fname'  AND p.lastname = '$lname' AND p.id = t.studentid
+				WHERE p.firstname LIKE '%$fname%'  AND p.lastname LIKE '%$lname%' AND p.id = t.studentid
 				ORDER BY t.year, t.semester DESC;";
 
     		$result = mysqli_query($connection, $query);

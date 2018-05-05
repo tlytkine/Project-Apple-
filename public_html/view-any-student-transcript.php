@@ -33,7 +33,7 @@ include 'header.php';
         /* make sure name entered is a student */
 		$query = "SELECT p.firstname, p.lastname
 			FROM personalinfo p, roles r
-			WHERE p.id = r.id AND r.role = 'STUDENT' AND p.firstname = '$fname' AND p.lastname = '$lname';";
+			WHERE p.id = r.id AND r.role = 'STUDENT' AND p.firstname LIKE '%$fname%' AND p.lastname LIKE '%$lname%';";
 
 		$result = mysqli_query($connection, $query);
 
@@ -47,7 +47,7 @@ include 'header.php';
 		/* get and display student name*/
 		$query = "SELECT p.firstname, p.lastname
 			FROM personalinfo p
-			WHERE p.firstname = '$fname' AND p.lastname = '$lname';";
+			WHERE p.firstname LIKE '%$fname%' AND p.lastname LIKE '%$lname%';";
 
 		$result = mysqli_query($connection, $query);
 
@@ -63,7 +63,7 @@ include 'header.php';
 		$query = "SELECT t.dept, t.coursenum, c.credithours, t.grade, t.year, t.semester, t.title
 			FROM transcripts t, courses c, personalinfo p
 			WHERE t.coursenum = c.coursenum AND t.dept = c.dept AND
-			p.firstname = '$fname' AND p.lastname = '$lname' AND t.studentid = p.id
+			p.firstname LIKE '%$fname%' AND p.lastname LIKE '%$lname%' AND t.studentid = p.id
 			ORDER BY t.year, t.semester DESC;";
 
 		$result = mysqli_query($connection, $query);
@@ -122,7 +122,7 @@ include 'header.php';
 			}
 			echo "</table>";
 
-			$gpa = $sum / $total_credits;
+			$gpa = round($sum / $total_credits, 2);
 
 			echo "<br/>";
 			echo "<br/>";
@@ -231,7 +231,7 @@ include 'header.php';
 			}
 			echo "</table>";
 
-			$gpa = $sum / $total_credits;
+			$gpa = round($sum / $total_credits, 2);
 
 			echo "<br/>";
 			echo "<br/>";
