@@ -24,10 +24,10 @@ if (isset($_POST['lift'])) {
 	facultyid = '$facultyid'";
 	$lift_result = mysqli_query($connection, $lift_query);
 	if(mysqli_affected_rows($connection)>0){
-		echo "Hold was successfully lifted!";
+		$holdlifted = "Hold was successfully lifted!";
 	}
 	else {
-		echo "There was not a hold in place to be lifted.";
+		$holderror = "There was not a hold in place to be lifted.";
 	}
 }
 
@@ -46,14 +46,14 @@ if (isset($_POST['place'])) {
 
 			$place_result = mysqli_query($connection, $place_query);
 			if(mysqli_affected_rows($connection)>0){
-				echo "Hold was successfully placed!<br>";
+				$holdplaced = "Hold was successfully placed!<br>";
 			}
 			else {
-				echo "Please try a different hold.<br>";
+				$holdinvalid = "Please try a different hold.<br>";
 			}
 		}
 		else {
-			echo "Hold was not placed. Please enter a hold in the text field.<br>";
+			$holdblank = "Hold was not placed. Please enter a hold in the text field.<br>";
 		}
 	}
 }
@@ -98,6 +98,29 @@ echo "<tr><td>".$row['studentfirstname']." ".$row['studentlastname']."</td>
 </tr>";
 }
 echo "</table>";
+
+
+if($holdlifted){
+	echo $holdlifted;
+	echo "<br>";
+}
+else if($holderror){
+	echo $holderror;
+	echo "<br>";
+}
+else if($holdplaced){
+	echo $holdplaced;
+	echo "<br>";
+}
+else if($holdinvalid){
+	$holdinvalid;
+	echo "<br>";
+}
+else if($holdblank){
+	echo $holdblank;
+	echo "<br>";
+}
+
 ?>
 
 
