@@ -1,5 +1,3 @@
-
-
 <html lang="en-US">
 <head>
     <meta charset="UTF-8">
@@ -20,7 +18,7 @@ include 'header.php';
 <h1>Admissions Applications and Reviews</h1>
 
 <form method="POST" id="search">
-    Application ID: <input type="number" min=1 max=2147483647 name="id">
+    ID: <input type="number" min=1 max=2147483647 name="id">
     Last Name: <input type="text" max=30 name="lastname">
 	<br />
 	Degree Type:
@@ -49,7 +47,7 @@ $query = "SELECT *
 	FROM admissionsapplication, academicinfo, applicantpersonalinfo
 	WHERE admissionsapplication.id = academicinfo.applicationid AND admissionsapplication.id = applicantpersonalinfo.id";
 
-if (!isset($_POST['viewall']) && $_POST['id'] > 0) {
+if (!isset($_POST['viewall']) && isset($_POST['id']) &&  $_POST['id'] > 0) {
 	$id = mysqli_real_escape_string($connection, trim($_POST['id']));
 	$query = $query . " AND applicantpersonalinfo.id = $id";
 }
@@ -57,15 +55,15 @@ if (!isset($_POST['viewall']) && isset($_POST['lastname'])) {
 	$name = $_POST['lastname'];
 	$query = $query . " AND lastname LIKE '%$name%'";
 }
-if (!isset($_POST['viewall']) && $_POST['degree'] != "") {
+if (!isset($_POST['viewall']) && isset($_POST['degree']) && $_POST['degree'] != "") {
 	$degree = $_POST['degree'];
 	$query = $query . " AND degreeapplyingfor = '$degree'";
 }
-if (!isset($_POST['viewall']) && $_POST['semester'] != "") {
+if (!isset($_POST['viewall']) && isset($_POST['semester']) && $_POST['semester'] != "") {
 	$semester = $_POST['semester'];
 	$query = $query . " AND semester = '$semester'";
 }
-if (!isset($_POST['viewall']) && $_POST['year'] > 0) {
+if (!isset($_POST['viewall']) && isset($_POST['year']) && $_POST['year'] > 0) {
 	$year = $_POST['year'];
 	$query = $query . " AND year = $year";
 }
