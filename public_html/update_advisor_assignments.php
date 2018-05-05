@@ -23,7 +23,7 @@ if($assign1){
 		if(mysqli_affected_rows($connection)>0){
 			$assignsuccess1 = "Advisor successfully assigned!";
 		}
-		else {
+		else if($advisor_result){
 			$alreadyassigned1 = "Advisor is already assigned to student.";
 		}
 
@@ -45,7 +45,7 @@ if($assign2){
 		if(mysqli_affected_rows($connection)>0){
 			$assignsuccess2 = "Advisor successfully assigned!";
 		}
-		else {
+		else if($advisor_result) {
 			$alreadyassigned2 = "Advisor is already assigned to student.";
 		}
 
