@@ -143,8 +143,13 @@
 				echo "<td>".$prereqCRN["prereqid"]."</td>";
 
                 echo "<form method='post' action='register.php'>";
-                echo "<td><input type='submit' name='reg' value='Register'></td>";
-                echo "</tr>";
+                echo "<td><input type='submit' name='reg' value='Register'>";
+
+                if(in_array($row['courseid'], $classes)){
+                    echo "<input type='submit' name='drop' value='Drop'>";
+                }
+
+                echo "</td></tr>";
 
                 /* pass through info needed to register grade */
                 echo "<input type='hidden' name='regCRN' value=".$row["courseid"]."></form>";
@@ -192,8 +197,13 @@
 				echo "<td>".$prereqCRN["prereqid"]."</td>";
 
                 echo "<form method='post' action='register.php'>";
-                echo "<td><input type='submit' name='reg' value='Register'></td>";
-                echo "</tr>";
+                echo "<td><input type='submit' name='reg' value='Register'>";
+
+                if(in_array($row['courseid'], $classes)){
+                    echo "<input type='submit' name='drop' value='Drop'>";
+                }
+
+                echo "</td></tr>";
 
                 /* pass through info needed to register grade */
                 echo "<input type='hidden' name='regCRN' value=".$row["courseid"]."></form>";
