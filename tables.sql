@@ -63,7 +63,7 @@ CREATE TABLE alumnipersonalinfo (
     lastname           VARCHAR(30),
     dob                DATE,
     address            VARCHAR (100),
-    graduationyear     INT,
+    graduationyear     YEAR,
     graduationsemester VARCHAR(30),
     degreename         VARCHAR(30),
     ssn                VARCHAR (11),
