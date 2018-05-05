@@ -121,12 +121,13 @@
 	$new_student_check_result = mysqli_query($connection,$new_student_check_query);
 
 	$new_students = mysqli_fetch_assoc($new_student_check_result);
+
+	echo "<h1>Assign New Faculty Advisor</h1>";
 	if(ISSET($new_students['studentid'])){
 
 		$current_students = "SELECT firstname,lastname,personalinfo.id,degreename,hold FROM personalinfo, advises, roles WHERE personalinfo.id = roles.id AND roles.role = 'STUDENT' AND advises.studentid = roles.id AND advises.facultyid IS NULL;";
 		$current_students_result = mysqli_query($connection, $current_students);
 
-			echo "<h1>Assign New Faculty Advisor</h1>";
 
 			$facultyquery = "SELECT firstname AS facultyfirstname,lastname AS facultylastname,personalinfo.id AS facultyid FROM personalinfo,roles WHERE personalinfo.id = roles.id AND roles.role='ADVISOR';";
 			$facultyresult = mysqli_query($connection,$facultyquery);
