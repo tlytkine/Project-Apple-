@@ -8,11 +8,10 @@ $id = $_SESSION["id"];
 <head><title>Advisee Information</title></head>
 <link rel="stylesheet" href="style.css">
 <body>
-<b>Advisee Information</b><br>
 
 <?php
 
-	echo "<br><h2>Advisee Information</h2>";
+	echo "<h1>Advisee Information</h1>";
 
 
 	$advisee_query = "SELECT firstname,lastname,studentid, hold, degreename FROM personalinfo,advises WHERE advises.facultyid='$id' AND personalinfo.id=advises.studentid;";
