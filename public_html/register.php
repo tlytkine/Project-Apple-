@@ -208,7 +208,7 @@
 		$prereqs = mysqli_query($connection, $query);
 		if(mysqli_num_rows($prereqs) > 0) {
 			while($prereqCRN = mysqli_fetch_assoc($prereqs)){
-				$query = "SELECT * FROM transcripts t, courses c WHERE t.studentid = '$sid' AND c.coursenum = t.coursenum AND c.dept = t.dept AND c.courseid = '".$prereqCRN["prereqid"]."';";
+				$query = "SELECT * FROM transcripts t, courses c WHERE t.studentid = '$sid' AND c.coursenum = t.coursenum AND c.dept = t.dept AND t.grade != 'IP' AND c.courseid = '".$prereqCRN["prereqid"]."';";
 				$taken = mysqli_query($connection, $query);
 				if(mysqli_num_rows($taken) == 0) {
 					$passPrereqs = 0;
@@ -218,9 +218,9 @@
 
 		/*error message */
 		if ($passPrereqs == 0) {
-			echo "You do not have the required prereqs </br>";
+			echo "You hve not completed the required prereqs </br>";
 		}
-
+ 
 		/* perform checks for schedule conflicts */
 		/* get student schedule (just day and time) */
 		$query = "SELECT c.courseid, c.day, c.time
