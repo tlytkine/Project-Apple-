@@ -19,7 +19,7 @@ $facultyid = $_POST['facultyid'];
 # Lift Hold Button 
 if (isset($_POST['lift'])) {
 	$lift_query = "UPDATE advises
-	SET hold='NULL'
+	SET hold=NULL
 	WHERE studentid = '$studentid' AND 
 	facultyid = '$facultyid'";
 	$lift_result = mysqli_query($connection, $lift_query);
