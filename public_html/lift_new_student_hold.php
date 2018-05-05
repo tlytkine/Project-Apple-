@@ -67,9 +67,8 @@
 			echo "</table>
 
 			<form method='post'>
-			<input type='hidden' name='lift_hold'>
 			<input type='hidden' name='studentid' value='$studentid'>
-			<input type='submit' value='Lift Hold'>
+			<input type='submit' value='Lift Hold' name='lift_hold'>
 			</form>";
 	
 		}
@@ -116,11 +115,10 @@
 			<td>".$row['degreename']."</td>
 			<td>".$row['admityear']."</td>
 			<td><form method='post'>
-			<input type='hidden' name='view_form'>
 			<input type='hidden' name='studentid' value='".$row['studentid']."'>
 			<input type='hidden' name='studentfirstname' value='".$row['firstname']."'>
 			<input type='hidden' name='studentlastname' value='".$row['lastname']."'>
-			<input type='submit' value='View Form'>
+			<input type='submit' value='View Form' name='view_form'>
 			</form></td>
 			</tr>";
 		}
