@@ -67,9 +67,9 @@
 		
 		}
 		//Inserts courses into new studentadvisingform table and counts number of successful inserts
-		else{
-				$successful_insert_count = 0;
-				for($i=1; $i<=12; $i++){
+		if($total_course_count >= 10){
+			$successful_insert_count = 0;
+			for($i=1; $i<=12; $i++){
 					if($courses[$i]>0){
 						$advising_form_insert_query = "INSERT INTO newstudentadvisingform(studentid,courseid,facultyid) VALUES($studentid,$courses[$i],$faculty_id);";
 						$advising_form_insert_result = mysqli_query($connection,$advising_form_insert_query);
@@ -82,7 +82,6 @@
 					$advising_form_submitted = "Advising form successfully submitted! Once your faculty advisor signs off on this form, your registration hold will be lifted off of your acccount.";
 				}
 		}
-	
 
 
 
