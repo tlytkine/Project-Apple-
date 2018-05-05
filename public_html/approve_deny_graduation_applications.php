@@ -99,13 +99,13 @@ while($row=mysqli_fetch_assoc($applications_result)){
 		echo "Not cleared.</td>";
 	}
 	echo "<td>";
-	echo "<form method='post' action='approve_deny_graduation_applications.php'>
+	echo "<form method='post'>
 	<input type='submit' value='Approve' name='approve'>
 	<input type='hidden' value='$studentid' name='studentid'>
 	</form>";
 	echo "</td>";
 	echo"<td>"; 
-	echo "<form method='post' action='approve_deny_graduation_applications.php'>
+	echo "<form method='post'>
 	<input type='submit' value='Deny' name='deny'>
 	<input type='hidden' value='$studentid' name='studentid'>
 	</form>";
@@ -124,6 +124,9 @@ if($approve){
 
 	$change_to_alumni_query = "UPDATE roles SET role ='ALUMNI' WHERE id='$studentid';";
 	$change_to_alumni_result = mysqli_query($connection,$change_to_alumni_query);
+	if($approve_result && $change_to_alumni_result){
+		echo "Application cleared! Student can now login as an alumni";
+	}
 }
 else if($deny){
 	$studentid = $_POST["studentid"];

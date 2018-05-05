@@ -1,25 +1,25 @@
 <?php 
 	include 'header.php';
 	include 'db-connect.php';
-	$id = $_SESSION["id"];
-	$query = "SELECT firstname, lastname
-	FROM personalinfo WHERE id='$id';";
-	$result = mysqli_query($connection, $query);
-	$row = mysqli_fetch_assoc($result);
-	$firstname = $row['firstname'];
-	$lastname = $row['lastname'];
+	$studentid = $_SESSION["id"];
+	$student_info_query = "SELECT firstname, lastname
+	FROM personalinfo WHERE id=$studentid;";
+	$student_info_result = mysqli_query($connection, $student_info_query);
+	$row = mysqli_fetch_assoc($student_info_result);
+	$studentfirstname = $row['firstname'];
+	$studentlastname = $row['lastname'];
 
 
-	$fid_query = "SELECT facultyid FROM advises WHERE studentid = '$id';";
-	$fid_result = mysqli_query($connection, $fid_query);
-	$row = mysqli_fetch_assoc($fid_result);
-	$fid = $row['facultyid'];
-	$fa_query = "SELECT firstname, lastname FROM personalinfo 
-	WHERE id = '$fid';";
-	$fa = mysqli_query($connection, $fa_query);
-	$row = mysqli_fetch_assoc($fa);
-	$advisor_first = $row['firstname'];
-	$advisor_last = $row['lastname'];
+	$faculty_id_query = "SELECT facultyid FROM advises WHERE studentid = $studentid;";
+	$faculty_id_result = mysqli_query($connection, $faculty_id_query);
+	$row = mysqli_fetch_assoc($faculty_id_result);
+	$facultyid = $row['facultyid'];
+	$faculty_advisor_query = "SELECT firstname, lastname FROM personalinfo 
+	WHERE id = $facultyid;";
+	$faculty_advisor_result = mysqli_query($connection, $faculty_advisor_query);
+	$row = mysqli_fetch_assoc($faculty_advisor_result);
+	$advisorfirstname = $row['firstname'];
+	$advisorlastname = $row['lastname'];
 
 ?>
 
@@ -28,61 +28,191 @@
 <link rel="stylesheet" href="style.css">
 <body>
 
-<!-- Display some information that will get passed with the submitted form-->
-<h1>Form 1</h1>
-<form method="post" action="ads.php">
-<p>First Name:</p>
-<input type="text" name="first_name" value=
-<?php echo '"' . $firstname . '"';	?> readonly>
-<p>Last Name:</p>
-<input type="text" name="last_name" value=
-<?php echo '"' . $lastname . '"'; ?> readonly>
-<p>Degree: </p>
-<select name="degreename">
-<!-- Inser other degrees -->
-<option value="MS_CS">MS_CS</option>
-</select>
-<p>GW ID:</p>
-<input type="text" name="studentid" value=
-<?php echo '"' . $id . '"';	?> readonly>
-
-
-<p>Faculty Advisor:</p>
 <?php 
-echo $advisor_first;
-echo " ";
-echo $advisor_last;
-?> 
 
-
-
-<h3>Courses Taken<br></h3>
-<!-- Class Input -->
-<p>Will not recognize any duplicate classes</p><br>
-<?php 
-	for ($i = 1; $i <= 12; $i++) {
-		// Displays an drop down box with all available classes
-		echo "<select name ='course$i'>";
-		echo "<option value = '0'>-----</option>";
-		$query = "SELECT dept,coursenum, courseid FROM courses;";
-		$result = mysqli_query($connection, $query);
-		while ($row = mysqli_fetch_assoc($result)) {
-			$coursenum = $row['coursenum'];
-			$courseid = $row['courseid'];
-			$dept = $row['dept'];
-			echo "<option value='$courseid'>".$dept." ".$coursenum."</option>";
+	if(ISSET($_POST['formsubmitted'])){
+		$degreename = $_POST['degreename'];
+		for ($i = 1; $i <= 12; $i++){
+			$courses[$i] = $_POST["course$i"];
 		}
-		echo "</select>";
-		echo "<br><br>";
+		$courses = array_unique($courses);
+		// Checks if courses entered were taken 
+		$course_count = 0;
+		for ($i = 1; $i <= 12; $i++) {
+			$course_check_query = "SELECT grade FROM transcripts, courses WHERE transcripts.studentid =$studentid AND transcripts.coursenum=courses.coursenum AND courses.courseid=$courses[$i] AND courses.dept = transcripts.dept;";
+			$course_check_result = mysqli_query($connection, $course_check_query);
+			$row = mysqli_fetch_assoc($course_check_result);
+			if (ISSET($row['grade'])) {
+				if (strcmp($row['grade'], 'IP') == 0) {
+					$courses_in_progress = "One or more of the courses you have entered are still in progress. Please check your transcript to make sure all grades have been submitted.";
+				}
+				else {
+					$course_count++;
+				}
+			}
+			else if ($courses[$i] != 0){
+				$courses_not_taken_query = "SELECT DISTINCT coursenum,dept FROM courses WHERE courseid=$course[$i];";
+				$courses_not_taken_result = mysqli_query($connection,$courses_not_taken_query);
+				$row = mysqli_fetch_assoc($courses_not_taken_result);
+				$dept = $row['dept'];
+				$coursenum = $row['coursenum'];
+				$courses_not_taken .= $dept." ".$coursenum.", ";
+			} 
+		}
+			// Checks that there are at least 10 courses. 
+			if($course_count < 10) {
+				$not_enough_courses = "You have not taken enough unique courses. The mininum requirement for graduation is 10 courses.";
+			}
+			// check against degree
+			$degree_check_query = "SELECT degreename, courseid FROM degreerequirements WHERE degreename='$degreename';";
+			$degree_check_result = mysqli_query($connection, $degree_check_query);
+			$core_courses_count = 0;
+			for($i = 1; $i<=12; $i++){
+				while($row =mysqli_fetch_assoc($result_from_query)){
+					if (strcmp($courses[$i], $row['courseid']) == 0) {
+						$core_courses_count++;
+					}
+				}
+			}
+			// check core classes are satisfied
+			if ($core_courses_count != 3) {
+				$core_courses_error = "You have not taken one or more of the three core courses required for your degree.";
+			}
+			// Check to make sure GPA is > 3.0
+			$gpa_calc_query = "SELECT (Sum(qualitypoints*credithours)/Sum(credithours)) AS GPA, transcripts.year FROM gradecalc, courses, transcripts WHERE gradecalc.grade = transcripts.grade AND transcripts.studentid=$studentid AND transcripts.coursenum = courses.coursenum;";
+			$gpa_calc_result = mysqli_query($connection, $gpa_calc_query);
+			if(mysqli_num_rows($gpa_calc_result)>0){
+				while($row=mysqli_fetch_assoc($gpa_calc_result)){
+					$year = $row['year'];
+					if ($row['GPA'] < 3.0) {
+						$gpa_error = "You have not met the minimum GPA requirement of 3.0 required for your degree.";
+					}
+				}
+			}
+			//check credit hours
+			$credit_hours_query = "SELECT (Sum(credithours)) AS CREDITS FROM courses, transcripts WHERE transcripts.coursenum = courses.coursenum AND transcripts.studentid = $studentid;";
+			$credit_hours_result = mysqli_query($connection, $credit_hours_query);
+			if(mysqli_num_rows($credit_hours_result)>0){
+				while($row=mysqli_fetch_assoc($credit_hours_result)){
+					if($row['CREDITS'] < 30) {
+						$credit_hours_error = "You have not met the minimum requirement of 30 credit hours required for your degree.";
+					}
+				}
+			}
+			//check if more than two grades below B-
+			$letter_grade_check = 0;
+			$course_grade_check_query = "SELECT qualitypoints FROM transcripts, gradecalc
+			WHERE student=$studentid AND gradecalc.grade = transcripts.grade;";
+			$course_grade_check_result = mysqli_query($connection, $course_grade_check_query);
+
+			while ($row = mysqli_fetch_assoc($course_grade_check_result)) {
+				if ($row['qualitypoints'] < 2.70) {
+					$letter_grade_check++;
+				}
+			}
+			if ($letter_grade_check > 2) {
+				$grades_error = "You have more than two letter grades below B-.";
+			}
+			// actually insert the application into the database
+			for ($i = 1; $i <= 12; $i++) {
+				if ($courses[$i] > 0) {
+					$form_insert_query = "INSERT INTO graduationapplication(studentid,courseid,year) VALUES($studentid,$courses[$i],'$year')";
+					$form_insert_result = mysqli_query($connection, $form_insert_query);
+				}
+			}
+			// Query to update students cleared field to 1 if all conditions met 
+			$cleared_query = "UPDATE graduationapplication SET cleared = 1 WHERE studentid = '$studentid';";
+			$result_cleared_query = mysqli_query($connection, $cleared_query);
+
+			if ($result_cleared_query) {
+				$applicationcleared = "<br> Application cleared successfully!";
+			}
+			else {
+				$applicationnotcleared = "<br>Application failed to be cleared for graduation.";
+			}
 	}
 
+	$duplicate_query = "SELECT studentid FROM graduationapplication WHERE studentid=$studentid;";
+	$result_from_query = mysqli_query($connection, $duplicate_query);
+
+	if (mysqli_num_rows($result_from_query) > 0){
+		echo "You have already submitted an application for graduation.";
+	}
+	else {
+		echo "<h1>Form 1</h1>
+		<form method='post'>
+		<p>First Name: ".$studentfirstname." </p><br>
+		<p>Last Name: ".$studentlastname."</p><br>
+		<p>Degree: </p>
+		<select name='degreename'>";
+		$degree_query = "SELECT degreerequirements.degreename, degreerequirements.courseid, courses.dept, courses.coursenum, courses.title FROM degreerequirements, courses WHERE degreerequirements.courseid = courses.courseid;";
+		$degree_result = mysqli_query($connection, $degree_query);
+		while($row=mysqli_fetch_assoc($degree_result)){
+			echo "<option value='".$row['degreename']."'>";
+			echo $row['degreename'];
+			echo "</option>";
+		}
+		echo "</select>
+
+		<p>Student ID: ".$studentid." </p><br>
+		<p>Faculty Advisor:".$advisorfirstname." ".$advisorlastname."</p><br>
+		<h3>Courses Taken<br></h3>
+		<p>Will not recognize any duplicate classes</p><br>";
+		for ($i = 1; $i <= 12; $i++) {
+			echo "<select name ='course$i'>";
+			echo "<option value = '0'>-----</option>";
+			$courses_query = "SELECT dept,coursenum, courseid FROM courses;";
+			$courses_result = mysqli_query($connection, $courses_query);
+			while ($row = mysqli_fetch_assoc($courses_result)) {
+				$coursenum = $row['coursenum'];
+				$courseid = $row['courseid'];
+				$dept = $row['dept'];
+				echo "<option value='$courseid'>".$dept." ".$coursenum."</option>";
+			}
+			echo "</select>";
+			echo "<br><br>";
+		}
+		echo"<br>
+		<input type='hidden' name='formsubmitted'>
+		<input type='submit' value='Apply To Graduate'>";
+	}
+	
+	if($applicationcleared){
+		echo $applicationcleared;
+	}
+	else {
+		echo $applicationnotcleared;
+		if($courses_in_progress){
+			echo $courses_in_progress;
+			echo "<br>";
+		}
+		if($courses_not_taken){
+			echo "You have not taken the following courses: ";
+			echo $courses_not_taken;
+			echo "<br>";
+		}
+		if($not_enough_courses){
+			echo $not_enough_courses;
+			echo "<br>";
+		}
+		if($core_courses_error){
+			echo $core_courses_error;
+			echo "<br>";
+		}
+		if($gpa_error){
+			echo $gpa_error;
+			echo "<br>";
+		}
+		if($credit_hours_error){
+			echo $credit_hours_error;
+			echo "<br>";
+		}
+		if($grades_error){
+			echo $grades_error;
+			echo "<br>";
+		}
+	}
+
+echo "</body>";
+echo "</html>";
 ?>
-<br>
-<!-- Submits form 1-->
-<input type="submit" value="Apply To Graduate">
-&nbsp;&nbsp;
-
-
-
-</body>
-</html>

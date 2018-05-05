@@ -1,3 +1,5 @@
+DROP TABLE IF EXISTS newstudentadvisingform CASCADE;
+
 DROP TABLE IF EXISTS gradecalc CASCADE;
 
 DROP TABLE IF EXISTS degreerequirements CASCADE;
@@ -212,6 +214,15 @@ CREATE TABLE degreerequirements (
 CREATE TABLE gradecalc (
     grade           VARCHAR(2) PRIMARY KEY,
     qualitypoints   DECIMAL(4,3)
+);
+CREATE TABLE newstudentadvisingform (
+    studentid INT, 
+    courseid INT NOT NULL,
+    facultyid INT,
+    PRIMARY KEY(studentid, courseid),
+    FOREIGN KEY (courseid) REFERENCES courses(courseid),
+    FOREIGN KEY (facultyid) REFERENCES users(id),
+    FOREIGN KEY (studentid) REFERENCES users(id)
 );
 
 

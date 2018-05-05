@@ -66,6 +66,7 @@ include 'header.php';
 <?php endif; ?>
 
 <?php if (in_array("STUDENT", $_SESSION["roles"])) : ?>
+<a href='advising_form.php'>New Student Advising Form</a> <br />
 <a href='view-class-schedule.php'>View Class Schedule</a> <br />
 <a href='view-personal-transcript.php'>View Transcript</a> <br />
 <a href='register.php'>Register for Classes</a> <br />
@@ -87,6 +88,7 @@ include 'header.php';
 <?php if (in_array("ADVISOR", $_SESSION["roles"])) : ?>
 <a href='view_advisee_information.php'>View Advisee Information</a> <br /> <!-- includes application status -->
 <a href='search-student-transcripts.php'>View Advisee Transcripts</a> <br />
+<a href='lift_new_student_hold.php'>Lift New Student Hold</a> <br />
 <a href='update_student_holds.php'>Update Advisee Holds</a> <br />
 <?php endif; ?>
 
