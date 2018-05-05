@@ -112,14 +112,14 @@
 		echo "<h1>New Student Advising Form</h1>";
 		echo "<p>This form must be filled out to lift the initial registration hold off of your account.</p>
 		<form method='post'>
-		<p>First Name: ".$studentfirstname."</p><br>
-		<p>Last Name: ".$studentlastname."</p>";
+		<p><b>First Name:</b> ".$studentfirstname."</p>
+		<p><b>Last Name:</b> ".$studentlastname."</p>";
 		$degrees_query = "SELECT DISTINCT degreename FROM degreerequirements;";
 		$degrees_result = mysqli_query($connection, $degrees_query);
-		echo "<p>Degree: ".$degreename."</p><br>
-		<p>Student ID:".$studentid."</p><br>
-		<p>Faculty Advisor: ".$advisorfirstname." ".$advisorlastname."</p><br>
-		<h3>Planned Courses<br></h3>
+		echo "<p><b>Degree:</b> ".$degreename."</p>
+		<p><b>Student ID:</b> ".$studentid."</p>
+		<p><b>Faculty Advisor:</b> ".$advisorfirstname." ".$advisorlastname."</p>
+		<h3>Enter Planned Courses<br></h3>
 		<p>Please enter the courses you plan to take. You must take a minimum of 10 courses including the three core courses required for your degree. These courses can be found on the view degree requirements page inn the main menu. Once you submit this form, your faculty advisor will sign off on this form electronically and the registration hold on your account will be lifted.</p>";
 		for($i = 1; $i <= 12; $i++){
 			echo "<select name ='course$i'>
