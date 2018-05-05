@@ -388,7 +388,7 @@ INSERT INTO users (email, password, id) VALUES ('starr@gwu.edu', '$2y$10$K7xpP4X
 INSERT INTO roles (id, role) VALUES (12, "APPLICANT");
 INSERT INTO roles (id, role) VALUES (12, "USER");
 INSERT INTO applicantpersonalinfo VALUES (12, 'Ringo', 'Starr', '2000-01-01', '2100 H St NW, Washington, DC', '222-11-1111');
-INSERT INTO admissionsapplication (id) VALUE (12);
+INSERT INTO admissionsapplication (id, status, finaldecision) VALUE (12, 'Incomplete', 0);
 INSERT INTO academicinfo (applicationid) VALUE (12);
 INSERT INTO recommendation (applicationid) VALUE (12);
 INSERT INTO recommendation (applicationid) VALUE (12);
