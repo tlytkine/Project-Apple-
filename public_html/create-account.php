@@ -69,7 +69,7 @@ if (isset($_POST['email']) && isset($_POST['password'])) {
 		}
 		
 		// Insert blank personalinfo row:
-		$query = "INSERT INTO personalinfo (id) VALUE ($id)";
+		$query = "INSERT INTO applicantpersonalinfo (id) VALUE ($id)";
 		$result = mysqli_query($connection, $query);
 		if (!$result) {
 			echo "<script type='text/javascript'>alert('Account could not be created');</script>";

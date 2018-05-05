@@ -45,12 +45,12 @@ include 'header.php';
 
 	include 'db-connect.php';
 	$query = "SELECT documentstatus.applicationid, personalinfosubmitted, applicationsubmitted, transcriptrecieved, letterofrecrecieved, firstname, lastname, status
-		FROM documentstatus, personalinfo, admissionsapplication
-		WHERE documentstatus.applicationid = personalinfo.id AND  documentstatus.applicationid = admissionsapplication.id";
+		FROM documentstatus, applicantpersonalinfo, admissionsapplication
+		WHERE documentstatus.applicationid = applicantpersonalinfo.id AND  documentstatus.applicationid = admissionsapplication.id";
 		
 	if (!isset($_POST['viewall']) && isset($_POST['idsubmit']) && $_POST['id'] > 0) {
 		$id = mysqli_real_escape_string($connection, trim($_POST['id']));
-		$query = $query . " AND personalinfo.id = $id";
+		$query = $query . " AND applicantpersonalinfo.id = $id";
 	} else if (!isset($_POST['viewall']) && isset($_POST['namesubmit']) && isset($_POST['lastname'])) {
 		$name = $_POST['lastname'];
 		$query = $query . " AND lastname LIKE '%$name%'";

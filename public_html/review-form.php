@@ -34,7 +34,7 @@ if (isset($_GET['review'])) {
     }
     
     //Query from academic information an application - printing out the review form
-    $query2   = "SELECT * FROM admissionsapplication, academicinfo,personalinfo  WHERE admissionsapplication.id = personalinfo.id AND admissionsapplication.id= academicinfo.applicationid AND admissionsapplication.id='" . $_SESSION['currentid'] . "'";
+    $query2   = "SELECT * FROM admissionsapplication, academicinfo, applicantpersonalinfo  WHERE admissionsapplication.id = applicantpersonalinfo.id AND admissionsapplication.id= academicinfo.applicationid AND admissionsapplication.id='" . $_SESSION['currentid'] . "'";
     $result_2 = mysqli_query($connection, $query2);
     if (mysqli_num_rows($result_2) > 0) {
         while ($row = mysqli_fetch_assoc($result_2)) {
