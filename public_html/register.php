@@ -58,7 +58,7 @@
 
 		if (mysqli_num_rows($result) > 0) {
 			echo "<table>";
-			echo "<tr><th>course id</th><th colspan=2>Course</th><th>Title</th><th>Section</th><th colspan=2>Professor</th><th>Year</th><th>Semester</th><th>Credits</th><th>Day</th><th>Time</th><th>Prereq1 Course ID</th><th>Prereq2 Course ID</th>";
+			echo "<tr><th>course id</th><th colspan=2>Course</th><th>Title</th><th>Section</th><th colspan=2>Professor</th><th>Year</th><th>Semester</th><th>Credits</th><th>Day</th><th>Time</th><th>Prereq1 Course ID</th><th>Prereq2 Course ID</th><th>Add/Drop</th></tr>";
 
 			while($row = mysqli_fetch_assoc($result)) {
 
@@ -75,6 +75,13 @@
 
 				$prereqCRN = mysqli_fetch_assoc($prereq);
 				echo "<td>".$prereqCRN["prereqid"]."</td>";
+
+                echo "<form method='post' action='register.php'>";
+                echo "<td><input type='submit' name='reg' value='Register'></td>";
+                echo "</tr>";
+
+                /* pass through info needed to register grade */
+                echo "<input type='hidden' name='regCRN' value=".$row["courseid"]."></form>";
 
 				echo "</tr>";
 			}
@@ -97,7 +104,7 @@
 
 		if (mysqli_num_rows($result) > 0) {
 			echo "<table>";
-			echo "<tr><th>course id</th><th colspan=2>Course</th><th>Title</th><th>Section</th><th colspan=2>Professor</th><th>Year</th><th>Semester</th><th>Credits</th><th>Day</th><th>Time</th><th>Prereq1 Course ID</th><th>Prereq2 Course ID</th>";
+			echo "<tr><th>course id</th><th colspan=2>Course</th><th>Title</th><th>Section</th><th colspan=2>Professor</th><th>Year</th><th>Semester</th><th>Credits</th><th>Day</th><th>Time</th><th>Prereq1 Course ID</th><th>Prereq2 Course ID</th><th>Add/Drop</th></tr>";
 
 			while($row = mysqli_fetch_assoc($result)) {
 
@@ -139,7 +146,7 @@
 
 		if (mysqli_num_rows($result) > 0) {
 			echo "<table>";
-			echo "<tr><th>course id</th><th colspan=2>Course</th><th>Title</th><th>Section</th><th colspan=2>Professor</th><th>Year</th><th>Semester</th><th>Credits</th><th>Day</th><th>Time</th><th>Prereq1 Course ID</th><th>Prereq2 Course ID</th>";
+			echo "<tr><th>course id</th><th colspan=2>Course</th><th>Title</th><th>Section</th><th colspan=2>Professor</th><th>Year</th><th>Semester</th><th>Credits</th><th>Day</th><th>Time</th><th>Prereq1 Course ID</th><th>Prereq2 Course ID</th><th>Add/Drop</th></tr>";
 
 			while($row = mysqli_fetch_assoc($result)) {
 
@@ -220,7 +227,7 @@
 		if ($passPrereqs == 0) {
 			echo "You hve not completed the required prereqs </br>";
 		}
- 
+
 		/* perform checks for schedule conflicts */
 		/* get student schedule (just day and time) */
 		$query = "SELECT c.courseid, c.day, c.time
