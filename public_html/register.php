@@ -45,22 +45,6 @@
     $drop = $_POST["drop"];
 
 
-    /* get current classes */
-    $query = "SELECT c.courseid
-              FROM courses c, transcripts t
-              WHERE t.studentid = '$id' AND t.coursenum = c.coursenum AND t.dept = c.dept
-                    AND t.year = c.year AND t.semester = c.semester;";
-
-    $result = mysqli_query($connection, $query);
-
-    /* display schedule */
-    $classes = array();
-    if (mysqli_num_rows($result) > 0) {
-        while($row = mysqli_fetch_assoc($result)) {
-            array_push($classes, $row['courseid']);
-        }
-    }
-
     /* handle registering for class */
 	if($reg) {
 		$class = $_POST["regCRN"];
@@ -201,6 +185,22 @@
 			echo "<br/> Successfully Dropped Class <br/>";
 		}
 	}
+
+    /* get current classes */
+    $query = "SELECT c.courseid
+              FROM courses c, transcripts t
+              WHERE t.studentid = '$id' AND t.coursenum = c.coursenum AND t.dept = c.dept
+                    AND t.year = c.year AND t.semester = c.semester;";
+
+    $result = mysqli_query($connection, $query);
+
+    /* display schedule */
+    $classes = array();
+    if (mysqli_num_rows($result) > 0) {
+        while($row = mysqli_fetch_assoc($result)) {
+            array_push($classes, $row['courseid']);
+        }
+    }
 
     /* show all classes */
 	if($all) {
