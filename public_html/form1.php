@@ -141,9 +141,10 @@
 	else {
 		echo "<h1>Form 1</h1>
 		<form method='post'>
-		<p>First Name: ".$studentfirstname." </p><br>
-		<p>Last Name: ".$studentlastname."</p><br>
-		<p>Degree: </p>
+		<p><b>First Name:</b> ".$studentfirstname." </p>
+		<p><b>Last Name:</b> ".$studentlastname."</p>
+		<p><b>Student ID:</b> ".$studentid." </p>
+		<p><b>Enter Degree:</b> </p>
 		<select name='degreename'>";
 		$degree_query = "SELECT degreerequirements.degreename, degreerequirements.courseid, courses.dept, courses.coursenum, courses.title FROM degreerequirements, courses WHERE degreerequirements.courseid = courses.courseid;";
 		$degree_result = mysqli_query($connection, $degree_query);
@@ -154,10 +155,9 @@
 		}
 		echo "</select>
 
-		<p>Student ID: ".$studentid." </p><br>
-		<p>Faculty Advisor:".$advisorfirstname." ".$advisorlastname."</p><br>
+		<p><b>Faculty Advisor:</b> ".$advisorfirstname." ".$advisorlastname."</p>
 		<h3>Courses Taken<br></h3>
-		<p>Will not recognize any duplicate classes</p><br>";
+		<p>Please enter all of the courses that you have taken.</p>";
 		for ($i = 1; $i <= 12; $i++) {
 			echo "<select name ='course$i'>";
 			echo "<option value = '0'>-----</option>";
