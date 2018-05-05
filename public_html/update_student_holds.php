@@ -26,9 +26,6 @@ if (isset($_POST['lift'])) {
 	if(mysqli_affected_rows($connection)>0){
 		$holdlifted = "Hold was successfully lifted!";
 	}
-	else {
-		$holderror = "There was not a hold in place to be lifted.";
-	}
 }
 
 
@@ -102,11 +99,6 @@ echo "</table>";
 if($holdlifted){
 	echo "<br>";
 	echo $holdlifted;
-	echo "<br>";
-}
-else if($holderror){
-	echo "<br>";
-	echo $holderror;
 	echo "<br>";
 }
 else if($holdplaced){
