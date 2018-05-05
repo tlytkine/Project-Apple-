@@ -132,7 +132,7 @@ include 'header.php';
 			}
 			echo "</table>";
 
-			$gpa = $sum / $total_credits;
+			$gpa = round($sum / $total_credits, 2);
 
 			echo "<br/>";
 			echo "<br/>";
@@ -252,7 +252,7 @@ include 'header.php';
 			}
 			echo "</table>";
 
-			$gpa = $sum / $total_credits;
+			$gpa = round($sum / $total_credits, 2);
 
 			echo "<br/>";
 			echo "<br/>";
