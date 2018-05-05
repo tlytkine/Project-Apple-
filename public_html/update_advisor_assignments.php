@@ -115,11 +115,9 @@
 	$current_students = "SELECT firstname,lastname,personalinfo.id,degreename,hold FROM personalinfo, advises, roles WHERE personalinfo.id = roles.id AND roles.role = 'STUDENT' AND advises.studentid = roles.id AND advises.facultyid IS NULL;";
 	$current_students_result = mysqli_query($connection, $current_students);
 
-	$row = mysqli_fetch_assoc($current_students_result);
+	if($current_students_result){
 
-	echo "<h1>Assign New Faculty Advisor</h1>";
-
-	if(ISSET($row['firstname'])){
+		echo "<h1>Assign New Faculty Advisor</h1>";
 
 		$facultyquery = "SELECT firstname AS facultyfirstname,lastname AS facultylastname,personalinfo.id AS facultyid FROM personalinfo,roles WHERE personalinfo.id = roles.id AND roles.role='ADVISOR';";
 		$facultyresult = mysqli_query($connection,$facultyquery);
@@ -134,6 +132,8 @@
 		<th>&nbsp;&nbsp;&nbsp;Assign</th>
 		</tr>";
 
+
+
 		while($row = mysqli_fetch_assoc($current_students_result)){
 			$studentidnew = $row['id'];
 			echo "<tr>
@@ -143,14 +143,13 @@
 			<td>".$row['degreename']."</td>
 			<td><form method='post'><select name ='facultyid'>";
 			while($row1 = mysqli_fetch_assoc($facultyresult)){
-				echo "<option value ='".$row1['facultyid']."' name='facultyidnew'>".$row1['facultyfirstname']." ".$row1['facultylastname']."</option>
-				<input type='hidden' name='studentidnew' value ='$studentidnew'>
-				<input type='hidden' name='facultyidnew' value ='".$row1['facultyid']."'>
-				</select>
-				<input type='submit' value='Assign' name='assign2'>
-				</form></td>";
+				echo "<option value ='".$row1['facultyid']."' name='facultyidnew'>".$row1['facultyfirstname']." ".$row1['facultylastname']."</option>";
+
 			}
-		echo "</tr>";
+			echo "</select><input type='hidden' name='studentidnew' value ='".$row['id']."'>
+			<input type='submit' value='Assign' name='assign2'>
+				</form></td>";
+			echo "</tr>";
 		}
 		echo "</table>";
 		echo "<br>";
