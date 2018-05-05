@@ -120,7 +120,7 @@ echo "<table>
 	<td>$allgreaverage</td>
 	</tr>
 	<tr>
-	<td>Bachelor's GPA</td>
+	<td>Average Bachelor's GPA</td>
 	<td>$admittedgpaaverage</td>
 	<td>$rejectedgpaaverage</td>
 	<td>$allgpaaverage</td>
