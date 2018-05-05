@@ -126,7 +126,7 @@
 		}
 	}
 	else {
-		echo "<br>There are not currently any students with new student holds in the system.";
+		echo "There are currently no students with new student holds in the system.";
 	}
 
 
