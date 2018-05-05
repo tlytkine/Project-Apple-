@@ -375,7 +375,7 @@ INSERT INTO transcripts VALUES('10', 'CS', '6254', '7', '2006', 'spring', 'A', '
 INSERT INTO users (email, password, id) VALUES ('lennon@gwu.edu', '$2y$10$K7xpP4XPPWkgYJ0/I4XOtehbRigHUqpmXer99/Ftx1fERDU.JZObC', 11);
 INSERT INTO roles (id, role) VALUES (11, "APPLICANT");
 INSERT INTO roles (id, role) VALUES (11, "USER");
-INSERT INTO applicantpersonalinfo VALUES(11, 'John', 'Lennon', '2000-01-01', '1800 22nd St NW, Washington, DC', 2018, '111-11-1111');
+INSERT INTO applicantpersonalinfo VALUES (11, 'John', 'Lennon', '2000-01-01', '1800 22nd St NW, Washington, DC', '111-11-1111');
 INSERT INTO admissionsapplication (id, status, finaldecision, semester, year) VALUE (11, 'Complete', 0, 'Fall', 2018);
 INSERT INTO documentstatus (applicationid, applicationsubmitted, transcriptrecieved, letterofrecrecieved, personalinfosubmitted) VALUE (11, 1, 1, 1, 1);
 INSERT INTO academicinfo (applicationid, degreeapplyingfor, gretotal, greverbal, greanalytical, grequantitive, gredate, bachgpa, bachmajor, bachyear, bachuni) VALUE (11, 'Ph.D.', 300, 150, 4, 150, '2018-01-05', '3.9', 'Computer Science', 2018, 'George Washington University');
@@ -387,7 +387,7 @@ INSERT INTO recommendation (applicationid, writername, writeremail, affiliation)
 INSERT INTO users (email, password, id) VALUES ('starr@gwu.edu', '$2y$10$K7xpP4XPPWkgYJ0/I4XOtehbRigHUqpmXer99/Ftx1fERDU.JZObC', 12);
 INSERT INTO roles (id, role) VALUES (12, "APPLICANT");
 INSERT INTO roles (id, role) VALUES (12, "USER");
-INSERT INTO applicantpersonalinfo VALUES (12, 'Ringo', 'Starr', '2000-01-01', '2100 H St NW, Washington, DC', 2018, '222-11-1111');
+INSERT INTO applicantpersonalinfo VALUES (12, 'Ringo', 'Starr', '2000-01-01', '2100 H St NW, Washington, DC', '222-11-1111');
 INSERT INTO admissionsapplication (id) VALUE (12);
 INSERT INTO academicinfo (applicationid) VALUE (12);
 INSERT INTO recommendation (applicationid) VALUE (12);
