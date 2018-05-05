@@ -84,41 +84,50 @@
 	$advisorfirstname = $row['firstname'];
 	$advisorlastname = $row['lastname'];
 
+	
+
+
+
+
+	echo "<h1>Lift New Student Holds</h1>
+	Welcome ".$advisorfirstname." ".$advisorlastname."<br>";
+
 	$advisee_info_query = "SELECT firstname, lastname, studentid, degreename, admityear, hold FROM advises, personalinfo WHERE advises.facultyid=$facultyid AND advises.hold='New Student' AND advises.studentid = personalinfo.id;";
 	$advisee_info_result = mysqli_query($connection,$advisee_info_query);
+	$row = mysqli_fetch_assoc($advisee_info_result);
 
-
-
-
-	echo "<h1>New Students with New Student Holds</h1>
-	Welcome ".$advisorfirstname." ".$advisorlastname."<br>
-	<table>
-	<tr>
-	<th>Advisee</th>
-	<th>Student ID</th>
-	<th>Degree Name</th>
-	<th>Admit Year</th> 
-	<th>View New Student Advising Form / Lift Hold</th>
-	</tr>";
-	while($row=mysqli_fetch_assoc($advisee_info)){
-		echo "<tr>
-		<td>".$row['firstname']." ".$row['lastname']."</td>
-		<td>".$row['studentid']."</td>
-		<td>".$row['degreename']."</td>
-		<td>".$row['admityear']."</td>
-		<td><form method='post'>
-		<input type='hidden' name='view_form'>
-		<input type='hidden' name='studentid' value='".$row['studentid']."'>
-		<input type='hidden' name='studentfirstname' value='".$row['firstname']."'>
-		<input type='hidden' name='studentlastname' value='".$row['lastname']."'>
-		<input type='submit' value='View Form'>
-		</form></td>
+	if(ISSET($row['studentid'])){
+		echo"<table>
+		<tr>
+		<th>Advisee</th>
+		<th>Student ID</th>
+		<th>Degree Name</th>
+		<th>Admit Year</th> 
+		<th>View New Student Advising Form / Lift Hold</th>
 		</tr>";
-	}
-	echo "</table>";
+		while($row=mysqli_fetch_assoc($advisee_info)){
+			echo "<tr>
+			<td>".$row['firstname']." ".$row['lastname']."</td>
+			<td>".$row['studentid']."</td>
+			<td>".$row['degreename']."</td>
+			<td>".$row['admityear']."</td>
+			<td><form method='post'>
+			<input type='hidden' name='view_form'>
+			<input type='hidden' name='studentid' value='".$row['studentid']."'>
+			<input type='hidden' name='studentfirstname' value='".$row['firstname']."'>
+			<input type='hidden' name='studentlastname' value='".$row['lastname']."'>
+			<input type='submit' value='View Form'>
+			</form></td>
+			</tr>";
+		}
+		echo "</table>";
 
-	if($form_not_submitted){
-		echo $form_not_submitted;
+		if($form_not_submitted){
+			echo $form_not_submitted;
+		}
+	}
+	else {
+		echo "<br>There are not currently any students with new student holds in the system.";
 	}
 
 
