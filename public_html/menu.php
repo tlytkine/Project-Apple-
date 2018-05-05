@@ -83,13 +83,13 @@ include 'header.php';
 
 <?php if (in_array("INSTRUCTOR", $_SESSION["roles"])) : ?>
 <a href='view-class-roster.php'>View Class Rosters</a> <br />
-<a href='search-student-grades.php'>Enter Student Grades</a> <br />
-<a href='search-student-transcripts.php'>View Student Transcripts</a> <br />
+<a href='search-student-grades.php'>Enter Your Students Grades</a> <br />
+<a href='search-student-transcripts.php'>View Your Students Transcripts</a> <br />
 <?php endif; ?>
 
 <?php if (in_array("ADVISOR", $_SESSION["roles"])) : ?>
 <a href='view_advisee_information.php'>View Advisee Information</a> <br /> <!-- includes application status -->
-<a href='search-student-transcripts.php'>View Advisee Transcripts</a> <br />
+<a href='advisor-view-transcripts.php'>View Advisee Transcripts</a> <br />
 <a href='lift_new_student_hold.php'>Lift New Student Hold</a> <br />
 <a href='update_student_holds_advisor.php'>Update Advisee Holds</a> <br />
 <?php endif; ?>
