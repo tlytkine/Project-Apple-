@@ -54,7 +54,7 @@ include 'header.php';
 		$row = mysqli_fetch_assoc($result);
 
 		$user_exists = 0;
-		if (mysqli_num_rows($result) > 0){
+		if (mysqli_num_rows($result) > 0 && $is_student != 0){
 			echo "<h2>".$row["firstname"]." ".$row["lastname"]."</h2>";
 			$user_exists = 1;
 		}
@@ -163,7 +163,7 @@ include 'header.php';
 		$row = mysqli_fetch_assoc($result);
 
 		$user_exists = 0;
-		if (mysqli_num_rows($result) > 0){
+		if (mysqli_num_rows($result) > 0 && $is_student != 0){
 			echo "<h2>".$row["firstname"]." ".$row["lastname"]."</h2>";
 			$user_exists = 1;
 		}
