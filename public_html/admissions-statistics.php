@@ -52,7 +52,7 @@ if (isset($_POST['year']) && $_POST['year'] > 0) {
 	$queryfilters = $queryfilters . " AND year = $year";
 }
 
-$query = "SELECT COUNT(*), AVG(gretotal)
+$query = "SELECT COUNT(*), AVG(gretotal), AVG(bachgpa)
 	FROM admissionsapplication, academicinfo, applicantpersonalinfo
 	WHERE admissionsapplication.id = academicinfo.applicationid AND admissionsapplication.id = applicantpersonalinfo.id AND finaldecision >= 3";
 $query = $query . $queryfilters;
@@ -61,12 +61,14 @@ if (mysqli_num_rows($result) > 0) {
 	$row = mysqli_fetch_assoc($result);
 	$admittedcount = $row["COUNT(*)"];
 	$admittedgreaverage = $row["AVG(gretotal)"];
+	$admittedgpaaverage = $row["AVG(bachgpa)"];
 } else {
 	$admittedcount = 0;
 	$admittedgreaverage = "";
+	$admittedgpaaverage = "";
 }
 
-$query = "SELECT COUNT(*), AVG(gretotal)
+$query = "SELECT COUNT(*), AVG(gretotal), AVG(bachgpa)
 	FROM admissionsapplication, academicinfo, applicantpersonalinfo
 	WHERE admissionsapplication.id = academicinfo.applicationid AND admissionsapplication.id = applicantpersonalinfo.id AND finaldecision = 1";
 $query = $query . $queryfilters;
@@ -75,12 +77,14 @@ if (mysqli_num_rows($result) > 0) {
 	$row = mysqli_fetch_assoc($result);
 	$rejectedcount = $row["COUNT(*)"];
 	$rejectedgreaverage = $row["AVG(gretotal)"];
+	$rejectedgpaaverage = $row["AVG(bachgpa)"];
 } else {
 	$rejectedcount = 0;
 	$rejectedgreaverage = "";
+	$rejectedgpaaverage = "";
 }
 
-$query = "SELECT COUNT(*), AVG(gretotal)
+$query = "SELECT COUNT(*), AVG(gretotal), AVG(bachgpa)
 	FROM admissionsapplication, academicinfo, applicantpersonalinfo
 	WHERE admissionsapplication.id = academicinfo.applicationid AND admissionsapplication.id = applicantpersonalinfo.id";
 $query = $query . $queryfilters;
@@ -89,9 +93,11 @@ if (mysqli_num_rows($result) > 0) {
 	$row = mysqli_fetch_assoc($result);
 	$allcount = $row["COUNT(*)"];
 	$allgreaverage = $row["AVG(gretotal)"];
+	$allgpaaverage = $row["AVG(bachgpa)"];
 } else {
 	$allcount = 0;
 	$allgreaverage = "";
+	$allgpaaverage = "";
 }
 
 echo "<table>
@@ -112,6 +118,12 @@ echo "<table>
 	<td>$admittedgreaverage</td>
 	<td>$rejectedgreaverage</td>
 	<td>$allgreaverage</td>
+	</tr>
+	<tr>
+	<td>Bachelor's GPA</td>
+	<td>$admittedgpaaverage</td>
+	<td>$rejectedgpaaverage</td>
+	<td>$allgpaaverage</td>
 	</tr>";
 echo "</table>";
 ?>
