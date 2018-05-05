@@ -2,14 +2,14 @@
 <body>
 <head>
     <meta charset="UTF-8">
-    <title>View Schedule</title>
+    <title>Update Info</title>
     <link rel="stylesheet" href="style.css">
 </head>
 
 
 <?php
     $allowed_user_types = array(
-        "USER"
+        "ALUMNI"
     );
     include 'header.php';
     include 'db-connect.php';
