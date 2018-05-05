@@ -44,11 +44,31 @@ if (isset($_POST['accept'])) {
 	}
 	$_SESSION["roles"] = $roles;
 	
+	// Get degree name and year:
+	$query = "SELECT degreeapplyingfor, year
+		FROM academicinfo, admissionsapplication
+		WHERE academicinfo.applicationid = admissionsapplication.id AND applicationid = $id";
+	$result = mysqli_query($connection, $query);
+	$row = mysqli_fetch_array($result);
+	$degree = $row["degreeapplyingfor"];
+	$year = $row["year"];
+	
 	// Add hold:
-	$query = "INSERT INTO advises (studentid, hold) VALUES ($id, 'New Student')";
+	$query = "INSERT INTO advises (studentid, hold, degreename, admityear) VALUES ($id, 'New Student', '$degree', $year)";
 	$result = mysqli_query($connection, $query);	
 	if (!$result) {
 		echo "<script type='text/javascript'>alert('Error adding hold');</script>";
+		exit();
+	}
+	
+	// Add to personal info table:
+	$query = "INSERT INTO personalinfo (id, firstname, lastname, dob, address, ssn)
+	SELECT id, firstname, lastname, dob, address, ssn
+	FROM applicantpersonalinfo
+	WHERE id = $id";
+	$result = mysqli_query($connection, $query);
+	if (!$result) {
+		echo "<script type='text/javascript'>alert('Error adding student');</script>";
 		exit();
 	}
 	
