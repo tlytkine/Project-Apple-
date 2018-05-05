@@ -1,5 +1,3 @@
-
-
 <html lang="en-US">
 <head>
     <meta charset="UTF-8">
@@ -20,37 +18,59 @@ include 'header.php';
 <h1>Admissions Applications and Reviews</h1>
 
 <form method="POST" id="search">
-	<h3>Search:</h3>
-    Application ID: <input type="number" min=1 max=2147483647 name="id">
-    <input type="submit" name="idsubmit" value="Search by ID">
+    ID: <input type="number" min=1 max=2147483647 name="id">
     Last Name: <input type="text" max=30 name="lastname">
-    <input type="submit" name="namesubmit" value="Search by Name">
+	<br />
+	Degree Type:
+	<select name="degree">
+		<option value="" selected></option>
+		<option value="M.S.">M.S.</option>
+		<option value="Ph.D.">Ph.D.</option>
+		<option value="Direct Ph.D.">Direct Ph.D.</option>       
+	</select>
+	Semester:
+	<select name="semester">
+		<option value="" selected></option>
+		<option value="Fall">Fall</option>
+		<option value="Spring">Spring</option>
+	</select>
+	Year: <input type="number" min=1000 max=9999 name="year">
+	Admitted: <input type="checkbox" name="admitted">
+    <input type="submit" name="filter" value="Filter">
     <input type="submit" name="viewall" value="View All">
 </form>
 
-<h3>Results:</h3>
-
 <?php
 include 'db-connect.php';
-//Search an application
-if (!isset($_POST['viewall']) && isset($_POST['idsubmit']) && $_POST['id'] > 0) {
-    $id = $_POST['id'];
-    $query = "SELECT *
-    FROM admissionsapplication, academicinfo, personalinfo
-    WHERE admissionsapplication.id = academicinfo.applicationid AND  application.id = personalinfo.id AND id = " . $id;
-    $result = mysqli_query($connection, $query);
-} else if (!isset($_POST['viewall']) && isset($_POST['namesubmit']) && isset($_POST['lastname'])) {
-	$name = $_POST['lastname'];
-    $query = "SELECT *
-    FROM admissionsapplication, academicinfo, personalinfo
-    WHERE admissionsapplication.id = academicinfo.applicationid AND admissionsapplication.id = personalinfo.id AND lastname LIKE '%$name%'";
-    $result = mysqli_query($connection, $query);
-} else {
-	//showing all the applications regardless of their status
-	$query  = "SELECT *
-	FROM admissionsapplication, academicinfo, personalinfo
-	WHERE admissionsapplication.id = academicinfo.applicationid AND admissionsapplication.id = personalinfo.id";
+// Search for an application
+$query = "SELECT *
+	FROM admissionsapplication, academicinfo, applicantpersonalinfo
+	WHERE admissionsapplication.id = academicinfo.applicationid AND admissionsapplication.id = applicantpersonalinfo.id";
+
+if (!isset($_POST['viewall']) && isset($_POST['id']) &&  $_POST['id'] > 0) {
+	$id = mysqli_real_escape_string($connection, trim($_POST['id']));
+	$query = $query . " AND applicantpersonalinfo.id = $id";
 }
+if (!isset($_POST['viewall']) && isset($_POST['lastname'])) {
+	$name = $_POST['lastname'];
+	$query = $query . " AND lastname LIKE '%$name%'";
+}
+if (!isset($_POST['viewall']) && isset($_POST['degree']) && $_POST['degree'] != "") {
+	$degree = $_POST['degree'];
+	$query = $query . " AND degreeapplyingfor = '$degree'";
+}
+if (!isset($_POST['viewall']) && isset($_POST['semester']) && $_POST['semester'] != "") {
+	$semester = $_POST['semester'];
+	$query = $query . " AND semester = '$semester'";
+}
+if (!isset($_POST['viewall']) && isset($_POST['year']) && $_POST['year'] > 0) {
+	$year = $_POST['year'];
+	$query = $query . " AND year = $year";
+}
+if (!isset($_POST['viewall']) && isset($_POST['admitted'])) {
+	$query = $query . " AND finaldecision >= 3";
+}
+
 $result = mysqli_query($connection, $query);
 
 if (mysqli_num_rows($result) > 0) {
@@ -59,6 +79,8 @@ if (mysqli_num_rows($result) > 0) {
 		<th>ID</th>
 		<th>First Name</th>
 		<th>Last Name</th>
+		<th>Semester</th>
+		<th>Year</th>
 		<th>Degree Type</th>
 		<th>Status</th>
 		<th>Final Decision</th>
@@ -77,6 +99,8 @@ if (mysqli_num_rows($result) > 0) {
 		echo "<td>{$row["id"]}</td>";
 		echo "<td>{$row["firstname"]}</td>";
 		echo "<td>{$row["lastname"]}</td>";
+		echo "<td>{$row["semester"]}</td>";
+		echo "<td>{$row["year"]}</td>";
 		echo "<td>{$row["degreeapplyingfor"]}</td>";
 		echo "<td>{$row["status"]}</td>";
 		echo "<td>$decision</td>";

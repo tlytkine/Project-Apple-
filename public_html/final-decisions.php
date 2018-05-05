@@ -42,12 +42,12 @@ include 'header.php';
 
 	include 'db-connect.php';
 	$query = "SELECT admissionsapplication.id, status, finaldecision, firstname, lastname
-		FROM admissionsapplication, personalinfo
-		WHERE admissionsapplication.id = personalinfo.id";
+		FROM admissionsapplication, applicantpersonalinfo
+		WHERE admissionsapplication.id = applicantpersonalinfo.id";
 		
 	if (!isset($_POST['viewall']) && isset($_POST['idsubmit']) && $_POST['id'] > 0) {
 		$id = mysqli_real_escape_string($connection, trim($_POST['id']));
-		$query = $query . " AND personalinfo.id = $id";
+		$query = $query . " AND applicantpersonalinfo.id = $id";
 	} else if (!isset($_POST['viewall']) && isset($_POST['namesubmit']) && isset($_POST['lastname'])) {
 		$name = $_POST['lastname'];
 		$query = $query . " AND lastname LIKE '%$name%'";

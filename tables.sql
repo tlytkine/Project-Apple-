@@ -75,7 +75,6 @@ CREATE TABLE applicantpersonalinfo (
     lastname          VARCHAR(30),
     dob               DATE,
     address           VARCHAR (100),
-    applicantyear     INT,
     ssn               VARCHAR (11),
     FOREIGN KEY (id) REFERENCES users(id)
 );
@@ -216,7 +215,7 @@ CREATE TABLE gradecalc (
     qualitypoints   DECIMAL(4,3)
 );
 CREATE TABLE newstudentadvisingform (
-    studentid INT, 
+    studentid INT,
     courseid INT NOT NULL,
     facultyid INT,
     PRIMARY KEY(studentid, courseid),
@@ -235,6 +234,7 @@ INSERT INTO users (email, password, id) VALUES ('gs@gwu.edu', '$2y$10$Dntyy58tka
 INSERT INTO roles (id, role) VALUES (2, "GS");
 
 /* instructor 1 */
+/* CAC */
 INSERT INTO users (email, password, id) VALUES ('simha@gwu.edu', '$2y$10$K7xpP4XPPWkgYJ0/I4XOtehbRigHUqpmXer99/Ftx1fERDU.JZObC', 3);
 INSERT INTO roles (id, role) VALUES (3, "INSTRUCTOR");
 INSERT INTO roles (id, role) VALUES (3, "CAC");
@@ -372,20 +372,28 @@ INSERT INTO transcripts VALUES('10', 'CS', '6283', '6', '2006', 'spring', 'A', '
 INSERT INTO transcripts VALUES('10', 'CS', '6286', '7', '2006', 'spring', 'A', 'Network Security');
 INSERT INTO transcripts VALUES('10', 'CS', '6254', '7', '2006', 'spring', 'A', 'Software Engineering');
 
-/* aplicant 1 */
+/* Applicant 1 (complete with no reviews) */
 INSERT INTO users (email, password, id) VALUES ('lennon@gwu.edu', '$2y$10$K7xpP4XPPWkgYJ0/I4XOtehbRigHUqpmXer99/Ftx1fERDU.JZObC', 11);
 INSERT INTO roles (id, role) VALUES (11, "APPLICANT");
 INSERT INTO roles (id, role) VALUES (11, "USER");
-INSERT INTO applicantpersonalinfo VALUES('11', 'john', 'lennon', '2000-01-01', '123 address st', 2018, '111-11-1111');
-/* application Complete with no reviews (info needs to be added)*/
+INSERT INTO applicantpersonalinfo VALUES (11, 'John', 'Lennon', '2000-01-01', '1800 22nd St NW, Washington, DC', '111-11-1111');
+INSERT INTO admissionsapplication (id, status, finaldecision, semester, year) VALUE (11, 'Complete', 0, 'Fall', 2018);
+INSERT INTO documentstatus (applicationid, applicationsubmitted, transcriptrecieved, letterofrecrecieved, personalinfosubmitted) VALUE (11, 1, 1, 1, 1);
+INSERT INTO academicinfo (applicationid, degreeapplyingfor, gretotal, greverbal, greanalytical, grequantitive, gredate, bachgpa, bachmajor, bachyear, bachuni) VALUE (11, 'Ph.D.', 300, 150, 4, 150, '2018-01-05', '3.9', 'Computer Science', 2018, 'George Washington University');
+INSERT INTO recommendation (applicationid, writername, writeremail, affiliation) VALUE (11, 'John Smith', 'smith@gwu.edu', 'Advisor');
+INSERT INTO recommendation (applicationid, writername, writeremail, affiliation) VALUE (11, 'Jill Peters', 'jpeters@gwu.edu', 'Professor');
+INSERT INTO recommendation (applicationid, writername, writeremail, affiliation) VALUE (11, 'Peter Jills', 'pjills@gwu.edu', 'Professor');
 
-
-/* applicant 2 */
+/* Applicant 2 (incomplete, missing transcripts) */
 INSERT INTO users (email, password, id) VALUES ('starr@gwu.edu', '$2y$10$K7xpP4XPPWkgYJ0/I4XOtehbRigHUqpmXer99/Ftx1fERDU.JZObC', 12);
 INSERT INTO roles (id, role) VALUES (12, "APPLICANT");
 INSERT INTO roles (id, role) VALUES (12, "USER");
-INSERT INTO applicantpersonalinfo VALUES('12', 'ringo', 'starr', '2000-01-01', '123 address st', 2018, '222-11-1111');
-/* application incomplete, missing transcripts (info needs to be added) */
+INSERT INTO applicantpersonalinfo VALUES (12, 'Ringo', 'Starr', '2000-01-01', '2100 H St NW, Washington, DC', '222-11-1111');
+INSERT INTO admissionsapplication (id, status, finaldecision) VALUE (12, 'Incomplete', 0);
+INSERT INTO academicinfo (applicationid) VALUE (12);
+INSERT INTO recommendation (applicationid) VALUE (12);
+INSERT INTO recommendation (applicationid) VALUE (12);
+INSERT INTO recommendation (applicationid) VALUE (12);
 
 /* fill grade calc table */
 INSERT INTO gradecalc(grade,qualitypoints)

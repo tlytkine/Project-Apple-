@@ -13,7 +13,7 @@ include 'header.php';
 <h1>Update Personal Information</h1>
 <?php
 include 'db-connect.php';
-$query = "SELECT * FROM personalinfo WHERE id = $_SESSION[id]";
+$query = "SELECT * FROM applicantpersonalinfo WHERE id = $_SESSION[id]";
 $result = mysqli_query($connection, $query);
 if (mysqli_num_rows($result) > 0) {
 	echo "<table>
@@ -49,7 +49,7 @@ if (isset($_POST['update'])) {
 	$dob = mysqli_real_escape_string($connection, trim($_POST['dob']));
 	$address = mysqli_real_escape_string($connection, trim($_POST['address']));
 	$ssn = mysqli_real_escape_string($connection, trim($_POST['ssn']));
-	$updatequery = "UPDATE personalinfo
+	$updatequery = "UPDATE applicantpersonalinfo
 		SET firstname='$firstname', lastname='$lastname', dob='$dob', address='$address', ssn='$ssn'
 		WHERE id=$id";
 	$updateresult = mysqli_query($connection, $updatequery);

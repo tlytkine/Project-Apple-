@@ -22,7 +22,7 @@ include 'db-connect.php';
 if (isset($_GET['viewapplication'])) {
     $_SESSION['currentappid'] = $_GET['viewapplication'];
     //query showing current selected applicaion
-    $query = "SELECT * FROM admissionsapplication, academicinfo, personalinfo  WHERE admissionsapplication.id=academicinfo.applicationid AND admissionsapplication.id=personalinfo.id AND admissionsapplication.id='" . $_SESSION['currentappid'] . "'";
+    $query = "SELECT * FROM admissionsapplication, academicinfo, applicantpersonalinfo  WHERE admissionsapplication.id=academicinfo.applicationid AND admissionsapplication.id=applicantpersonalinfo.id AND admissionsapplication.id='" . $_SESSION['currentappid'] . "'";
     $result = mysqli_query($connection, $query);
     if (mysqli_num_rows($result) > 0) {
         while ($row = mysqli_fetch_assoc($result)) {

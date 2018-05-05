@@ -28,8 +28,8 @@ include 'header.php';
 <?php
 include 'db-connect.php';
 
-$query = "SELECT * FROM admissionsapplication, academicinfo, personalinfo
-WHERE admissionsapplication.id=academicinfo.applicationid AND admissionsapplication.id=personalinfo.id AND status='Complete'";
+$query = "SELECT * FROM admissionsapplication, academicinfo, applicantpersonalinfo
+WHERE admissionsapplication.id=academicinfo.applicationid AND admissionsapplication.id=applicantpersonalinfo.id AND status='Complete'";
 
 if (!isset($_POST['viewall']) && isset($_POST['idsubmit']) && $_POST['id'] > 0) {
     $id = mysqli_real_escape_string($connection, trim($_POST['id']));
