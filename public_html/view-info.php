@@ -123,7 +123,7 @@
 		if (mysqli_num_rows($result)>0) {
 			echo '<table style="width:25%"';
 			echo '<tr>';
-			echo '<th>Student ID</th>';
+			echo '<th>GWID</th>';
 			echo '<th>First Name</th>';
 			echo '<th>Last Name</th>';
 			echo '<th>Address</th>';
