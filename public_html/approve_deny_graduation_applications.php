@@ -54,13 +54,13 @@ while($row=mysqli_fetch_assoc($applications_result)){
 	echo "<td>";
 	echo "<form method='post'>
 	<input type='submit' value='Approve' name='approve'>
-	<input type='hidden' value='$studentid' name='studentid'>
+	<input type='hidden' value='".$row['studentid']."' name='studentid'>
 	</form>";
 	echo "</td>";
 	echo"<td>"; 
 	echo "<form method='post'>
 	<input type='submit' value='Deny' name='deny'>
-	<input type='hidden' value='$studentid' name='studentid'>
+	<input type='hidden' value='".$row['studentid']."' name='studentid'>
 	</form>";
 	echo"</td>";
 }
@@ -93,7 +93,7 @@ if($approve){
 	$semester = $currentyear['semester'];
 
 
-	$degreenamequery = "SELECT degreename FROM advises WHERE studentid=$sid;";
+	$degreenamequery = "SELECT degreename FROM advises WHERE studentid= $sid;";
 	$degreenameresult = mysqli_query($connection, $degreenamequery);
 	$degreenamefetch = mysqli_fetch_assoc($degreenameresult);
 
@@ -102,22 +102,9 @@ if($approve){
 	$insertalumniquery = "INSERT INTO alumnipersonalinfo(id,firstname,lastname,dob,address,graduationyear,graduationsemester,degreename,ssn) VALUES($sid,'$firstname','$lastname','$dob','$address','$year','$semester','$degreename','$ssn');";
 	$insertalumniresult = mysqli_query($connection, $insertalumniquery);
 
-	if($insertalumniresult){
-		echo "Personal info moved to alumnipersonalinfo table.<br>";
-	}
-	else{
-		echo "Error moving personalinfo to alumnipersonalinfo table.<br>";
-	}
 
 	$deletestudentquery = "DELETE FROM personalinfo WHERE id = $sid;";
 	$deletestudentresult = mysqli_query($connection, $deletestudentquery);
-
-	if($deletestudentresult){
-		echo "Delete from personal info successful.<br>";
-	}
-	else{
-		echo "Delete from personalinfo failed.<br>";
-	}
 
 	$updaterolequery = "UPDATE roles SET role='ALUMNI' WHERE id= $sid AND role='STUDENT';";
 	$updateroleresult = mysqli_query($connection, $updaterolequery);
