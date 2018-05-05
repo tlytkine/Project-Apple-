@@ -36,7 +36,7 @@ echo "<tr><td>".$row['studentfirstname']." ".$row['studentlastname']."</td>
 <td>".$row['facultyfirstname']." ".$row['facultylastname']."</td>
 <td>".$row['facultyid']."</td>
 <td>";
-if(is_null($row['hold']){
+if(is_null($row['hold'])){
 	echo "None.";
 
 }
