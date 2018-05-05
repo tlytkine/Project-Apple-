@@ -58,14 +58,15 @@ CREATE TABLE personalinfo (
 );
 
 CREATE TABLE alumnipersonalinfo (
-    id                INT PRIMARY KEY,
-    firstname         VARCHAR(30),
-    lastname          VARCHAR(30),
-    dob               DATE,
-    address           VARCHAR (100),
-    graduationyear    INT,
-    degreename        VARCHAR(30),
-    ssn               VARCHAR (11),
+    id                 INT PRIMARY KEY,
+    firstname          VARCHAR(30),
+    lastname           VARCHAR(30),
+    dob                DATE,
+    address            VARCHAR (100),
+    graduationyear     INT,
+    graduationsemester VARCHAR(30),
+    degreename         VARCHAR(30),
+    ssn                VARCHAR (11),
     FOREIGN KEY (id) REFERENCES users(id)
 );
 
@@ -360,7 +361,7 @@ INSERT INTO advises VALUES('9', '5', NULL, 'MS', 2017);
 INSERT INTO users (email, password, id) VALUES ('clapton@gwu.edu', '$2y$10$K7xpP4XPPWkgYJ0/I4XOtehbRigHUqpmXer99/Ftx1fERDU.JZObC', 10);
 INSERT INTO roles (id, role) VALUES (10, "ALUMNI");
 INSERT INTO roles (id, role) VALUES (10, "USER");
-INSERT INTO alumnipersonalinfo VALUES('10', 'eric', 'clapton', '2000-01-01', '123 address st', 2006, 'MS', '555-11-1111');
+INSERT INTO alumnipersonalinfo VALUES('10', 'eric', 'clapton', '2000-01-01', '123 address st', 2006, 'spring', 'MS', '555-11-1111');
 
 INSERT INTO transcripts VALUES('10', 'CS', '6221', '3', '2005', 'fall', 'B', 'Software Paradigms');
 INSERT INTO transcripts VALUES('10', 'CS', '6461', '4', '2005', 'fall', 'B', 'Computer Architecture');
