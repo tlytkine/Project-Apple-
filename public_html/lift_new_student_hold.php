@@ -32,7 +32,7 @@
 		<th>Student ID</th>
 		<th>Degree Name</th>
 		<th>Admit Year</th> 
-		<th>View New Student Advising Form / Lift Hold</th>
+		<th>Review Advising Form</th>
 		</tr>";
 		while($row=mysqli_fetch_assoc($advisee_info_result)){
 			echo "<tr>
@@ -79,7 +79,6 @@
 			<th>Course Number</th>
 			<th>Title</th>
 			<th>Credit Hours</th>
-			<th>Lift Hold 
 			</tr>";
 
 			while($row=mysqli_fetch_assoc($courses_entered_result)){
