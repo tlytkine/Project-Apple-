@@ -105,17 +105,17 @@ echo "<br>";
   function getApplyingForDegree($row) {
     $degree = $row["degreeapplyingfor"];
     $selected0 = ($degree == " ") ? "selected" : "";
-    $selected1 = ($degree == "M.S.") ? "selected" : "";
-    $selected3 = ($degree == "Ph.D.") ? "selected" : "";
-    $selected4 = ($degree == "Direct Ph.D.") ? "selected" : "";
+    $selected1 = ($degree == "MS") ? "selected" : "";
+    $selected3 = ($degree == "PhD") ? "selected" : "";
+    $selected4 = ($degree == "Direct PhD") ? "selected" : "";
 
     echo "<label for=\"degree\">Applying for Degree: </label>";
 
     echo "<select name=\"degree\" required>
       <option value=\"\" $selected0></option>
-      <option value=\"M.S.\" $selected1>M.S.</option>
-      <option value=\"Ph.D.\" $selected3>Ph.D.</option>
-      <option value=\"Direct Ph.D.\" $selected4>Direct Ph.D.</option>       
+      <option value=\"MS\" $selected1>MS</option>
+      <option value=\"PhD\" $selected3>PhD</option>
+      <option value=\"Direct PhD\" $selected4>Direct PhD</option>       
       </select>";
 
     echo "<br />"; 

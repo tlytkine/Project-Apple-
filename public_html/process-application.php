@@ -61,7 +61,7 @@ if (!$submitted) {
 
 	// If application submitted:
 	if (isset($_POST['submit'])) {
-		if ($degree == "M.S." || ($_POST['total'] >= 130 && $_POST['verbal'] >= 130 && $_POST['quantitative'] >= 130) && isset($_POST['gredate'])) {
+		if ($degree == "MS" || ($_POST['total'] >= 130 && $_POST['verbal'] >= 130 && $_POST['quantitative'] >= 130) && isset($_POST['gredate'])) {
 			$query1 = "UPDATE documentstatus 
 						SET applicationsubmitted = TRUE
 						WHERE applicationid = '$id'";
