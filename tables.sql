@@ -215,7 +215,7 @@ CREATE TABLE gradecalc (
     qualitypoints   DECIMAL(4,3)
 );
 CREATE TABLE newstudentadvisingform (
-    studentid INT, 
+    studentid INT,
     courseid INT NOT NULL,
     facultyid INT,
     PRIMARY KEY(studentid, courseid),
@@ -234,6 +234,7 @@ INSERT INTO users (email, password, id) VALUES ('gs@gwu.edu', '$2y$10$Dntyy58tka
 INSERT INTO roles (id, role) VALUES (2, "GS");
 
 /* instructor 1 */
+/* CAC */
 INSERT INTO users (email, password, id) VALUES ('simha@gwu.edu', '$2y$10$K7xpP4XPPWkgYJ0/I4XOtehbRigHUqpmXer99/Ftx1fERDU.JZObC', 3);
 INSERT INTO roles (id, role) VALUES (3, "INSTRUCTOR");
 INSERT INTO roles (id, role) VALUES (3, "CAC");
