@@ -35,7 +35,15 @@ echo "<tr><td>".$row['studentfirstname']." ".$row['studentlastname']."</td>
 <td>".$row['studentid']."</td>
 <td>".$row['facultyfirstname']." ".$row['facultylastname']."</td>
 <td>".$row['facultyid']."</td>
-<td>".$row['hold']."</td>
+<td>";
+if(is_null($row['hold']){
+	echo "None.";
+
+}
+else{ 
+	echo $row['hold'];
+}
+echo "</td>
 </tr>";
 }
 echo "</table>";
