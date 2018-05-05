@@ -78,11 +78,11 @@ while($row = mysqli_fetch_assoc($result)){
 	$facultyresult = mysqli_query($connection,$facultyquery);
 	echo "<td><form method = 'post'><select name ='facultyidother'>";
 	while($row1 = mysqli_fetch_assoc($facultyresult)){
-		echo "<option value ='".$row1['facultyid']."' name='facultyidother'>".$row1['facultyfirstname']." ".$row1['facultylastname']."</option>
-		</select>
-		<input type='hidden' name='studentidother' value ='".$row['studentid']."'>
-		<input type='submit' value='Assign' name='assign1'>";
+		echo "<option value ='".$row1['facultyid']."' name='facultyidother'>".$row1['facultyfirstname']." ".$row1['facultylastname']."</option>";
+
 	}
+	echo "</select> <input type='hidden' name='studentidother' value ='".$row['studentid']."'>
+	<input type='submit' value='Assign' name='assign1'>";
 	echo "</form></td>";
 	echo "</tr>";
 }
