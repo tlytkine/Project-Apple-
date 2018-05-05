@@ -12,7 +12,7 @@
 	if(ISSET($_POST['assign1'])){
 		$assign1 = $_POST['assign1'];
 	}
-	else if(ISSET($_POST['assign2'])){
+	if(ISSET($_POST['assign2'])){
 		$assign2 = $_POST['assign2'];
 	}
 
@@ -35,7 +35,7 @@
 		$result = mysqli_query($connection, $query);
 
 	}
-	else if($assign2){
+	if($assign2){
 
 		$facultyidnew = $_POST['facultyidnew'];
 		$studentidnew = $_POST['studentidnew'];
@@ -147,8 +147,8 @@
 
 			}
 			echo "</select><input type='hidden' name='studentidnew' value ='".$row['id']."'>
-			<input type='submit' value='Assign' name='assign2'>
-				</form></td>";
+			<input type='submit' value='Assign' name='assign2'>";
+			echo "</form></td>";
 			echo "</tr>";
 		}
 		echo "</table>";
