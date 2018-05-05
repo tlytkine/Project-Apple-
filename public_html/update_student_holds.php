@@ -101,22 +101,27 @@ echo "</table>";
 
 
 if($holdlifted){
+	echo "<br>";
 	echo $holdlifted;
 	echo "<br>";
 }
 else if($holderror){
+	echo "<br>";
 	echo $holderror;
 	echo "<br>";
 }
 else if($holdplaced){
+	echo "<br>";
 	echo $holdplaced;
 	echo "<br>";
 }
 else if($holdinvalid){
+	echo "<br>";
 	$holdinvalid;
 	echo "<br>";
 }
 else if($holdblank){
+	echo "<br>";
 	echo $holdblank;
 	echo "<br>";
 }
