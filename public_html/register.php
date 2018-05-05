@@ -122,6 +122,13 @@
 				$prereqCRN = mysqli_fetch_assoc($prereq);
 				echo "<td>".$prereqCRN["prereqid"]."</td>";
 
+                echo "<form method='post' action='register.php'>";
+                echo "<td><input type='submit' name='reg' value='Register'></td>";
+                echo "</tr>";
+
+                /* pass through info needed to register grade */
+                echo "<input type='hidden' name='regCRN' value=".$row["courseid"]."></form>";
+
 				echo "</tr>";
 			}
 			echo "</table>";
@@ -163,6 +170,13 @@
 
 				$prereqCRN = mysqli_fetch_assoc($prereq);
 				echo "<td>".$prereqCRN["prereqid"]."</td>";
+
+                echo "<form method='post' action='register.php'>";
+                echo "<td><input type='submit' name='reg' value='Register'></td>";
+                echo "</tr>";
+
+                /* pass through info needed to register grade */
+                echo "<input type='hidden' name='regCRN' value=".$row["courseid"]."></form>";
 
 				echo "</tr>";
 			}
