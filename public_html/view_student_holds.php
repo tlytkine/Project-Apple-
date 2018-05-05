@@ -36,12 +36,11 @@ echo "<tr><td>".$row['studentfirstname']." ".$row['studentlastname']."</td>
 <td>".$row['facultyfirstname']." ".$row['facultylastname']."</td>
 <td>".$row['facultyid']."</td>
 <td>";
-if(is_null($row['hold'])){
-	echo "None.";
-
+if(ISSET($row['hold'])){
+	echo $row['hold'];
 }
 else{ 
-	echo $row['hold'];
+	echo "None.";
 }
 echo "</td>
 </tr>";
