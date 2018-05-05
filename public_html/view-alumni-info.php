@@ -22,7 +22,7 @@
 
 	/* handle changing of personal info */
 	if($change) {
-		//$pass = $_POST["pass"];
+		$pass = $_POST["pass"];
 		$first = $_POST["first"];
 		$last = $_POST["last"];
 		$address = $_POST["address"];
@@ -38,8 +38,14 @@
 		$id = $row["id"];
 
 		/* queries for changing info */
-		/*if($pass) {
-			$query = "UPDATE users SET password='$pass' WHERE email='$user';";
+        if($pass) {
+            // Prepare password:
+            $pass = mysqli_real_escape_string($connection, trim($pass));
+
+            // Hash password:
+        	$hash = password_hash($pass, PASSWORD_BCRYPT);
+
+            $query = "UPDATE users SET password='$hash' WHERE email='$user';";
 
 			$result = mysqli_query($connection, $query);
 
@@ -51,7 +57,7 @@
 				echo "Failed to update password";
 				echo "</br>";
 			}
-		}*/
+		}
 		if($first) {
 			$query = "UPDATE alumnipersonalinfo
 					SET firstname='".$first."'
@@ -146,8 +152,8 @@
 		echo "<p> Leave all else blank, then hit Change </p>";
 
 		echo "<form method='post' action='view-info.php'>";
-		/*echo    "<label for='pass'>Password: </label>";
-		echo    "<input type='text' id='pass' name='pass' /> <br/>";*/
+		echo    "<label for='pass'>Password: </label>";
+		echo    "<input type='text' id='pass' name='pass' /> <br/>";
 		echo    "<label for='first'>First name: </label>";
 		echo    "<input type='text' id='first' name='first' /> <br/>";
 		echo    "<label for='last'>Last name: </label>";
