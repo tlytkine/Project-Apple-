@@ -96,7 +96,9 @@
 
         echo '<h4>Search by Degree</h4>';
         echo '<select name="degreename">';
-        echo '<option value="MS_CS">MS_CS</option>';
+        echo '<option value="MS">MS</option>';
+        echo '<option value="PhD">PhD</option>';
+        echo '<option value="Direct PhD">Direct PhD</option>';
         echo '</select>';
 		echo '<input type="submit" name="degree_search" value="Search">';
 

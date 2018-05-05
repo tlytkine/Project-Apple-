@@ -336,7 +336,7 @@ INSERT INTO transcripts VALUES('8', 'CS', '6246', '6', '2018', 'spring', 'A', 'C
 INSERT INTO transcripts VALUES('8', 'CS', '6262', '5', '2018', 'spring', 'B', 'Graphics 1');
 INSERT INTO transcripts VALUES('8', 'CS', '6283', '6', '2018', 'spring', 'B', 'Security 1');
 
-INSERT INTO advises VALUES('8', '7', NULL, 'MS_CS', 2017);
+INSERT INTO advises VALUES('8', '7', NULL, 'MS', 2017);
 
 /* student 2 */
 INSERT INTO users (email, password, id) VALUES ('harrison@gwu.edu', '$2y$10$K7xpP4XPPWkgYJ0/I4XOtehbRigHUqpmXer99/Ftx1fERDU.JZObC', 9);
@@ -354,13 +354,13 @@ INSERT INTO transcripts VALUES('9', 'CS', '6242', '5', '2018', 'spring', 'B', 'D
 INSERT INTO transcripts VALUES('9', 'EE', '6244', '4', '2018', 'spring', 'C', 'Information Theory');
 INSERT INTO transcripts VALUES('9', 'CS', '6283', '6', '2018', 'spring', 'B', 'Security 1');
 
-INSERT INTO advises VALUES('9', '5', NULL, 'MS_CS', 2017);
+INSERT INTO advises VALUES('9', '5', NULL, 'MS', 2017);
 
 /* alumni 1 */
 INSERT INTO users (email, password, id) VALUES ('clapton@gwu.edu', '$2y$10$K7xpP4XPPWkgYJ0/I4XOtehbRigHUqpmXer99/Ftx1fERDU.JZObC', 10);
 INSERT INTO roles (id, role) VALUES (10, "ALUMNI");
 INSERT INTO roles (id, role) VALUES (10, "USER");
-INSERT INTO alumnipersonalinfo VALUES('10', 'eric', 'clapton', '2000-01-01', '123 address st', 2006, 'MS_CS', '555-11-1111');
+INSERT INTO alumnipersonalinfo VALUES('10', 'eric', 'clapton', '2000-01-01', '123 address st', 2006, 'MS', '555-11-1111');
 
 INSERT INTO transcripts VALUES('10', 'CS', '6221', '3', '2005', 'fall', 'B', 'Software Paradigms');
 INSERT INTO transcripts VALUES('10', 'CS', '6461', '4', '2005', 'fall', 'B', 'Computer Architecture');
@@ -380,7 +380,7 @@ INSERT INTO roles (id, role) VALUES (11, "USER");
 INSERT INTO applicantpersonalinfo VALUES (11, 'John', 'Lennon', '2000-01-01', '1800 22nd St NW, Washington, DC', '111-11-1111');
 INSERT INTO admissionsapplication (id, status, finaldecision, semester, year) VALUE (11, 'Complete', 0, 'Fall', 2018);
 INSERT INTO documentstatus (applicationid, applicationsubmitted, transcriptrecieved, letterofrecrecieved, personalinfosubmitted) VALUE (11, 1, 1, 1, 1);
-INSERT INTO academicinfo (applicationid, degreeapplyingfor, gretotal, greverbal, greanalytical, grequantitive, gredate, bachgpa, bachmajor, bachyear, bachuni) VALUE (11, 'Ph.D.', 300, 150, 4, 150, '2018-01-05', '3.9', 'Computer Science', 2018, 'George Washington University');
+INSERT INTO academicinfo (applicationid, degreeapplyingfor, gretotal, greverbal, greanalytical, grequantitive, gredate, bachgpa, bachmajor, bachyear, bachuni) VALUE (11, 'PhD', 300, 150, 4, 150, '2018-01-05', '3.9', 'Computer Science', 2018, 'George Washington University');
 INSERT INTO recommendation (applicationid, writername, writeremail, affiliation) VALUE (11, 'John Smith', 'smith@gwu.edu', 'Advisor');
 INSERT INTO recommendation (applicationid, writername, writeremail, affiliation) VALUE (11, 'Jill Peters', 'jpeters@gwu.edu', 'Professor');
 INSERT INTO recommendation (applicationid, writername, writeremail, affiliation) VALUE (11, 'Peter Jills', 'pjills@gwu.edu', 'Professor');
