@@ -35,6 +35,7 @@
 
     /* extract user */
     $user = $_SESSION["email"];
+    $id = $_SESSION["id"];
 
     /* variables for button handling */
     $idSearch = $_POST["idSearch"];
@@ -44,7 +45,21 @@
     $drop = $_POST["drop"];
 
 
-    /* manage displays */
+    /* get current classes */
+    $query = "SELECT c.courseid
+              FROM courses c, transcripts t
+              WHERE t.studentid = '$id' AND t.coursenum = c.coursenum AND t.dept = c.dept
+                    AND t.year = c.year AND t.semester = c.semester;";
+
+    $result = mysqli_query($connection, $query);
+
+    /* display schedule */
+    $classes = array();
+    if (mysqli_num_rows($result) > 0) {
+        while($row = mysqli_fetch_assoc($result)) {
+            array_push($classes, $row['courseid']);
+        }
+    }
 
 	/* show all classes */
 	if($all) {
@@ -77,8 +92,13 @@
 				echo "<td>".$prereqCRN["prereqid"]."</td>";
 
                 echo "<form method='post' action='register.php'>";
-                echo "<td><input type='submit' name='reg' value='Register'></td>";
-                echo "</tr>";
+                echo "<td><input type='submit' name='reg' value='Register'>";
+
+                if(in_array($row['courseid'], $classes)){
+                    echo "<input type='submit' name='drop' value='Drop'>";
+                }
+
+                echo "</td></tr>";
 
                 /* pass through info needed to register grade */
                 echo "<input type='hidden' name='regCRN' value=".$row["courseid"]."></form>";
