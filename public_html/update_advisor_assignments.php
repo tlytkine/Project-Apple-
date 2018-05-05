@@ -143,14 +143,13 @@
 			<td>".$row['degreename']."</td>
 			<td><form method='post'><select name ='facultyid'>";
 			while($row1 = mysqli_fetch_assoc($facultyresult)){
-				echo "<option value ='".$row1['facultyid']."' name='facultyidnew'>".$row1['facultyfirstname']." ".$row1['facultylastname']."</option>
-				<input type='hidden' name='studentidnew' value ='$studentidnew'>
-				<input type='hidden' name='facultyidnew' value ='".$row1['facultyid']."'>
-				</select>
-				<input type='submit' value='Assign' name='assign2'>
-				</form></td>";
+				echo "<option value ='".$row1['facultyid']."' name='facultyidnew'>".$row1['facultyfirstname']." ".$row1['facultylastname']."</option>";
+
 			}
-		echo "</tr>";
+			echo "</select><input type='hidden' name='studentidnew' value ='".$row['id']."'>
+			<input type='submit' value='Assign' name='assign2'>
+				</form></td>";
+			echo "</tr>";
 		}
 		echo "</table>";
 		echo "<br>";
