@@ -89,7 +89,7 @@ include 'header.php';
 <a href='view_advisee_information.php'>View Advisee Information</a> <br /> <!-- includes application status -->
 <a href='search-student-transcripts.php'>View Advisee Transcripts</a> <br />
 <a href='lift_new_student_hold.php'>Lift New Student Hold</a> <br />
-<a href='update_student_holds.php'>Update Advisee Holds</a> <br />
+<a href='update_student_holds_advisor.php'>Update Advisee Holds</a> <br />
 <?php endif; ?>
 
 <?php if (in_array("REVIEWER", $_SESSION["roles"])) : ?>
