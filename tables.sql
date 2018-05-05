@@ -75,7 +75,6 @@ CREATE TABLE applicantpersonalinfo (
     lastname          VARCHAR(30),
     dob               DATE,
     address           VARCHAR (100),
-    applicantyear     INT,
     ssn               VARCHAR (11),
     FOREIGN KEY (id) REFERENCES users(id)
 );
