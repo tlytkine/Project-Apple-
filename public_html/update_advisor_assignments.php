@@ -24,7 +24,7 @@ if($assign1){
 			$assignsuccess1 = "Advisor successfully assigned!";
 		}
 		else {
-			$alreadyassigned = "Advisor is already assigned to student.";
+			$alreadyassigned1 = "Advisor is already assigned to student.";
 		}
 
 		$current_students_result = mysqli_query($connection, $current_students);
@@ -41,6 +41,13 @@ if($assign2){
 		$advisor_update = "UPDATE advises SET facultyid = $facultyidnew WHERE 
 		studentid = $studentidnew;";
 		$advisor_result = mysqli_query($connection, $advisor_update);
+
+		if(mysqli_affected_rows($connection)>0){
+			$assignsuccess2 = "Advisor successfully assigned!";
+		}
+		else {
+			$alreadyassigned2 = "Advisor is already assigned to student.";
+		}
 
 		$current_students_result = mysqli_query($connection, $current_students);
 		$facultyresult = mysqli_query($connection,$facultyquery);
@@ -99,6 +106,11 @@ if($assignsuccess1){
 	echo $assignsuccess1;
 	echo "<br>";
 }
+else if($alreadyassigned1){
+	echo $alreadyassigned1;
+	echo "<br>";
+
+}
 
 echo "<br>";
 $current_students = "SELECT firstname,lastname,personalinfo.id,degreename,hold FROM personalinfo, advises, roles WHERE personalinfo.id = roles.id AND roles.role = 'STUDENT' AND advises.studentid = roles.id AND advises.facultyid IS NULL;";
@@ -144,12 +156,12 @@ while($row = mysqli_fetch_assoc($current_students_result)){
 }
 echo "</table>";
 echo "<br>";
-if($assignsuccess1){
-	echo $assignsuccess1;
+if($assignsuccess2){
+	echo $assignsuccess2;
 	echo "<br>";
 }
-else if($alreadyassigned){
-	echo $alreadyassigned;
+else if($alreadyassigned2){
+	echo $alreadyassigned2;
 	echo "<br>";
 
 }
