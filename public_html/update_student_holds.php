@@ -35,7 +35,6 @@ if (isset($_POST['lift'])) {
 
 # Place Hold Button 
 if (isset($_POST['place'])) {
-	echo "<h1>Place Hold</h1><br>";
 	if(isset($_POST['holdtext'])){
 		$holdtext = $_POST['holdtext'];
 		if(strlen($holdtext)>0){
