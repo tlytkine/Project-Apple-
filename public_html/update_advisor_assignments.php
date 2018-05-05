@@ -25,7 +25,7 @@ if($assign1){
 		$result = mysqli_query($connection, $query);
 
 		if($advisor_result){
-			echo "Advisor sucessfully assigned!";
+			$assignsuccess1 = "Advisor successfully assigned!";
 		}
 }
 
@@ -42,7 +42,7 @@ if($assign2){
 		$result = mysqli_query($connection, $query);
 
 		if($advisor_result){
-			echo "Advisor sucessfully assigned!";
+			$assignsuccess2 = "Advisor successfully assigned!";
 		}
 }
 
@@ -89,6 +89,13 @@ while($row = mysqli_fetch_assoc($result)){
 echo "</table>";
 
 
+echo "<br>";
+if($assignsuccess1){
+	echo $assignsuccess1;
+	echo "<br>";
+}
+
+echo "<br>";
 $current_students = "SELECT firstname,lastname,personalinfo.id,degreename,hold FROM personalinfo, advises, roles WHERE personalinfo.id = roles.id AND roles.role = 'STUDENT' AND advises.studentid = roles.id AND advises.facultyid IS NULL;";
 $current_students_result = mysqli_query($connection, $current_students);
 
@@ -131,6 +138,11 @@ while($row = mysqli_fetch_assoc($current_students_result)){
 	echo "</tr>";
 }
 echo "</table>";
+echo "<br>";
+if($assignsuccess1){
+	echo $assignsuccess1;
+	echo "<br>";
+}
 
 }
 else {
