@@ -381,16 +381,16 @@ INSERT INTO roles (id, role) VALUES (10, "ALUMNI");
 INSERT INTO roles (id, role) VALUES (10, "USER");
 INSERT INTO alumnipersonalinfo VALUES('10', 'eric', 'clapton', '2000-01-01', '123 address st', 2006, 'spring', 'MS', '555-11-1111');
 
-INSERT INTO transcripts VALUES('10', 'CS', '6221', '3', '2005', 'fall', 'B', 'Software Paradigms');
-INSERT INTO transcripts VALUES('10', 'CS', '6461', '4', '2005', 'fall', 'B', 'Computer Architecture');
-INSERT INTO transcripts VALUES('10', 'CS', '6212', '5', '2005', 'fall', 'B', 'Algorithims');
-INSERT INTO transcripts VALUES('10', 'CS', '6232', '7', '2005', 'fall', 'B', 'Networks 1');
-INSERT INTO transcripts VALUES('10', 'CS', '6241', '4', '2005', 'fall', 'B', 'Databases 1');
-INSERT INTO transcripts VALUES('10', 'CS', '6233', '3', '2006', 'spring', 'B', 'Networks 2');
-INSERT INTO transcripts VALUES('10', 'CS', '6242', '5', '2006', 'spring', 'B', 'Databases 2');
-INSERT INTO transcripts VALUES('10', 'CS', '6283', '6', '2006', 'spring', 'A', 'Security 1');
-INSERT INTO transcripts VALUES('10', 'CS', '6286', '7', '2006', 'spring', 'A', 'Network Security');
-INSERT INTO transcripts VALUES('10', 'CS', '6254', '7', '2006', 'spring', 'A', 'Software Engineering');
+INSERT INTO transcripts VALUES('10', 'CS', '6221', '3', '2005', 'fall', 'B', 'Software Paradigms', 'M', '15:00:00');
+INSERT INTO transcripts VALUES('10', 'CS', '6461', '4', '2005', 'fall', 'B', 'Computer Architecture', 'T', '15:00:00');
+INSERT INTO transcripts VALUES('10', 'CS', '6212', '5', '2005', 'fall', 'B', 'Algorithims', 'W', '15:00:00');
+INSERT INTO transcripts VALUES('10', 'CS', '6232', '7', '2005', 'fall', 'B', 'Networks 1', 'M', '18:00:00');
+INSERT INTO transcripts VALUES('10', 'CS', '6241', '4', '2005', 'fall', 'B', 'Databases 1', 'W', '18:00:00');
+INSERT INTO transcripts VALUES('10', 'CS', '6233', '3', '2006', 'spring', 'B', 'Networks 2', 'T', '18:00:00');
+INSERT INTO transcripts VALUES('10', 'CS', '6242', '5', '2006', 'spring', 'B', 'Databases 2', 'R', '18:00:00');
+INSERT INTO transcripts VALUES('10', 'CS', '6283', '6', '2006', 'spring', 'A', 'Security 1', 'T', '18:00:00');
+INSERT INTO transcripts VALUES('10', 'CS', '6286', '7', '2006', 'spring', 'A', 'Network Security', 'W', '18:00:00');
+INSERT INTO transcripts VALUES('10', 'CS', '6254', '7', '2006', 'spring', 'A', 'Software Engineering', 'M', '15:00:00');
 
 /* Applicant 1 (complete with no reviews) */
 INSERT INTO users (email, password, id) VALUES ('lennon@gwu.edu', '$2y$10$K7xpP4XPPWkgYJ0/I4XOtehbRigHUqpmXer99/Ftx1fERDU.JZObC', 11);
