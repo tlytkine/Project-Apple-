@@ -1,4 +1,8 @@
 <?php 
+$allowed_user_types = array(
+        "GS",
+        "ADMIN"
+ 	);
 include 'header.php';
 include 'db-connect.php';
 $id = $_SESSION["id"];
@@ -12,14 +16,11 @@ $id = $_SESSION["id"];
 
 <?php
 
-
-
-	
-
+	echo "<h1>Update Degrees</h1>";
 	// edit degree
 	if (strcmp($_POST['action'], 'update_degree') == 0) {
 
-if((isset($_POST['degreename']))&&(isset($_POST['currentcourseid']))&&(isset($_POST['newcourseid']))){
+	if((isset($_POST['degreename']))&&(isset($_POST['currentcourseid']))&&(isset($_POST['newcourseid']))){
 			$degreename = $_POST['degreename'];
 			$currentcourseid = $_POST['currentcourseid'];
 			$newcourseid = $_POST['newcourseid'];
@@ -112,7 +113,7 @@ if((isset($_POST['degreename']))&&(isset($_POST['currentcourseid']))&&(isset($_P
 		}
 	}
 
-	echo "<br><h2>Update Degrees Menu</h2>";
+
 
 	$degree_query = "SELECT degreerequirements.degreename, degreerequirements.courseid, courses.dept, courses.coursenum, courses.title FROM degreerequirements, courses WHERE degreerequirements.courseid = courses.courseid;";
 	$degree_result = mysqli_query($connection, $degree_query);

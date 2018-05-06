@@ -1,4 +1,7 @@
 <?php 
+$allowed_user_types = array(
+        "STUDENT"
+ );
 include 'header.php';
 include 'db-connect.php';
 $id = $_SESSION["id"];
@@ -6,7 +9,7 @@ $id = $_SESSION["id"];
 
 <html>
 <head><title>View Degree Requirements</title></head>
-<body><h2>View Degree Requirements</h2><br>
+<body><h1>View Degree Requirements</h1>
 
 
 <?php

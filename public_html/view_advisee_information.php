@@ -1,17 +1,20 @@
 <?php 
+$allowed_user_types = array(
+        "ADVISOR"
+ );
 include 'header.php';
 include 'db-connect.php';
 $id = $_SESSION["id"];
 ?>
 
 <html>
-<head><title>Advisee Information</title></head>
+<head><title>View Advisee Information</title></head>
 <link rel="stylesheet" href="style.css">
 <body>
 
 <?php
 
-	echo "<h1>Advisee Information</h1>";
+	echo "<h1>View Advisee Information</h1>";
 
 
 	$advisee_query = "SELECT firstname,lastname,studentid, hold, degreename FROM personalinfo,advises WHERE advises.facultyid='$id' AND personalinfo.id=advises.studentid;";

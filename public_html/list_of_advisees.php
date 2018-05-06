@@ -1,7 +1,11 @@
 <?php 
-include 'header.php';
-include 'db-connect.php';
-$id = $_SESSION["id"];
+	$allowed_user_types = array(
+        "GS",
+        "ADMIN"
+ 	);
+	include 'header.php';
+	include 'db-connect.php';
+	$id = $_SESSION["id"];
 ?>
 
 
@@ -12,7 +16,7 @@ $id = $_SESSION["id"];
 
 <?php
 
-echo "<br><h2>List of Advisees</h2>";
+echo "<h1>List of Advisees</h1>";
 
 
 $advisee_query = "SELECT firstname,lastname,studentid, hold, degreename FROM personalinfo,advises WHERE personalinfo.id=advises.studentid;";

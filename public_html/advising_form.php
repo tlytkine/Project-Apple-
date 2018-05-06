@@ -1,4 +1,9 @@
 <?php 
+
+
+    $allowed_user_types = array(
+        "STUDENT"
+    );
 	include 'header.php';
 	include 'db-connect.php';
 	$studentid = $_SESSION['id'];

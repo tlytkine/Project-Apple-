@@ -1,9 +1,12 @@
 <?php 
+	$allowed_user_types = array(
+        "ADVISOR"
+ 	);
 	include 'header.php';
 	include 'db-connect.php';
 	$facultyid = $_SESSION["id"];
 ?>
-	<head><title>Advising Form</title></head>
+	<head><title>Lift New Student Holds</title></head>
 	<link rel='stylesheet' href='style.css'>
 	<body>
 <?php

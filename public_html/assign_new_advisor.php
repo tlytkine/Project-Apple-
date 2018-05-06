@@ -1,5 +1,11 @@
-<?php include 'header.php';?>
-<?php include 'db-connect.php';?>
+<?php 
+$allowed_user_types = array(
+        "ADMIN",
+        "GS"
+ );
+include 'header.php';
+include 'db-connect.php';
+?>
 
 <html>
 <head><title>Assign Faculty Advisor</title></head>
