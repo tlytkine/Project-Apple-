@@ -346,7 +346,7 @@ INSERT INTO personalinfo VALUES('8', 'Paul', 'McCartney', '2000-01-01', '123 Add
 
 INSERT INTO transcripts VALUES('8', 'CS', '6221', '3', '2016', 'fall', 'A', 'Software Paradigms', 'M', '15:00:00');
 INSERT INTO transcripts VALUES('8', 'CS', '6461', '4', '2016', 'fall', 'A', 'Computer Architecture', 'T', '15:00:00');
-INSERT INTO transcripts VALUES('8', 'CS', '6212', '5', '2017', 'spring', 'B', 'Algorithims', 'W', '15:00:00');
+INSERT INTO transcripts VALUES('8', 'CS', '6212', '5', '2017', 'spring', 'B', 'Algorithms', 'W', '15:00:00');
 INSERT INTO transcripts VALUES('8', 'CS', '6225', '6', '2017', 'spring', 'B', 'Data Compression', 'R', '15:00:00');
 INSERT INTO transcripts VALUES('8', 'CS', '6232', '7', '2017', 'spring', 'B', 'Networks 1', 'M', '18:00:00');
 INSERT INTO transcripts VALUES('8', 'CS', '6233', '3', '2017', 'fall', 'A', 'Networks 2', 'T', '18:00:00');
@@ -365,7 +365,7 @@ INSERT INTO personalinfo VALUES('9', 'George', 'Harrison', '2000-01-01', '123 Ad
 
 INSERT INTO transcripts VALUES('9', 'CS', '6221', '3', '2016', 'fall', 'B', 'Software Paradigms', 'M', '15:00:00');
 INSERT INTO transcripts VALUES('9', 'CS', '6461', '4', '2016', 'fall', 'B', 'Computer Architecture', 'T', '15:00:00');
-INSERT INTO transcripts VALUES('9', 'CS', '6212', '5', '2016', 'fall', 'B', 'Algorithims', 'W', '15:00:00');
+INSERT INTO transcripts VALUES('9', 'CS', '6212', '5', '2016', 'fall', 'B', 'Algorithms', 'W', '15:00:00');
 INSERT INTO transcripts VALUES('9', 'CS', '6232', '7', '2017', 'spring', 'B', 'Networks 1', 'M', '18:00:00');
 INSERT INTO transcripts VALUES('9', 'CS', '6241', '4', '2017', 'spring', 'B', 'Databases 1', 'W', '18:00:00');
 INSERT INTO transcripts VALUES('9', 'CS', '6233', '3', '2017', 'spring', 'B', 'Networks 2', 'T', '18:00:00');
@@ -383,7 +383,7 @@ INSERT INTO alumnipersonalinfo VALUES('10', 'Eric', 'Clapton', '2000-01-01', '12
 
 INSERT INTO transcripts VALUES('10', 'CS', '6221', '3', '2005', 'fall', 'B', 'Software Paradigms', 'M', '15:00:00');
 INSERT INTO transcripts VALUES('10', 'CS', '6461', '4', '2005', 'fall', 'B', 'Computer Architecture', 'T', '15:00:00');
-INSERT INTO transcripts VALUES('10', 'CS', '6212', '5', '2005', 'fall', 'B', 'Algorithims', 'W', '15:00:00');
+INSERT INTO transcripts VALUES('10', 'CS', '6212', '5', '2005', 'fall', 'B', 'Algorithms', 'W', '15:00:00');
 INSERT INTO transcripts VALUES('10', 'CS', '6232', '7', '2005', 'fall', 'B', 'Networks 1', 'M', '18:00:00');
 INSERT INTO transcripts VALUES('10', 'CS', '6241', '4', '2005', 'fall', 'B', 'Databases 1', 'W', '18:00:00');
 INSERT INTO transcripts VALUES('10', 'CS', '6233', '3', '2006', 'spring', 'B', 'Networks 2', 'T', '18:00:00');
