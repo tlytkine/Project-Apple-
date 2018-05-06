@@ -7,7 +7,7 @@
 
 <body>
 <?php
-$allowed_user_types = array("USER");
+$allowed_user_types = array("USER", "ADMIN", "GS", "APPLICANT", "STUDENT", "ALUMNI", "INSTRUCTOR", "ADVISOR", "REVIEWER", "CAC");
 include 'header.php';
 ?>
 <h1>Menu</h1>
