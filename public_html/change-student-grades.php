@@ -35,6 +35,16 @@ include 'header.php';
     $lname = $_POST["lname"];
 
     $_SESSION["student_id"]  = $id;
+
+    /* get current year and semester */
+    $query = "SELECT year, semester
+        FROM courses c
+        LIMIT 1;";
+    $result = mysqli_query($connection, $query);
+    $row = mysqli_fetch_assoc($result);
+    $cur_year = $row["year"];
+    $cur_semester = $row["semester"];
+
     /* runs if grade was changed */
     if($change_grade){
         $query = "UPDATE transcripts
@@ -98,17 +108,25 @@ include 'header.php';
 					echo "<tr>";
 
 					echo "<td>".$row["dept"]."</td><td>".$row["coursenum"]."</td><td>".$row["title"]."</td><td>".$row["semester"]."</td><td>".$row["year"]."</td>";
-					echo "<td><form method='post' action='change-student-grades.php'>";
-					echo "<input type='text' name='new_grade' value=".$row["grade"].">";
-					echo "</td>";
-					echo "<td><input type='submit' name='change_grade' value='Change'></td>";
 
-					/* pass through info needed to change grade */
-					echo "<input type='hidden' name='id' value=".$row["studentid"].">";
-					echo "<input type='hidden' name='dept' value=".$row["dept"].">";
-					echo "<input type='hidden' name='coursenum' value=".$row["coursenum"].">";
-					echo "<input type='hidden' name='semester' value=".$row["semester"].">";
-					echo "<input type='hidden' name='year' value=".$row["year"]."></form>";
+
+                    if($row["year"] == $cur_year && $row["semester"] == $cur_semester){
+                        echo "<td><form method='post' action='change-student-grades.php'>";
+    					echo "<input type='text' name='new_grade' value=".$row["grade"].">";
+    					echo "</td>";
+    					echo "<td><input type='submit' name='change_grade' value='Change'></td>";
+
+    					/* pass through info needed to change grade */
+    					echo "<input type='hidden' name='id' value=".$row["studentid"].">";
+    					echo "<input type='hidden' name='dept' value=".$row["dept"].">";
+    					echo "<input type='hidden' name='coursenum' value=".$row["coursenum"].">";
+    					echo "<input type='hidden' name='semester' value=".$row["semester"].">";
+    					echo "<input type='hidden' name='year' value=".$row["year"]."></form>";
+                    }
+                    else{
+                        echo "<td><input type='text' value=".$row["grade"]."></td>";
+                        echo "<td></td>";
+                    }
 
 					echo "</tr>";
 				}
