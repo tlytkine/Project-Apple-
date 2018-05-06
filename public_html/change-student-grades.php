@@ -124,7 +124,7 @@ include 'header.php';
     					echo "<input type='hidden' name='year' value=".$row["year"]."></form>";
                     }
                     else{
-                        echo "<td><input type='text' value=".$row["grade"]."></td>";
+                        echo "<td><input type='text' value=".$row["grade"]." readonly></td>";
                         echo "<td></td>";
                     }
 
@@ -185,6 +185,8 @@ include 'header.php';
 			while ($row = mysqli_fetch_assoc($result)){
 				echo "<tr>";
 
+                echo "<td>".$row["dept"]."</td><td>".$row["coursenum"]."</td><td>".$row["title"]."</td><td>".$row["semester"]."</td><td>".$row["year"]."</td>";
+
                 if($row["year"] == $cur_year && $row["semester"] == $cur_semester){
                     echo "<td><form method='post' action='change-student-grades.php'>";
                     echo "<input type='text' name='new_grade' value=".$row["grade"].">";
@@ -199,7 +201,7 @@ include 'header.php';
                     echo "<input type='hidden' name='year' value=".$row["year"]."></form>";
                 }
                 else{
-                    echo "<td><input type='text' value=".$row["grade"]."></td>";
+                    echo "<td><input type='text' value=".$row["grade"]." readonly></td>";
                     echo "<td></td>";
                 }
 
