@@ -7,7 +7,7 @@
 
 <body>
 <?php
-$allowed_user_types = array("System Administrator");
+$allowed_user_types = array("ADMIN");
 include 'header.php';
 ?>
 <h1>Add Users</h1>

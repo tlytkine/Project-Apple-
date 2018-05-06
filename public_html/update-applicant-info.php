@@ -7,7 +7,7 @@
 
 <body>
 <?php
-$allowed_user_types = array("System Administrator");
+$allowed_user_types = array("APPLICANT");
 include 'header.php';
 ?>
 <h1>Update Personal Information</h1>

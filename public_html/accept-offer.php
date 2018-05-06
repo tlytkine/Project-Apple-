@@ -7,7 +7,7 @@
 
 <body>
 <?php
-$allowed_user_types = array("Applicant");
+$allowed_user_types = array("APPLICANT");
 include 'header.php';
 ?>
 

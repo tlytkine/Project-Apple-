@@ -9,7 +9,7 @@
 <body>
 <?php
 $allowed_user_types = array(
-    "Faculty Reviewer",
+    "REVIEWER",
     "CAC"
 );
 include 'header.php';
