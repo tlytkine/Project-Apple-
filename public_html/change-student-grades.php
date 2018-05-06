@@ -94,7 +94,7 @@ include 'header.php';
 			/* get student grade information */
 			$query = "SELECT t.studentid, t.dept, t.coursenum, t.grade, t.semester, t.year, t.title
 				FROM transcripts t, personalinfo p, users u
-				WHERE p.firstname = LIKE '%$fname%'  AND p.lastname LIKE '%$lname%' AND p.id = t.studentid
+				WHERE p.firstname LIKE '%$fname%'  AND p.lastname LIKE '%$lname%' AND p.id = t.studentid
                         	AND u.email = '$_SESSION[email]' AND u.id = t.professorid
 				ORDER BY t.year, t.semester DESC;";
 
@@ -124,7 +124,7 @@ include 'header.php';
     					echo "<input type='hidden' name='year' value=".$row["year"]."></form>";
                     }
                     else{
-                        echo "<td><input type='text' value=".$row["grade"]."></td>";
+                        echo "<td><input type='text' value=".$row["grade"]." readonly></td>";
                         echo "<td></td>";
                     }
 
@@ -185,18 +185,25 @@ include 'header.php';
 			while ($row = mysqli_fetch_assoc($result)){
 				echo "<tr>";
 
-				echo "<td>".$row["dept"]."</td><td>".$row["coursenum"]."</td><td>".$row["title"]."</td><td>".$row["semester"]."</td><td>".$row["year"]."</td>";
-				echo "<td><form method='post' action='change-student-grades.php'>";
-				echo "<input type='text' name='new_grade' value='".$row["grade"]."'>";
-				echo "</td>";
-				echo "<td><input type='submit' name='change_grade' value='Change'></td>";
+                echo "<td>".$row["dept"]."</td><td>".$row["coursenum"]."</td><td>".$row["title"]."</td><td>".$row["semester"]."</td><td>".$row["year"]."</td>";
 
-				/* pass through info needed to change grade */
-				echo "<input type='hidden' name='id' value=".$row["studentid"].">";
-				echo "<input type='hidden' name='dept' value=".$row["dept"].">";
-				echo "<input type='hidden' name='coursenum' value=".$row["coursenum"].">";
-				echo "<input type='hidden' name='semester' value=".$row["semester"].">";
-				echo "<input type='hidden' name='year' value=".$row["year"]."></form>";
+                if($row["year"] == $cur_year && $row["semester"] == $cur_semester){
+                    echo "<td><form method='post' action='change-student-grades.php'>";
+                    echo "<input type='text' name='new_grade' value=".$row["grade"].">";
+                    echo "</td>";
+                    echo "<td><input type='submit' name='change_grade' value='Change'></td>";
+
+                    /* pass through info needed to change grade */
+                    echo "<input type='hidden' name='id' value=".$row["studentid"].">";
+                    echo "<input type='hidden' name='dept' value=".$row["dept"].">";
+                    echo "<input type='hidden' name='coursenum' value=".$row["coursenum"].">";
+                    echo "<input type='hidden' name='semester' value=".$row["semester"].">";
+                    echo "<input type='hidden' name='year' value=".$row["year"]."></form>";
+                }
+                else{
+                    echo "<td><input type='text' value=".$row["grade"]." readonly></td>";
+                    echo "<td></td>";
+                }
 
 				echo "</tr>";
 			}

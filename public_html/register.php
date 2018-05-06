@@ -97,7 +97,7 @@
 
 		/*error message */
 		if ($passPrereqs == 0) {
-			echo "You hve not completed the required prereqs </br>";
+			echo "You have not completed the required prereqs </br>";
 		}
 
 		/* perform checks for schedule conflicts */
