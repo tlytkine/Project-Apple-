@@ -115,7 +115,7 @@ $id = $_SESSION["id"];
 
 
 
-	$degree_query = "SELECT degreerequirements.degreename, degreerequirements.courseid, courses.dept, courses.coursenum, courses.title FROM degreerequirements, courses WHERE degreerequirements.courseid = courses.courseid;";
+	$degree_query = "SELECT degreerequirements.degreename, degreerequirements.courseid, courses.dept, courses.coursenum, courses.title FROM degreerequirements, courses WHERE degreerequirements.courseid = courses.courseid ORDER BY(degreename);";
 	$degree_result = mysqli_query($connection, $degree_query);
 
 		echo "<table>
