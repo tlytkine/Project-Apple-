@@ -79,45 +79,86 @@
         $sections = array();
 		if (mysqli_num_rows($result) > 0) {
 			while($row = mysqli_fetch_assoc($result)) {
-                array_push($time, $row["time"]);
-                array_push($day, $row["day"]);
-                array_push($dept, $row["dept"]);
-                array_push($coursenum, $row["coursenum"]);
-                array_push($title, $row["title"]);
-                array_push($section, $row["section"]);
+                array_push($depts, $row["dept"]);
+                array_push($coursenums, $row["coursenum"]);
+                array_push($sections, $row["section"]);
+                array_push($days, $row["day"]);
+                array_push($times, $row["time"]);
+                array_push($titles, $row["title"]);
 			}
 		}
         else {
 			echo "No results, please check semester and year are correct <br/>";
             $no_results = 1;
 		}
-
+        $keys = array(0,0,0,0,0);
+        $started = array(0, 0, 0, 0, 0);
         /* display schedule */
         if($no_results != 1){
             echo "<table>";
             echo "<tr><th>Time</th><th>Monday</th><th>Tuesday</th><th>Wednesday</th><th>Thursday</th><th>Friday</th></tr>";
-            for($t = 12; d <= 22; d++){
+            /* iteratre through each time/row */
+            for($t = 12; $t <= 22; $t++){
                 echo "<tr>";
-                echo "<td>" . $t . "00:00" . "</td>";
-                $cur_time = $t . "00:00";
+                echo "<td>" . $t . ":00" . "</td>";
+                $cur_time = $t . ":00:00";
+                /* iterate through each column/day */
                 for ($d = 0; $d < 5; $d++) {
                     $found_class = 0;
                     $same_day = array();
+
+                    /* find all courses for this day */
                     for($i = 0; $i < count($coursenums); $i++){
                         if($days[$i] == $week[$d]){
                             array_push($same_day, $coursenums[$i]);
                         }
                     }
 
+                    /* check if any of the courses on this day start at this time */
                     for($i = 0; $i < count($same_day); $i++){
-                        $key = array_search($same_day[$i], $coursenums);
-                        if($times[$key] == $cur_time){
-                            echo '<tdbgcolor="#FF0000">';
-                            echo $titles[$key];
+                        $keys[$d] = array_search($same_day[$i], $coursenums);
+                        if($times[$keys[$d]] == $cur_time){
+                            echo '<td style="background-color:black; color:white">';
+                            echo $titles[$keys[$d]];
                             $found_class = 1;
+                            $started[$d] = 5;
+                            break;
                         }
                     }
-                    if($found_class == 0){
+
+                    //echo $started[$d];
+                    if($started[$d] > 0 && $started[$d] != 5){
+                        if($started[$d] == 3){
+                            echo '<td style="background-color:black; color:white">';
+                            echo $t-1 . ":00-";
+                            echo $t+1 . ":30";
+                        }
+                        else{
+                            echo '<td style="background-color:black">';
+                        }
+                        $started[$d]--;
+                    }
+                    else if($found_class == 0){
+                        echo "<td>";
+                    }
+                    echo "</td>";
+                }
+                echo "</tr>";
+                echo "<tr><td>" . $t . ":30" . "</td>";
+                for ($d = 0; $d < 5; $d++) {
+                    if($started[$d] == 5){ $started[$d]--; }
+
+                    if($started[$d] > 0){
+                        if($started[$d] == 4){
+                            echo '<td style="background-color:black; color:white">';
+                            echo $depts[$keys[$d]] ." ". $coursenums[$keys[$d]] . "-" .$sections[$keys[$d]];
+                        }
+                        else{
+                            echo '<td style="background-color:black">';
+                        }
+                        $started[$d]--;
+                    }
+                    else{
                         echo "<td>";
                     }
                     echo "</td>";
