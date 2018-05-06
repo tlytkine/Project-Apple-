@@ -33,35 +33,35 @@
 
 <?php 
 
-	if(ISSET($_POST['formsubmitted'])){
-		$degreename = $_POST['degreename'];
-		for ($i = 1; $i <= 12; $i++){
-			$courses[$i] = $_POST["course$i"];
-		}
-		$courses = array_unique($courses);
-		// Checks if courses entered were taken 
-		$course_count = 0;
-		for ($i = 1; $i <= 12; $i++) {
-			$course_check_query = "SELECT grade FROM transcripts, courses WHERE transcripts.studentid =$studentid AND transcripts.coursenum=courses.coursenum AND courses.courseid=$courses[$i] AND courses.dept = transcripts.dept;";
-			$course_check_result = mysqli_query($connection, $course_check_query);
-			$row = mysqli_fetch_assoc($course_check_result);
-			if (ISSET($row['grade'])) {
-				if (strcmp($row['grade'], 'IP') == 0) {
-					$courses_in_progress = "One or more of the courses you have entered are still in progress. Please check your transcript to make sure all grades have been submitted.";
-				}
-				else {
-					$course_count++;
-				}
+		if(ISSET($_POST['formsubmitted'])){
+			$degreename = $_POST['degreename'];
+			for ($i = 1; $i <= 12; $i++){
+				$courses[$i] = $_POST["course$i"];
 			}
-			else if ($courses[$i] != 0){
-				$courses_not_taken_query = "SELECT DISTINCT coursenum,dept FROM courses WHERE courseid=$course[$i];";
-				$courses_not_taken_result = mysqli_query($connection,$courses_not_taken_query);
-				$row = mysqli_fetch_assoc($courses_not_taken_result);
-				$dept = $row['dept'];
-				$coursenum = $row['coursenum'];
-				$courses_not_taken .= $dept." ".$coursenum.", ";
-			} 
-		}
+			$courses = array_unique($courses);
+			// Checks if courses entered were taken 
+			$course_count = 0;
+			for ($i = 1; $i <= 12; $i++) {
+				$course_check_query = "SELECT grade FROM transcripts, courses WHERE transcripts.studentid =$studentid AND transcripts.coursenum=courses.coursenum AND courses.courseid=$courses[$i] AND courses.dept = transcripts.dept;";
+				$course_check_result = mysqli_query($connection, $course_check_query);
+				$row = mysqli_fetch_assoc($course_check_result);
+				if (ISSET($row['grade'])) {
+					if (strcmp($row['grade'], 'IP') == 0) {
+						$courses_in_progress = "One or more of the courses you have entered are still in progress. Please check your transcript to make sure all grades have been submitted.";
+					}
+					else {
+						$course_count++;
+					}
+				}
+				else if ($courses[$i] != 0){
+					$courses_not_taken_query = "SELECT DISTINCT coursenum,dept FROM courses WHERE courseid=$course[$i];";
+					$courses_not_taken_result = mysqli_query($connection,$courses_not_taken_query);
+					$row = mysqli_fetch_assoc($courses_not_taken_result);
+					$dept = $row['dept'];
+					$coursenum = $row['coursenum'];
+					$courses_not_taken .= $dept." ".$coursenum.", ";
+				} 
+			}
 			// Checks that there are at least 10 courses. 
 			if($course_count < 10) {
 				$not_enough_courses = "You have not taken enough unique courses. The mininum requirement for graduation is 10 courses.";
@@ -94,6 +94,7 @@
 					if ($row['GPA'] < 3.0) {
 						$gpa_error = "You have not met the minimum GPA requirement of 3.0 required for your degree.";
 					}
+					$gpaval = $row['GPA'];
 				}
 			}
 			//check credit hours
@@ -104,6 +105,7 @@
 					if($row['CREDITS'] < 30) {
 						$credit_hours_error = "You have not met the minimum requirement of 30 credit hours required for your degree.";
 					}
+					$numcredits = $row['CREDITS'];
 				}
 			}
 			//check if more than two grades below B-
@@ -120,29 +122,35 @@
 			if ($letter_grade_check > 2) {
 				$grades_error = "You have more than two letter grades below B-.";
 			}
-			// actually insert the application into the database
-			for ($i = 1; $i <= 12; $i++) {
-				if ($courses[$i] > 0) {
-					$form_insert_query = "INSERT INTO graduationapplication(studentid,courseid,year) VALUES($studentid,$courses[$i],'$year')";
-					$form_insert_result = mysqli_query($connection, $form_insert_query);
+
+			if(($letter_grade_check < 2) && ($numcredits>=30) && ($gpaval>=3.0) && ($core_courses_count==$num_core_courses) && ($course_count>=10)){
+				// actually insert the application into the database
+				for ($i = 1; $i <= 12; $i++) {
+					if ($courses[$i] > 0) {
+						$form_insert_query = "INSERT INTO graduationapplication(studentid,courseid,year) VALUES($studentid,$courses[$i],'$year')";
+						$form_insert_result = mysqli_query($connection, $form_insert_query);
+					}
+				}
+				// Query to update students cleared field to 1 if all conditions met 
+				$cleared_query = "UPDATE graduationapplication SET cleared = 1 WHERE studentid = '$studentid';";
+				$result_cleared_query = mysqli_query($connection, $cleared_query);
+
+				if ($result_cleared_query) {
+					$applicationcleared = "<br> Application cleared successfully!";
+				}
+				else {
+					$applicationnotcleared = "<br>Application failed to be cleared for graduation.";
 				}
 			}
-			// Query to update students cleared field to 1 if all conditions met 
-			$cleared_query = "UPDATE graduationapplication SET cleared = 1 WHERE studentid = '$studentid';";
-			$result_cleared_query = mysqli_query($connection, $cleared_query);
-
-			if ($result_cleared_query) {
-				$applicationcleared = "<br> Application cleared successfully!";
-			}
-			else {
-				$applicationnotcleared = "<br>Application failed to be cleared for graduation.";
-			}
-	}
+		}
 
 	$duplicate_query = "SELECT studentid FROM graduationapplication WHERE studentid=$studentid;";
 	$result_from_query = mysqli_query($connection, $duplicate_query);
 
-	if (mysqli_num_rows($result_from_query) > 0){
+	$row = mysqli_fetch_assoc($result_from_query);
+
+
+	if ($row['studentid']==$studentid){
 		echo "You have already submitted an application for graduation.";
 	}
 	else {
