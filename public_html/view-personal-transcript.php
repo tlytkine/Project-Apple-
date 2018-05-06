@@ -102,9 +102,7 @@ include 'header.php';
         $gpa = round($sum / $total_credits, 2);
 
         echo "<br/>";
-        if($gpa == 0 && $f == 0){
-            echo "N/A";
-        }
+        if($gpa == 0 && $f == 0){}
         else{
             echo "<h4> GPA: " . $gpa;
         }
