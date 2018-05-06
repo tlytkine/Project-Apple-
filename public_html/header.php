@@ -6,15 +6,13 @@
 session_start();
 
 // Redirect to home page if accessing restricted page:
-/*
-if (empty(array_intersect($_SESSION["roles"], $allowed_user_types))) {
-	if (isset($_SESSION["roles"])) {
+if (isset($_SESSION["roles"])) {
+	if (empty(array_intersect($_SESSION["roles"], $allowed_user_types))) {
 		header("location: menu.php");
-	} else {
-		header("location: login.php");
 	}
+} else {
+	header("location: login.php");
 }
-*/
 
 ?>
 </body>

@@ -8,7 +8,7 @@
 <body>
 <?php
 $allowed_user_types = array(
-    "Applicant"
+    "APPLICANT"
 );
 include 'header.php';
 ?>

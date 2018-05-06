@@ -7,7 +7,7 @@
 
 <body>
 <?php
-$allowed_user_types = array("USER");
+$allowed_user_types = array("USER", "ADMIN", "GS", "APPLICANT", "STUDENT", "ALUMNI", "INSTRUCTOR", "ADVISOR", "REVIEWER", "CAC");
 include 'header.php';
 ?>
 <h1>Menu</h1>
@@ -64,6 +64,7 @@ include 'header.php';
 <?php if (in_array("APPLICANT", $_SESSION["roles"])) : ?>
 <a href='update-applicant-info.php'>Update Personal Information</a> <br />
 <a href='admissions-application.php'>Complete Admissions Application</a> <br />
+<a href='manage-recommendations.php'>Manage Letters of Recommendation</a> <br />
 <a href='applicant-status.php'>View Application Status</a> <br />
 <?php endif; ?>
 

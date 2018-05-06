@@ -7,7 +7,7 @@
 
 <body>
 <?php
-$allowed_user_types = array("Grad Secretary");
+$allowed_user_types = array("GS", "ADMIN");
 include 'header.php';
 ?>
 <h1>Update Document Status</h1>

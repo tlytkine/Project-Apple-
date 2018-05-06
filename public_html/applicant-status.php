@@ -7,7 +7,7 @@
 
 <body>
 <?php
-$allowed_user_types = array("Applicant");
+$allowed_user_types = array("APPLICANT");
 include 'header.php';
 ?>
 
@@ -43,7 +43,7 @@ if ($row["finaldecision"] == 0) {
 	echo "Personal Information: $personalinfosubmitted<br/>";
 	echo "Application: $applicationsubmitted<br/>";
 	echo "Transcript: $transcriptrecieved<br/>";
-	echo "Letter of Recommendation: $letterofrecrecieved";
+	echo "Letters of Recommendation: $letterofrecrecieved";
 } else {
 	echo "Application Status: Decision Available<br/>";
 	if ($row["finaldecision"] == 1) {
