@@ -1,4 +1,9 @@
 <?php 
+
+
+    $allowed_user_types = array(
+        "STUDENT"
+    );
 	include 'header.php';
 	include 'db-connect.php';
 	$studentid = $_SESSION['id'];
@@ -56,7 +61,15 @@
 				}
 			}
 		}
-		if($core_course_count < 3){
+		$num_core_courses_query = "SELECT COUNT(courseid) AS CourseCount FROM degreerequirements WHERE degreename='$degreename';";
+		$num_core_courses_result = mysqli_query($connection, $num_core_courses_query);
+
+		$row = mysqli_fetch_assoc($num_core_courses_result);
+
+		$num_core_courses = $row['CourseCount'];
+
+
+		if($core_course_count < $num_core_courses){
 			$core_course_error = "Not all core courses have been entered. Please check your degree requirements and make sure you have entered all of the core courses.";
 		}
 		// Counts total number of courses entered into form 

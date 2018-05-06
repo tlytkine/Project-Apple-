@@ -1,4 +1,8 @@
 <?php 
+
+$allowed_user_types = array(
+        "ADVISOR"
+ );
 include 'header.php';
 include 'db-connect.php';
 $facultyid = $_SESSION["id"];
@@ -11,6 +15,8 @@ $facultyid = $_SESSION["id"];
 
 <?php
 
+
+	echo "<h1>Update Student Holds</h1>";
 	$studentid = $_POST['studentid'];
 
 
@@ -51,8 +57,6 @@ $facultyid = $_SESSION["id"];
 			}
 		}
 	}
-
-	echo "<h1>Update Student Holds</h1>";
 
 	// Get all students / faculty advisors 
 	$advisee_query = "SELECT P1.firstname AS studentfirstname, P1.lastname AS studentlastname, P2.firstname AS facultyfirstname, P2.lastname AS facultylastname, advises.studentid, advises.facultyid, advises.hold, advises.degreename FROM personalinfo AS P1, personalinfo AS P2, advises WHERE P1.id = advises.studentid AND P2.id = advises.facultyid AND advises.facultyid=$facultyid;"; 

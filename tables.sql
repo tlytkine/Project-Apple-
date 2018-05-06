@@ -320,6 +320,21 @@ INSERT INTO prereqs VALUES (18, 3);
 INSERT INTO prereqs VALUES (19, 14);
 INSERT INTO prereqs VALUES (19, 15);
 
+/* Fill degree requirements  */
+INSERT INTO degreerequirements(degreename, courseid) VALUES ('MS',1);
+INSERT INTO degreerequirements(degreename, courseid) VALUES ('MS',2);
+INSERT INTO degreerequirements(degreename, courseid) VALUES ('MS',3);
+
+INSERT INTO degreerequirements(degreename, courseid) VALUES ('PhD',1);
+INSERT INTO degreerequirements(degreename, courseid) VALUES ('PhD',2);
+INSERT INTO degreerequirements(degreename, courseid) VALUES ('PhD',3);
+INSERT INTO degreerequirements(degreename, courseid) VALUES ('PhD',4);
+INSERT INTO degreerequirements(degreename, courseid) VALUES ('PhD',5);
+INSERT INTO degreerequirements(degreename, courseid) VALUES ('PhD',6);
+
+INSERT INTO degreerequirements(degreename, courseid) VALUES ('Direct PhD',4);
+INSERT INTO degreerequirements(degreename, courseid) VALUES ('Direct PhD',5);
+INSERT INTO degreerequirements(degreename, courseid) VALUES ('Direct PhD',6);
 
 /* student 1 */
 INSERT INTO users (email, password, id) VALUES ('mccartney@gwu.edu', '$2y$10$K7xpP4XPPWkgYJ0/I4XOtehbRigHUqpmXer99/Ftx1fERDU.JZObC', 8);

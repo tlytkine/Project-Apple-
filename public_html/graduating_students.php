@@ -1,4 +1,8 @@
 <?php 
+$allowed_user_types = array(
+		"ADMIN",
+        "GS"
+ );
 include 'header.php';
 include 'db-connect.php';
 $id = $_SESSION["id"];
@@ -12,7 +16,7 @@ $id = $_SESSION["id"];
 
 <?php
 
-echo "<br><h2>List of Graduating Students</h2>";
+echo "<h1>List of Graduating Students</h1>";
 
 
 $graduating_students_query = "SELECT DISTINCT personalinfo.firstname,personalinfo.lastname,graduationapplications.studentid, graduationapplications.year,advises.degreename FROM personalinfo,graduationapplication,advises WHERE graduationapplication.studentid = personalinfo.id AND advises.studentid = graduationapplication.studentid AND graduationapplication.cleared=1;";

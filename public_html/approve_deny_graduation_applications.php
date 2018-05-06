@@ -1,4 +1,9 @@
 <?php 
+
+$allowed_user_types = array(
+        "ADMIN",
+        "GS"
+ );
 include 'header.php';
 include 'db-connect.php';
 $id = $_SESSION["id"];
@@ -10,7 +15,7 @@ $id = $_SESSION["id"];
 <head><title>Approve/Deny Graduation Applications</title></head>
 <link rel="stylesheet" href="style.css">
 <body>
-<h1>Graduation Applications</h1><br> 
+<h1>Graduation Applications</h1> 
 <?php
 
 

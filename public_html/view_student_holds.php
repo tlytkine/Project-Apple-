@@ -1,4 +1,7 @@
 <?php 
+$allowed_user_types = array(
+        "GS"
+ );
 include 'header.php';
 include 'db-connect.php';
 $id = $_SESSION["id"];

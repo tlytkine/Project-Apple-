@@ -1,8 +1,16 @@
-<?php include 'header.php';?>
-<?php include 'db-connect.php';?>
+<?php 
+
+	$allowed_user_types = array(
+        "GS",
+        "ADMIN"
+ 	);
+
+	include 'header.php';
+	include 'db-connect.php';
+?>
 
 <html>
-<head><title>View / Edit Faculty Advisor</title></head>
+<head><title>Update Advisor Assignments</title></head>
 <link rel="stylesheet" href="style.css">
 <body>
 <h1>View / Edit Faculty Advisor</h1>
