@@ -25,10 +25,12 @@
 
 	echo "<h1>Lift New Student Holds</h1>";
 
-	$advisee_info_query = "SELECT firstname, lastname, studentid, degreename, admityear, hold FROM advises, personalinfo WHERE advises.facultyid=$facultyid AND advises.hold='New Student' AND advises.studentid = personalinfo.id;";
-	$advisee_info_result = mysqli_query($connection,$advisee_info_query);
+	$new_student_check_query = "SELECT studentid FROM advises WHERE advises.facultyid = $facultyid AND advises.hold = 'New Student';";
+	$new_student_check_result = mysqli_query($connection,$new_student_check_query);
+	$row = mysqli_fetch_assoc($new_student_check_result);
 
-	if($advisee_info_result){
+
+	if(ISSET(row['studentid'])){
 		echo"<table>
 		<tr>
 		<th>Advisee</th>
@@ -37,6 +39,8 @@
 		<th>Admit Year</th> 
 		<th>Review Advising Form</th>
 		</tr>";
+		$advisee_info_query = "SELECT firstname, lastname, studentid, degreename, admityear, hold FROM advises, personalinfo WHERE advises.facultyid=$facultyid AND advises.hold='New Student' AND advises.studentid = personalinfo.id;";
+		$advisee_info_result = mysqli_query($connection,$advisee_info_query);
 		while($row=mysqli_fetch_assoc($advisee_info_result)){
 			echo "<tr>
 			<td>".$row['firstname']." ".$row['lastname']."</td>
