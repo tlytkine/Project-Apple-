@@ -2,10 +2,11 @@
 <body>
 <head>
     <meta charset="UTF-8">
-    <title>View Schedule</title>
+    <title>Change Personal Information</title>
     <link rel="stylesheet" href="style.css">
 </head>
 
+<h1>Change Personal Information</h1>
 
 <?php
     require 'password.php'; // Allows use of password_hash with PHP 5.4

@@ -2,10 +2,11 @@
 <body>
 <head>
     <meta charset="UTF-8">
-    <title>View Schedule</title>
+    <title>Register for Class</title>
     <link rel="stylesheet" href="style.css">
 </head>
 
+<h1>Register for Class</h1>
 
 <?php
     $allowed_user_types = array(

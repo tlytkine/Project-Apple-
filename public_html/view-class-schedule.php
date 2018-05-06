@@ -26,8 +26,7 @@
 
 	/* display schedule */
 	if($list) {
-        echo "<h2>Schedule</h2>";
-
+        echo "<h1>View Schedule</h1>";
 		$year = $_POST["year"];
 		$semester = $_POST["semester"];
 
@@ -55,9 +54,8 @@
 		}
 	}
     else if($grid){
-        echo "<h2>Schedule</h2>";
-
-		$year = $_POST["year"];
+        echo "<h1>View Schedule</h1>";
+        $year = $_POST["year"];
 		$semester = $_POST["semester"];
 
 		/* get schedule */
@@ -171,7 +169,7 @@
     }
     /* show search */
 	else{
-        echo "<h2>Schedule Search</h2>";
+        echo "<h1>Schedule Search</h1>";
 
     	/* prompt for user entry of current year and semester */
 		echo "<p> Enter year and semester (spring or fall) </p>";

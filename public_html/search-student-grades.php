@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="style.css">
 </head>
 
+<h1>Search for a Student</h1>
 
 <?php
 $allowed_user_types = array(
