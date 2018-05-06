@@ -7,7 +7,7 @@
 
 <body>
 <?php
-$allowed_user_types = array("Grad Secretary", "CAC");
+$allowed_user_types = array("GS", "CAC", "ADMIN");
 include 'header.php';
 ?>
 <h1>Update Final Decisions</h1>

@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="style.css">
 </head>
 
+<h1>Change Roles</h1>
 
 <?php
     $allowed_user_types = array(
@@ -17,7 +18,6 @@
     $change_role = $_POST["change_role"];
 	$add_role = $_POST["add_role"];
     $remove_role = $_POST["remove_role"];
-
 
     if($change_role) {
         $change_role_user = $_POST["change_role_user"];

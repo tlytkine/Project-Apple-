@@ -14,6 +14,8 @@
     include 'header.php';
     include 'db-connect.php';
 
+    echo "<h1>Add/Remove Courses Offered</h1>";
+
     /* used for page display */
 	$add_class_info = $_POST["add_class_info"];
 	$add_class = $_POST["add_class"];

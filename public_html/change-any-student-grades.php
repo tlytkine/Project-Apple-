@@ -9,12 +9,13 @@
 
 <?php
 $allowed_user_types = array(
-    "INSTRUCTOR"
+    "INSTRUCTOR",
+    "GS"
 );
 include 'header.php';
 
 ?>
-<h2>Change Gades</h2>
+<h1>Change Grades</h1>
 
 <?php
     include 'db-connect.php';

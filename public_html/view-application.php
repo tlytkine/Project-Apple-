@@ -9,8 +9,8 @@
 <?php
 $allowed_user_types = array(
     "CAC",
-    "Grad Secretary",
-    "System Administrator"
+    "GS",
+    "ADMIN"
 );
 include 'header.php';
 ?>

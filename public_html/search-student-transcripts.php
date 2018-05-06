@@ -16,7 +16,7 @@ $allowed_user_types = array(
 include 'header.php';
 
 ?>
-<h2>Search for a Student</h2>
+<h1>Search for a Student</h1>
 
 <?php
     if (in_array("INSTRUCTOR", $_SESSION["roles"])){

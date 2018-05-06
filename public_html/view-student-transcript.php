@@ -14,7 +14,7 @@ $allowed_user_types = array(
 include 'header.php';
 
 ?>
-<h2>View Transcript</h2>
+<h1>View Transcript</h1>
 
 <?php
     include 'db-connect.php';

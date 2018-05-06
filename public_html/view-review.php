@@ -7,7 +7,7 @@
 
 <body>
 <?php
-$allowed_user_types = array("CAC", "Grad Secretary","System Administrator");
+$allowed_user_types = array("CAC", "GS", "ADMIN");
 include 'header.php';
 ?>
 

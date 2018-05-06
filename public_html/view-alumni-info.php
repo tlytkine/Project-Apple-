@@ -2,10 +2,11 @@
 <body>
 <head>
     <meta charset="UTF-8">
-    <title>Update Info</title>
+    <title>Change Alumni Information</title>
     <link rel="stylesheet" href="style.css">
 </head>
 
+<h1>Change Alumni Information</h1>
 
 <?php
     $allowed_user_types = array(

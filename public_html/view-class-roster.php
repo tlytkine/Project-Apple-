@@ -14,7 +14,7 @@ $allowed_user_types = array(
 include 'header.php';
 
 ?>
-<h2>View Class Rosters</h2>
+<h1>View Class Rosters</h1>
 
 <?php
         include 'db-connect.php';
