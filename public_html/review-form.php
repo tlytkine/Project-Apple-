@@ -126,6 +126,9 @@ if (isset($_GET['ReviewRecommendation'])) {
             echo "Writer Name:   " . $row["writername"] . "<br>";
             echo "Writer Email:   " . $row["writeremail"] . "<br>";
             echo "Affiliation:   " . $row["affiliation"] . "<br>";
+			echo "<br /><form method='POST' id='downloadform'>
+			<input type='submit' name='download' value='Download File'>
+			</form>";
             echo '<h4>Ratings (Worst = 1, Best = 5):</h4>';
   //geting overal, generic, and credible rating. ALL required 
             echo ' <form action="" method="get">
@@ -170,6 +173,27 @@ Credible Rating:
         }
     }
 }
+
+// Download recommendation:
+if (isset($_POST['download'])) {
+	$query = "SELECT letterfile
+		FROM recommendation
+		WHERE recommendationid = {$_SESSION['recommendationid']}";
+	$result = mysqli_query($connection, $query);
+	$filedata = mysqli_fetch_array($result)["letterfile"];
+	$length = strlen($filedata);
+	if ($length > 0) {
+		header("Content-Type: application/pdf");
+		header("Content-Length: " . strlen($filedata));
+		header("Content-Disposition: attachment; filename='" . $_SESSION['recommendationid'] . ".pdf'");
+		ob_clean();
+		flush();
+		echo $filedata;
+	} else {
+		echo "<script type='text/javascript'>alert('File not available');</script>";
+	}
+}
+
 //updating queries based on ratings on recommendation letters 
 if (isset($_GET['SubmitReview'])) {
     $rat = $_GET['myvalue'];

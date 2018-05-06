@@ -109,6 +109,7 @@ CREATE TABLE recommendation (
     rating              INT CHECK (Rating >= 1 AND Rating <= 6),
     genericrating       BOOLEAN,
     crediblerating      BOOLEAN,
+    letterfile          MEDIUMBLOB,
     FOREIGN KEY (applicationid) REFERENCES admissionsapplication(id)
 );
 
