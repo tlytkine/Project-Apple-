@@ -54,12 +54,9 @@ if (isset($_POST['send'])) {
 	$recid = $_POST['recid'];
 	$email = $_POST['writeremail'];
 	$reclink = $path . "upload-recommendation.php?recid=" . $recid;
-	$message = "Greetings,\n\n
-		Please use the following link to submit your letter of recommendation:\n";
+	$message = "Greetings,\n\nPlease use the following link to submit your letter of recommendation:\n";
 	$message = $message . $reclink;
-	$message = $message . "\n\n
-		Thank you,\n
-		GW Admissions";
+	$message = $message . "\n\nThank you,\nGW Admissions";
 	$body = wordwrap($message, 70);
 	$headers = "From: GW Admissions <do-not-reply@example.com>";
 	mail($email, "GW Admissions Recommendation Request", $body, $headers);
