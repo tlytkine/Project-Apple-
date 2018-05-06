@@ -6,8 +6,6 @@
     <link rel="stylesheet" href="style.css">
 </head>
 
-<h1>Change Personal Information</h1>
-
 <?php
     require 'password.php'; // Allows use of password_hash with PHP 5.4
     $allowed_user_types = array(
@@ -16,6 +14,7 @@
     include 'header.php';
     include 'db-connect.php';
 
+    echo "<h1>Change Personal Information</h1>";
 
     /* extract user */
 	$user = $_SESSION["email"];
@@ -122,7 +121,6 @@
 	}
     /* handle update personal info display */
 	else {
-		echo "<h2 style='text-align:center'> Update Personal Info </h2>";
 		echo "<p> This is the information you have currently entered</p>";
 		$query = "SELECT p.id, p.firstname, p.lastname, p.address, u.email
 			      FROM  personalinfo p, users u
