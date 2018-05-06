@@ -152,7 +152,7 @@
 
 		echo "<form method='post' action='view-info.php'>";
 		echo    "<label for='pass'>Password: </label>";
-		echo    "<input type='text' id='pass' name='pass' /> <br/>";
+		echo    "<input type='password' id='pass' name='pass' /> <br/>";
 		echo    "<label for='first'>First name: </label>";
 		echo    "<input type='text' id='first' name='first' /> <br/>";
 		echo    "<label for='last'>Last name: </label>";

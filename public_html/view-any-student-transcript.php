@@ -64,7 +64,7 @@ include 'header.php';
 			FROM transcripts t, courses c, personalinfo p
 			WHERE t.coursenum = c.coursenum AND t.dept = c.dept AND
 			p.firstname LIKE '%$fname%' AND p.lastname LIKE '%$lname%' AND t.studentid = p.id
-			ORDER BY t.year, t.semester DESC;";
+			ORDER BY t.year, t.semester, t.coursenum DESC;";
 
 		$result = mysqli_query($connection, $query);
 
@@ -101,7 +101,7 @@ include 'header.php';
 				if (strcmp($row["grade"], "IP") != 0) {
 					$total_credits = $total_credits + $weight;
 				}
-
+                $f = 0;
 				if (strcmp($row["grade"], "A") == 0) {
 					$sum = $sum + ($weight * 4.0);
 				} else if (strcmp($row["grade"], "A-") == 0) {
@@ -118,6 +118,7 @@ include 'header.php';
 					$sum = $sum + ($weight * 2.0);
 				} else if (strcmp($row["grade"], "F") == 0) {
 					$sum = $sum + ($weight * 0.0);
+                    $f = 1;
 				}
 			}
 			echo "</table>";
@@ -125,9 +126,10 @@ include 'header.php';
 			$gpa = round($sum / $total_credits, 2);
 
 			echo "<br/>";
-			echo "<br/>";
-			echo "<br/>";
-			echo "<h4> GPA: " . $gpa;
+            if($gpa == 0 && $f == 0){}
+            else{
+                echo "<h4> GPA: " . $gpa;
+            }
 		}
 		else if ($user_exists == 1 && $is_student != 0){
 			echo "This student has not taken any of your classes yet";
@@ -173,7 +175,7 @@ include 'header.php';
 			FROM transcripts t, courses c
 			WHERE t.coursenum = c.coursenum AND t.dept = c.dept AND
 			t.studentid = '$student_id'
-			ORDER BY t.year, t.semester DESC;";
+			ORDER BY t.year, t.semester, t.coursenum DESC;";
 
 		$result = mysqli_query($connection, $query);
 
@@ -210,7 +212,7 @@ include 'header.php';
 				if (strcmp($row["grade"], "IP") != 0) {
 					$total_credits = $total_credits + $weight;
 				}
-
+                $f = 0;
 				if (strcmp($row["grade"], "A") == 0) {
 					$sum = $sum + ($weight * 4.0);
 				} else if (strcmp($row["grade"], "A-") == 0) {
@@ -227,6 +229,7 @@ include 'header.php';
 					$sum = $sum + ($weight * 2.0);
 				} else if (strcmp($row["grade"], "F") == 0) {
 					$sum = $sum + ($weight * 0.0);
+                    $f = 1;
 				}
 			}
 			echo "</table>";
@@ -234,9 +237,10 @@ include 'header.php';
 			$gpa = round($sum / $total_credits, 2);
 
 			echo "<br/>";
-			echo "<br/>";
-			echo "<br/>";
-			echo "<h4> GPA: " . $gpa;
+            if($gpa == 0 && $f == 0){}
+            else{
+                echo "<h4> GPA: " . $gpa;
+            }
 		}
 		else if ($user_exists == 1 && $is_student != 0){
 			echo "This student has not taken any of your classes yet";
