@@ -1,3 +1,4 @@
+<?php session_start(); ob_start();?>
 <html>
 <body>
 <head>
@@ -340,7 +341,7 @@
 		echo    "<input type='radio' name='semester' value='spring'>Spring <br/>";
 		echo    "<input type='submit' value='View Schedule as List' name='list' />";
         echo    "<input type='submit' value='View Schedule on Calendar' name='grid' />";
-        echo    "<br />"
+        echo    "<br />";
         echo    "<input type='submit' value='View Current Schedule as List' name='curlist' />";
         echo    "<input type='submit' value='View Current Schedule on Calendar' name='curgrid' />";
 		echo "</form>";
