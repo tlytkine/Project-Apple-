@@ -31,7 +31,7 @@
 		$semester = $_POST["semester"];
 
 		/* get schedule */
-		$query = "SELECT t.dept, t.coursenum, c.section, c.day, c.time, c.title
+		$query = "SELECT t.dept, t.coursenum, c.section, t.day, t.time, c.title
 			FROM users u, transcripts t, courses c
 			WHERE u.id=t.studentid AND u.email = '$user' AND t.coursenum = c.coursenum AND t.dept = c.dept AND t.semester = '$semester' AND t.year = '$year'
 			ORDER BY day;";
@@ -59,7 +59,7 @@
 		$semester = $_POST["semester"];
 
 		/* get schedule */
-		$query = "SELECT t.dept, t.coursenum, c.section, c.day, c.time, c.title
+		$query = "SELECT t.dept, t.coursenum, c.section, t.day, t.time, c.title
 			FROM users u, transcripts t, courses c
 			WHERE u.id=t.studentid AND u.email = '$user' AND t.coursenum = c.coursenum AND t.dept = c.dept AND t.semester = '$semester' AND t.year = '$year'
 			ORDER BY day;";

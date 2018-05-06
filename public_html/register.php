@@ -6,8 +6,6 @@
     <link rel="stylesheet" href="style.css">
 </head>
 
-<h1>Register for Class</h1>
-
 <?php
     $allowed_user_types = array(
         "STUDENT"
@@ -15,7 +13,7 @@
     include 'header.php';
     include 'db-connect.php';
 ?>
-
+<h1>Register for Class</h1>
 <h2 style="text-align:center"> Search For Classes </h2>
 <p> Search by department or course number </p>
 <form method="post" action="register.php">
@@ -137,7 +135,7 @@
 		/* insert into transcript if allowed*/
 		if($has_hold == 1 && $passSched == 1 && $passPrereqs == 1 && $class != NULL) {
 			$query = "INSERT INTO transcripts VALUES
-				('$sid', '".$classInfo["dept"]."', '".$classInfo["coursenum"]."', '".$classInfo["professorid"]."', '".$classInfo["year"]."', '".$classInfo["semester"]."', 'IP', '".$classInfo["title"]."');";
+				('$sid', '".$classInfo["dept"]."', '".$classInfo["coursenum"]."', '".$classInfo["professorid"]."', '".$classInfo["year"]."', '".$classInfo["semester"]."', 'IP', '".$classInfo["title"]."', '".$classInfo["day"]."', '".$classInfo["time"]."');";
 
 			$result = mysqli_query($connection, $query);
 
@@ -350,7 +348,7 @@
 
                 echo "</td></tr>";
 
-                /* pass through info needed to register grade */
+                /* pass through info needed to register */
                 echo "<input type='hidden' name='deptSearch' value='deptSearch'>";
                 echo "<input type='hidden' name='search' value='$dept'>";
                 echo "<input type='hidden' name='regCRN' value=".$row["courseid"]."></form>";

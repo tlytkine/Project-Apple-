@@ -172,6 +172,8 @@ CREATE TABLE transcripts (
     semester       VARCHAR(30),
     grade          VARCHAR(2),
     title          VARCHAR(60),
+    day            CHAR(1),
+    time           TIME,
     PRIMARY KEY (studentid, dept, coursenum, year, semester),
     FOREIGN KEY (studentid) REFERENCES users(id),
     FOREIGN KEY (professorid) REFERENCES users(id)
@@ -342,16 +344,16 @@ INSERT INTO roles (id, role) VALUES (8, "STUDENT");
 INSERT INTO roles (id, role) VALUES (8, "USER");
 INSERT INTO personalinfo VALUES('8', 'paul', 'mccartney', '2000-01-01', '123 address st', '333-11-1111');
 
-INSERT INTO transcripts VALUES('8', 'CS', '6221', '3', '2016', 'fall', 'A', 'Software Paradigms');
-INSERT INTO transcripts VALUES('8', 'CS', '6461', '4', '2016', 'fall', 'A', 'Computer Architecture');
-INSERT INTO transcripts VALUES('8', 'CS', '6212', '5', '2017', 'spring', 'B', 'Algorithims');
-INSERT INTO transcripts VALUES('8', 'CS', '6225', '6', '2017', 'spring', 'B', 'Data Compression');
-INSERT INTO transcripts VALUES('8', 'CS', '6232', '7', '2017', 'spring', 'B', 'Networks 1');
-INSERT INTO transcripts VALUES('8', 'CS', '6233', '3', '2017', 'fall', 'A', 'Networks 2');
-INSERT INTO transcripts VALUES('8', 'CS', '6241', '4', '2017', 'fall', 'A', 'Databases 1');
-INSERT INTO transcripts VALUES('8', 'CS', '6246', '6', '2017', 'fall', 'A', 'Compilers');
-INSERT INTO transcripts VALUES('8', 'CS', '6262', '5', '2018', 'spring', 'B', 'Graphics 1');
-INSERT INTO transcripts VALUES('8', 'CS', '6283', '6', '2018', 'spring', 'B', 'Security 1');
+INSERT INTO transcripts VALUES('8', 'CS', '6221', '3', '2016', 'fall', 'A', 'Software Paradigms', 'M', '15:00:00');
+INSERT INTO transcripts VALUES('8', 'CS', '6461', '4', '2016', 'fall', 'A', 'Computer Architecture', 'T', '15:00:00');
+INSERT INTO transcripts VALUES('8', 'CS', '6212', '5', '2017', 'spring', 'B', 'Algorithims', 'W', '15:00:00');
+INSERT INTO transcripts VALUES('8', 'CS', '6225', '6', '2017', 'spring', 'B', 'Data Compression', 'R', '15:00:00');
+INSERT INTO transcripts VALUES('8', 'CS', '6232', '7', '2017', 'spring', 'B', 'Networks 1', 'M', '18:00:00');
+INSERT INTO transcripts VALUES('8', 'CS', '6233', '3', '2017', 'fall', 'A', 'Networks 2', 'T', '18:00:00');
+INSERT INTO transcripts VALUES('8', 'CS', '6241', '4', '2017', 'fall', 'A', 'Databases 1', 'W', '18:00:00');
+INSERT INTO transcripts VALUES('8', 'CS', '6246', '6', '2017', 'fall', 'A', 'Compilers', 'T', '15:00:00');
+INSERT INTO transcripts VALUES('8', 'CS', '6262', '5', '2018', 'spring', 'B', 'Graphics 1', 'W', '18:00:00');
+INSERT INTO transcripts VALUES('8', 'CS', '6283', '6', '2018', 'spring', 'B', 'Security 1', 'T', '18:00:00');
 
 INSERT INTO advises VALUES('8', '7', NULL, 'MS', 2017);
 
@@ -361,15 +363,15 @@ INSERT INTO roles (id, role) VALUES (9, "STUDENT");
 INSERT INTO roles (id, role) VALUES (9, "USER");
 INSERT INTO personalinfo VALUES('9', 'george', 'harrison', '2000-01-01', '123 address st', '444-11-1111');
 
-INSERT INTO transcripts VALUES('9', 'CS', '6221', '3', '2016', 'fall', 'B', 'Software Paradigms');
-INSERT INTO transcripts VALUES('9', 'CS', '6461', '4', '2016', 'fall', 'B', 'Computer Architecture');
-INSERT INTO transcripts VALUES('9', 'CS', '6212', '5', '2016', 'fall', 'B', 'Algorithims');
-INSERT INTO transcripts VALUES('9', 'CS', '6232', '7', '2017', 'spring', 'B', 'Networks 1');
-INSERT INTO transcripts VALUES('9', 'CS', '6241', '4', '2017', 'spring', 'B', 'Databases 1');
-INSERT INTO transcripts VALUES('9', 'CS', '6233', '3', '2017', 'spring', 'B', 'Networks 2');
-INSERT INTO transcripts VALUES('9', 'CS', '6242', '5', '2017', 'fall', 'B', 'Databases 2');
-INSERT INTO transcripts VALUES('9', 'EE', '6244', '4', '2017', 'fall', 'C', 'Information Theory');
-INSERT INTO transcripts VALUES('9', 'CS', '6283', '6', '2018', 'spring', 'B', 'Security 1');
+INSERT INTO transcripts VALUES('9', 'CS', '6221', '3', '2016', 'fall', 'B', 'Software Paradigms', 'M', '15:00:00');
+INSERT INTO transcripts VALUES('9', 'CS', '6461', '4', '2016', 'fall', 'B', 'Computer Architecture', 'T', '15:00:00');
+INSERT INTO transcripts VALUES('9', 'CS', '6212', '5', '2016', 'fall', 'B', 'Algorithims', 'W', '15:00:00');
+INSERT INTO transcripts VALUES('9', 'CS', '6232', '7', '2017', 'spring', 'B', 'Networks 1', 'M', '18:00:00');
+INSERT INTO transcripts VALUES('9', 'CS', '6241', '4', '2017', 'spring', 'B', 'Databases 1', 'W', '18:00:00');
+INSERT INTO transcripts VALUES('9', 'CS', '6233', '3', '2017', 'spring', 'B', 'Networks 2', 'T', '18:00:00');
+INSERT INTO transcripts VALUES('9', 'CS', '6242', '5', '2017', 'fall', 'B', 'Databases 2', 'R', '18:00:00');
+INSERT INTO transcripts VALUES('9', 'EE', '6244', '4', '2017', 'fall', 'C', 'Information Theory', 'T', '18:00:00');
+INSERT INTO transcripts VALUES('9', 'CS', '6283', '6', '2018', 'spring', 'B', 'Security 1', 'T', '18:00:00');
 
 INSERT INTO advises VALUES('9', '5', NULL, 'MS', 2017);
 
