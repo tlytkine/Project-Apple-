@@ -244,7 +244,7 @@ INSERT INTO roles (id, role) VALUES (3, "INSTRUCTOR");
 INSERT INTO roles (id, role) VALUES (3, "CAC");
 INSERT INTO roles (id, role) VALUES (3, "REVIEWER");
 INSERT INTO roles (id, role) VALUES (3, "USER");
-INSERT INTO personalinfo VALUES('3', 'r', 'simha', '2000-01-01', '123 address st', '123-45-6789');
+INSERT INTO personalinfo VALUES('3', 'Rahul', 'Simha', '2000-01-01', '123 Address St.', '123-45-6789');
 
 /* instructor 2 */
 /* advisor 1 */
@@ -252,7 +252,7 @@ INSERT INTO users (email, password, id) VALUES ('heller@gwu.edu', '$2y$10$K7xpP4
 INSERT INTO roles (id, role) VALUES (4, "INSTRUCTOR");
 INSERT INTO roles (id, role) VALUES (4, "ADVISOR");
 INSERT INTO roles (id, role) VALUES (4, "USER");
-INSERT INTO personalinfo VALUES('4', 'r', 'heller', '2000-01-01', '123 address st', '023-45-6789');
+INSERT INTO personalinfo VALUES('4', 'Rachelle', 'Heller', '2000-01-01', '123 Address St.', '023-45-6789');
 
 /* instructor 3 */
 /* advisor 2 */
@@ -260,7 +260,7 @@ INSERT INTO users (email, password, id) VALUES ('parmer@gwu.edu', '$2y$10$K7xpP4
 INSERT INTO roles (id, role) VALUES (5, "INSTRUCTOR");
 INSERT INTO roles (id, role) VALUES (5, "ADVISOR");
 INSERT INTO roles (id, role) VALUES (5, "USER");
-INSERT INTO personalinfo VALUES('5', 'g', 'parmer', '2000-01-01', '123 address st', '013-45-6789');
+INSERT INTO personalinfo VALUES('5', 'Gabriel', 'Parmer', '2000-01-01', '123 Address St.', '013-45-6789');
 
 /* instructor 4 */
 /* reviewer 1 */
@@ -268,7 +268,7 @@ INSERT INTO users (email, password, id) VALUES ('pless@gwu.edu', '$2y$10$K7xpP4X
 INSERT INTO roles (id, role) VALUES (6, "INSTRUCTOR");
 INSERT INTO roles (id, role) VALUES (6, "REVIEWER");
 INSERT INTO roles (id, role) VALUES (6, "USER");
-INSERT INTO personalinfo VALUES('6', 'r', 'pless', '2000-01-01', '123 address st', '012-45-6789');
+INSERT INTO personalinfo VALUES('6', 'Robert', 'Pless', '2000-01-01', '123 Address St.', '012-45-6789');
 
 /* instructor 5 */
 /* reviewer 2 */
@@ -278,7 +278,7 @@ INSERT INTO roles (id, role) VALUES (7, "INSTRUCTOR");
 INSERT INTO roles (id, role) VALUES (7, "ADVISOR");
 INSERT INTO roles (id, role) VALUES (7, "REVIEWER");
 INSERT INTO roles (id, role) VALUES (7, "USER");
-INSERT INTO personalinfo VALUES('7', 'b', 'narahari', '2000-01-01', '123 address st', '012-35-6789');
+INSERT INTO personalinfo VALUES('7', 'Bhagi', 'Narahari', '2000-01-01', '123 Address St.', '012-35-6789');
 
 /* add courses */
 INSERT INTO courses (courseid, coursenum, dept, professorid, year, semester, section, credithours, day, time, title) VALUES ('1','6221', 'CS', '3', '2018','spring', '10', '3','M', '15:00:00', 'Software Paradigms');
@@ -342,7 +342,7 @@ INSERT INTO degreerequirements(degreename, courseid) VALUES ('Direct PhD',6);
 INSERT INTO users (email, password, id) VALUES ('mccartney@gwu.edu', '$2y$10$K7xpP4XPPWkgYJ0/I4XOtehbRigHUqpmXer99/Ftx1fERDU.JZObC', 8);
 INSERT INTO roles (id, role) VALUES (8, "STUDENT");
 INSERT INTO roles (id, role) VALUES (8, "USER");
-INSERT INTO personalinfo VALUES('8', 'paul', 'mccartney', '2000-01-01', '123 address st', '333-11-1111');
+INSERT INTO personalinfo VALUES('8', 'Paul', 'McCartney', '2000-01-01', '123 Address St.', '333-11-1111');
 
 INSERT INTO transcripts VALUES('8', 'CS', '6221', '3', '2016', 'fall', 'A', 'Software Paradigms', 'M', '15:00:00');
 INSERT INTO transcripts VALUES('8', 'CS', '6461', '4', '2016', 'fall', 'A', 'Computer Architecture', 'T', '15:00:00');
@@ -361,7 +361,7 @@ INSERT INTO advises VALUES('8', '7', NULL, 'MS', 2017);
 INSERT INTO users (email, password, id) VALUES ('harrison@gwu.edu', '$2y$10$K7xpP4XPPWkgYJ0/I4XOtehbRigHUqpmXer99/Ftx1fERDU.JZObC', 9);
 INSERT INTO roles (id, role) VALUES (9, "STUDENT");
 INSERT INTO roles (id, role) VALUES (9, "USER");
-INSERT INTO personalinfo VALUES('9', 'george', 'harrison', '2000-01-01', '123 address st', '444-11-1111');
+INSERT INTO personalinfo VALUES('9', 'George', 'Harrison', '2000-01-01', '123 Address St.', '444-11-1111');
 
 INSERT INTO transcripts VALUES('9', 'CS', '6221', '3', '2016', 'fall', 'B', 'Software Paradigms', 'M', '15:00:00');
 INSERT INTO transcripts VALUES('9', 'CS', '6461', '4', '2016', 'fall', 'B', 'Computer Architecture', 'T', '15:00:00');
@@ -379,7 +379,7 @@ INSERT INTO advises VALUES('9', '5', NULL, 'MS', 2017);
 INSERT INTO users (email, password, id) VALUES ('clapton@gwu.edu', '$2y$10$K7xpP4XPPWkgYJ0/I4XOtehbRigHUqpmXer99/Ftx1fERDU.JZObC', 10);
 INSERT INTO roles (id, role) VALUES (10, "ALUMNI");
 INSERT INTO roles (id, role) VALUES (10, "USER");
-INSERT INTO alumnipersonalinfo VALUES('10', 'eric', 'clapton', '2000-01-01', '123 address st', 2006, 'spring', 'MS', '555-11-1111');
+INSERT INTO alumnipersonalinfo VALUES('10', 'Eric', 'Clapton', '2000-01-01', '123 Address St.', 2006, 'spring', 'MS', '555-11-1111');
 
 INSERT INTO transcripts VALUES('10', 'CS', '6221', '3', '2005', 'fall', 'B', 'Software Paradigms', 'M', '15:00:00');
 INSERT INTO transcripts VALUES('10', 'CS', '6461', '4', '2005', 'fall', 'B', 'Computer Architecture', 'T', '15:00:00');
