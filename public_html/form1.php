@@ -77,9 +77,13 @@
 					}
 				}
 			}
+			$num_core_courses_query = "SELECT COUNT(courseid) AS CourseCount FROM degreerequirements WHERE degreename='$degreename';";
+			$num_core_courses_result = mysqli_query($connection, $num_core_courses_query);
+			$row = mysqli_fetch_assoc($num_core_courses_result);
+			$num_core_courses = $row['CourseCount'];
 			// check core classes are satisfied
-			if ($core_courses_count != 3) {
-				$core_courses_error = "You have not taken one or more of the three core courses required for your degree.";
+			if ($core_courses_count < $num_core_courses) {
+				$core_courses_error = "You have not taken one or more of the core courses required for your degree.";
 			}
 			// Check to make sure GPA is > 3.0
 			$gpa_calc_query = "SELECT (Sum(qualitypoints*credithours)/Sum(credithours)) AS GPA, transcripts.year FROM gradecalc, courses, transcripts WHERE gradecalc.grade = transcripts.grade AND transcripts.studentid=$studentid AND transcripts.coursenum = courses.coursenum;";
