@@ -30,7 +30,7 @@
 	$row = mysqli_fetch_assoc($new_student_check_result);
 
 
-	if(ISSET(row['studentid'])){
+	if(ISSET(row['studentid']) ){
 		echo"<table>
 		<tr>
 		<th>Advisee</th>
