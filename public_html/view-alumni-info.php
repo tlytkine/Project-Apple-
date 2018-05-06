@@ -6,8 +6,6 @@
     <link rel="stylesheet" href="style.css">
 </head>
 
-<h1>Change Alumni Information</h1>
-
 <?php
     $allowed_user_types = array(
         "ALUMNI"
@@ -15,6 +13,7 @@
     include 'header.php';
     include 'db-connect.php';
 
+    echo "<h1>Change Alumni Information</h1>";
 
     /* extract user */
 	$user = $_SESSION["email"];
@@ -121,7 +120,6 @@
 	}
     /* handle update personal info display */
 	else {
-		echo "<h2 style='text-align:center'> Update Personal Info </h2>";
 		echo "<p> This is the information you have currently entered</p>";
 		$query = "SELECT p.id, p.firstname, p.lastname, p.address, u.email, p.graduationyear
 			      FROM  alumnipersonalinfo p, users u
