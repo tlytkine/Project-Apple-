@@ -331,9 +331,9 @@ INSERT INTO transcripts VALUES('8', 'CS', '6461', '4', '2016', 'fall', 'A', 'Com
 INSERT INTO transcripts VALUES('8', 'CS', '6212', '5', '2017', 'spring', 'B', 'Algorithims');
 INSERT INTO transcripts VALUES('8', 'CS', '6225', '6', '2017', 'spring', 'B', 'Data Compression');
 INSERT INTO transcripts VALUES('8', 'CS', '6232', '7', '2017', 'spring', 'B', 'Networks 1');
-INSERT INTO transcripts VALUES('8', 'CS', '6233', '3', '2018', 'fall', 'A', 'Networks 2');
-INSERT INTO transcripts VALUES('8', 'CS', '6241', '4', '2018', 'fall', 'A', 'Databases 1');
-INSERT INTO transcripts VALUES('8', 'CS', '6246', '6', '2018', 'fall', 'A', 'Compilers');
+INSERT INTO transcripts VALUES('8', 'CS', '6233', '3', '2017', 'fall', 'A', 'Networks 2');
+INSERT INTO transcripts VALUES('8', 'CS', '6241', '4', '2017', 'fall', 'A', 'Databases 1');
+INSERT INTO transcripts VALUES('8', 'CS', '6246', '6', '2017', 'fall', 'A', 'Compilers');
 INSERT INTO transcripts VALUES('8', 'CS', '6262', '5', '2018', 'spring', 'B', 'Graphics 1');
 INSERT INTO transcripts VALUES('8', 'CS', '6283', '6', '2018', 'spring', 'B', 'Security 1');
 
