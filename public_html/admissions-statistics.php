@@ -20,9 +20,9 @@ include 'header.php';
 	Degree Type:
 	<select name="degree">
 		<option value="" selected></option>
-		<option value="M.S.">M.S.</option>
-		<option value="Ph.D.">Ph.D.</option>
-		<option value="Direct Ph.D.">Direct Ph.D.</option>       
+		<option value="MS">MS</option>
+		<option value="PhD">PhD</option>
+		<option value="Direct PhD">Direct PhD</option>       
 	</select>
 	Semester:
 	<select name="semester">
