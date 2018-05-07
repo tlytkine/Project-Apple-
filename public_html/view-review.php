@@ -13,15 +13,39 @@ include 'header.php';
 
 <?php
 include 'db-connect.php';
+function show_recommendation_ratings($connection, $applicationid, $reviewerid) {
+	//recommendation letters submitted for the application
+    echo "<h4>Recommendation Letters Ratings: </h4>";
+    $checklettersquery = "SELECT * FROM recommendationreview, recommendation WHERE recommendationreview.recommendationid=recommendation.recommendationid AND recommendation.applicationid=$applicationid AND recommendationreview.reviewerid = $reviewerid";
+    $checkresult       = mysqli_query($connection, $checklettersquery);
+    
+    if (mysqli_num_rows($checkresult) > 0) {
+        while ($row = mysqli_fetch_assoc($checkresult)) {
+            echo "<h5>Recommendation ID: " . $row['recommendationid'] . "</h5>";
+            echo "Writer: " . $row['writername'] . " (" . $row['writeremail'] . ")<br>";
+            echo "Affiliation: " . $row['affiliation'] . "<br>";
+            if ($row['rating'] == NULL) {
+                echo "No rating has been submitted yet<br>";
+            } else {
+                echo "Rating: " . $row['rating'] . " ";
+                echo "Generic Rating: " . $row['genericrating'] . " ";
+                echo "Credible Rating: " . $row['crediblerating'] . "<br>";
+            }
+        }
+    } else {
+        echo "No letter ratings";
+    }
+}
+
 if(isset($_GET['view'])) {
 	// Showing reviews submitted for the current selected application
 	$_SESSION['currentreviewid'] = $_GET['view'];
-	echo "<h3>Submitted Reviews: </h3>";
+	echo "<h1>Submitted Reviews</h1>";
 	$checkreviewquery = "SELECT * FROM review, personalinfo WHERE applicationid = {$_SESSION['currentreviewid']} AND reviewerid = id";
 	$checkreview = mysqli_query($connection,$checkreviewquery);
 	if (mysqli_num_rows($checkreview) > 0) {
 		while ($row = mysqli_fetch_assoc($checkreview)) {
-			echo "<b>Reviewer: {$row['firstname']} {$row['lastname']}</b><br />";
+			echo "<h3>Reviewer: {$row['firstname']} {$row['lastname']}</h3>";
 			if ($row['decision'] == 1) {
 				echo "Reviewer's Decision: Reject"; 
 			} else if ($row['decision'] == 2) {
@@ -48,7 +72,9 @@ if(isset($_GET['view'])) {
 			if ($row['decision'] != 1) {
 				echo "Deficiency Courses: " . $row['defcourse'] . "<br>";
 			}
-			echo "Reviewer's Comments: " . $row['comments'] . "<br><br />";
+			echo "Reviewer's Comments: " . $row['comments'] . "<br>";
+			show_recommendation_ratings($connection, $_SESSION['currentreviewid'], $row['reviewerid']);
+			echo "<br />";
 		}
 	} else {
 		echo "No review has been submitted yet";

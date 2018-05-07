@@ -60,32 +60,6 @@ if (isset($_GET['viewapplication'])) {
             echo "Experience:   " . $row["experience"] . "<br>";
         }
     }
-    //recommendation letters submitted for the application
-    echo "<h3>Recommendation Letters ratings: </h3>";
-    $checklettersquery = "SELECT * FROM recommendation WHERE applicationid='" . $_SESSION['currentappid'] . "' ";
-    $checkresult       = mysqli_query($connection, $checklettersquery);
-    
-    if (mysqli_num_rows($checkresult) > 0) {
-        while ($row = mysqli_fetch_assoc($checkresult)) {
-            echo "Recommendation ID: " . $row['recommendationid'] . "<br>";
-            echo "From: " . $row['writername'] . "<br>";
-            echo "Writer's Email: " . $row['writeremail'] . "<br>";
-            echo "Affiliation: " . $row['affiliation'] . "<br>";
-            if ($row['rating'] == NULL) {
-                echo "No rating has been submitted yet<br>";
-            } else {
-                echo "Rating : " . $row['rating'] . "<br>";
-            }
-                echo "Generic Rating : " . $row['genericrating'] . "<br>";
-                echo "Credible Rating : " . $row['crediblerating'] . "<br>";
-
-
-            echo "<hr>";
-        }
-    } else {
-        echo "no rating has been submitted for this letter";
-    }
-
 }
 
 

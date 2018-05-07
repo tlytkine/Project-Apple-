@@ -64,21 +64,23 @@ if (isset($_GET['review'])) {
             echo "<h3>Recommendation Letters: </h3>";
             
             //check to see if there are any recommendation letter submitted and if they have not been rated yet
-            $checklettersquery = "SELECT * FROM recommendation WHERE applicationid='" . $_SESSION['currentid'] . "' ";
+            $checklettersquery = "SELECT * FROM recommendation WHERE applicationid='" . $_SESSION['currentid'] . "'";
             $checkresult       = mysqli_query($connection, $checklettersquery);
+			$query3   = "SELECT *
+			FROM recommendation
+			WHERE recommendationid NOT IN (SELECT recommendationid
+				FROM recommendationreview
+				WHERE reviewerid = {$_SESSION['id']})
+			AND applicationid= {$_SESSION['currentid']}";
+			$result_3 = mysqli_query($connection, $query3);
             if (mysqli_num_rows($checkresult) == 0) {
                 echo "There are no recommendation letters submitted yet.";
             } else {
-                $query3   = "SELECT * FROM recommendation WHERE rating IS NULL AND applicationid='" . $_SESSION['currentid'] . "'";
-                $result_3 = mysqli_query($connection, $query3);
                 if (mysqli_num_rows($result_3) > 0) {
                     echo "Please review available recommendation letters: ";
                     echo "<br><ul>";
                     while ($row = mysqli_fetch_assoc($result_3)) {
-                        $reviewname = $row['recommendationid'];
-                        if (is_null($row['rating'])) {
-                            echo '<li><a href = "review-form.php?ReviewRecommendation=' . $row['recommendationid'] . '">Letter</a></li>';
-                        }
+						echo '<li><a href = "review-form.php?ReviewRecommendation=' . $row['recommendationid'] . '">Letter</a></li>';
                     }
 					echo "</ul>";
                 } else {
@@ -87,16 +89,13 @@ if (isset($_GET['review'])) {
             }
             //Review option if there are no unrated letters and no previous review posted
             echo '<h3>Submit Decisions:</h3>';
-            $query4   = "SELECT * FROM recommendation WHERE applicationid='" . $_SESSION['currentid'] . "' AND rating IS NULL";
-            $result_4 = mysqli_query($connection, $query4);
-            if (mysqli_num_rows($result_4) == 0) {
+            if (mysqli_num_rows($result_3) == 0) {
                 $checkreviewquery = "SELECT * FROM review WHERE applicationid ='" . $_SESSION['currentid'] . "' AND reviewerid = {$_SESSION['id']}";
                 $checkreview      = mysqli_query($connection, $checkreviewquery);
                 if (mysqli_num_rows($checkreview) == 0) {
                     //the start button appears as soon as all the letters are rated and no previous review has been posted
                     echo '<form><input type="submit" value="Start" name="Start" ></form>';
                 } else {
-                    echo "<br>";
                     echo "Review already submitted";
                 }
             } else {
@@ -123,7 +122,7 @@ if (isset($_GET['ReviewRecommendation'])) {
   //geting overal, generic, and credible rating. ALL required 
             echo ' <form action="" method="get">
 Overall Rating: 
-<select name="myvalue" required>
+<select name="rating" required>
   <option value="" selected="selected"></option>
   <option value="1">1</option>
   <option value="2">2</option>
@@ -184,38 +183,19 @@ if (isset($_POST['download'])) {
 	}
 }
 
-//updating queries based on ratings on recommendation letters 
+// Updating queries based on ratings on recommendation letters 
 if (isset($_GET['SubmitReview'])) {
-    $rat = $_GET['myvalue'];
-    //Updating rating
-    $sql = " UPDATE recommendation SET rating = $rat WHERE recommendationid = '" . $_SESSION['recommendationid'] . "'";
+    // Updating ratings
+    $sql = "INSERT INTO recommendationreview (recommendationid, reviewerid, rating, genericrating, crediblerating) VALUES ({$_SESSION['recommendationid']}, {$_SESSION['id']}, {$_GET['rating']}, {$_GET['generic']}, {$_GET['credible']})";
     if (mysqli_query($connection, $sql)) {
         echo " ";
     } else {
         echo "Error updating record: " . mysqli_error($connection);
     }
-    //updating Generic rating
-    $Generic  = $_GET['generic'];
-    $Credible = $_GET['credible'];
-    
-    
-    $sql = " UPDATE recommendation SET genericrating = $Generic WHERE recommendationid = '" . $_SESSION['recommendationid'] . "'";
-    if (mysqli_query($connection, $sql)) {
-        echo " ";
-    } else {
-        echo "Error updating record: " . mysqli_error($connection);
-    }
-    //updating Credible rating
-    $sql = " UPDATE recommendation SET crediblerating = $Credible WHERE recommendationid = '" . $_SESSION['recommendationid'] . "'";
-    if (mysqli_query($connection, $sql)) {
-        echo " ";
-    } else {
-        echo "Error updating record: " . mysqli_error($connection);
-    }
-    
+
     echo "Recommendation letter ratings submitted";
     echo "</br>";
-    //going back to main review form
+    // Going back to main review form
     echo "<a href=\"review-form.php?review=" . $_SESSION['currentid'] . "\">Back to Review Form</a>";
 }
 //starts posting Decisions

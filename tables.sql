@@ -18,6 +18,8 @@ DROP TABLE IF EXISTS academicinfo CASCADE;
 
 DROP TABLE IF EXISTS documentstatus CASCADE;
 
+DROP TABLE IF EXISTS recommendationreview CASCADE;
+
 DROP TABLE IF EXISTS recommendation CASCADE;
 
 DROP TABLE IF EXISTS review CASCADE;
@@ -107,11 +109,19 @@ CREATE TABLE recommendation (
     writername          VARCHAR(30),
     writeremail         VARCHAR(254),
     affiliation         VARCHAR(30),
-    rating              INT CHECK (Rating >= 1 AND Rating <= 6),
-    genericrating       BOOLEAN,
-    crediblerating      BOOLEAN,
     letterfile          MEDIUMBLOB,
     FOREIGN KEY (applicationid) REFERENCES admissionsapplication(id)
+);
+
+CREATE TABLE recommendationreview (
+    recommendationid    INT,
+    reviewerid          INT,
+    rating              INT CHECK (Rating >= 0 AND Rating <= 5),
+    genericrating       INT CHECK (Rating >= 0 AND Rating <= 5),
+    crediblerating      INT CHECK (Rating >= 0 AND Rating <= 5),
+    PRIMARY KEY (recommendationid, reviewerid),
+    FOREIGN KEY (recommendationid) REFERENCES recommendation(recommendationid),
+    FOREIGN KEY (reviewerid) REFERENCES users(id)
 );
 
 CREATE TABLE documentstatus (
