@@ -82,22 +82,23 @@ CREATE TABLE applicantpersonalinfo (
 
 CREATE TABLE admissionsapplication (
     id                  INT PRIMARY KEY AUTO_INCREMENT,
-    reviewerusername    VARCHAR(254),
     status              VARCHAR(20) NOT NULL,
     finaldecision       INT NOT NULL,
     semester            VARCHAR(10),
     year                YEAR,
-    FOREIGN KEY (id) REFERENCES users(id),
-    FOREIGN KEY (reviewerusername) REFERENCES users(email)
+    FOREIGN KEY (id) REFERENCES users(id)
 );
 
 CREATE TABLE review (
-    applicationid   INT PRIMARY KEY,
+    applicationid   INT,
+    reviewerid      INT,
     decision        INT,
     defcourse       VARCHAR(100),
     comments        VARCHAR(100),
     reasons         VARCHAR(100),
-    FOREIGN KEY (applicationid) REFERENCES admissionsapplication(id)
+    PRIMARY KEY (applicationid, reviewerid),
+    FOREIGN KEY (applicationid) REFERENCES admissionsapplication(id),
+    FOREIGN KEY (reviewerid) REFERENCES users(id)
 );
 
 CREATE TABLE recommendation (

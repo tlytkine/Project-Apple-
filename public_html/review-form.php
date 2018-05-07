@@ -23,16 +23,6 @@ echo "<hr>";
 if (isset($_GET['review'])) {
     $_SESSION['currentid'] = $_GET['review'];
     
-    //updating application's reviewer's username
-    $reviewerusename = $_SESSION["email"];
-    $updatereviewer  = " UPDATE admissionsapplication SET reviewerusername='" . $_SESSION['email'] . "' WHERE id = '" . $_SESSION['currentid'] . "'";
-    
-    if (mysqli_query($connection, $updatereviewer)) {
-        echo " ";
-    } else {
-        echo "Error updating record: " . mysqli_error($connection);
-    }
-    
     //Query from academic information an application - printing out the review form
     $query2   = "SELECT * FROM admissionsapplication, academicinfo, applicantpersonalinfo  WHERE admissionsapplication.id = applicantpersonalinfo.id AND admissionsapplication.id= academicinfo.applicationid AND admissionsapplication.id='" . $_SESSION['currentid'] . "'";
     $result_2 = mysqli_query($connection, $query2);
@@ -100,7 +90,7 @@ if (isset($_GET['review'])) {
             $query4   = "SELECT * FROM recommendation WHERE applicationid='" . $_SESSION['currentid'] . "' AND rating IS NULL";
             $result_4 = mysqli_query($connection, $query4);
             if (mysqli_num_rows($result_4) == 0) {
-                $checkreviewquery = "SELECT * FROM review WHERE applicationid ='" . $_SESSION['currentid'] . "'";
+                $checkreviewquery = "SELECT * FROM review WHERE applicationid ='" . $_SESSION['currentid'] . "' AND reviewerid = {$_SESSION['id']}";
                 $checkreview      = mysqli_query($connection, $checkreviewquery);
                 if (mysqli_num_rows($checkreview) == 0) {
                     //the start button appears as soon as all the letters are rated and no previous review has been posted
@@ -281,7 +271,7 @@ if (isset($_GET['Submit'])) {
     $Decision2 = $_GET['Decision2'];
     $Comments  = $_GET['Comments'];
     
-    $sql = " INSERT INTO review(decision, applicationid, defcourse, comments, reasons) VALUES('" . $_SESSION['decision'] . "', '" . $_SESSION['currentid'] . "', '$DefCourse', '$Comments', '$Decision2')";
+    $sql = " INSERT INTO review (decision, applicationid, comments, reasons, reviewerid) VALUES('" . $_SESSION['decision'] . "', '" . $_SESSION['currentid'] . "', '$Comments', '$Decision2', {$_SESSION['id']})";
     if (mysqli_query($connection, $sql)) {
         echo " ";
     } else {
@@ -292,7 +282,7 @@ if (isset($_GET['Submit'])) {
 if (isset($_GET['Submit2'])) {
     $DefCourse = $_GET['DefCourse'];
     $Comments  = $_GET['Comments'];
-    $sql       = " INSERT INTO review(decision, applicationid, defcourse, comments) VALUES('" . $_SESSION['decision'] . "', '" . $_SESSION['currentid'] . "', '$DefCourse', '$Comments')";
+    $sql       = " INSERT INTO review (decision, applicationid, defcourse, comments, reviewerid) VALUES('" . $_SESSION['decision'] . "', '" . $_SESSION['currentid'] . "', '$DefCourse', '$Comments', {$_SESSION['id']})";
     if (mysqli_query($connection, $sql)) {
         echo " ";
     } else {
