@@ -112,7 +112,6 @@ $id = $_SESSION["id"];
 			$degreename = $degreenamefetch['degreename'];
 
 			$insertalumniquery = "INSERT INTO alumnipersonalinfo(id,firstname,lastname,dob,address,graduationyear,graduationsemester,degreename,ssn) VALUES($sid,'$firstname','$lastname','$dob','$address',$year,'$semester','$degreename','$ssn');";
-			echo $insertalumniquery;
 			$insertalumniresult = mysqli_query($connection, $insertalumniquery);
 
 
