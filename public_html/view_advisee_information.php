@@ -41,7 +41,14 @@ $facultyid = $_SESSION["id"];
 			echo "<tr>
 			<td>".$row['firstname']." ".$row['lastname']."</td>
 			<td>".$row['studentid']."</td>
-			<td>".$row['hold']."</td>
+			<td>";
+			if(ISSET($row['hold'])){
+				echo $row['hold'];
+			}
+			else{ 
+				echo "None";
+			}
+			echo "</td>
 			<td>".$row['degreename']."</td>
 			</tr>";
 		}
