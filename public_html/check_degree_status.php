@@ -141,7 +141,7 @@ $id = $_SESSION["id"];
 	echo $gpa;
 	echo "</td>
 	<td>";
-	if($GPA >= 3.0){
+	if($gpa >= 3.0){
 		echo "&#10004";
 	}
 	else{
@@ -161,7 +161,7 @@ $id = $_SESSION["id"];
 		}
 	}
 	echo $letter_grade_check;
-	echo " grades below B-";
+	echo " grade(s) below B-";
 	echo "</td>
 	<td>";
 	if($letter_grade_check <= 2){
