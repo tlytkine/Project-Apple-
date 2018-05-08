@@ -50,6 +50,11 @@
 
 		if(ISSET($_POST['formsubmitted'])){
 			$degreename = $_POST['degreename'];
+			// initially fills the course array with zeros
+			for($i = 1; $i <= 12; $i++){
+				$courses[$i] = 0;
+			}
+			// fills the course array with course ids 
 			for ($i = 1; $i <= 12; $i++){
 				$courses[$i] = $_POST["course$i"];
 			}
@@ -128,7 +133,7 @@
 			//check if more than two grades below B-
 			$letter_grade_check = 0;
 			$course_grade_check_query = "SELECT qualitypoints FROM transcripts, gradecalc
-			WHERE student=$studentid AND gradecalc.grade = transcripts.grade;";
+			WHERE studentid=$studentid AND gradecalc.grade = transcripts.grade;";
 			echo $course_grade_check_query;
 			echo "<br>";
 			$course_grade_check_result = mysqli_query($connection, $course_grade_check_query);
