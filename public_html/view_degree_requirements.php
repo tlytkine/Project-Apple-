@@ -22,7 +22,7 @@ $id = $_SESSION["id"];
 	$row = mysqli_fetch_assoc($degreenameresult);
 	$degreename = $row['degreename'];
 
-	echo "Degree Requirements: ";
+	echo "Degree Name: ";
 	echo $degreename;
 	echo "<br>";
 
