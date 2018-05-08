@@ -138,7 +138,8 @@ $id = $_SESSION["id"];
 	$row = mysqli_fetch_assoc($gpa_calc_result);
 	$gpa = $row['GPA'];
 	echo "GPA: ";
-	echo $gpa;
+	$roundedgpa = round($gpa,2);
+	echo $roundedgpa;
 	echo "</td>
 	<td>";
 	if($gpa >= 3.0){
