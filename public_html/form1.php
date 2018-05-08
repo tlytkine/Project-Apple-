@@ -33,6 +33,8 @@
 
 <?php 
 
+		echo "<h1>Form 1</h1>";
+
 
 
 		if(ISSET($_POST['formsubmitted'])){
@@ -154,7 +156,6 @@
 		}
 
 	else {
-		echo "<h1>Form 1</h1>";
 		if(($not_enough_courses)||($courses_in_progress)||($courses_not_taken)||($core_courses_error)||($gpa_error)||($credit_hours_error)||($grades_error)){
 			echo "<b>Application failed to be cleared for graduation because: </b><br>";
 			
