@@ -67,10 +67,10 @@
 				$not_enough_courses = "<i>You have not taken enough courses. The mininum requirement for graduation is 10 courses.</i>";
 			}
 			// check against degree
-			$degree_check_query = "SELECT degreename, courseid FROM degreerequirements WHERE degreename='$degreename';";
-			$degree_check_result = mysqli_query($connection, $degree_check_query);
 			$core_courses_count = 0;
 			for($i = 1; $i<=12; $i++){
+				$degree_check_query = "SELECT degreename, courseid FROM degreerequirements WHERE degreename='$degreename';";
+				$degree_check_result = mysqli_query($connection, $degree_check_query);
 				while($row =mysqli_fetch_assoc($degree_check_result)){
 					if (strcmp($courses[$i], $row['courseid']) == 0) {
 						$core_courses_count++;
