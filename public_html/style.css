@@ -68,3 +68,6 @@ button, input[type="submit"] {
     font-weight: bold;
 	margin: 2px;
 }
+form {
+	margin-bottom:2px;
+}
