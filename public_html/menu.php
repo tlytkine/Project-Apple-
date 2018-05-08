@@ -81,6 +81,7 @@ include 'header.php';
 <a href='advising_form.php'>New Student Advising Form</a> <br />
 <a href='view-personal-transcript.php'>View Transcript</a> <br />
 <a href='view_degree_requirements.php'>View Degree Requirements</a> <br />
+<a href='check_degree_status.php'>Check Degree Status</a> <br />
 <a href='form1.php'>Apply to Graduate (Form 1)</a> <br />
 <?php endif; ?>
 
