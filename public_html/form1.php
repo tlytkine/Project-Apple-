@@ -36,6 +36,17 @@
 		echo "<h1>Form 1</h1>";
 
 
+		$duplicate_query = "SELECT studentid FROM graduationapplication WHERE studentid=$studentid;";
+		$result_from_query = mysqli_query($connection, $duplicate_query);
+
+		$row = mysqli_fetch_assoc($result_from_query);
+
+
+		if ($row['studentid']==$studentid){
+				echo "You have already submitted an application for graduation.";
+		}
+
+
 
 		if(ISSET($_POST['formsubmitted'])){
 			$degreename = $_POST['degreename'];
@@ -144,17 +155,7 @@
 				}
 			}
 		}
-
-	$duplicate_query = "SELECT studentid FROM graduationapplication WHERE studentid=$studentid;";
-	$result_from_query = mysqli_query($connection, $duplicate_query);
-
-	$row = mysqli_fetch_assoc($result_from_query);
-
-
-	if ($row['studentid']==$studentid){
-			echo "You have already submitted an application for graduation.";
-	}
-	else if ($applicationclearedsucessfully){
+	if ($applicationclearedsucessfully){
 		echo $applicationclearedsucessfully;
 	}
 
