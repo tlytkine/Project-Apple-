@@ -137,7 +137,7 @@
 		}
 	}
     else{
-        echo "<p> Enter username to view their current roles: </p>";
+        echo "<p> Enter email to view their current roles: </p>";
 		echo "<form method='post' action='change-user-roles.php'>";
 		echo    "<label for='change_role_user'>Email: </label>";
 		echo    "<input type='text' id='change_role_user' name='change_role_user'/> <br/>";
