@@ -120,6 +120,7 @@
 
 		if($lift_hold_result && $delete_form_result){
 			echo "Hold was lifted successfully! New student advising form has been deleted from system.";
+			header("Location: lift_new_student_hold.php");
 		}
 		else{
 			echo "Hold was not able to be lifted.";
