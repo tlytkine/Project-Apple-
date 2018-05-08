@@ -22,7 +22,7 @@ echo "<h1>List of Advisees</h1>";
 
 $advisee_check_query = "SELECT firstname,lastname,studentid, hold, degreename FROM personalinfo,advises WHERE personalinfo.id=advises.studentid;";
 
-$advisee_check_result = mysqli_query($connection, $advisee_query);
+$advisee_check_result = mysqli_query($connection, $advisee_check_query);
 
 
 $row = mysqli_fetch_assoc($advisee_check_result);
