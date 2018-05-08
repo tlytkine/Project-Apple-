@@ -6,14 +6,14 @@
     <link rel="stylesheet" href="style.css">
 </head>
 
-<h1>Update Classes</h1>
-
 <?php
     $allowed_user_types = array(
         "ADMIN"
     );
     include 'header.php';
     include 'db-connect.php';
+
+    echo "<h1>Update Classes</h1>";
 
     /* used for page display */
     $update_classes = $_POST["update_classes"];
