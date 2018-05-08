@@ -140,9 +140,6 @@
 				if ($result_cleared_query) {
 					$applicationcleared = "<br> Application cleared successfully!";
 				}
-				else {
-					$applicationnotcleared = "<br>Application failed to be cleared for graduation.";
-				}
 			}
 		}
 
@@ -161,7 +158,7 @@
 				echo $applicationcleared;
 		}
 		else if(($not_enough_courses)||($courses_in_progress)||($courses_not_taken)||($core_courses_error)||($gpa_error)||($credit_hours_error)||($grades_error)){
-			echo $applicationnotcleared;
+			echo "<br>Application failed to be cleared for graduation.";
 			
 			if($not_enough_courses){
 				echo $not_enough_courses;
