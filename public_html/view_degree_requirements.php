@@ -27,8 +27,7 @@ $id = $_SESSION["id"];
 	$degreerequirementsquery = "SELECT degreerequirements.courseid,dept,coursenum,title FROM degreerequirements, courses WHERE degreerequirements.degreename = '$degreename' AND courses.courseid = degreerequirements.courseid;";
 	$degreerequirementsresult = mysqli_query($connection, $degreerequirementsquery);
 
-	echo "
-	<h3>Core Courses: </h3>:
+	echo "<h3>Core Courses: </h3>
 	<table>
 	<tr>
 	<th>Course ID</th>
@@ -46,7 +45,8 @@ $id = $_SESSION["id"];
 	}
 
 	echo "</table>
-	Graduation Requirements: 
+	<br>
+	<b>Graduation Requirements:</b>
 	<ul>
 		<li>You must have taken all of the core courses listed above.</li>
 		<li>You must have taken at least 10 courses.</li>
