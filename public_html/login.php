@@ -6,6 +6,7 @@
 </head>
 
 <body>
+<?php include 'header-public.php'; ?>
 <h1>Login</h1>
 <form method="POST" id="login">
 	<input type="email" name="email" placeholder="Email" maxlength="254" required>

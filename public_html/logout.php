@@ -6,6 +6,7 @@
 </head>
 
 <body>
+<?php include 'header-public.php'; ?>
 
 <?php
 session_start();

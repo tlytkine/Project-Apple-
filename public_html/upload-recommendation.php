@@ -6,6 +6,7 @@
 </head>
 
 <body>
+<?php include 'header-public.php'; ?>
 
 <h1>Upload Letter of Recommendation</h1>
 
