@@ -4,7 +4,7 @@ $allowed_user_types = array(
  );
 include 'header.php';
 include 'db-connect.php';
-$id = $_SESSION["id"];
+$facultyid = $_SESSION["id"];
 ?>
 
 <html>
@@ -17,11 +17,11 @@ $id = $_SESSION["id"];
 	echo "<h1>View Advisee Information</h1>";
 
 
-	$advisee_query = "SELECT firstname,lastname,studentid, hold, degreename FROM personalinfo,advises WHERE advises.facultyid='$id' AND personalinfo.id=advises.studentid;";
+	$advisee_check_query = "SELECT firstname,lastname,studentid, hold, degreename FROM personalinfo,advises WHERE advises.facultyid=$facultyid AND personalinfo.id=advises.studentid;";
 
-	$advisee_result = mysqli_query($connection, $advisee_query);
+	$advisee_check_result = mysqli_query($connection, $advisee_query);
 
-	$row = mysqli_fetch_assoc($advisee_result);
+	$row = mysqli_fetch_assoc($advisee_check_result);
 	if(ISSET($row['studentid'])){
 
 		echo "<table>
@@ -31,6 +31,11 @@ $id = $_SESSION["id"];
 		<th>Hold</th>
 		<th>Degree Name</th>
 		</tr>";
+		$advisee_query = "SELECT firstname,lastname,studentid, hold, degreename FROM personalinfo,advises WHERE advises.facultyid=$facultyid AND personalinfo.id=advises.studentid;";
+
+		$advisee_result = mysqli_query($connection, $advisee_query);
+
+	$row = mysqli_fetch_assoc($advisee_result);
 
 		while($row = mysqli_fetch_assoc($advisee_result)){
 			echo "<tr>
