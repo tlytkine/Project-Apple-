@@ -10,7 +10,7 @@ $id = $_SESSION["id"];
 <html>
 <head><title>View Degree Requirements</title></head>
 <link rel="stylesheet" href="style.css">
-<body><h1>View Degree Requirements</h1>
+<body><h1>Degree Requirements</h1>
 
 
 <?php
@@ -19,17 +19,17 @@ $id = $_SESSION["id"];
 
 	$degreenameresult = mysqli_query($connection, $degreenamequery);
 
+
 	$row = mysqli_fetch_assoc($degreenameresult);
 	$degreename = $row['degreename'];
-
-	echo "Degree Name: ";
-	echo $degreename;
-	echo "<br>";
+	echo "<h2>Degree Name: ".$degreename."</h2>";
 
 	$degreerequirementsquery = "SELECT degreerequirements.courseid,dept,coursenum,title FROM degreerequirements, courses WHERE degreerequirements.degreename = '$degreename' AND courses.courseid = degreerequirements.courseid;";
 	$degreerequirementsresult = mysqli_query($connection, $degreerequirementsquery);
 
-	echo "<table>
+	echo "
+	<h3>Core Courses: </h3>:
+	<table>
 	<tr>
 	<th>Course ID</th>
 	<th>Department</th>
@@ -45,7 +45,18 @@ $id = $_SESSION["id"];
 		</tr>";
 	}
 
-	echo "</table>";
+	echo "</table>
+	Graduation Requirements: 
+	<ul>
+		<li>You must have taken all of the core courses listed above.</li>
+		<li>You must have taken at least 10 courses.</li>
+		<li>You must have completed a minimum of 30 credit hours.</li>
+		<li>You must have a GPA of 3.0 or above.</li>
+		<li>You must have no more than two letter grades below B-.</li>
+	</ul>
+
+
+	";
 
 
 
