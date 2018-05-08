@@ -152,7 +152,7 @@
 
 
 	if ($row['studentid']==$studentid){
-			echo "<b>You have already submitted an application for graduation.</b>";
+			echo "You have already submitted an application for graduation.";
 		}
 
 	else {
