@@ -111,7 +111,7 @@ include 'header.php';
 				if (strcmp($row["grade"], "IP") != 0) {
 					$total_credits = $total_credits + $weight;
 				}
-
+                $f = 0;
 				if (strcmp($row["grade"], "A") == 0) {
 					$sum = $sum + ($weight * 4.0);
 				} else if (strcmp($row["grade"], "A-") == 0) {
@@ -128,6 +128,7 @@ include 'header.php';
 					$sum = $sum + ($weight * 2.0);
 				} else if (strcmp($row["grade"], "F") == 0) {
 					$sum = $sum + ($weight * 0.0);
+                    $f = 1;
 				}
 			}
 			echo "</table>";
@@ -135,9 +136,12 @@ include 'header.php';
 			$gpa = $sum / $total_credits;
 
 			echo "<br/>";
-			echo "<br/>";
-			echo "<br/>";
-			echo "<h4> GPA: " . $gpa;
+            if($gpa == 0 && $f == 0){}
+            else{
+                echo "<h4> GPA: " . $gpa;
+                echo "<h4> Total Credits: " . $total_credits;
+            }
+
 		}
 		else if ($user_exists == 1 && $has_student == 0 && $is_student != 0){
 			echo "You are not this student's advisor";
@@ -259,6 +263,7 @@ include 'header.php';
             if($gpa == 0 && $f == 0){}
             else{
                 echo "<h4> GPA: " . $gpa;
+                echo "<h4> Total Credits: " . $total_credits;
             }
 		}
 		else if ($user_exists == 1 && $has_student == 0 && $is_student != 0){
