@@ -156,7 +156,44 @@
 		echo "You have already submitted an application for graduation.";
 	}
 	else {
-		echo "<h1>Form 1</h1>
+		echo "<h1>Form 1</h1>";
+		if($applicationcleared){
+				echo $applicationcleared;
+		}
+		else if(($not_enough_courses)||($courses_in_progress)||($courses_not_taken)||($core_courses_error)||($gpa_error)||($credit_hours_error)||($grades_error)){
+			echo $applicationnotcleared;
+			
+			if($not_enough_courses){
+				echo $not_enough_courses;
+				echo "<br>";
+			}
+			if($courses_in_progress){
+				echo $courses_in_progress;
+				echo "<br>";
+			}
+			if($courses_not_taken){
+				echo "You have not taken the following courses: ";
+				echo $courses_not_taken;
+				echo "<br>";
+			}
+			if($core_courses_error){
+				echo $core_courses_error;
+				echo "<br>";
+			}
+			if($gpa_error){
+				echo $gpa_error;
+				echo "<br>";
+			}
+			if($credit_hours_error){
+				echo $credit_hours_error;
+				echo "<br>";
+			}
+			if($grades_error){
+				echo $grades_error;
+				echo "<br>";
+			}
+		}
+		echo "
 		<form method='post'>
 		<p><b>First Name:</b> ".$studentfirstname." </p>
 		<p><b>Last Name:</b> ".$studentlastname."</p>
@@ -194,41 +231,8 @@
 		<input type='submit' value='Apply To Graduate'>";
 	}
 	
-	if($applicationcleared){
-		echo $applicationcleared;
-	}
-	else {
-		echo $applicationnotcleared;
-		if($courses_in_progress){
-			echo $courses_in_progress;
-			echo "<br>";
-		}
-		if($courses_not_taken){
-			echo "You have not taken the following courses: ";
-			echo $courses_not_taken;
-			echo "<br>";
-		}
-		if($not_enough_courses){
-			echo $not_enough_courses;
-			echo "<br>";
-		}
-		if($core_courses_error){
-			echo $core_courses_error;
-			echo "<br>";
-		}
-		if($gpa_error){
-			echo $gpa_error;
-			echo "<br>";
-		}
-		if($credit_hours_error){
-			echo $credit_hours_error;
-			echo "<br>";
-		}
-		if($grades_error){
-			echo $grades_error;
-			echo "<br>";
-		}
-	}
+
+
 
 echo "</body>";
 echo "</html>";
