@@ -193,44 +193,45 @@
 				echo "<br>";
 			}
 		}
-		echo "
-		<form method='post'>
-		<p><b>First Name:</b> ".$studentfirstname." </p>
-		<p><b>Last Name:</b> ".$studentlastname."</p>
-		<p><b>Student ID:</b> ".$studentid." </p>
-		<p><b>Enter Degree:</b> </p>
-		<select name='degreename'>";
-		$degree_query = "SELECT DISTINCT degreename FROM degreerequirements, courses WHERE degreerequirements.courseid = courses.courseid;";
-		$degree_result = mysqli_query($connection, $degree_query);
-		while($row=mysqli_fetch_assoc($degree_result)){
-			echo "<option value='".$row['degreename']."'>";
-			echo $row['degreename'];
-			echo "</option>";
-		}
-		echo "</select>
-
-		<p><b>Faculty Advisor:</b> ".$advisorfirstname." ".$advisorlastname."</p>
-		<h3>Courses Taken<br></h3>
-		<p>Please enter all of the courses that you have taken.</p>";
-		for ($i = 1; $i <= 12; $i++) {
-			echo "<select name ='course$i'>";
-			echo "<option value = '0'>-----</option>";
-			$courses_query = "SELECT dept,coursenum, courseid FROM courses;";
-			$courses_result = mysqli_query($connection, $courses_query);
-			while ($row = mysqli_fetch_assoc($courses_result)) {
-				$coursenum = $row['coursenum'];
-				$courseid = $row['courseid'];
-				$dept = $row['dept'];
-				echo "<option value='$courseid'>".$dept." ".$coursenum."</option>";
+		if(!($applicationclearedsucessfully)){
+			echo "
+			<form method='post'>
+			<p><b>First Name:</b> ".$studentfirstname." </p>
+			<p><b>Last Name:</b> ".$studentlastname."</p>
+			<p><b>Student ID:</b> ".$studentid." </p>
+			<p><b>Enter Degree:</b> </p>
+			<select name='degreename'>";
+			$degree_query = "SELECT DISTINCT degreename FROM degreerequirements, courses WHERE degreerequirements.courseid = courses.courseid;";
+			$degree_result = mysqli_query($connection, $degree_query);
+			while($row=mysqli_fetch_assoc($degree_result)){
+				echo "<option value='".$row['degreename']."'>";
+				echo $row['degreename'];
+				echo "</option>";
 			}
-			echo "</select>";
-			echo "<br><br>";
+			echo "</select>
+
+			<p><b>Faculty Advisor:</b> ".$advisorfirstname." ".$advisorlastname."</p>
+			<h3>Courses Taken<br></h3>
+			<p>Please enter all of the courses that you have taken.</p>";
+			for ($i = 1; $i <= 12; $i++) {
+				echo "<select name ='course$i'>";
+				echo "<option value = '0'>-----</option>";
+				$courses_query = "SELECT dept,coursenum, courseid FROM courses;";
+				$courses_result = mysqli_query($connection, $courses_query);
+				while ($row = mysqli_fetch_assoc($courses_result)) {
+					$coursenum = $row['coursenum'];
+					$courseid = $row['courseid'];
+					$dept = $row['dept'];
+					echo "<option value='$courseid'>".$dept." ".$coursenum."</option>";
+				}
+				echo "</select>";
+				echo "<br><br>";
+			}
+			echo"<br>
+			<input type='hidden' name='formsubmitted'>
+			<input type='submit' value='Apply To Graduate'>";
 		}
-		echo"<br>
-		<input type='hidden' name='formsubmitted'>
-		<input type='submit' value='Apply To Graduate'>";
 	}
-	
 
 
 
