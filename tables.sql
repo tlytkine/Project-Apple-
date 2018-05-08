@@ -289,6 +289,7 @@ INSERT INTO roles (id, role) VALUES (7, "INSTRUCTOR");
 INSERT INTO roles (id, role) VALUES (7, "ADVISOR");
 INSERT INTO roles (id, role) VALUES (7, "REVIEWER");
 INSERT INTO roles (id, role) VALUES (7, "USER");
+INSERT INTO roles (id, role) VALUES (7, "CAC");
 INSERT INTO personalinfo VALUES('7', 'Bhagi', 'Narahari', '2000-01-01', '123 Address St.', '012-35-6789');
 
 /* add courses */
