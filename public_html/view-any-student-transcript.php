@@ -130,6 +130,7 @@ include 'header.php';
             if($gpa == 0 && $f == 0){}
             else{
                 echo "<h4> GPA: " . $gpa;
+                echo "<h4> Total Credits: " . $total_credits;
             }
 		}
 		else if ($user_exists == 1 && $is_student != 0){
@@ -241,6 +242,7 @@ include 'header.php';
             if($gpa == 0 && $f == 0){}
             else{
                 echo "<h4> GPA: " . $gpa;
+                echo "<h4> Total Credits: " . $total_credits;
             }
 		}
 		else if ($user_exists == 1 && $is_student != 0){
