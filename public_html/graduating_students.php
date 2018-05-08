@@ -26,7 +26,7 @@ $graduating_check_result = mysqli_query($connection, $graduating_check_query);
 $row = mysqli_fetch_assoc($graduating_check_result);
 
 	if(ISSET($row['studentid'])){
-		$graduating_students_query = "SELECT DISTINCT personalinfo.firstname,personalinfo.lastname,graduationapplications.studentid, graduationapplications.year,advises.degreename FROM personalinfo,graduationapplication,advises WHERE graduationapplication.studentid = personalinfo.id AND advises.studentid = graduationapplication.studentid AND graduationapplication.cleared=1;";
+		$graduating_students_query = "SELECT DISTINCT personalinfo.firstname,personalinfo.lastname,graduationapplication.studentid, graduationapplication.year,advises.degreename FROM personalinfo,graduationapplication,advises WHERE graduationapplication.studentid = personalinfo.id AND advises.studentid = graduationapplication.studentid AND graduationapplication.cleared=1;";
 
 		$graduating_students_result = mysqli_query($connection, $graduating_students_query);
 
