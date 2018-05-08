@@ -28,7 +28,7 @@
 	$new_student_check_query = "SELECT studentid FROM advises WHERE advises.facultyid = $facultyid AND advises.hold = 'New Student';";
 	$new_student_check_result = mysqli_query($connection,$new_student_check_query);
 
-	if($advisee_info_result){
+	if(ISSET($row['firstname'])){
 		echo"<table>
 		<tr>
 		<th>Advisee</th>

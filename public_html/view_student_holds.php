@@ -29,7 +29,7 @@ echo "<table>
 <th>Student ID</th>
 <th>Faculty Advisor</th>
 <th>Faculty ID</th>
-<th>Holds</th>
+<th>Hold</th>
 </tr>";
 
 // Displays a table of all students along with actions that can be taken
