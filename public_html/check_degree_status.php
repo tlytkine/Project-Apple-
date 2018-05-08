@@ -29,13 +29,14 @@ $id = $_SESSION["id"];
 	$degreerequirementsquery = "SELECT degreerequirements.courseid,dept,coursenum,title FROM degreerequirements, courses WHERE degreerequirements.degreename = '$degreename' AND courses.courseid = degreerequirements.courseid;";
 	$degreerequirementsresult = mysqli_query($connection, $degreerequirementsquery);
 
-	echo "<table>
+	echo "<h3>Core Course Status</h3>
+	<table>
 	<tr>
 	<th>Course ID</th>
 	<th>Department</th>
 	<th>Course Num</th>
 	<th>Title</th>
-	<th>Requirement Satisfied</th>
+	<th>Requirement Satisfied?</th>
 	</tr>";
 	while($row = mysqli_fetch_assoc($degreerequirementsresult)){
 		echo "<tr>
@@ -65,7 +66,46 @@ $id = $_SESSION["id"];
 		</tr>";
 	}
 
-	echo "</table>";
+	echo "</table>
+	<br>
+	<b>Graduation Requirements: </b>
+	<table>
+	<tr>
+	<th>Requirement</th>
+	<th>Status</th>
+	<th>Satisfied?</th>
+	</tr>
+	<tr>
+	<td>Core Courses</td>
+	<td>Insert Status</td>
+	<td>Insert checkmark or x</td>
+	</tr>
+	<tr>
+	<td>Minimum of 10 courses</td>
+	<td>Insert Status</td>
+	<td>Insert checkmark or x</td>
+	</tr>
+	<tr>
+	<td>Minimum of 10 courses</td>
+	<td>Insert Status</td>
+	<td>Insert checkmark or x</td>
+	</tr>
+	<tr>
+	<td>Minimum of 30 credit hours</td>
+	<td>Insert Status</td>
+	<td>Insert checkmark or x</td>
+	</tr>
+	<td>Minimum GPA of 3.0</td>
+	<td>Insert Status</td>
+	<td>Insert checkmark or x</td>
+	</tr>
+	<td>No more than two letter grades below B-</td>
+	<td>Insert Status</td>
+	<td>Insert checkmark or x</td>
+	</tr>
+	</table>
+	";
+
 
 
 
