@@ -42,8 +42,8 @@
 		$row = mysqli_fetch_assoc($result_from_query);
 
 
-		if ($row['studentid']==$studentid){
-				echo "You have already submitted an application for graduation.";
+		if($row['studentid']==$studentid){
+				$alreadysubmitted = "You have already submitted an application for graduation.";
 		}
 
 
@@ -193,7 +193,7 @@
 				echo "<br>";
 			}
 		}
-		if(!($applicationclearedsucessfully)){
+		if(!($applicationclearedsucessfully) && (!$alreadysubmitted)){
 			echo "
 			<form method='post'>
 			<p><b>First Name:</b> ".$studentfirstname." </p>
