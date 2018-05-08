@@ -13,6 +13,8 @@
 	<input type="password" name="password" placeholder="Password" maxlength="255" required>
 	<button type="submit">Create Account</button>
 </form>
+<br/>
+<a href="login.php">Login</a>
 
 <?php
 require 'password.php'; // Allows use of password_hash with PHP 5.4
