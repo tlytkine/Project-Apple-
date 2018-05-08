@@ -339,6 +339,7 @@
 		echo    "Semester: ";
 		echo    "<input type='radio' name='semester' value='fall'>Fall";
 		echo    "<input type='radio' name='semester' value='spring'>Spring <br/>";
+        echo "<br>";
 		echo    "<input type='submit' value='View Schedule as List' name='list' />";
         echo    "<input type='submit' value='View Schedule on Calendar' name='grid' />";
         echo    "<br />";
