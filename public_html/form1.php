@@ -35,8 +35,6 @@
 
 		if(ISSET($_POST['formsubmitted'])){
 			$degreename = $_POST['degreename'];
-			echo "$degreename";
-			echo "<br>";
 			for ($i = 1; $i <= 12; $i++){
 				$courses[$i] = $_POST["course$i"];
 			}
@@ -73,7 +71,7 @@
 			$degree_check_result = mysqli_query($connection, $degree_check_query);
 			$core_courses_count = 0;
 			for($i = 1; $i<=12; $i++){
-				while($row =mysqli_fetch_assoc($result_from_query)){
+				while($row =mysqli_fetch_assoc($degree_check_result)){
 					if (strcmp($courses[$i], $row['courseid']) == 0) {
 						$core_courses_count++;
 					}
