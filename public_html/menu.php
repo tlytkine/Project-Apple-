@@ -60,7 +60,6 @@ include 'header.php';
 <a href='search-student-transcripts.php'>View Student Transcripts</a> <br />
 <a href='search-student-grades.php'>Enter Student Grades</a> <br />
 <a href='update_advisor_assignments.php'>Update Advisor Assignments</a> <br />
-<a href='list_of_advisees.php'>List of Advisees</a> <br />
 <a href='graduating_students.php'>List of Graduating Students</a><br />
 <a href='view_student_holds.php'>View Student Holds</a> <br />
 <a href='approve_deny_graduation_applications.php'>Approve/Deny Graduation Applications</a> <br />

@@ -6,12 +6,15 @@
 </head>
 
 <body>
+<?php include 'header-public.php'; ?>
 <h1>Create Account</h1>
 <form method="POST" id="newaccount">
 	<input type="email" name="email" placeholder="Email" maxlength="254" required>
 	<input type="password" name="password" placeholder="Password" maxlength="255" required>
 	<button type="submit">Create Account</button>
 </form>
+<br/>
+<a href="login.php">Login</a>
 
 <?php
 require 'password.php'; // Allows use of password_hash with PHP 5.4
