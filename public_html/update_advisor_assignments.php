@@ -93,7 +93,14 @@
 		echo "<tr>
 		<td>".$row['studentfirstname']." ".$row['studentlastname']."</td>
 		<td>".$row['studentid']."</td>
-		<td>".$row['hold']."</td>
+		<td>";
+		if(ISSET($row['hold'])){
+			echo $row['hold'];
+		}
+		else{ 
+			echo "None";
+		}
+		echo "</td> 
 		<td>".$row['degreename']."</td>
 		<td>".$row['advisorfirstname']." ".$row['advisorlastname']."</td>
 		<td>".$row['advisorid']."</td>";
