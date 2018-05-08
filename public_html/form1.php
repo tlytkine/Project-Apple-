@@ -58,6 +58,8 @@
 			$course_count = 0;
 			for ($i = 1; $i <= 12; $i++) {
 				$course_check_query = "SELECT grade FROM transcripts, courses WHERE transcripts.studentid =$studentid AND transcripts.coursenum=courses.coursenum AND courses.courseid=$courses[$i] AND courses.dept = transcripts.dept;";
+				echo "<br>";
+				echo $course_check_query;
 				$course_check_result = mysqli_query($connection, $course_check_query);
 				$row = mysqli_fetch_assoc($course_check_result);
 				if (ISSET($row['grade'])) {
@@ -127,6 +129,8 @@
 			$letter_grade_check = 0;
 			$course_grade_check_query = "SELECT qualitypoints FROM transcripts, gradecalc
 			WHERE student=$studentid AND gradecalc.grade = transcripts.grade;";
+			echo $course_grade_check_query;
+			echo "<br>";
 			$course_grade_check_result = mysqli_query($connection, $course_grade_check_query);
 
 			while ($row = mysqli_fetch_assoc($course_grade_check_result)) {
