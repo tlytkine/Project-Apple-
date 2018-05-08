@@ -29,7 +29,7 @@ echo "<table>
 <th>Student ID</th>
 <th>Faculty Advisor</th>
 <th>Faculty ID</th>
-<th>Hold</th>
+<th>Holds</th>
 </tr>";
 
 // Displays a table of all students along with actions that can be taken
@@ -43,7 +43,7 @@ if(ISSET($row['hold'])){
 	echo $row['hold'];
 }
 else{ 
-	echo "None.";
+	echo "None";
 }
 echo "</td>
 </tr>";
