@@ -114,8 +114,22 @@ $id = $_SESSION["id"];
 	echo "</td>
 	</tr>
 	<td>Minimum of 30 credit hours</td>
-	<td>Insert Status</td>
-	<td>Insert checkmark or x</td>
+	<td>";
+	$credit_hour_query = "SELECT SUM(credithours) AS credithoursum FROM courses,transcripts WHERE transcripts.dept = courses.dept AND courses.coursenum = transcripts.coursenum AND transcripts.studentid = $id AND transcripts.grade <> 'IP';";
+	$credit_hour_result = mysqli_query($connection,$credit_hour_query);
+	$row = mysqli_fetch_assoc($credit_hour_result);
+	$credithoursum = $row['credithoursum'];
+	echo $credithoursum;
+	echo " credit hours completed
+	</td>
+	<td>";
+	if($credithoursum >= 30){
+		echo "&#10004";
+	}
+	else{
+		echo "&#10008";
+	}
+	echo "</td>
 	</tr>
 	<td>Minimum GPA of 3.0</td>
 	<td>Insert Status</td>
