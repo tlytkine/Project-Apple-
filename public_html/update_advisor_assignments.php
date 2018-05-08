@@ -157,7 +157,14 @@
 				echo "<tr>
 				<td>".$row['firstname']." ".$row['lastname']."</td>
 				<td>".$row['id']."</td>
-				<td>".$row['hold']."</td>
+				<td>";
+				if(ISSET($row['hold'])){
+					echo $row['hold'];
+				}
+				else{ 
+					echo "None";
+				}
+				echo "</td>
 				<td>".$row['degreename']."</td>
 				<td><form method='post'><select name ='facultyidnew'>";
 				while($row1 = mysqli_fetch_assoc($facultyresult)){
