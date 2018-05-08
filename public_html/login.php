@@ -13,9 +13,12 @@
 	<input type="password" name="password" placeholder="Password" maxlength="255" required>
 	<button type="submit">Login</button>
 </form>
-
-<a href="create-account.php">Create Applicant Account</a><br/><br/>
+<br/>
+<a href="create-account.php">Create Applicant Account</a>
+<div id="footer">
+&copy; 2018 Tim Lytkine, Billy Miller, and Dietrich Reidenbaugh (for CSCI 2541W: Database Systems)<br/>
 <a href="reset.php">Reset Database</a>
+</div>
 
 <?php
 require 'password.php'; // Allows use of password_verify with PHP 5.4
