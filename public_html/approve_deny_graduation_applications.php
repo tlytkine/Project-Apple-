@@ -141,6 +141,7 @@ $id = $_SESSION["id"];
 				echo "Error deleting student from system.";
 			}
 		}
+		header("Refresh: 2; url=approve_deny_graduation_applications.php");
 	}
 
 
