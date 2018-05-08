@@ -9,6 +9,7 @@ $id = $_SESSION["id"];
 
 <html>
 <head><title>View Degree Requirements</title></head>
+<link rel="stylesheet" href="style.css">
 <body><h1>View Degree Requirements</h1>
 
 
