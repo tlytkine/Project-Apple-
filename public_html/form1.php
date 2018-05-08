@@ -158,7 +158,9 @@
 	if ($applicationclearedsucessfully){
 		echo $applicationclearedsucessfully;
 	}
-
+	else if($alreadysubmitted){
+		echo $alreadysubmitted;
+	}
 	else {
 		if(($not_enough_courses)||($courses_in_progress)||($courses_not_taken)||($core_courses_error)||($gpa_error)||($credit_hours_error)||($grades_error)){
 			echo "<b>Application failed to be cleared for graduation because: </b><br>";
@@ -231,9 +233,6 @@
 			<input type='hidden' name='formsubmitted'>
 			<input type='submit' value='Apply To Graduate'>";
 		}
-	}
-	else if($alreadysubmitted){
-		echo $alreadysubmitted;
 	}
 
 
