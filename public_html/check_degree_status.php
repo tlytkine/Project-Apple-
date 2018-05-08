@@ -85,7 +85,7 @@ $id = $_SESSION["id"];
 	$row = mysqli_fetch_assoc($numcorecoursesresult);
 	$numcorecourses = $row['numcorecourses'];
 	echo "$numcorecourses"; 
-	echo "core courses taken </td>
+	echo " core courses taken </td>
 	<td>";
 	if($numcorecourses==$num_core_courses){
 		echo "&#10004";
@@ -97,15 +97,22 @@ $id = $_SESSION["id"];
 	</tr>
 	<tr>
 	<td>Minimum of 10 courses</td>
-	<td>Insert Status</td>
-	<td>Insert checkmark or x</td>
+	<td>";
+	$number_of_courses_query = "SELECT COUNT(studentid) AS numcourses FROM transcripts WHERE studentid = $id;";
+	$number_of_courses_result = mysqli_query($connection,$number_of_courses_query);
+	$row = mysqli_fetch_assoc($number_of_courses_result);
+	$numcourses = $row['numcourses'];
+	echo $numcourses;
+	echo " courses taken</td>
+	<td>";
+	if($numcourses >= 10){
+		echo "&#10004";
+	}
+	else {
+		echo "&#10008";
+	}
+	echo "</td>
 	</tr>
-	<tr>
-	<td>Minimum of 10 courses</td>
-	<td>Insert Status</td>
-	<td>Insert checkmark or x</td>
-	</tr>
-	<tr>
 	<td>Minimum of 30 credit hours</td>
 	<td>Insert Status</td>
 	<td>Insert checkmark or x</td>
