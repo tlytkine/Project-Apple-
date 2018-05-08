@@ -1,3 +1,4 @@
+<?php session_start(); ob_start();?>
 <html>
 <body>
 <head>
@@ -54,7 +55,7 @@ include 'header.php';
 		$row = mysqli_fetch_assoc($result);
 
 		$user_exists = 0;
-		if (mysqli_num_rows($result) > 0 && $is_student != 0){
+		if (mysqli_num_rows($result) > 0 && $is_student != 0  && !($fname == NULL && $lname == NULL)){
 			echo "<h2>".$row["firstname"]." ".$row["lastname"]."</h2>";
 			$user_exists = 1;
 		}
@@ -73,13 +74,13 @@ include 'header.php';
 		$sum = 0;
 
         /* display transcript information */
-		if (mysqli_num_rows($result) > 0 && $is_student != 0 && $is_student != 0){
-			echo "<table>";
+		if (mysqli_num_rows($result) > 0 && $user_exists != 0 && $is_student != 0){
+			echo '<table style="width: 50%">';
 			$cur_year = ""; //track current year
 			$cur_sem = ""; //track current semester
 			while ($row = mysqli_fetch_assoc($result)){
 				if($cur_year != $row["year"] || $cur_sem != $row["semester"]){
-					echo "</table><br><table>";
+					echo '</table><br><table style="width: 50%">';
 					echo "<tr><th colspan=2>Course</th><th>Title</th><th>Credits</th><th>Grade</th><th>Semester</th><th>Year</th></tr>";
 					$cur_year = $row["year"];
 					$cur_sem = $row["semester"];
@@ -185,12 +186,12 @@ include 'header.php';
 
 		/* display transcript information */
 		if (mysqli_num_rows($result) > 0 && $is_student != 0){
-			echo "<table>";
+			echo '<table style="width: 50%">';
 			$cur_year = ""; //track current year
 			$cur_sem = ""; //track current semester
 			while ($row = mysqli_fetch_assoc($result)){
 				if($cur_year != $row["year"] || $cur_sem != $row["semester"]){
-					echo "</table><br><table>";
+					echo '</table><br><table style="width: 50%">';
 					echo "<tr><th colspan=2>Course</th><th>Title</th><th>Credits</th><th>Grade</th><th>Semester</th><th>Year</th></tr>";
 					$cur_year = $row["year"];
 					$cur_sem = $row["semester"];

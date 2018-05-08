@@ -6,8 +6,6 @@
     <link rel="stylesheet" href="style.css">
 </head>
 
-<h1>Deactivate Users</h1>
-
 <?php
     $allowed_user_types = array(
         "ADMIN"
@@ -15,6 +13,7 @@
     include 'header.php';
     include 'db-connect.php';
 
+    echo "<h1>Deactivate Users</h1>";
 
     $deactivate = $_POST["do_deactivate"];
 

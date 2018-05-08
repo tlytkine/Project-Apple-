@@ -6,14 +6,14 @@
     <link rel="stylesheet" href="style.css">
 </head>
 
-<h1>Change Roles</h1>
-
 <?php
     $allowed_user_types = array(
         "ADMIN"
     );
     include 'header.php';
     include 'db-connect.php';
+
+    echo "<h1>Change Roles</h1>";
 
     $change_role = $_POST["change_role"];
 	$add_role = $_POST["add_role"];
@@ -121,8 +121,14 @@
             $query = "DELETE FROM roles WHERE id = '$id' AND role = 'INACTIVE';";
 			$result = mysqli_query($connection, $query);
 
+            if(in_array($role, $user_types) && $role != "GS" && $role != "ADMIN"){
+                $query = "INSERT INTO roles VALUES ('$id', 'USER');";
+    			$result = mysqli_query($connection, $query);
+            }
+
 			$query = "INSERT INTO roles VALUES ('$id', '$role');";
 			$result = mysqli_query($connection, $query);
+
 
 			if ($result) {
 				echo "<br/>";
@@ -137,7 +143,7 @@
 		}
 	}
     else{
-        echo "<p> Enter username to view their current roles: </p>";
+        echo "<p> Enter email to view their current roles: </p>";
 		echo "<form method='post' action='change-user-roles.php'>";
 		echo    "<label for='change_role_user'>Email: </label>";
 		echo    "<input type='text' id='change_role_user' name='change_role_user'/> <br/>";

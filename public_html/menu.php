@@ -46,7 +46,7 @@ include 'header.php';
 
 <?php if (in_array("GS", $_SESSION["roles"])) : ?>
 <h3>User Information</h3>
-<a href=''>View Student Information</a> <br />
+<a href='view-user-info.php'>View Student Information</a> <br />
 <a href='view-students.php'>View Current Students</a><br />
 <a href='view-alumni.php'>View Alumni</a><br />
 
