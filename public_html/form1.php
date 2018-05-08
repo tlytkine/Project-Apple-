@@ -202,6 +202,7 @@
 		}
 		if(!($applicationclearedsucessfully) && (!$alreadysubmitted)){
 			echo "
+			<p>Fill out the following form to submit an application for graduation. Your application will not be cleared unless you have satisfied unless you have met all of the degree requirements. You can view the requirements for your degree and your status in the main menu.</p>
 			<form method='post'>
 			<p><b>First Name:</b> ".$studentfirstname." </p>
 			<p><b>Last Name:</b> ".$studentlastname."</p>
