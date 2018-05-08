@@ -6,8 +6,6 @@
     <link rel="stylesheet" href="style.css">
 </head>
 
-<h1>View Students</h1>
-
 <?php
     $allowed_user_types = array(
         "ADMIN",
@@ -16,16 +14,19 @@
     include 'header.php';
     include 'db-connect.php';
 
+    echo "<h1>View Students</h1>";
+
     /* used for page display */
-    $year = $_POST["year"];
-    $degree = $_POST["degree"];
+    $year_search = $_POST["year_search"];
+    $degree_search = $_POST["degree_search"];
 
     /* display for search by year */
-	if($year){
+	if($year_search){
+        $year = $_POST["year"];
+
         $query = "SELECT p.id, p.firstname, p.lastname, p.dob, p.address, u.email
                   FROM personalinfo p, users u, roles r, advises a
-                  WHERE a.studentid = p.id AND p.id = u.id AND p.id = r.id AND r.role = 'STUDENT'
-                  ORDER BY a.admityear DESC;";
+                  WHERE a.studentid = p.id AND p.id = u.id AND p.id = r.id AND r.role = 'STUDENT' AND a.admityear = '$year';";
 
         $result = mysqli_query($connection, $query);
 
@@ -46,15 +47,18 @@
             }
             echo "</table>";
         }
+        else if(!is_numeric($year)){
+            echo "Please enter a valid year";
+        }
         else{
             echo "No students";
         }
 	}
-    else if($degree){
+    else if($degree_search){
+        $degreename = $_POST["degreename"];
         $query = "SELECT p.id, p.firstname, p.lastname, p.dob, p.address, u.email, a.degreename
                   FROM personalinfo p, users u, roles r, advises a
-                  WHERE p.id = a.studentid AND p.id = u.id AND p.id = r.id AND r.role = 'STUDENT'
-                  ORDER BY a.degreename;";
+                  WHERE p.id = a.studentid AND p.id = u.id AND p.id = r.id AND r.role = 'STUDENT' AND a.degreename = '$degreename';";
 
         $result = mysqli_query($connection, $query);
 
@@ -84,10 +88,16 @@
 		echo '<form method="post" action="view-students.php">';
 
         echo '<h4>View by Admit Year</h4>';
-        echo '<input type="submit" name="year" value="Go">';
+        echo '<input type="text" name="year"><br>';
+        echo '<input type="submit" name="year_search" value="Search">';
 
         echo '<h4>View by Degree</h4>';
-		echo '<input type="submit" name="degree" value="Go">';
+        echo '<select name="degreename">';
+        echo '<option value="MS">MS</option>';
+        echo '<option value="PhD">PhD</option>';
+        echo '<option value="Direct PhD">Direct PhD</option>';
+        echo '</select>';
+		echo '<input type="submit" name="degree_search" value="Search">';
 
         echo '</form>';
 	}
