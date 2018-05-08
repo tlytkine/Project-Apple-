@@ -81,6 +81,12 @@
 			$num_core_courses_result = mysqli_query($connection, $num_core_courses_query);
 			$row = mysqli_fetch_assoc($num_core_courses_result);
 			$num_core_courses = $row['CourseCount'];
+			echo "Core Course Count : ";
+			echo $core_courses_count;
+			echo "<br>";
+			echo "Num Core Courses : ";
+			echo $num_core_courses;
+			echo "<br>";
 			// check core classes are satisfied
 			if ($core_courses_count < $num_core_courses) {
 				$core_courses_error = "<i>You have not taken one or more of the core courses required for your degree.</i>";
