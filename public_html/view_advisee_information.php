@@ -37,8 +37,6 @@ $facultyid = $_SESSION["id"];
 
 		$advisee_result = mysqli_query($connection, $advisee_query);
 
-	$row = mysqli_fetch_assoc($advisee_result);
-
 		while($row = mysqli_fetch_assoc($advisee_result)){
 			echo "<tr>
 			<td>".$row['firstname']." ".$row['lastname']."</td>
