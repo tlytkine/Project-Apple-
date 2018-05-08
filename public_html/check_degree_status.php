@@ -38,6 +38,7 @@ $id = $_SESSION["id"];
 	<th>Title</th>
 	<th>Requirement Satisfied?</th>
 	</tr>";
+	$num_core_courses = 0;
 	while($row = mysqli_fetch_assoc($degreerequirementsresult)){
 		echo "<tr>
 		<td>".$row['courseid']."</td>
@@ -46,6 +47,7 @@ $id = $_SESSION["id"];
 		<td>".$row['title']."</td>
 		<td>";
 		$cid = $row['courseid'];
+
 		$requirement_check_query = "SELECT studentid,grade FROM transcripts,courses WHERE transcripts.studentid = $id AND courses.courseid = $cid AND transcripts.dept = courses.dept AND courses.coursenum = transcripts.coursenum;";
 		$requirement_check_result = mysqli_query($connection, $requirement_check_query);
 		$row = mysqli_fetch_assoc($requirement_check_result);
@@ -56,7 +58,7 @@ $id = $_SESSION["id"];
 			}
 			else {
 				echo "&#10004";
-
+				$num_core_courses++;
 			}
 		}
 		else {
@@ -77,8 +79,21 @@ $id = $_SESSION["id"];
 	</tr>
 	<tr>
 	<td>Core Courses</td>
-	<td>Insert Status</td>
-	<td>Insert checkmark or x</td>
+	<td>";
+	$numcorecoursesquery = "SELECT COUNT(courseid) AS numcorecourses FROM degreerequirements WHERE degreename='$degreename';";
+	$numcorecoursesresult = mysqli_query($connection, $numcorecoursesquery);
+	$row = mysqli_fetch_assoc($numcorecoursesresult);
+	$numcorecourses = $row['numcorecourses'];
+	echo "$numcorecourses"; 
+	echo "core courses taken </td>
+	<td>";
+	if($numcorecourses==$num_core_courses){
+		echo "&#10004";
+	}
+	else {
+		echo "&#10008";
+	}
+	echo "</td>
 	</tr>
 	<tr>
 	<td>Minimum of 10 courses</td>
@@ -99,7 +114,7 @@ $id = $_SESSION["id"];
 	<td>Insert Status</td>
 	<td>Insert checkmark or x</td>
 	</tr>
-	<td>No more than two letter grades below B-</td>
+	<td>Maximum of 2 letter grades below B-</td>
 	<td>Insert Status</td>
 	<td>Insert checkmark or x</td>
 	</tr>
