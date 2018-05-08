@@ -74,7 +74,7 @@ include 'header.php';
 			WHERE p.firstname LIKE '%$fname%' AND p.lastname LIKE '%$lname%';";
 
 		$result = mysqli_query($connection, $query);
-        if (mysqli_num_rows($result) == 0 || $is_student == 0){
+        if (mysqli_num_rows($result) == 0 || $is_student == 0 || ($fname == NULL && $lname == NULL)){
 			echo "This student doesn't exist";
 		}
 		else{

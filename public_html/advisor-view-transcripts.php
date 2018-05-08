@@ -39,7 +39,7 @@ include 'header.php';
 		$row = mysqli_fetch_assoc($result);
 
 		$is_student = 0;
-		if (mysqli_num_rows($result) > 0){
+		if (mysqli_num_rows($result) > 0  && !($fname == NULL && $lname == NULL)){
 			$is_student = 1;
 		}
 
