@@ -86,7 +86,14 @@ $facultyid = $_SESSION["id"];
 				<td>".$row['studentid']."</td>
 				<td>".$row['facultyfirstname']." ".$row['facultylastname']."</td>
 				<td>".$row['facultyid']."</td>
-				<td>".$row['hold']."</td>
+				<td>";
+				if(ISSET($row['hold'])){
+					echo $row['hold'];
+				}
+				else{ 
+					echo "None";
+				}
+				echo "</td>
 				<form method ='post'>
 				<input type='hidden' name='studentid' value ='".$row['studentid']."'>
 				<input type='hidden' name='facultyid' value='".$row['facultyid']."'>
