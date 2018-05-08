@@ -49,7 +49,7 @@
 				$row = mysqli_fetch_assoc($course_check_result);
 				if (ISSET($row['grade'])) {
 					if (strcmp($row['grade'], 'IP') == 0) {
-						$courses_in_progress = "One or more of the courses you have entered are still in progress. Please check your transcript to make sure all grades have been submitted.";
+						$courses_in_progress = "<i>One or more of the courses you have entered are still in progress. Please check your transcript to make sure all grades have been submitted.</i>";
 					}
 					else {
 						$course_count++;
@@ -66,7 +66,7 @@
 			}
 			// Checks that there are at least 10 courses. 
 			if($course_count < 10) {
-				$not_enough_courses = "You have not taken enough unique courses. The mininum requirement for graduation is 10 courses.";
+				$not_enough_courses = "<i>You have not taken enough courses. The mininum requirement for graduation is 10 courses.</i>";
 			}
 			// check against degree
 			$degree_check_query = "SELECT degreename, courseid FROM degreerequirements WHERE degreename='$degreename';";
@@ -85,7 +85,7 @@
 			$num_core_courses = $row['CourseCount'];
 			// check core classes are satisfied
 			if ($core_courses_count < $num_core_courses) {
-				$core_courses_error = "You have not taken one or more of the core courses required for your degree.";
+				$core_courses_error = "<i>You have not taken one or more of the core courses required for your degree.</i>";
 			}
 			// Check to make sure GPA is > 3.0
 			$gpa_calc_query = "SELECT (Sum(qualitypoints*credithours)/Sum(credithours)) AS GPA, transcripts.year FROM gradecalc, courses, transcripts WHERE gradecalc.grade = transcripts.grade AND transcripts.studentid=$studentid AND transcripts.coursenum = courses.coursenum;";
@@ -94,7 +94,7 @@
 				while($row=mysqli_fetch_assoc($gpa_calc_result)){
 					$year = $row['year'];
 					if ($row['GPA'] < 3.0) {
-						$gpa_error = "You have not met the minimum GPA requirement of 3.0 required for your degree.";
+						$gpa_error = "<i>You have not met the minimum GPA requirement of 3.0 required for your degree.</i>";
 					}
 					$gpaval = $row['GPA'];
 				}
@@ -105,7 +105,7 @@
 			if(mysqli_num_rows($credit_hours_result)>0){
 				while($row=mysqli_fetch_assoc($credit_hours_result)){
 					if($row['CREDITS'] < 30) {
-						$credit_hours_error = "You have not met the minimum requirement of 30 credit hours required for your degree.";
+						$credit_hours_error = "<i>You have not met the minimum requirement of 30 credit hours required for your degree.</i>";
 					}
 					$numcredits = $row['CREDITS'];
 				}
@@ -122,7 +122,7 @@
 				}
 			}
 			if ($letter_grade_check > 2) {
-				$grades_error = "You have more than two letter grades below B-.";
+				$grades_error = "<i>You have more than two letter grades below B-.</i>";
 			}
 
 			if(($letter_grade_check < 2) && ($numcredits>=30) && ($gpaval>=3.0) && ($core_courses_count==$num_core_courses) && ($course_count>=10)){
@@ -150,7 +150,7 @@
 
 
 	if ($row['studentid']==$studentid){
-		echo "You have already submitted an application for graduation.";
+		echo "<b>You have already submitted an application for graduation.</b>";
 	}
 	else {
 		echo "<h1>Form 1</h1>";
@@ -158,7 +158,7 @@
 				echo $applicationcleared;
 		}
 		else if(($not_enough_courses)||($courses_in_progress)||($courses_not_taken)||($core_courses_error)||($gpa_error)||($credit_hours_error)||($grades_error)){
-			echo "<br>Application failed to be cleared for graduation.";
+			echo "<b>Application failed to be cleared for graduation.<b><br>";
 			
 			if($not_enough_courses){
 				echo $not_enough_courses;
@@ -169,7 +169,7 @@
 				echo "<br>";
 			}
 			if($courses_not_taken){
-				echo "You have not taken the following courses: ";
+				echo "<i>You have not taken the following courses:</i> ";
 				echo $courses_not_taken;
 				echo "<br>";
 			}
