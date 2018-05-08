@@ -37,7 +37,6 @@ $id = $_SESSION["id"];
 	else {
 		$applications_query = "SELECT DISTINCT graduationapplication.studentid,personalinfo.firstname,personalinfo.lastname, graduationapplication.year,graduationapplication.cleared, advises.degreename FROM graduationapplication,personalinfo,advises
 		WHERE graduationapplication.studentid = personalinfo.id AND advises.studentid = graduationapplication.studentid;";
-		echo $applications_query;
 		$applications_result = mysqli_query($connection, $applications_query);
 
 		echo "<table>
