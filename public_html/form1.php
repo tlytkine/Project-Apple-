@@ -232,6 +232,9 @@
 			<input type='submit' value='Apply To Graduate'>";
 		}
 	}
+	else if($alreadysubmitted){
+		echo $alreadysubmitted;
+	}
 
 
 
