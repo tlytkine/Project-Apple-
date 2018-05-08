@@ -21,7 +21,7 @@ if (isset($_SESSION["roles"])) {
 <div id="head">
 <div id="logo">
 	<span class="imgspan"></span>
-	<img src="https://creativeservices.gwu.edu/sites/g/files/zaxdzs1101/f/image/gw_txt_4cp_pos_0.png" height="80%">
+	<a href="menu.php"><img src="https://creativeservices.gwu.edu/sites/g/files/zaxdzs1101/f/image/gw_txt_4cp_pos_0.png" height="80%"></a>
 </div>
 <div id="nav">
 	<a href="menu.php">Menu</a> 
