@@ -121,8 +121,14 @@
             $query = "DELETE FROM roles WHERE id = '$id' AND role = 'INACTIVE';";
 			$result = mysqli_query($connection, $query);
 
+            if(in_array($role, $user_types) && $role != "GS" && $role != "ADMIN"){
+                $query = "INSERT INTO roles VALUES ('$id', 'USER');";
+    			$result = mysqli_query($connection, $query);
+            }
+
 			$query = "INSERT INTO roles VALUES ('$id', '$role');";
 			$result = mysqli_query($connection, $query);
+
 
 			if ($result) {
 				echo "<br/>";
