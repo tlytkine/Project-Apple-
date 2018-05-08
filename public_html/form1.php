@@ -33,6 +33,16 @@
 
 <?php 
 
+		$duplicate_query = "SELECT studentid FROM graduationapplication WHERE studentid=$studentid;";
+		$result_from_query = mysqli_query($connection, $duplicate_query);
+
+		$row = mysqli_fetch_assoc($result_from_query);
+
+
+		if ($row['studentid']==$studentid){
+			echo "<b>You have already submitted an application for graduation.</b>";
+		}
+
 		if(ISSET($_POST['formsubmitted'])){
 			$degreename = $_POST['degreename'];
 			for ($i = 1; $i <= 12; $i++){
@@ -141,15 +151,6 @@
 			}
 		}
 
-	$duplicate_query = "SELECT studentid FROM graduationapplication WHERE studentid=$studentid;";
-	$result_from_query = mysqli_query($connection, $duplicate_query);
-
-	$row = mysqli_fetch_assoc($result_from_query);
-
-
-	if ($row['studentid']==$studentid){
-		echo "<b>You have already submitted an application for graduation.</b>";
-	}
 	else {
 		echo "<h1>Form 1</h1>";
 		if($applicationcleared){
