@@ -140,7 +140,7 @@
 				$result_cleared_query = mysqli_query($connection, $cleared_query);
 
 				if ($result_cleared_query) {
-					echo "Application cleared successfully!";
+					$applicationclearedsucessfully = "Application cleared successfully!";
 				}
 			}
 		}
@@ -153,7 +153,10 @@
 
 	if ($row['studentid']==$studentid){
 			echo "You have already submitted an application for graduation.";
-		}
+	}
+	else if ($applicationclearedsucessfully){
+		echo $applicationclearedsucessfully;
+	}
 
 	else {
 		if(($not_enough_courses)||($courses_in_progress)||($courses_not_taken)||($core_courses_error)||($gpa_error)||($credit_hours_error)||($grades_error)){
