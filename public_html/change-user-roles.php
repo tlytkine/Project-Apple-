@@ -15,6 +15,8 @@
     include 'header.php';
     include 'db-connect.php';
 
+    echo "<h1>Change Roles</h1>";
+
     $change_role = $_POST["change_role"];
 	$add_role = $_POST["add_role"];
     $remove_role = $_POST["remove_role"];
