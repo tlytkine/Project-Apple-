@@ -35,6 +35,8 @@
 
 		if(ISSET($_POST['formsubmitted'])){
 			$degreename = $_POST['degreename'];
+			echo "$degreename";
+			echo "<br>";
 			for ($i = 1; $i <= 12; $i++){
 				$courses[$i] = $_POST["course$i"];
 			}
