@@ -132,12 +132,45 @@ $id = $_SESSION["id"];
 	echo "</td>
 	</tr>
 	<td>Minimum GPA of 3.0</td>
-	<td>Insert Status</td>
-	<td>Insert checkmark or x</td>
+	<td>";
+	$gpa_calc_query = "SELECT (Sum(qualitypoints*credithours)/Sum(credithours)) AS GPA, transcripts.year FROM gradecalc, courses, transcripts WHERE gradecalc.grade = transcripts.grade AND transcripts.studentid=$id AND transcripts.coursenum = courses.coursenum;";
+	$gpa_calc_result = mysqli_query($connection, $gpa_calc_query);
+	$row = mysqli_fetch_assoc($gpa_calc_result);
+	$gpa = $row['GPA'];
+	echo "GPA: ";
+	echo $gpa;
+	echo "</td>
+	<td>";
+	if($GPA >= 3.0){
+		echo "&#10004";
+	}
+	else{
+		echo "&#10008";
+	}
+	echo "</td>
 	</tr>
 	<td>Maximum of 2 letter grades below B-</td>
-	<td>Insert Status</td>
-	<td>Insert checkmark or x</td>
+	<td>";
+	$letter_grade_check = 0;
+	$course_grade_check_query = "SELECT qualitypoints FROM transcripts, gradecalc
+			WHERE studentid=$id AND gradecalc.grade = transcripts.grade;";
+			$course_grade_check_result = mysqli_query($connection, $course_grade_check_query);
+	while ($row = mysqli_fetch_assoc($course_grade_check_result)) {
+		if ($row['qualitypoints'] < 2.70) {
+			$letter_grade_check++;
+		}
+	}
+	echo $letter_grade_check;
+	echo " grades below B-";
+	echo "</td>
+	<td>";
+	if($letter_grade_check <= 2){
+		echo "&#10004";
+	}
+	else{
+		echo "&#10008";
+	}
+	echo "</td>
 	</tr>
 	</table>
 	";
