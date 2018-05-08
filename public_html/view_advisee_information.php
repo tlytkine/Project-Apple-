@@ -19,7 +19,9 @@ $facultyid = $_SESSION["id"];
 
 	$advisee_check_query = "SELECT firstname,lastname,studentid, hold, degreename FROM personalinfo,advises WHERE advises.facultyid=$facultyid AND personalinfo.id=advises.studentid;";
 
-	$advisee_check_result = mysqli_query($connection, $advisee_query);
+
+
+	$advisee_check_result = mysqli_query($connection, $advisee_check_query);
 
 	$row = mysqli_fetch_assoc($advisee_check_result);
 	if(ISSET($row['studentid'])){
